@@ -1,0 +1,404 @@
+// Shinobi Codex — Milestone 1 schema.
+//
+// Design rules
+//  * Closed vocabularies that the client may extend (roles, ability types, statistics,
+//    slots, gem types, effect targets, condition types/values) are LOOKUP TABLES, not enums.
+//  * Everything that "does something" is an Effect row (statistic + value + value type),
+//    optionally guarded by Condition rows. Effects hang off exactly one owner.
+//  * Sets are separate from their items; bonuses are rows with an arbitrary piece threshold.
+//  * SQLite has no native enums, so small closed sets (user role, value type...) are strings
+//    validated in src/domain/constants.ts. The schema is portable to PostgreSQL by changing
+//    the datasource provider.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ───────────────────────── Identity ─────────────────────────
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  name         String?
+  passwordHash String
+  role         String    @default("USER") // USER | ADMIN  (see USER_ROLES)
+  isActive     Boolean   @default(true) // false = access revoked
+  lastLoginAt  DateTime?
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  sessions     Session[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  tokenHash String   @unique // SHA-256 of the cookie token; the raw token is never stored
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ───────────────────────── Vocabularies ─────────────────────────
+
+/// Statistic definitions (HP, Attack, Speed, Final Damage...). Rows are data, not code.
+model Statistic {
+  id               String   @id @default(cuid())
+  key              String   @unique
+  name             String
+  description      String?
+  defaultValueType String   @default("FLAT") // FLAT | PERCENT | MULTIPLIER (see VALUE_TYPES)
+  sortOrder        Int      @default(0)
+  isActive         Boolean  @default(true)
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+  effects          Effect[]
+}
+
+model NinjaRole {
+  id          String   @id @default(cuid())
+  key         String   @unique
+  name        String
+  description String?
+  sortOrder   Int      @default(0)
+  ninjas      Ninja[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model AbilityType {
+  id        String    @id @default(cuid())
+  key       String    @unique // e.g. skill, passive, awakening, attack — rows, not code
+  name      String
+  sortOrder Int       @default(0)
+  abilities Ability[]
+}
+
+model EffectTarget {
+  id        String   @id @default(cuid())
+  key       String   @unique // e.g. self, ally, enemy
+  name      String
+  sortOrder Int      @default(0)
+  effects   Effect[]
+}
+
+/// Kinds of condition: nature, role, element, trigger, status, restriction...
+model ConditionType {
+  id        String           @id @default(cuid())
+  key       String           @unique
+  name      String
+  sortOrder Int              @default(0)
+  values    ConditionValue[]
+  conditions Condition[]
+}
+
+/// Catalogue of values a condition type can reference (e.g. type "nature" → "Fire").
+model ConditionValue {
+  id              String        @id @default(cuid())
+  conditionTypeId String
+  conditionType   ConditionType @relation(fields: [conditionTypeId], references: [id], onDelete: Cascade)
+  key             String
+  name            String
+  sortOrder       Int           @default(0)
+  conditions      Condition[]
+
+  @@unique([conditionTypeId, key])
+}
+
+// ───────────────────────── Effects & conditions ─────────────────────────
+
+/// A single mechanical effect. Owned by exactly ONE of the owner columns
+/// (enforced by assertSingleEffectOwner in src/domain/effects.ts and by tests).
+model Effect {
+  id          String     @id @default(cuid())
+  statisticId String?
+  statistic   Statistic? @relation(fields: [statisticId], references: [id], onDelete: Restrict)
+  value       Float?
+  valueType   String     @default("FLAT") // FLAT | PERCENT | MULTIPLIER
+  targetId    String?
+  target      EffectTarget? @relation(fields: [targetId], references: [id], onDelete: SetNull)
+  durationTurns Int?
+  chancePercent Float? // 0–100; null = always
+  description String? // free text when an effect is not purely numeric
+  sortOrder   Int        @default(0)
+
+  // owners (exactly one is set)
+  abilityId          String?
+  ability            Ability?          @relation(fields: [abilityId], references: [id], onDelete: Cascade)
+  talentOptionId     String?
+  talentOption       TalentOption?     @relation(fields: [talentOptionId], references: [id], onDelete: Cascade)
+  equipmentId        String?
+  equipment          Equipment?        @relation(fields: [equipmentId], references: [id], onDelete: Cascade)
+  equipmentSetBonusId String?
+  equipmentSetBonus  EquipmentSetBonus? @relation(fields: [equipmentSetBonusId], references: [id], onDelete: Cascade)
+  jewelryId          String?
+  jewelry            Jewelry?          @relation(fields: [jewelryId], references: [id], onDelete: Cascade)
+  jewelrySetBonusId  String?
+  jewelrySetBonus    JewelrySetBonus?  @relation(fields: [jewelrySetBonusId], references: [id], onDelete: Cascade)
+  gemId              String?
+  gem                Gem?              @relation(fields: [gemId], references: [id], onDelete: Cascade)
+
+  conditions Condition[]
+  createdAt  DateTime    @default(now())
+  updatedAt  DateTime    @updatedAt
+
+  @@index([abilityId])
+  @@index([talentOptionId])
+  @@index([equipmentId])
+  @@index([equipmentSetBonusId])
+  @@index([jewelryId])
+  @@index([jewelrySetBonusId])
+  @@index([gemId])
+  @@index([statisticId])
+}
+
+/// A requirement/restriction attached to an effect.
+/// Conditions sharing an `alternativeGroup` are ANDed; different groups are ORed.
+model Condition {
+  id               String          @id @default(cuid())
+  effectId         String
+  effect           Effect          @relation(fields: [effectId], references: [id], onDelete: Cascade)
+  conditionTypeId  String
+  conditionType    ConditionType   @relation(fields: [conditionTypeId], references: [id], onDelete: Restrict)
+  conditionValueId String?
+  conditionValue   ConditionValue? @relation(fields: [conditionValueId], references: [id], onDelete: Restrict)
+  operator         String          @default("REQUIRES") // REQUIRES | EXCLUDES
+  numericValue     Float? // thresholds ("HP below 30")
+  note             String? // free-text qualifier
+  alternativeGroup Int             @default(0)
+  sortOrder        Int             @default(0)
+
+  @@index([effectId])
+}
+
+// ───────────────────────── Ninjas ─────────────────────────
+
+model Ninja {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  name         String
+  description  String?
+  imageUrl     String?
+  roleId       String?
+  role         NinjaRole?    @relation(fields: [roleId], references: [id], onDelete: SetNull)
+  status       String        @default("DRAFT") // DRAFT | PUBLISHED | ARCHIVED (see CONTENT_STATUSES)
+  metadata     Json?
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  abilities    Ability[]
+  talentGroups TalentGroup[]
+
+  @@index([roleId])
+  @@index([status])
+}
+
+/// Skills, passives, awakenings, attacks... distinguished by AbilityType rows.
+model Ability {
+  id            String      @id @default(cuid())
+  ninjaId       String
+  ninja         Ninja       @relation(fields: [ninjaId], references: [id], onDelete: Cascade)
+  abilityTypeId String
+  abilityType   AbilityType @relation(fields: [abilityTypeId], references: [id], onDelete: Restrict)
+  name          String
+  description   String?
+  imageUrl      String?
+  sortOrder     Int         @default(0)
+  effects       Effect[]
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@index([ninjaId])
+  @@index([abilityTypeId])
+}
+
+/// A set of talent choices. "Choose ONE of A/B" is a group with selectionMode ONE_OF
+/// and two options — never two independent talents.
+model TalentGroup {
+  id            String         @id @default(cuid())
+  ninjaId       String
+  ninja         Ninja          @relation(fields: [ninjaId], references: [id], onDelete: Cascade)
+  name          String?
+  selectionMode String         @default("ONE_OF") // ONE_OF | ALL (see SELECTION_MODES)
+  minSelections Int            @default(1)
+  maxSelections Int            @default(1)
+  sortOrder     Int            @default(0)
+  options       TalentOption[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+
+  @@index([ninjaId])
+}
+
+model TalentOption {
+  id          String      @id @default(cuid())
+  groupId     String
+  group       TalentGroup @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  name        String
+  description String?
+  imageUrl    String?
+  isDefault   Boolean     @default(false) // option shown as selected by default
+  sortOrder   Int         @default(0)
+  effects     Effect[]
+
+  @@index([groupId])
+}
+
+// ───────────────────────── Equipment ─────────────────────────
+
+model EquipmentSlot {
+  id        String      @id @default(cuid())
+  key       String      @unique
+  name      String
+  sortOrder Int         @default(0)
+  items     Equipment[]
+}
+
+model EquipmentSet {
+  id          String              @id @default(cuid())
+  slug        String              @unique
+  name        String
+  description String?
+  imageUrl    String?
+  metadata    Json?
+  items       Equipment[]
+  bonuses     EquipmentSetBonus[]
+  createdAt   DateTime            @default(now())
+  updatedAt   DateTime            @updatedAt
+}
+
+/// Bonus unlocked at ANY piece count — 2/4/6 are data, not schema.
+model EquipmentSetBonus {
+  id             String       @id @default(cuid())
+  setId          String
+  set            EquipmentSet @relation(fields: [setId], references: [id], onDelete: Cascade)
+  requiredPieces Int
+  description    String?
+  sortOrder      Int          @default(0)
+  effects        Effect[]
+
+  @@unique([setId, requiredPieces])
+}
+
+model Equipment {
+  id        String         @id @default(cuid())
+  slug      String         @unique
+  name      String
+  slotId    String?
+  slot      EquipmentSlot? @relation(fields: [slotId], references: [id], onDelete: SetNull)
+  setId     String?
+  set       EquipmentSet?  @relation(fields: [setId], references: [id], onDelete: SetNull)
+  imageUrl  String?
+  metadata  Json?
+  status    String         @default("DRAFT")
+  effects   Effect[] // base statistics and item effects
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+
+  @@index([slotId])
+  @@index([setId])
+}
+
+// ───────────────────────── Jewelry / accessories ─────────────────────────
+// Deliberately NOT sharing tables with equipment: jewelry sets may use different
+// bonus rules (e.g. "these specific items" rather than a plain piece count).
+
+model JewelryType {
+  id        String    @id @default(cuid())
+  key       String    @unique
+  name      String
+  sortOrder Int       @default(0)
+  items     Jewelry[]
+}
+
+model JewelrySet {
+  id          String           @id @default(cuid())
+  slug        String           @unique
+  name        String
+  description String?
+  imageUrl    String?
+  metadata    Json?
+  items       Jewelry[]
+  bonuses     JewelrySetBonus[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+/// requirementKind PIECE_COUNT → needs `requiredPieces` of the set.
+/// requirementKind SPECIFIC_ITEMS → needs every item listed in `requiredItems`.
+model JewelrySetBonus {
+  id              String       @id @default(cuid())
+  setId           String
+  set             JewelrySet   @relation(fields: [setId], references: [id], onDelete: Cascade)
+  requirementKind String       @default("PIECE_COUNT")
+  requiredPieces  Int?
+  description     String?
+  sortOrder       Int          @default(0)
+  requiredItems   JewelrySetBonusItem[]
+  effects         Effect[]
+
+  @@index([setId])
+}
+
+model JewelrySetBonusItem {
+  bonusId   String
+  bonus     JewelrySetBonus @relation(fields: [bonusId], references: [id], onDelete: Cascade)
+  jewelryId String
+  jewelry   Jewelry         @relation(fields: [jewelryId], references: [id], onDelete: Cascade)
+
+  @@id([bonusId, jewelryId])
+}
+
+model Jewelry {
+  id            String                @id @default(cuid())
+  slug          String                @unique
+  name          String
+  typeId        String?
+  type          JewelryType?          @relation(fields: [typeId], references: [id], onDelete: SetNull)
+  setId         String?
+  set           JewelrySet?           @relation(fields: [setId], references: [id], onDelete: SetNull)
+  imageUrl      String?
+  metadata      Json?
+  status        String                @default("DRAFT")
+  effects       Effect[]
+  bonusRequirements JewelrySetBonusItem[]
+  createdAt     DateTime              @default(now())
+  updatedAt     DateTime              @updatedAt
+
+  @@index([typeId])
+  @@index([setId])
+}
+
+// ───────────────────────── Gems ─────────────────────────
+
+model GemType {
+  id        String @id @default(cuid())
+  key       String @unique
+  name      String
+  sortOrder Int    @default(0)
+  gems      Gem[]
+}
+
+model Gem {
+  id          String   @id @default(cuid())
+  slug        String   @unique
+  name        String
+  gemTypeId   String?
+  gemType     GemType? @relation(fields: [gemTypeId], references: [id], onDelete: SetNull)
+  level       Int?
+  description String?
+  imageUrl    String?
+  metadata    Json?
+  status      String   @default("DRAFT")
+  effects     Effect[]
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([gemTypeId])
+}

@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#10151c" />
+  <meta name="description" content="Base de datos privada para explorar ninjas, equipo, joyería y gemas." />
+  <title>Shinobi Codex — Base de datos</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#" aria-label="Shinobi Codex, inicio"><span class="brand-mark">忍</span><span><strong>SHINOBI</strong><small>CODEX</small></span></a>
+      <div class="workspace-label">BASE DE DATOS</div>
+      <nav class="nav-list" id="nav-list" aria-label="Navegación principal"></nav>
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-bottom"><div class="sync-status"><span class="status-dot"></span><span><strong>Biblioteca local</strong><small>Datos guardados en este dispositivo</small></span></div><button class="profile" id="profile-button"><span class="avatar">A</span><span><strong>Administrador</strong><small>Modo de gestión</small></span><span class="more">•••</span></button></div>
+    </aside>
+    <main class="main-content">
+      <header class="topbar"><button class="mobile-menu" id="mobile-menu" aria-label="Abrir menú">☰</button><div class="breadcrumbs"><span>Biblioteca</span><span class="crumb-slash">/</span><strong id="breadcrumb-current">Ninjas</strong></div><div class="topbar-actions"><span class="private-pill"><span class="lock">▣</span> ESPACIO PRIVADO</span><span class="top-avatar">A</span></div></header>
+      <section class="content-wrap">
+        <div class="page-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> ARCHIVO DEL SHINOBI</div><h1 id="page-title">Ninjas</h1><p id="page-description">Conoce a cada combatiente, sus habilidades y su potencial.</p></div><button class="primary-button" id="add-button"><span>＋</span> Añadir ninja</button></div>
+        <div class="stats-strip" id="stats-strip"></div>
+        <section class="catalog-panel">
+          <div class="catalog-toolbar"><div class="search-wrap"><span class="search-icon">⌕</span><input id="search-input" type="search" placeholder="Buscar por nombre, rol o estadística..." autocomplete="off" /><kbd>⌘ K</kbd></div><button class="filter-toggle" id="filter-toggle"><span>☷</span> Filtros <span class="filter-count" id="filter-count">0</span></button><label class="sort-wrap"><span>Ordenar por</span><select id="sort-select"><option value="name-asc">Nombre A–Z</option><option value="name-desc">Nombre Z–A</option><option value="power-desc">Poder: mayor a menor</option><option value="power-asc">Poder: menor a mayor</option><option value="rarity-desc">Rareza</option></select></label></div>
+          <div class="filters-panel" id="filters-panel"><div class="filter-group"><label for="role-filter">Rol</label><select id="role-filter"><option value="">Todos los roles</option></select></div><div class="filter-group"><label for="element-filter">Naturaleza</label><select id="element-filter"><option value="">Todas las naturalezas</option><option>Fuego</option><option>Agua</option><option>Viento</option><option>Rayo</option><option>Tierra</option></select></div><div class="filter-group"><label for="rarity-filter">Rareza</label><select id="rarity-filter"><option value="">Todas</option><option>Legendario</option><option>Épico</option><option>Raro</option></select></div><div class="filter-group range-filter"><label for="power-filter">Poder mínimo <span id="power-value">0</span></label><input type="range" id="power-filter" min="0" max="100" value="0" /></div><button id="clear-filters" class="clear-button">Limpiar filtros</button></div>
+          <div class="results-meta"><span id="results-count">0 resultados</span><div class="view-switch"><button class="view-option active" aria-label="Vista de cuadrícula">▦</button><button class="view-option" aria-label="Vista de lista">☰</button></div></div>
+          <div class="card-grid" id="card-grid"></div>
+          <div class="empty-state hidden" id="empty-state"><div class="empty-icon">⌕</div><h3>No encontramos resultados</h3><p>Prueba con otra búsqueda o ajusta los filtros.</p><button class="text-button" id="empty-clear">Limpiar búsqueda y filtros</button></div>
+          <div class="catalog-footer"><span>Mostrando <strong id="showing-count">0</strong> registros</span><span>SHINOBI CODEX <i>•</i> ARCHIVO V.1</span></div>
+        </section>
+        <footer class="page-footer"><span>Una guía creada por y para shinobi.</span><span>Actualizado en octubre de 2026</span></footer>
+      </section>
+    </main>
+  </div>
+  <div class="overlay hidden" id="overlay"><section class="detail-drawer" id="detail-drawer" aria-modal="true" role="dialog" aria-labelledby="drawer-title"><button class="drawer-close" id="drawer-close" aria-label="Cerrar">×</button><div id="drawer-content"></div></section></div>
+  <div class="modal-overlay hidden" id="edit-overlay"><section class="edit-modal" role="dialog" aria-modal="true" aria-labelledby="edit-title"><div class="modal-heading"><div><div class="eyebrow"><span class="eyebrow-line"></span> GESTIÓN DE CONTENIDO</div><h2 id="edit-title">Añadir registro</h2></div><button class="drawer-close" id="edit-close" aria-label="Cerrar">×</button></div><form id="edit-form"><div class="form-grid" id="form-grid"></div><div class="modal-actions"><button type="button" class="secondary-button" id="cancel-edit">Cancelar</button><button type="submit" class="primary-button">Guardar registro <span>→</span></button></div></form></section></div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="app.js"></script>
+</body>
+</html>
