@@ -99,7 +99,7 @@ describe("effects and conditions", () => {
 
   it("other condition kinds coexist (role, trigger) and OR-groups work", () => {
     const mk = (id: string, group: number): ConditionView => ({
-      id, typeKey: "x", typeName: "x", valueName: null, operator: "REQUIRES", numericValue: null, note: null, alternativeGroup: group,
+      id, scope: "ACTIVATION", typeKey: "x", typeName: "x", valueKey: null, valueName: null, operator: "REQUIRES", numericValue: null, note: null, alternativeGroup: group,
     });
     const groups = groupConditions([mk("a", 0), mk("b", 0), mk("c", 1)]);
     expect(groups.map((g) => g.length)).toEqual([2, 1]);

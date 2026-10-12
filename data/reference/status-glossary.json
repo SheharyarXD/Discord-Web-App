@@ -1,0 +1,660 @@
+{
+  "_about": "Staged transcription of the status guide screenshots. `name` is the heading exactly as written; `description` is the definition exactly as written (null when the guide only lists the name). Classification comes from the section heading the entry sits under. `modifiers` are added only where the wording is unambiguous: a named stat, a direction and (when given) a number. A modifier's `magnitude` is the guide's DEFAULT; an individual ninja's text may override it. This is reference text, not a combat formula. `note` is a reviewer note shown in the Spanish interface, so it is written in Spanish; game terms inside it stay in English.",
+  "sections": [
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010624).png",
+      "heading": "Terminology",
+      "defaults": {
+        "kind": "TERM",
+        "polarity": "NEUTRAL",
+        "cleansability": "UNKNOWN",
+        "structuredStatus": "TEXT_ONLY",
+        "reviewStatus": "CONFIRMED"
+      },
+      "entries": [
+        {
+          "key": "penetration-damage",
+          "name": "Penetration or Pierce damage",
+          "aliases": [
+            "Penetration damage",
+            "Pierce damage",
+            "Penetration",
+            "Pierce"
+          ],
+          "description": "Immediate deduction of enemy hp equal to the attacker's attack stat (and attack reduction effects do affect it)",
+          "categoryKeys": [
+            "damage_mechanic"
+          ]
+        },
+        {
+          "key": "dot",
+          "name": "DoT (damage over time)",
+          "aliases": [
+            "DoT",
+            "Damage over time"
+          ],
+          "description": "Deduction of enemy hp equal to the attacker's attack stat at the start of the enemy's turn (and attack reduction effects do affect it)",
+          "timingNote": "at the start of the enemy's turn",
+          "categoryKeys": [
+            "dot",
+            "damage_mechanic"
+          ]
+        },
+        {
+          "key": "defense-shield",
+          "name": "Physical or strategy defense shield",
+          "aliases": [
+            "Physical shield",
+            "Strategy shield",
+            "Defense shield"
+          ],
+          "description": "A certain percentage of your physical or strategy defense value respectively is used to reduce direct or DoT damage taken. Physical shield scales on physical defense, so Jōgan is best suited for physical ninjas. Strategy shield scales on strategy defense, so Tenseigan is better suited for strategic ninjas.",
+          "categoryKeys": [
+            "shield_mechanic"
+          ]
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010628).png",
+      "heading": "Cleansable DoTs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "UNKNOWN",
+        "cleansability": "CLEANSABLE",
+        "categoryKeys": [
+          "dot"
+        ],
+        "structuredStatus": "TEXT_ONLY",
+        "reviewStatus": "CONFIRMED",
+        "note": "La guía lista los DoT en su propio apartado, separado de los «debuffs», y solo da el nombre, sin definición."
+      },
+      "entries": [
+        {
+          "name": "Poison"
+        },
+        {
+          "name": "Ignite"
+        },
+        {
+          "name": "Power loss"
+        },
+        {
+          "name": "Orochi poison"
+        },
+        {
+          "name": "Vein damage"
+        },
+        {
+          "name": "Bleed"
+        },
+        {
+          "name": "Split"
+        },
+        {
+          "name": "Unification"
+        },
+        {
+          "name": "Safeguard"
+        },
+        {
+          "name": "Burst"
+        },
+        {
+          "name": "Scorching flame"
+        },
+        {
+          "name": "Sticky acid",
+          "description": "bypasses the effect of DoT-reducing bloodlines (Jōgan and Tenseigan) and defense shields (e.g. Summer Pain and Hashirama-Madara)",
+          "reviewStatus": "PARTIALLY_CONFIRMED",
+          "note": "Aparece como punto aparte bajo «Cleansable DoTs», después de la lista. Se clasifica como DoT purificable solo por esa posición. La excepción se guarda como texto; no se calcula nada a partir de ella."
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010628).png",
+      "heading": "Uncleansable DoTs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "UNKNOWN",
+        "cleansability": "UNCLEANSABLE",
+        "categoryKeys": [
+          "dot"
+        ],
+        "structuredStatus": "TEXT_ONLY",
+        "reviewStatus": "CONFIRMED",
+        "note": "La guía lista los DoT en su propio apartado, separado de los «debuffs», y solo da el nombre, sin definición."
+      },
+      "entries": [
+        {
+          "key": "incinerate",
+          "name": "Incinerate (or Burn)",
+          "aliases": [
+            "Incinerate",
+            "Burn"
+          ]
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010628).png",
+      "heading": "Uncleansable CCs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "UNKNOWN",
+        "cleansability": "UNCLEANSABLE",
+        "categoryKeys": [
+          "cc"
+        ],
+        "structuredStatus": "TEXT_ONLY",
+        "reviewStatus": "CONFIRMED",
+        "note": "La guía lista los CC en su propio apartado, separado de los «debuffs», y solo da el nombre, sin definición."
+      },
+      "entries": [
+        {
+          "name": "Blind"
+        },
+        {
+          "name": "Imprison"
+        },
+        {
+          "name": "Freeze"
+        },
+        {
+          "name": "Wind Bound"
+        },
+        {
+          "name": "Seal"
+        },
+        {
+          "name": "Charm",
+          "description": "with chaos effect whose potency varies among ninjas who apply it",
+          "note": "La guía lista los CC en su propio apartado, separado de los «debuffs». El texto entre paréntesis es la única definición que da."
+        },
+        {
+          "name": "Curse Fixation",
+          "mergeOnly": true
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010631).png",
+      "heading": "Cleansable debuffs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "DEBUFF",
+        "cleansability": "CLEANSABLE",
+        "structuredStatus": "STRUCTURED",
+        "reviewStatus": "CONFIRMED"
+      },
+      "entries": [
+        {
+          "name": "Painful Will",
+          "description": "Unable to add buffs",
+          "categoryKeys": [
+            "restriction"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010631).png",
+      "heading": "Uncleansable debuffs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "DEBUFF",
+        "cleansability": "UNCLEANSABLE",
+        "structuredStatus": "STRUCTURED",
+        "reviewStatus": "CONFIRMED"
+      },
+      "entries": [
+        {
+          "name": "Upwind/Headwind state",
+          "aliases": [
+            "Upwind state",
+            "Headwind state"
+          ],
+          "description": "Decreases healing rate and CC resistance by 30%",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "healing rate",
+              "statisticKey": "healing-rate",
+              "direction": "DECREASE",
+              "magnitude": 30
+            },
+            {
+              "statLabel": "CC resistance",
+              "statisticKey": "cc-resistance",
+              "direction": "DECREASE",
+              "magnitude": 30
+            }
+          ]
+        },
+        {
+          "name": "Weakened state",
+          "description": "Decreases speed and defenses by 20% and unable to add buffs",
+          "categoryKeys": [
+            "stat_modifier",
+            "restriction"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "speed",
+              "statisticKey": "speed",
+              "direction": "DECREASE",
+              "magnitude": 20
+            },
+            {
+              "statLabel": "defenses",
+              "statisticKey": "defenses",
+              "direction": "DECREASE",
+              "magnitude": 20
+            }
+          ],
+          "note": "También impide añadir buffs; esa parte se guarda solo como texto."
+        },
+        {
+          "name": "Corrosion state",
+          "description": "Decreases avoid injury and increases final damage received (30%, unless other is stated)",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "avoid injury",
+              "statisticKey": "avoid-injury",
+              "direction": "DECREASE",
+              "magnitude": 30
+            },
+            {
+              "statLabel": "final damage received",
+              "statisticKey": "final-damage-received",
+              "direction": "INCREASE",
+              "magnitude": 30
+            }
+          ]
+        },
+        {
+          "name": "Death Seed",
+          "description": "Instant death at the start of your turn (unless the ninja is immune)",
+          "timingNote": "at the start of your turn",
+          "categoryKeys": [
+            "instant_death"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        },
+        {
+          "name": "Poisonous Wind",
+          "description": "Uncleansable CC and 30% subtraction of current hp at the start of your turn",
+          "timingNote": "at the start of your turn",
+          "categoryKeys": [
+            "cc",
+            "hp_loss"
+          ],
+          "structuredStatus": "TEXT_ONLY",
+          "note": "Se describe como CC pero aparece en la lista de debuffs, no en la de CC. El 30% de la vida actual se guarda como texto: es una pérdida de vida, no un modificador de estadística."
+        },
+        {
+          "name": "Curse Fixation",
+          "description": "Uncleansable CC and 20% block rate reduction",
+          "categoryKeys": [
+            "cc",
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "block rate",
+              "statisticKey": "block-rate",
+              "direction": "DECREASE",
+              "magnitude": 20
+            }
+          ],
+          "note": "Aparece dos veces en la guía: solo con el nombre en «Uncleansable CCs» y con esta definición en «Uncleansable debuffs». Una única entrada recoge ambas clasificaciones."
+        },
+        {
+          "name": "Chaotic Storm",
+          "description": "Decreases enemy attack and defenses (20%, unless other is stated)",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "attack",
+              "statisticKey": "attack",
+              "direction": "DECREASE",
+              "magnitude": 20
+            },
+            {
+              "statLabel": "defenses",
+              "statisticKey": "defenses",
+              "direction": "DECREASE",
+              "magnitude": 20
+            }
+          ]
+        },
+        {
+          "name": "Dispirited State",
+          "description": "Decreases damage rate and final damage (25%, unless other is stated)",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "damage rate",
+              "statisticKey": "damage-rate",
+              "direction": "DECREASE",
+              "magnitude": 25
+            },
+            {
+              "statLabel": "final damage",
+              "statisticKey": "final-damage",
+              "direction": "DECREASE",
+              "magnitude": 25
+            }
+          ]
+        },
+        {
+          "name": "Untreatment State",
+          "description": "Cannot be healed",
+          "categoryKeys": [
+            "restriction"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        },
+        {
+          "name": "Armor Break",
+          "description": "Defenses reduction (30%, unless other is stated)",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "defenses",
+              "statisticKey": "defenses",
+              "direction": "DECREASE",
+              "magnitude": 30
+            }
+          ]
+        },
+        {
+          "name": "Crit resistance reduction",
+          "description": "as implied (20%, unless other is stated)",
+          "sourceText": "Crit resistance reduction: as implied (20%, u… other is stated)",
+          "reviewStatus": "PARTIALLY_CONFIRMED",
+          "ambiguityNote": "An on-screen scroll button covers part of this line. The visible text is 'as implied (20%, u… other is stated)'; 'unless' is read from the identical phrase used by the other entries.",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "crit resistance",
+              "statisticKey": "crit-resistance",
+              "direction": "DECREASE",
+              "magnitude": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010647).png",
+      "heading": "Uncleansable buffs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "BUFF",
+        "cleansability": "UNCLEANSABLE",
+        "structuredStatus": "STRUCTURED",
+        "reviewStatus": "CONFIRMED"
+      },
+      "entries": [
+        {
+          "name": "S-Super Dodge",
+          "description": "Protects from all incoming damage, debuffs, dots, penetration damage, and fury reduction effects (unless the attacking enemy is immune to S-Super Dodge. If the enemy is immune to S-Super Dodge, this buff can be cleansed (e.g. Hiruko))",
+          "cleansabilityNote": "If the enemy is immune to S-Super Dodge, this buff can be cleansed (e.g. Hiruko)",
+          "categoryKeys": [
+            "protection"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        },
+        {
+          "key": "amenotejikara",
+          "name": "Amenotejikara/Shielding state/Position Interchange",
+          "aliases": [
+            "Amenotejikara",
+            "Shielding state",
+            "Position Interchange"
+          ],
+          "description": "Ignores enemy damage (only direct damage from skill, not s.crit, s.block, penetration damage, DoTs, or poisonous wind)",
+          "categoryKeys": [
+            "protection"
+          ],
+          "structuredStatus": "TEXT_ONLY",
+          "note": "«Shielding state» es también el título de otra entrada de la misma lista, con una definición más corta. Se conservan las dos tal como están escritas."
+        },
+        {
+          "key": "shatter-storm",
+          "name": "Shatter Storm/Breaking Wind",
+          "aliases": [
+            "Shatter Storm",
+            "Breaking Wind"
+          ],
+          "description": "Increases attack and defenses by 15% (unless other is stated)",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "attack",
+              "statisticKey": "attack",
+              "direction": "INCREASE",
+              "magnitude": 15
+            },
+            {
+              "statLabel": "defenses",
+              "statisticKey": "defenses",
+              "direction": "INCREASE",
+              "magnitude": 15
+            }
+          ],
+          "note": "Regla confirmada por el cliente: un porcentaje entre paréntesis en el texto de un ninja (por ejemplo «(20%) shatter storm») sustituye a este 15% solo para ese ninja. Es la fuerza del efecto, no una probabilidad."
+        },
+        {
+          "key": "wind-escape",
+          "name": "Wind Escape/Shield",
+          "aliases": [
+            "Wind Escape"
+          ],
+          "description": "Ignores enemy attack by 10%",
+          "categoryKeys": [
+            "protection"
+          ],
+          "structuredStatus": "TEXT_ONLY",
+          "reviewStatus": "PARTIALLY_CONFIRMED",
+          "ambiguityNote": "'Wind Escape/Shield' may mean 'Wind Escape / Wind Shield' or 'Wind Escape / Shield'; only 'Wind Escape' is recorded as an alias. This heading is not in bold in the source. 'Ignores enemy attack by 10%' is kept as text: what exactly is reduced is not clear enough to structure."
+        },
+        {
+          "key": "shielding-state",
+          "name": "Shielding state",
+          "description": "Ignores enemy damage",
+          "categoryKeys": [
+            "protection"
+          ],
+          "structuredStatus": "TEXT_ONLY",
+          "note": "Las mismas palabras aparecen dentro del título «Amenotejikara/Shielding state/Position Interchange», cuya definición es más restrictiva. Se conserva como entrada propia, tal como está escrita."
+        },
+        {
+          "name": "Bond state",
+          "description": "Increases CC resistance, block rate (can exceed cap), and avoid injury by 35%",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "CC resistance",
+              "statisticKey": "cc-resistance",
+              "direction": "INCREASE",
+              "magnitude": 35
+            },
+            {
+              "statLabel": "block rate",
+              "statisticKey": "block-rate",
+              "direction": "INCREASE",
+              "magnitude": 35,
+              "note": "can exceed cap"
+            },
+            {
+              "statLabel": "avoid injury",
+              "statisticKey": "avoid-injury",
+              "direction": "INCREASE",
+              "magnitude": 35
+            }
+          ]
+        },
+        {
+          "name": "Pyroblast state",
+          "description": "Increases damage rate and final damage dealt by 30%",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "damage rate",
+              "statisticKey": "damage-rate",
+              "direction": "INCREASE",
+              "magnitude": 30
+            },
+            {
+              "statLabel": "final damage dealt",
+              "statisticKey": "final-damage-dealt",
+              "direction": "INCREASE",
+              "magnitude": 30
+            }
+          ]
+        },
+        {
+          "name": "Superarmor state",
+          "description": "Immunity to debuffs",
+          "categoryKeys": [
+            "immunity"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        },
+        {
+          "name": "Acceleration",
+          "description": "Increases speed by 15%",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "speed",
+              "statisticKey": "speed",
+              "direction": "INCREASE",
+              "magnitude": 15
+            }
+          ]
+        },
+        {
+          "name": "Strong state",
+          "description": "Increases avoid injury and final damage reduction",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "avoid injury",
+              "statisticKey": "avoid-injury",
+              "direction": "INCREASE",
+              "magnitude": null
+            },
+            {
+              "statLabel": "final damage reduction",
+              "statisticKey": "final-damage-reduction",
+              "direction": "INCREASE",
+              "magnitude": null
+            }
+          ],
+          "note": "La guía no indica ningún valor para este estado."
+        },
+        {
+          "name": "Super Defense",
+          "description": "Increases defenses (20%, unless other is stated)",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "overrideDocumented": true,
+          "modifiers": [
+            {
+              "statLabel": "defenses",
+              "statisticKey": "defenses",
+              "direction": "INCREASE",
+              "magnitude": 20
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010652).png",
+      "heading": "Cleansable buffs",
+      "defaults": {
+        "kind": "STATUS",
+        "polarity": "BUFF",
+        "cleansability": "CLEANSABLE",
+        "structuredStatus": "STRUCTURED",
+        "reviewStatus": "CONFIRMED"
+      },
+      "entries": [
+        {
+          "name": "Super dodge",
+          "description": "Protects from all incoming damage, debuffs, dots, penetration damage, and fury reduction effects (unless the attacking enemy is immune to Super Dodge)",
+          "categoryKeys": [
+            "protection"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        },
+        {
+          "name": "Fury Shield",
+          "description": "Increases final damage dealt by 30%",
+          "categoryKeys": [
+            "stat_modifier"
+          ],
+          "modifiers": [
+            {
+              "statLabel": "final damage dealt",
+              "statisticKey": "final-damage-dealt",
+              "direction": "INCREASE",
+              "magnitude": 30
+            }
+          ]
+        },
+        {
+          "name": "CC-free State",
+          "description": "Immunity to all CC",
+          "categoryKeys": [
+            "immunity"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        },
+        {
+          "name": "Death Seed immunity buff",
+          "description": "Protects from Death Seed application",
+          "categoryKeys": [
+            "immunity"
+          ],
+          "structuredStatus": "TEXT_ONLY"
+        }
+      ]
+    }
+  ]
+}

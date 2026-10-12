@@ -9,7 +9,7 @@ export async function SectionPlaceholder({ section }: { section: SectionKey }) {
   return (
     <>
       <PageHeader title={t(`sections.${section}.title`)} description={t(`sections.${section}.description`)} />
-      <EmptyState title={t("common.comingSoon")} hint={t("common.emptyHint")} />
+      <EmptyState title={t("common.comingSoon")} hint={section === "search" ? t("common.emptyHint") : t("common.noSourceYet")} />
     </>
   );
 }

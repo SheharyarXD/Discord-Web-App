@@ -1,0 +1,32 @@
+{
+  "purpose": "Behavioral regression test scenarios based on the client's explicit correction, not independent game data imports",
+  "definition": {
+    "name": "Shatter Storm / Breaking Wind",
+    "default_description": "Increases attack and defenses by 15%, unless otherwise stated",
+    "default_magnitude_percent": 15
+  },
+  "cases": [
+    {
+      "case": "unspecified_override",
+      "usage_override_percent": null,
+      "expected_effective_stat_bonus_percent": 15,
+      "expected_application_chance_percent": null
+    },
+    {
+      "case": "individual_override",
+      "example_raw_text": "Makes all ally assaulters enter (20%) Shatter Storm state for 2 rounds.",
+      "usage_override_percent": 20,
+      "expected_effective_stat_bonus_percent": 20,
+      "expected_application_chance_percent": null,
+      "duration_rounds": 2,
+      "target_original": "all ally assaulters"
+    },
+    {
+      "case": "different_ninja_unaffected",
+      "usage_override_percent": null,
+      "expected_effective_stat_bonus_percent": 15,
+      "expected_application_chance_percent": null
+    }
+  ],
+  "note": "The client confirmed that the per-use 20% overrides all affected stat increases. Do not treat this 20% as a proc chance, and do not modify the shared default."
+}

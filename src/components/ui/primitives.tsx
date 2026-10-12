@@ -1,3 +1,4 @@
+import Link from "next/link";
 import type { ButtonHTMLAttributes, ReactNode } from "react";
 
 export function cx(...parts: (string | false | null | undefined)[]): string {
@@ -60,4 +61,62 @@ export function EmptyState({ title, hint, icon = "◌" }: { title: string; hint?
 
 export function Skeleton({ className }: { className?: string }) {
   return <div aria-hidden className={cx("animate-pulse rounded-lg bg-surface-2", className)} />;
+}
+
+const tagTones = {
+  default: "border-border text-fg",
+  muted: "border-border text-muted",
+  ok: "border-ok/50 text-ok",
+  danger: "border-danger/50 text-danger",
+  warn: "border-warn/50 text-warn",
+  info: "border-info/50 text-info",
+} as const;
+
+/** Small labelled tag. The label carries the meaning; the tone only reinforces it. */
+export function Tag({ children, tone = "default", title }: { children: ReactNode; tone?: keyof typeof tagTones; title?: string }) {
+  return (
+    <span title={title} className={cx("inline-flex items-center rounded-md border px-2 py-0.5 text-xs font-medium", tagTones[tone])}>
+      {children}
+    </span>
+  );
+}
+
+/** Previous / next links for a bounded list. */
+export function Pagination({
+  page,
+  pageCount,
+  hrefFor,
+  labels,
+}: {
+  page: number;
+  pageCount: number;
+  hrefFor: (page: number) => string;
+  labels: { previous: string; next: string; status: string; nav: string };
+}) {
+  if (pageCount <= 1) return null;
+  const link = "inline-flex min-h-11 items-center rounded-lg border border-border px-4 text-sm font-semibold hover:bg-surface-2";
+  const off = "inline-flex min-h-11 items-center rounded-lg border border-border/50 px-4 text-sm font-semibold text-muted/60";
+  return (
+    <nav aria-label={labels.nav} className="mt-6 flex items-center justify-between gap-3">
+      {page > 1 ? (
+        <Link href={hrefFor(page - 1)} rel="prev" className={link}>
+          ← {labels.previous}
+        </Link>
+      ) : (
+        <span aria-disabled className={off}>
+          ← {labels.previous}
+        </span>
+      )}
+      <span className="text-sm text-muted">{labels.status}</span>
+      {page < pageCount ? (
+        <Link href={hrefFor(page + 1)} rel="next" className={link}>
+          {labels.next} →
+        </Link>
+      ) : (
+        <span aria-disabled className={off}>
+          {labels.next} →
+        </span>
+      )}
+    </nav>
+  );
 }

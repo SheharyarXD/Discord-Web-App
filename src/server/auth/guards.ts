@@ -1,14 +1,9 @@
 import "server-only";
 import { notFound, redirect } from "next/navigation";
 import { getCurrentUser, type SessionUser } from "./session";
-import { can, type Action } from "./permissions";
+import { can, ForbiddenError, type Action } from "./permissions";
 
-export class ForbiddenError extends Error {
-  constructor(action: Action) {
-    super(`Forbidden: ${action}`);
-    this.name = "ForbiddenError";
-  }
-}
+export { ForbiddenError };
 
 /** For pages/layouts: redirect anonymous visitors to the login page. */
 export async function requireUser(): Promise<SessionUser> {

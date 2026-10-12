@@ -1,0 +1,135 @@
+{
+  "_about": "Every supplied reference asset and what the review of it found. Paths are relative to docs/milestone-2-handoff/. Capture timestamps are NOT recorded as dates: a screenshot's clock or a Discord post date is not a game release date.",
+  "baseDir": "docs/milestone-2-handoff",
+  "assets": [
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.02 AM.jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "release-order channel, start of the list: lines 1-16 (November 2012 to February 2014), line 17 cut.",
+      "capturedNote": "Filename suggests it was shared on 2026-10-07; the list message itself is dated 16/10/2025 and was edited later.",
+      "remainingQuestions": "", "notes": "Line 17 (Six Paths Madara, March 2014) is cut by the bottom overlay; it is fully legible in the next capture."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.03 AM (2).jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "release-order list, lines 4-31 (February 2013 to May 2015).",
+      "remainingQuestions": "", "notes": "Top line and bottom line are cut off. Overlaps the previous capture on lines 4-17 and the next on line 31."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.03 AM (1).jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "release-order list, lines 31-58 (May 2015 to August 2017).",
+      "remainingQuestions": "", "notes": "Top line and bottom line are cut off. Overlaps the next capture on line 58."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.03 AM.jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "release-order list, lines 58-85 (August 2017 to November 2019).",
+      "remainingQuestions": "The line after Princess Hinata (November 2019) is cut off here and the next capture starts at Guren (December 2019): the two captures share no fully legible line. The months are consecutive, so no gap is expected, but this boundary could not be cross-checked.",
+      "notes": "Bottom line is cut off and unreadable."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.04 AM.jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "release-order list, lines 86-113 (December 2019 to March 2022).",
+      "remainingQuestions": "See the previous capture: boundary with it is not cross-checked.", "notes": "Bottom line (114) is cut. Overlaps the next capture on line 113."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.04 AM (1).jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "release-order list, lines 113-140 (March 2022 to June 2024).",
+      "remainingQuestions": "", "notes": "Bottom line (141) is cut. Overlaps the next capture on line 140."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/WhatsApp Image 2026-10-07 at 3.56.04 AM (2).jpeg",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": true,
+      "description": "release-order list, lines 140-167 (June 2024 to September 2026), end of the list.",
+      "remainingQuestions": "", "notes": "Every line is fully legible."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/release_order/image(8).png",
+      "category": "SCREENSHOT", "section": "release_order", "fullyLegible": false,
+      "description": "Later capture of the end of the same release-order list, lines 142-167 (August 2024 to September 2026).",
+      "remainingQuestions": "", "notes": "Top line (141) is cut. Adds no new line: every line also appears in the previous capture. Not a strict duplicate image (different crop and time), so it is kept as its own asset."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/ninja_and_UI/image(9).png",
+      "category": "SCREENSHOT", "section": "ninja_and_UI", "fullyLegible": true,
+      "description": "Milestone 1 application: Spanish admin screen for ninja roles, with [DEMO] placeholder rows.",
+      "remainingQuestions": "", "notes": "Shows our own app, not the game. No game data extracted. The [DEMO] rows are test placeholders and were not imported."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png",
+      "category": "SCREENSHOT", "section": "ninja_and_UI", "fullyLegible": false,
+      "description": "Reference thread 'Uchiha Madara (Moon's Eye)' under 'supporters': in-game ninja card with type, formation, four base stats with growth rates, talent, skill and rating.",
+      "capturedNote": "The post is dated 13/03/2026; that is the post date, not used as the release date.",
+      "remainingQuestions": "The card shows ONE talent and ONE skill by name only; it does not show their effects, nor whether an alternative talent exists. The Spanish line above the card ('Restaura 68 de furia propia y 30 para los aliados.') is the tail of an earlier message whose beginning is cut off.",
+      "notes": "The small name plate under the portrait reads 'Madara [Moon's Eye]'; the thread title reads 'Uchiha Madara (Moon's Eye)'. The lower image is a combat animation with no data."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/ninja_and_UI/image(20261012-010500).png",
+      "category": "SCREENSHOT", "section": "ninja_and_UI", "fullyLegible": false,
+      "description": "In-game formation screen in Spanish: position labels Apoyo / Centro / Vanguardia, 'Número de atacante 4/4'.",
+      "remainingQuestions": "", "notes": "Used only for the Spanish names of the three positions and as an illustration of placement. Red overlay text is partly unreadable and was ignored. No team logic was built from it."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/ninja_and_UI/image(20261012-010510).png",
+      "category": "SCREENSHOT", "section": "ninja_and_UI", "fullyLegible": true,
+      "description": "Crop of the ninja card: 'Source: Other'.",
+      "remainingQuestions": "", "notes": "The client said this card field is the same for every ninja and not needed. Deliberately not stored as a ninja attribute."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010554).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": false,
+      "description": "One line of an ability: 'Makes ally assaulters enter (20%) shatter storm state for 2 rounds.'",
+      "remainingQuestions": "Which ninja and which ability this line belongs to is not visible. The lines above and below are cut off.",
+      "notes": "The image reads 'Makes ally assaulters', without the word 'all' that appears in the written brief; the image wording is kept."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010611).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": false,
+      "duplicateOf": "03_REFERENCE_IMAGES/mechanics/image(20261012-010554).png",
+      "description": "Same line as image(20261012-010554).png.",
+      "remainingQuestions": "", "notes": "A second capture of the same line: the files are not byte-identical, but the visible text and crop are the same. Not a second usage."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010624).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": true,
+      "description": "Guide, 'Terminology': Penetration or Pierce damage, DoT (damage over time), Physical or strategy defense shield.",
+      "remainingQuestions": "", "notes": "Stored as glossary terms (reference text). No damage formula was implemented from it."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010628).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": true,
+      "description": "Guide: 'Cleansable DoTs', 'Uncleansable DoTs', 'Uncleansable CCs'.",
+      "remainingQuestions": "The DoT and CC lists give names only, without definitions. The guide lists DoTs and CCs apart from 'debuffs'; whether rules about debuffs also cover them is not stated.",
+      "notes": "'Sticky acid' is its own bullet under 'Cleansable DoTs' with an exception text."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010631).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": false,
+      "description": "Guide: 'Cleansable debuffs' and 'Uncleansable debuffs' with definitions.",
+      "remainingQuestions": "In the last entry ('Crit resistance reduction') an on-screen scroll button hides part of the text: 'as implied (20%, u… other is stated)'. The hidden word is very likely 'unless'.",
+      "notes": "Curse Fixation appears here and also in the CC list."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010647).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": true,
+      "description": "Guide: 'Uncleansable buffs' with definitions, including Shatter Storm/Breaking Wind (15% unless other is stated).",
+      "remainingQuestions": "'Shielding state' appears twice: inside the heading 'Amenotejikara/Shielding state/Position Interchange' and as its own entry with a shorter definition. 'Wind Escape/Shield' could mean 'Wind Escape / Wind Shield' or 'Wind Escape / Shield'.",
+      "notes": "'Wind Escape/Shield' is not in bold in the source, unlike the other headings."
+    },
+    {
+      "path": "03_REFERENCE_IMAGES/mechanics/image(20261012-010652).png",
+      "category": "SCREENSHOT", "section": "mechanics", "fullyLegible": true,
+      "description": "Guide: 'Cleansable buffs' with definitions.",
+      "remainingQuestions": "", "notes": ""
+    },
+    {
+      "path": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md",
+      "category": "CLIENT_MESSAGE", "section": "client", "fullyLegible": true,
+      "description": "Written summary of what the client confirmed in conversation on 6-7 October 2026.",
+      "remainingQuestions": "", "notes": "Used for rules the screenshots do not show: rating vocabulary, Tank/DPS rule, formation meaning, primary stat per formation, team limits, the 15%/20% override rule."
+    }
+  ]
+}

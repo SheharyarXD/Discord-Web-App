@@ -1,0 +1,45 @@
+{
+  "_about": "Evidence that is real but cannot be turned into game records yet. It is stored as source records WITHOUT creating abilities or effect usages, so nothing is invented to fill the gap. Each item says what is missing.",
+  "items": [
+    {
+      "key": "staged:usage:shatter-storm-20-ally-assaulters",
+      "asset": "03_REFERENCE_IMAGES/mechanics/image(20261012-010554).png",
+      "alsoIn": [
+        "03_REFERENCE_IMAGES/mechanics/image(20261012-010611).png"
+      ],
+      "kind": "effect_usage",
+      "ownerName": null,
+      "abilityName": null,
+      "statusKey": "shatter-storm",
+      "rawText": "Makes ally assaulters enter (20%) shatter storm state for 2 rounds.",
+      "defaultStatModifierPercent": 15,
+      "usageOverridePercent": 20,
+      "applicationChancePercent": null,
+      "durationRounds": 2,
+      "targetOriginal": "ally assaulters",
+      "requiredNature": null,
+      "otherConditions": null,
+      "reviewStatus": "NEEDS_REVIEW",
+      "ambiguityNote": "En la captura no se ve a qué ninja ni a qué habilidad pertenece esta línea, así que no se ha creado ningún uso de efecto. Significado confirmado por el cliente: (20%) es la fuerza del efecto para ese ninja y sustituye al 15% por defecto en attack y defenses; no es una probabilidad, y no se indica ninguna. Cuando se conozca el dueño quedará así: estado shatter-storm, valor propio 20, duración 2 rondas, objetivo aliados de la categoría «assaulters», probabilidad vacía."
+    },
+    {
+      "key": "staged:fragment:madara-moons-eye-fury",
+      "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png",
+      "alsoIn": [],
+      "kind": "ability_text_fragment",
+      "ownerName": "Uchiha Madara (Moon's Eye)",
+      "abilityName": null,
+      "statusKey": null,
+      "rawText": "Restaura 68 de furia propia y 30 para los aliados.",
+      "defaultStatModifierPercent": null,
+      "usageOverridePercent": null,
+      "applicationChancePercent": null,
+      "durationRounds": null,
+      "targetOriginal": null,
+      "requiredNature": null,
+      "otherConditions": null,
+      "reviewStatus": "PARTIALLY_CONFIRMED",
+      "ambiguityNote": "Última línea de un mensaje anterior del hilo de este ninja; lo que hay encima está cortado, así que no se sabe a qué habilidad pertenece. Texto en español tal como se publicó. Se guarda solo como evidencia: no se ha creado ninguna habilidad ni efecto a partir de él."
+    }
+  ]
+}

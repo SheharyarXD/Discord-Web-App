@@ -1,0 +1,81 @@
+{
+  "_about": "Vocabulary confirmed by the supplied material. Each row names the evidence it rests on. Nothing here is inferred from general knowledge of the franchise.",
+  "client": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md",
+  "ratings": {
+    "evidence": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Confirmed requirements, item 4", "sourceText": "Ratings include S, SS, SSS, SR, SSR, with extensible categories.", "reviewStatus": "CONFIRMED" },
+    "orderNote": "sortOrder follows the order in which the client listed them. It is a display order, not a confirmed ranking.",
+    "rows": ["S", "SS", "SSS", "SR", "SSR"]
+  },
+  "baseStatistics": {
+    "evidence": { "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png", "section": "ninja card", "reviewStatus": "CONFIRMED" },
+    "rows": [
+      { "key": "force", "name": "Force" },
+      { "key": "agility", "name": "Agility" },
+      { "key": "chakra", "name": "Chakra" },
+      { "key": "hp", "name": "HP" }
+    ]
+  },
+  "guideStatistics": {
+    "_about": "Stat terms exactly as the status guide words them. They are kept apart even when two may be the same stat (e.g. 'final damage' and 'final damage dealt'); merging is the client's call.",
+    "rows": [
+      { "key": "attack", "name": "attack" },
+      { "key": "defenses", "name": "defenses", "note": "Plural group term as written in the guide. Which defenses it covers (physical, strategy, both) is not stated." },
+      { "key": "speed", "name": "speed" },
+      { "key": "healing-rate", "name": "healing rate" },
+      { "key": "cc-resistance", "name": "CC resistance" },
+      { "key": "avoid-injury", "name": "avoid injury" },
+      { "key": "final-damage-received", "name": "final damage received" },
+      { "key": "block-rate", "name": "block rate" },
+      { "key": "damage-rate", "name": "damage rate" },
+      { "key": "final-damage", "name": "final damage", "note": "As written under Dispirited State. May or may not be the same stat as 'final damage dealt'." },
+      { "key": "final-damage-dealt", "name": "final damage dealt", "note": "As written under Pyroblast state and Fury Shield. May or may not be the same stat as 'final damage'." },
+      { "key": "final-damage-reduction", "name": "final damage reduction" },
+      { "key": "crit-resistance", "name": "crit resistance" }
+    ]
+  },
+  "formations": {
+    "_about": "In-game positions. English names: 'Support' is printed on the ninja card; 'Center' and 'Vanguard' are the client's wording. Spanish names are printed on the in-game formation screen.",
+    "evidenceEs": { "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(20261012-010500).png", "section": "position labels", "sourceText": "Apoyo · Centro · Vanguardia", "reviewStatus": "CONFIRMED" },
+    "evidenceRule": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Confirmed requirements, items 6-8", "sourceText": "Support, Center, Vanguard describe formation positions (rear, middle, front). All Support units primarily use Chakra; Center/Vanguard primarily use Force. Future teams contain four ninjas; max 3 Support, 2 Center, 1 Vanguard.", "reviewStatus": "CONFIRMED" },
+    "rows": [
+      { "key": "support", "name": "Support", "nameEs": "Apoyo", "positionNote": "rear", "primaryStatisticKey": "chakra", "maxPerTeam": 3 },
+      { "key": "center", "name": "Center", "nameEs": "Centro", "positionNote": "middle", "primaryStatisticKey": "force", "maxPerTeam": 2 },
+      { "key": "vanguard", "name": "Vanguard", "nameEs": "Vanguardia", "positionNote": "front", "primaryStatisticKey": "force", "maxPerTeam": 1 }
+    ]
+  },
+  "roles": {
+    "_about": "Source categories: the labels the reference forum files ninjas under. They are NOT the in-game formation. Every mapping below is a PROPOSAL awaiting the client's approval; until then a category resolves to no formation.",
+    "rows": [
+      {
+        "key": "supporters", "name": "supporters", "mappedFormationKey": "support", "mappingStatus": "PROPOSED",
+        "mappingNote": "One data point: 'Uchiha Madara (Moon's Eye)' is filed under 'supporters' and its card prints Formation: Support. Not yet confirmed as a general rule.",
+        "evidence": { "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png", "section": "thread header", "sourceText": "supporters", "reviewStatus": "CONFIRMED" }
+      },
+      {
+        "key": "assaulters", "name": "assaulters", "mappedFormationKey": "center", "mappingStatus": "PROPOSED",
+        "mappingNote": "Unproven. The names differ ('assaulters' vs 'Center') and no card of a ninja filed under 'assaulters' has been supplied.",
+        "evidence": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Known unresolved items", "sourceText": "The Discord channels are named supporters, assaulters, vanguards [...] Assaulter = Center is not proven.", "reviewStatus": "NEEDS_REVIEW" }
+      },
+      {
+        "key": "vanguards", "name": "vanguards", "mappedFormationKey": "vanguard", "mappingStatus": "PROPOSED",
+        "mappingNote": "Same word as the formation, but no card of a ninja filed under 'vanguards' has been supplied.",
+        "evidence": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Known unresolved items", "sourceText": "The Discord channels are named supporters, assaulters, vanguards", "reviewStatus": "NEEDS_REVIEW" }
+      }
+    ]
+  },
+  "statusCategories": {
+    "_about": "Structural facets used to classify dictionary entries. Spanish labels are interface wording, not game terms.",
+    "rows": [
+      { "key": "dot", "name": "DoT", "nameEs": "Daño en el tiempo (DoT)" },
+      { "key": "cc", "name": "CC", "nameEs": "Control (CC)" },
+      { "key": "stat_modifier", "name": "Stat modifier", "nameEs": "Modifica estadísticas" },
+      { "key": "immunity", "name": "Immunity", "nameEs": "Inmunidad" },
+      { "key": "protection", "name": "Protection", "nameEs": "Protección" },
+      { "key": "restriction", "name": "Restriction", "nameEs": "Restricción" },
+      { "key": "hp_loss", "name": "HP loss", "nameEs": "Pérdida de vida" },
+      { "key": "instant_death", "name": "Instant death", "nameEs": "Muerte instantánea" },
+      { "key": "damage_mechanic", "name": "Damage mechanic", "nameEs": "Mecánica de daño" },
+      { "key": "shield_mechanic", "name": "Shield mechanic", "nameEs": "Mecánica de escudo" }
+    ]
+  }
+}

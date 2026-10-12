@@ -12,7 +12,9 @@
     "db:migrate": "prisma migrate dev",
     "db:deploy": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
-    "db:seed:demo": "tsx prisma/seed-demo.ts"
+    "db:seed:demo": "tsx prisma/seed-demo.ts",
+    "db:ingest": "tsx prisma/ingest-reference.ts",
+    "db:ingest:staging": "tsx prisma/ingest-reference.ts --export-staging"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

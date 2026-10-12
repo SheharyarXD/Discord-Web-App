@@ -5,7 +5,9 @@ import { logoutAction } from "@/server/auth/actions";
 import type { SessionUser } from "@/server/auth/session";
 import { can } from "@/server/auth/permissions";
 import { Button } from "@/components/ui/primitives";
+import { FEATURES } from "@/config/features";
 import { MainNav } from "./main-nav";
+import { visibleNav } from "./nav-items";
 
 export async function AppHeader({ user }: { user: SessionUser }) {
   const t = await getT();
@@ -17,7 +19,7 @@ export async function AppHeader({ user }: { user: SessionUser }) {
           <span className="hidden text-sm font-bold tracking-wide sm:inline">{t("app.name")}</span>
         </Link>
         <div className="flex flex-1 items-center justify-end gap-2 lg:justify-between lg:pl-4">
-          <MainNav showAdmin={can(user, "admin:access")} />
+          <MainNav items={visibleNav(FEATURES, can(user, "admin:access"))} />
           <div className="flex items-center gap-2">
             <span className="hidden max-w-48 truncate text-xs text-muted md:inline" title={user.email}>
               {user.email}

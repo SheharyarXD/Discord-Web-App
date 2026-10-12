@@ -1,0 +1,55 @@
+{
+  "_about": "Ninja cards read from supplied screenshots. Only what is printed on the card is recorded. A card names one talent and one skill but shows neither their effects nor whether alternatives exist, so none are stored.",
+  "cards": [
+    {
+      "name": "Uchiha Madara (Moon's Eye)",
+      "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png",
+      "reviewStatus": "CONFIRMED",
+      "roleKey": "supporters",
+      "roleEvidence": "Título del hilo: «Uchiha Madara (Moon's Eye)», dentro de «supporters».",
+      "formationKey": "support",
+      "ratingKey": "SSR",
+      "type": {
+        "key": "genjutsu",
+        "name": "Genjutsu"
+      },
+      "description": "Fate is merely an excuse for the weak. The strong create their own path!",
+      "baseStats": [
+        {
+          "statisticKey": "force",
+          "sourceLabel": "Force",
+          "baseValue": "22500",
+          "growthRate": "22.5"
+        },
+        {
+          "statisticKey": "agility",
+          "sourceLabel": "Agility",
+          "baseValue": "44500",
+          "growthRate": "44.5"
+        },
+        {
+          "statisticKey": "chakra",
+          "sourceLabel": "Chakra",
+          "baseValue": "44000",
+          "growthRate": "44"
+        },
+        {
+          "statisticKey": "hp",
+          "sourceLabel": "HP",
+          "baseValue": "440000",
+          "growthRate": "44"
+        }
+      ],
+      "skill": {
+        "name": "Truth-Seeking Pierce"
+      },
+      "talent": {
+        "name": "Infinite Tsukuyomi"
+      },
+      "talentNote": "La ficha muestra un solo talento. No se ve si este ninja tiene un talento alternativo para elegir; el grupo queda pendiente de revisión.",
+      "cardSourceText": "Type: Genjutsu · Formation: Support · Force 22500 (Growth Rate 22.5) · Chakra 44000 (Growth Rate 44) · Agility 44500 (Growth Rate 44.5) · HP 440000 (Growth Rate 44) · Talent: Infinite Tsukuyomi · Skill: Truth-Seeking Pierce · Rating: SSR · Source: Other",
+      "notIngested": "Source: Other (the client asked not to keep this card field). Name plate under the portrait: 'Madara [Moon's Eye]'.",
+      "skillNote": "La ficha solo muestra el nombre de la habilidad; no se ven su descripción ni sus efectos."
+    }
+  ]
+}

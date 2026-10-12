@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FEATURES } from "@/config/features";
 import { getT } from "@/i18n/server";
 import { getContentCounts } from "@/server/queries/overview";
 import { Card, PageHeader } from "@/components/ui/primitives";
@@ -11,6 +12,7 @@ const SECTIONS = [
   { href: "/jewelry", key: "jewelry" },
   { href: "/gems", key: "gems" },
   { href: "/sets", key: "sets" },
+  { href: "/effects", key: "effects" },
 ] as const;
 
 export default async function HomePage() {
@@ -21,7 +23,7 @@ export default async function HomePage() {
       <PageHeader title={t("home.title")} description={t("home.intro")} />
       <h2 className="mb-3 text-sm font-semibold uppercase tracking-wider text-muted">{t("home.sectionsTitle")}</h2>
       <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {SECTIONS.map(({ href, key }) => (
+        {SECTIONS.filter(({ key }) => key !== "gems" || FEATURES.gems).map(({ href, key }) => (
           <li key={key}>
             <Link href={href} className="block h-full">
               <Card className="h-full transition-colors hover:border-accent">

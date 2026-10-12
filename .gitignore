@@ -8,3 +8,5 @@ prisma/*.db
 tests/.tmp
 next-env.d.ts
 *.tsbuildinfo
+tests/*.log
+prisma/backups

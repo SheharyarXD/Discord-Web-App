@@ -1,0 +1,11 @@
+# Keep line endings identical on every machine. Prisma checksums migration files,
+# so a migration must never change bytes between a commit and a checkout.
+* text=auto eol=lf
+
+# Never touch binary files.
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary
+*.db binary

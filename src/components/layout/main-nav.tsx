@@ -5,19 +5,17 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useT } from "@/i18n/client";
 import { cx } from "@/components/ui/primitives";
-import { MAIN_NAV, type NavItem } from "./nav-items";
+import type { NavItem } from "./nav-items";
 
 function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
 /** Desktop: inline links. Below `lg`: a disclosure button that reveals the same links. */
-export function MainNav({ showAdmin }: { showAdmin: boolean }) {
+export function MainNav({ items }: { items: NavItem[] }) {
   const t = useT();
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
-
-  const items: NavItem[] = showAdmin ? [...MAIN_NAV, { href: "/admin", labelKey: "nav.admin" }, { href: "/preview", labelKey: "nav.preview" }] : MAIN_NAV;
 
   const links = items.map((item) => (
     <Link
