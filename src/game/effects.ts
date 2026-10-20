@@ -2,9 +2,11 @@ import type { Prisma } from "@prisma/client";
 import type {
   Cleansability,
   ConditionScope,
+  EffectKind,
   EffectOwnerField,
   ModifierDirection,
   Polarity,
+  RateKind,
   StatusKind,
   StructuredStatus,
   TranslationStatus,
@@ -122,6 +124,7 @@ export function toEffectView(row: EffectRow): EffectView {
   return {
     id: row.id,
     statisticName: row.statistic?.name ?? null,
+    statisticKey: row.statistic?.key ?? null,
     value: toNumber(row.value),
     valueType: row.valueType as ValueType,
     targetName: row.target?.name ?? null,
@@ -135,6 +138,20 @@ export function toEffectView(row: EffectRow): EffectView {
     conditionText: row.conditionText,
     structuredStatus: row.structuredStatus as StructuredStatus,
     sourceText: row.sourceText,
+    kind: row.kind as EffectKind,
+    rateValue: toNumber(row.rateValue),
+    rateKind: row.rateKind as RateKind | null,
+    replacesValue: toNumber(row.replacesValue),
+    valueNote: row.valueNote,
+    targetCount: row.targetCount,
+    targetSelector: row.targetSelector,
+    excludesSelf: row.excludesSelf,
+    choiceGroup: row.choiceGroup,
+    choiceLabel: row.choiceLabel,
+    sourceLine: row.sourceLine,
+    note: row.note,
+    descriptionEs: row.descriptionEs,
+    translationStatus: row.translationStatus as TranslationStatus,
     status: definition && {
       definition,
       magnitudeOverride,
@@ -181,9 +198,19 @@ function lookups(tx: Prisma.TransactionClient) {
  * Replaces the effect usages of ONE owner with `inputs` (must run inside a transaction).
  * Every referenced key must already exist: nothing is invented on the fly.
  */
-export async function replaceEffects(tx: Prisma.TransactionClient, owner: EffectOwner, inputs: ParsedEffectInput[]): Promise<void> {
+export async function replaceEffects(
+  tx: Prisma.TransactionClient,
+  owner: EffectOwner,
+  inputs: ParsedEffectInput[],
+  /**
+   * "all": the owner's effects become exactly `inputs`.
+   * "simple": only plain statistic rows (no status, no conditions) are replaced; special effects of the owner
+   * are left alone. Used by the administrator's item forms, which can only express plain statistics.
+   */
+  mode: "all" | "simple" = "all",
+): Promise<void> {
   const find = lookups(tx);
-  await tx.effect.deleteMany({ where: owner });
+  await tx.effect.deleteMany({ where: mode === "all" ? owner : { ...owner, kind: "STAT", statisticId: { not: null }, statusEffectId: null, conditions: { none: {} } } });
   for (const [sortOrder, e] of inputs.entries()) {
     const conditions: Prisma.ConditionUncheckedCreateWithoutEffectInput[] = [];
     for (const [i, c] of e.conditions.entries()) {
@@ -222,6 +249,18 @@ export async function replaceEffects(tx: Prisma.TransactionClient, owner: Effect
         description: e.description ?? null,
         descriptionEs: e.descriptionEs ?? null,
         translationStatus: e.translationStatus,
+        kind: e.kind,
+        rateValue: e.rateValue ?? null,
+        rateKind: e.rateKind ?? null,
+        replacesValue: e.replacesValue ?? null,
+        valueNote: e.valueNote ?? null,
+        targetCount: e.targetCount ?? null,
+        targetSelector: e.targetSelector ?? null,
+        excludesSelf: e.excludesSelf,
+        choiceGroup: e.choiceGroup ?? null,
+        choiceLabel: e.choiceLabel ?? null,
+        sourceLine: e.sourceLine ?? null,
+        note: e.note ?? null,
         sortOrder,
         conditions: { create: conditions },
       },

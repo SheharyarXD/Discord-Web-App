@@ -211,6 +211,13 @@ model Formation {
   primaryStatistic   Statistic?     @relation(fields: [primaryStatisticId], references: [id], onDelete: SetNull)
   /// Client-stated team limit, kept as reference data for a future feature. Nothing enforces it.
   maxPerTeam         Int?
+  /// Another row that may be the SAME position under a different name (the card prints
+  /// "Assaulter", the client says "Center"). Only an APPROVED equivalence is ever acted on.
+  equivalentToId     String?
+  equivalentTo       Formation?     @relation("FormationEquivalence", fields: [equivalentToId], references: [id], onDelete: SetNull)
+  equivalents        Formation[]    @relation("FormationEquivalence")
+  equivalenceStatus  String         @default("NONE") // NONE | PROPOSED | APPROVED
+  equivalenceNote    String?
   sortOrder          Int            @default(0)
   ninjas             Ninja[]
   mappedRoles        NinjaRole[]
@@ -404,9 +411,31 @@ model Effect {
   targetText        String? // original target wording, e.g. "ally assaulters"
   durationTurns     Int? // rounds
   chancePercent     Decimal? // 0–100; null = no chance stated (NOT "always" and NOT the magnitude)
+  /// What the row is: ATTACK | STAT | STATUS | IMMUNITY | FURY | HEAL | DISPEL | TEXT (see EFFECT_KINDS).
+  kind              String        @default("STAT")
+  /// A "rate" the source states. It is NEVER a probability unless rateKind says APPLICATION:
+  ///   GROWTH "attacks with 300% growth rate" · INTENSITY "poisons with 120% rate", "heals with 50% rate"
+  ///   APPLICATION "80% rate to stun" (kept apart from chancePercent, which needs the word "chance")
+  rateValue         Decimal?
+  rateKind          String?
+  /// Value an awakening line says it replaces ("from 83% → 86%": value 86, replacesValue 83).
+  replacesValue     Decimal?
+  /// Qualitative wording when the source gives no number ("high rate", "a certain percentage"),
+  /// or a rider on the number ("can exceed cap").
+  valueNote         String?
+  targetCount       Int? // "2 random allies" → 2
+  targetSelector    String? // RANDOM | HIGHEST_HP | LOWEST_HP | ... (see TARGET_SELECTORS)
+  excludesSelf      Boolean       @default(false)
+  /// Alternatives inside one ability: rows sharing a choiceGroup are options of which ONE
+  /// applies ("Deva Path … OR Animal Path …"). Different groups are independent of each other.
+  choiceGroup       Int?
+  choiceLabel       String?
+  /// Position of the source line inside its ability; rows parsed from one line share it.
+  sourceLine        Int?
+  note              String?
   triggerText       String? // original trigger wording, if any
   conditionText     String? // natural-language requirement not (yet) structured → still conditional
-  structuredStatus  String        @default("STRUCTURED") // STRUCTURED | NEEDS_REVIEW
+  structuredStatus  String        @default("STRUCTURED") // STRUCTURED | NEEDS_REVIEW | TEXT_ONLY
   sourceText        String? // verbatim wording of this usage
   description       String? // free text when an effect is not purely numeric
   descriptionEs     String?
@@ -443,6 +472,7 @@ model Effect {
   @@index([gemId])
   @@index([statisticId, valueType, value])
   @@index([statusEffectId])
+  @@index([kind])
 }
 
 /// A requirement/restriction attached to an effect usage.
@@ -521,6 +551,7 @@ model Ninja {
   natures             NinjaNature[]
   subjectOfConditions Condition[]     @relation("ConditionSubjectNinja")
   sourceRecords       SourceRecord[]
+  aliases             NinjaAlias[]
 
   @@index([roleId])
   @@index([status])
@@ -530,6 +561,25 @@ model Ninja {
   @@index([clientCombatClass])
   @@index([releaseYear, releaseMonth, releaseOrder])
   @@index([name])
+}
+
+/// Another name the same ninja goes by: the card name plate, the thread title, a spelling variant.
+/// The canonical `Ninja.name` is never rewritten from an alias.
+model NinjaAlias {
+  id         String   @id @default(cuid())
+  ninjaId    String
+  ninja      Ninja    @relation(fields: [ninjaId], references: [id], onDelete: Cascade)
+  alias      String
+  normalized String
+  kind       String // CARD_NAME | SOURCE_NAME (see ALIAS_KINDS)
+  locale     String   @default("en")
+  /// VERIFIED same words, mechanically · REVIEWED a judgement backed by `note`, awaiting the client
+  status     String   @default("REVIEWED")
+  note       String?
+  createdAt  DateTime @default(now())
+
+  @@unique([ninjaId, normalized, kind])
+  @@index([normalized])
 }
 
 /// A base attribute printed on the ninja card, with its growth rate. One row per statistic.
@@ -578,6 +628,31 @@ model Ability {
   translationStatus String         @default("MISSING")
   triggerText       String?
   stage             Int? // rank / awakening stage, when the source gives one
+  /// Name printed on the ninja card (may be cut off by the game UI). `name` is the heading
+  /// used in the ability text; both are kept when they differ.
+  cardLabel         String?
+  cardLabelCut      Boolean        @default(false)
+  /// Heading exactly as posted in the source ("Talent Awakening 1: Sage Mode").
+  sourceHeading     String?
+  /// An awakening belongs to the skill it awakens (parentAbilityId) OR to a talent
+  /// (talentOptionId) — never both (trigger-enforced).
+  parentAbilityId   String?
+  parentAbility     Ability?       @relation("AbilityAwakenings", fields: [parentAbilityId], references: [id], onDelete: Cascade)
+  awakenings        Ability[]      @relation("AbilityAwakenings")
+  talentOptionId    String?
+  talentOption      TalentOption?  @relation(fields: [talentOptionId], references: [id], onDelete: Cascade)
+  /// How this awakening combines with what came before. Set ONLY from explicit source wording:
+  ///   NOT_APPLICABLE base ability · UNKNOWN the source does not say · CUMULATIVE adds to prior
+  ///   REPLACES_PRIOR its effects replace an earlier stage · CANCELS_PRIOR switches an earlier stage off
+  ///   UPGRADES_BASE restates specific base numbers ("from 83% → 86%")
+  /// No code may sum stages while the rule is UNKNOWN.
+  stackingRule      String         @default("NOT_APPLICABLE")
+  supersedesId      String?
+  supersedes        Ability?       @relation("AbilitySupersession", fields: [supersedesId], references: [id], onDelete: SetNull)
+  supersededBy      Ability[]      @relation("AbilitySupersession")
+  ruleSourceText    String? // verbatim wording the rule rests on
+  conditionText     String? // e.g. "Special Jugo Card Awakening"
+  note              String?
   imageUrl          String?
   reviewStatus      String         @default("NEEDS_REVIEW")
   sortOrder         Int            @default(0)
@@ -588,6 +663,8 @@ model Ability {
 
   @@index([ninjaId])
   @@index([abilityTypeId])
+  @@index([parentAbilityId])
+  @@index([talentOptionId])
 }
 
 /// A set of talent choices. "Choose ONE of A/B" is a group with selectionMode ONE_OF
@@ -623,8 +700,14 @@ model TalentOption {
   /// M1 column, kept for compatibility. Since M2 it is NOT rendered as a selection: which
   /// option is active is a per-user choice (UserTalentSelection), never canonical game data.
   isDefault         Boolean               @default(false)
+  cardLabel         String?
+  cardLabelCut      Boolean               @default(false)
+  sourceHeading     String?
+  note              String?
+  reviewStatus      String                @default("NEEDS_REVIEW")
   sortOrder         Int                   @default(0)
   effects           Effect[]
+  awakenings        Ability[]
   selections        UserTalentSelection[]
   sourceRecords     SourceRecord[]
 

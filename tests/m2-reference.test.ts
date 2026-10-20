@@ -1,6 +1,7 @@
 import { existsSync } from "node:fs";
 import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { resolveAwakenings } from "../src/domain/awakenings";
 import { resolveEffectUsage } from "../src/domain/effects";
 import { getNinjaDetail, listNinjas } from "../src/game/ninjas";
 import { analyzeReleaseList, loadReferenceData, readReferenceFile, type ReferenceInventory, type ReleaseFile, type StagedEvidenceFile } from "../src/game/reference-loader";
@@ -66,8 +67,9 @@ describe("loading the reference data", () => {
     // Kurotsuchi (March 2022) is fully legible in two captures: one ninja, two evidence rows.
     const kurotsuchi = await db.ninja.findUniqueOrThrow({ where: { slug: "kurotsuchi" }, include: { sourceRecords: true } });
     expect([kurotsuchi.releaseYear, kurotsuchi.releaseMonth, kurotsuchi.releaseOrder]).toEqual([2022, 3, 113]);
-    expect(kurotsuchi.sourceRecords).toHaveLength(2);
-    expect(kurotsuchi.sourceRecords.every((r) => r.sourceText === "Kurotsuchi (March 2022)" && r.reviewStatus === "CONFIRMED")).toBe(true);
+    const releaseRecords = kurotsuchi.sourceRecords.filter((r) => !r.key.startsWith("profile:"));
+    expect(releaseRecords).toHaveLength(2);
+    expect(releaseRecords.every((r) => r.sourceText === "Kurotsuchi (March 2022)" && r.reviewStatus === "CONFIRMED")).toBe(true);
   });
 
   it("is idempotent: a second run creates nothing", async () => {
@@ -98,15 +100,18 @@ describe("loading the reference data", () => {
     expect(page.items.map((n) => n.name)).toEqual(["Sasuke (Taka)", "Orochimaru (Akatsuki)", "Tsunade-Sakura (Summer)", "Hinata (Soccer Star)", "Naruto (6-tails mode)"]);
   });
 
-  it("a release-list-only ninja is sparse: no role, rating, formation, class, stats or abilities are invented", async () => {
-    const ninja = (await getNinjaDetail(db, "cursed-seal-sasuke"))!;
+  it("a ninja without a card is sparse: no rating, type, class or stats are invented", async () => {
+    const ninja = (await getNinjaDetail(db, "sasuke-taka"))!;
     expect(ninja).toMatchObject({
-      name: "Cursed Seal Sasuke", release: { year: 2012, month: 11 }, releaseOrder: 1, reviewStatus: "CONFIRMED",
-      role: null, formation: null, rating: null, type: null, clientCombatClass: null, primaryStat: null,
-      natures: [], baseStats: [], abilities: [], talentGroups: [], description: null,
+      name: "Sasuke (Taka)", release: { year: 2026, month: 9 }, releaseOrder: 167, rating: null, type: null, clientCombatClass: null, baseStats: [],
     });
+    // The approved Assaulter = Center rule still gives it its primary attribute (Force) without a card.
+    // Since the Supporter package arrived every ninja of the release list has a profile; only Might Guy and Sasuke (Taka) still lack a card.
+    expect(first.profiles!.releaseOnly).toHaveLength(0);
+    const noCard = await db.ninja.findMany({ where: { baseStats: { none: {} } }, select: { name: true }, orderBy: { name: "asc" } });
+    expect(noCard.map((n) => n.name)).toEqual(["Might Guy", "Sasuke (Taka)"]);
     const sparse = await db.ninja.count({ where: { ...fromReleaseList, ratingId: null, formationId: null, roleId: null, ninjaTypeId: null, clientCombatClass: null, abilities: { none: {} }, baseStats: { none: {} } } });
-    expect(sparse).toBe(166); // everyone except the one ninja whose card was supplied
+    expect(sparse).toBe(0);
   });
 
   it("stores exactly what the Madara (Moon's Eye) card prints", async () => {
@@ -120,19 +125,18 @@ describe("loading the reference data", () => {
       primaryStat: { key: "chakra" },
       clientCombatClass: null, // the client has not classified it; never derived from the numbers
       description: "Fate is merely an excuse for the weak. The strong create their own path!",
-      translationStatus: "MISSING",
     });
     expect(madara.baseStats.map((s) => [s.sourceLabel, s.baseValue, s.growthRate])).toEqual([
       ["Force", "22500", "22.5"],
-      ["Agility", "44500", "44.5"],
       ["Chakra", "44000", "44"],
+      ["Agility", "44500", "44.5"],
       ["HP", "440000", "44"],
     ]);
-    // Only the names printed on the card: no descriptions, effects or extra talents were made up.
-    expect(madara.abilities.map((a) => [a.type.key, a.name, a.description, a.effects.length, a.reviewStatus])).toEqual([["skill", "Truth-Seeking Pierce", null, 0, "PARTIALLY_CONFIRMED"]]);
+    // Its ability text arrived with the Supporter package: the same record now carries the talent, the skill and the talent awakening, with text.
+    const skill = madara.abilities.find((a) => a.type.key === "skill")!;
+    expect([skill.name, skill.effects.length > 0, skill.description?.startsWith("Attacks")]).toEqual(["Truth-Seeking Pierce", true, true]);
     expect(madara.talentGroups).toHaveLength(1);
-    expect(madara.talentGroups[0]!).toMatchObject({ reviewStatus: "NEEDS_REVIEW", selectedOptionIds: [] });
-    expect(madara.talentGroups[0]!.options.map((o) => [o.name, o.effects.length])).toEqual([["Infinite Tsukuyomi", 0]]);
+    expect(madara.talentGroups[0]!.options.map((o) => [o.name, o.effects.length > 0, o.awakenings.map((w) => w.name)])).toEqual([["Infinite Tsukuyomi", true, ["Limbo · Border Jail"]]]);
     expect(madara.sources.length).toBeGreaterThanOrEqual(4);
     // "Source: Other" on the card is deliberately not a ninja attribute.
     expect(Object.keys(await db.ninja.findUniqueOrThrow({ where: { slug: madara.slug } })).filter((k) => /acquisition|source$/i.test(k))).toEqual([]);
@@ -145,11 +149,14 @@ describe("loading the reference data", () => {
     const records = await db.sourceRecord.findMany({ where: { key: { startsWith: usage.key } } });
     expect(records).toHaveLength(2); // the capture and its duplicate
     expect(records.every((r) => r.ninjaId === null && r.effectId === null && r.reviewStatus === "NEEDS_REVIEW")).toBe(true);
-    // No effect usage of the real Shatter Storm exists yet, because its owner is unknown.
-    expect(await db.effect.count({ where: { statusEffect: { key: "shatter-storm" } } })).toBe(0);
+    // The staged usage created no effect. The Shatter Storm usages that exist all come from the ability text of a named ninja.
+    const storms = await db.effect.findMany({ where: { statusEffect: { key: "shatter-storm" } }, include: { ability: true, talentOption: true } });
+    expect(storms.every((e) => /shatter storm/i.test(e.sourceText ?? "") && (e.ability !== null || e.talentOption !== null))).toBe(true);
+    // No effect row is tied to the staged usage record itself (asserted above); the same wording may appear in a named ninja's own text.
     const fragment = await db.sourceRecord.findUniqueOrThrow({ where: { key: "staged:fragment:madara-moons-eye-fury" }, include: { ninja: true } });
     expect(fragment.ninja?.slug).toBe("uchiha-madara-moon-s-eye");
-    expect(await db.ability.count({ where: { ninja: { slug: "uchiha-madara-moon-s-eye" } } })).toBe(1);
+    // Its Supporter profile (skill, talent awakening, status text) arrived later; the card-only fragment still belongs to it.
+    expect(await db.ability.count({ where: { ninja: { slug: "uchiha-madara-moon-s-eye" } } })).toBeGreaterThanOrEqual(1);
   });
 
   it("the duplicate capture is registered as a duplicate, not as a second source of truth", async () => {
@@ -169,7 +176,9 @@ describe("loading the reference data", () => {
 });
 
 describe("the loaded status guide", () => {
-  const loaded = async () => (await listStatusEffects(db)).filter((s) => !/^t\d*-/.test(s.key));
+  /** Statuses that ability texts name and the guide does not define. */
+  const fromAbilityTexts = new Set(readReferenceFile<{ statuses: { key: string; new?: boolean }[] }>(REFERENCE_DIR, "lexicon.json").statuses.filter((s) => s.new).map((s) => s.key));
+  const loaded = async () => (await listStatusEffects(db)).filter((s) => !/^t\d*-/.test(s.key) && !fromAbilityTexts.has(s.key));
 
   it("contains the 46 statuses and 3 terms of the guide", async () => {
     const all = await loaded();
@@ -218,11 +227,119 @@ describe("the loaded status guide", () => {
     const all = await loaded();
     expect(all.every((s) => s.translationStatus === "MISSING" && s.descriptionEs === null)).toBe(true);
     const formations = await db.formation.findMany({ orderBy: { sortOrder: "asc" } });
-    expect(formations.map((f) => [f.name, f.nameEs, f.translationStatus, f.maxPerTeam])).toEqual([["Support", "Apoyo", "VERIFIED", 3], ["Center", "Centro", "VERIFIED", 2], ["Vanguard", "Vanguardia", "VERIFIED", 1]]);
+    expect(formations.map((f) => [f.name, f.nameEs, f.translationStatus, f.maxPerTeam])).toEqual([["Support", "Apoyo", "VERIFIED", 3], ["Center", "Centro", "VERIFIED", 2], ["Vanguard", "Vanguardia", "VERIFIED", 1], ["Assaulter", null, "MISSING", null]]);
   });
 
-  it("leaves every source-category mapping as a proposal", async () => {
+  it("source-category mappings: Assaulters is approved by the client, the others stay proposals", async () => {
     const roles = await db.ninjaRole.findMany({ where: { key: { in: ["supporters", "assaulters", "vanguards"] } }, include: { mappedFormation: true }, orderBy: { key: "asc" } });
-    expect(roles.map((r) => [r.key, r.mappedFormation?.key, r.mappingStatus])).toEqual([["assaulters", "center", "PROPOSED"], ["supporters", "support", "PROPOSED"], ["vanguards", "vanguard", "PROPOSED"]]);
+    expect(roles.map((r) => [r.key, r.mappedFormation?.key, r.mappingStatus])).toEqual([["assaulters", "assaulter", "APPROVED"], ["supporters", "support", "PROPOSED"], ["vanguards", "vanguard", "PROPOSED"]]);
+    // The card label «Assaulter» is its own row, and the client confirmed it is the same position as Center.
+    const assaulter = await db.formation.findUniqueOrThrow({ where: { key: "assaulter" }, include: { equivalentTo: true } });
+    expect([assaulter.equivalentTo?.key, assaulter.equivalenceStatus, assaulter.primaryStatisticId, assaulter.maxPerTeam]).toEqual(["center", "APPROVED", null, null]);
+  });
+});
+
+describe("loaded ninja profiles", () => {
+  const fromProfiles = { sourceRecords: { some: { key: { startsWith: "profile:" } } } };
+
+  it("adds the ten Alien ninjas and updates release-list ninjas in place, without duplicating any", async () => {
+    expect(first.profiles).toMatchObject({ sourceEntries: 184, distinctNinjas: 177, stagedRecords: 11 });
+    expect(first.profiles!.created).toHaveLength(10);
+    expect(first.profiles!.created.every((name) => name.startsWith("Alien "))).toBe(true);
+    expect(first.profiles!.updated).toHaveLength(167);
+    expect(await db.ninja.count({ where: fromReleaseList })).toBe(167);
+    expect(await db.ninja.count({ where: fromProfiles })).toBe(177);
+    const sasuke = await db.ninja.findUniqueOrThrow({ where: { slug: "cursed-seal-sasuke" } });
+    expect([sasuke.name, sasuke.releaseYear, sasuke.releaseMonth, sasuke.releaseOrder, sasuke.status]).toEqual(["Cursed Seal Sasuke", 2012, 11, 1, "PUBLISHED"]);
+  });
+
+  it("is idempotent: the second run creates nothing and changes no count", () => {
+    expect(second.profiles!.created).toEqual([]);
+    expect(second.profiles!.updated).toHaveLength(177);
+    expect(second.profiles!.evidenceRecords).toBe(first.profiles!.evidenceRecords);
+    expect(second.totals).toEqual(first.totals);
+    expect(second.profiles!.ledger).toEqual(first.profiles!.ledger);
+  });
+
+  it("creates no ninja for an entry whose identity is unresolved", async () => {
+    expect(await db.ninja.count({ where: { slug: { in: ["immortal-madara", "neji-hyuga", "illusion-god-itachi", "nagato-uzumaki"] } } })).toBe(0);
+    const staged = await db.sourceRecord.findMany({ where: { key: { startsWith: "profile:awakening:" }, field: { contains: "staged" } } });
+    expect(staged).toHaveLength(11);
+    expect(staged.every((r) => r.ninjaId === null && r.abilityId === null && r.talentOptionId === null && r.effectId === null && r.reviewStatus === "NEEDS_REVIEW")).toBe(true);
+  });
+
+  it("the Alien ninjas are their own collection with no release date", async () => {
+    const aliens = await listNinjas(db, { roleKeys: ["alien-ninjas"] });
+    expect(aliens.total).toBe(10);
+    expect(aliens.items.every((n) => n.release === null && n.rating?.key === "SSS" && n.formation !== null)).toBe(true);
+  });
+
+  it("a card's formation is shown as printed, and the approved equivalence gives it Center's rule", async () => {
+    const approved = (await getNinjaDetail(db, "variable-sakura"))!;
+    expect(approved.formation).toMatchObject({ key: "assaulter", name: "Assaulter", nameEs: null, origin: "DIRECT", equivalence: { status: "APPROVED", toName: "Center", toNameEs: "Centro" } });
+    expect(approved.primaryStat).toMatchObject({ key: "force" });
+    expect(approved.baseStats.filter((s) => s.isPrimary).map((s) => s.sourceLabel)).toEqual(["Force"]);
+    // Taking the approval away takes the rule away again (the data, not the code, carries the decision).
+    await db.formation.update({ where: { key: "assaulter" }, data: { equivalenceStatus: "PROPOSED" } });
+    try {
+      expect((await getNinjaDetail(db, "variable-sakura"))!.primaryStat).toBeNull();
+    } finally {
+      await db.formation.update({ where: { key: "assaulter" }, data: { equivalenceStatus: "APPROVED" } });
+    }
+    expect((await getNinjaDetail(db, "angel-konan"))!.primaryStat).toMatchObject({ key: "chakra" });
+    expect((await getNinjaDetail(db, "cursed-seal-sasuke"))!.primaryStat).toMatchObject({ key: "force" });
+  });
+
+  it("no rating, formation or type exists without a card behind it, and no class is ever assigned", async () => {
+    expect(await db.ninja.count({ where: { ...fromProfiles, baseStats: { none: {} }, OR: [{ ratingId: { not: null } }, { formationId: { not: null } }, { ninjaTypeId: { not: null } }] } })).toBe(0);
+    expect(await db.ninja.count({ where: { ...fromProfiles, clientCombatClass: { not: null } } })).toBe(0);
+    const guy = (await getNinjaDetail(db, "might-guy"))!;
+    // No card: no rating, type or statistics. The formation comes only from its channel, whose mapping the client approved.
+    expect(guy).toMatchObject({ rating: null, type: null, baseStats: [], formation: { key: "assaulter", origin: "APPROVED_MAPPING" } });
+    expect(guy.abilities).toHaveLength(1);
+  });
+
+  it("Sai: the usage's own strength is kept apart from its chance and duration", async () => {
+    const sai = (await getNinjaDetail(db, "sai-errant-knight"))!;
+    const all = sai.talentGroups.flatMap((g) => g.options).flatMap((o) => [...o.effects, ...o.awakenings.flatMap((w) => w.effects)]);
+    const storm = all.find((e) => e.status?.definition.key === "shatter-storm")!;
+    expect(storm).toMatchObject({ kind: "STATUS", chancePercent: 60, durationTurns: 2, targetCount: 1, targetSelector: "RANDOM", rateValue: null });
+    expect(storm.status!.magnitudeOverride).toBe(10);
+    expect(storm.status!.resolved.modifiers.map((m) => [m.effectiveMagnitude, m.origin])).toEqual([[10, "OVERRIDE"], [10, "OVERRIDE"]]);
+    expect((await getStatusEffect(db, "shatter-storm"))!.modifiers.map((m) => m.magnitude)).toEqual([15, 15]);
+  });
+
+  it("Hinata (Soccer Star): once level 2 is unlocked, level 1 is no longer in force", async () => {
+    const hinata = (await getNinjaDetail(db, "hinata-soccer-star"))!;
+    const [l1, l2] = hinata.talentGroups[0]!.options[0]!.awakenings;
+    expect([l2!.stage, l2!.stackingRule, l2!.supersedesId]).toEqual([2, "REPLACES_PRIOR", l1!.id]);
+    const refs = [l1!, l2!].map((w) => ({ id: w.id, stage: w.stage, rule: w.stackingRule, supersedesId: w.supersedesId }));
+    expect(resolveAwakenings(refs, 2).active).toEqual([l2!.id]);
+    expect(resolveAwakenings(refs, 2).superseded).toEqual([{ id: l1!.id, byId: l2!.id, how: "REPLACED" }]);
+  });
+
+  it("stores English and supplied Spanish side by side, and invents no Spanish name", async () => {
+    const skill = (await getNinjaDetail(db, "cursed-seal-sasuke"))!.abilities[0]!;
+    expect(skill.effects[0]).toMatchObject({ sourceLine: 0, kind: "ATTACK", sourceText: "Attacks enemies with 100% growth rate.", descriptionEs: "Ataca a los enemigos con una tasa de crecimiento del 100%.", rateValue: 100, rateKind: "GROWTH", chancePercent: null });
+    const konan = (await getNinjaDetail(db, "angel-konan"))!;
+    // Spanish for the first 16 Supporters came from the recovery package, line for line next to the English.
+    expect(konan.abilities[0]!.effects.every((e) => e.descriptionEs !== null && e.translationStatus === "SOURCE_PROVIDED" && e.sourceText)).toBe(true);
+    const guren = (await getNinjaDetail(db, "guren"))!;
+    expect(guren.abilities[0]!.effects.every((e) => e.descriptionEs === null && e.translationStatus === "MISSING")).toBe(true);
+    expect(await db.ninja.count({ where: { ...fromProfiles, nameEs: { not: null } } })).toBe(0);
+  });
+
+  it("statuses that only ability texts name carry no made-up definition", async () => {
+    const fromTexts = readReferenceFile<{ statuses: { key: string; new?: boolean }[] }>(REFERENCE_DIR, "lexicon.json").statuses.filter((s) => s.new);
+    const rows = await db.statusEffect.findMany({ where: { key: { in: fromTexts.map((s) => s.key) } }, include: { modifiers: true } });
+    expect(rows).toHaveLength(fromTexts.length);
+    expect(rows.every((s) => s.description === null && s.modifiers.length === 0 && s.polarity === "UNKNOWN" && s.reviewStatus === "NEEDS_REVIEW")).toBe(true);
+  });
+
+  it("every stored row satisfies the database rules", async () => {
+    expect(await db.$queryRawUnsafe("PRAGMA foreign_key_check")).toEqual([]);
+    expect(await db.effect.count({ where: { rateValue: { not: null }, rateKind: null } })).toBe(0);
+    expect(await db.effect.count({ where: { magnitudeOverride: { not: null }, statusEffectId: null } })).toBe(0);
+    expect(await db.ability.count({ where: { abilityType: { key: { in: ["talent_awakening", "skill_awakening"] } }, parentAbilityId: null, talentOptionId: null } })).toBe(0);
   });
 });

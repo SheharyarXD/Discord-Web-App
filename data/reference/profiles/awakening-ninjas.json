@@ -1,0 +1,749 @@
+{
+ "_about": "Staged transcription of one reference channel. Text is copied verbatim from the cited files under docs/m2-handoff/ (only the bullet marker is removed). Card values were read from the card images. Nothing here is interpreted: identities are resolved in identity-map.json and numbers are parsed by the loader.",
+ "channel": "awakening-ninjas",
+ "roleKey": "awakening-ninjas",
+ "collectionStatus": "COMPLETE",
+ "entries": [
+  {
+   "sourceId": "awakening:immortal-madara",
+   "nameAsPosted": "Immortal Madara",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Chakra Phagocytosis",
+     "name": "Chakra Phagocytosis",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 92% speed, 70% damage rate, and 70% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 116%, hp by 30%, and attack by 30%."
+       },
+       {
+        "text": "Immune to chaos and charm."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 2: Sage Mode",
+     "name": "Sage Mode",
+     "stage": 2,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases all allies' final damage reduction by 30%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 30%."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 3: Grave·Prison",
+     "name": "Grave·Prison",
+     "stage": 3,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "After being attacked, heals all allies with 30% rate, and has 30% chance to dispel 1 random enemy's buffs."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks all enemies with 300% growth rate."
+       },
+       {
+        "text": "90% rate to inflict curse fixation and tsukuyomi for 2 rounds."
+       },
+       {
+        "text": "Ally vanguard and assaulters enter shatter storm state for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' defenses by 100% for 2 rounds."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Decreases all enemies' attack by 30%, and enemy supporters enter weakened state for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "Do not infer whether three numbered talent awakenings stack or are mutually exclusive.",
+    "Shatter Storm percentage not specified here: use the reusable default unless stronger source evidence gives an override.",
+    "The healing “30% rate” is not confidently an activation chance.",
+    "No source URL, rating, formation, release date, nature or base stats provided in this post."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "awakening:six-paths-sage",
+   "nameAsPosted": "Six Paths Sage",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Sage's Power",
+     "name": "Sage's Power",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 10% avoid injury, and 10% damage rate."
+       },
+       {
+        "text": "Immune to stun."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "Fusion of Tailed Beast",
+     "name": "Fusion of Tailed Beast",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemies with 180% growth rate."
+       },
+       {
+        "text": "50% rate to silence enemies for 2 rounds."
+       },
+       {
+        "text": "Poisons enemies with 70% rate for 1 round."
+       },
+       {
+        "text": "Increases supporters' punch rate by 10% and damage rate by 15% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Sage Mode",
+     "name": "Sage Mode",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 92% speed, 55% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases allies' speed by 116%, avoid injury and hp by 30%."
+       },
+       {
+        "text": "Increases ally supporters' physical defense and ally assaulters' strategy defense by 45%."
+       },
+       {
+        "text": "For every 10% hp loss, increases allies' avoid injury by 8%."
+       },
+       {
+        "text": "After being attacked, has 60% chance to dispel self debuffs, and 45% chance to dispel ally assaulters' debuffs."
+       },
+       {
+        "text": "Immune to fury reduction, stun, and imprison."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening: Ying Yang Release",
+     "name": "Ying Yang Release",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "80% rate to silence and stun enemies for 2 rounds."
+       },
+       {
+        "text": "Poisons enemies with 120% rate for 2 rounds."
+       },
+       {
+        "text": "Applies vein damage to enemy supporters with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Applies safeguard to enemy assaulters with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Applies unification to enemy vanguard with 150% rate for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' attack by 30% for 2 rounds."
+       },
+       {
+        "text": "Increases allies' damage rate by 30% and attack by 20% for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "Values exceeding 100% in status application “rate” must not be interpreted as activation probabilities.",
+    "For “avoid injury and hp by 30%”, verify whether the 30% applies to both.",
+    "Target of “For every 10% hp loss” (whose HP) should not be guessed."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "awakening:yasaka-itachi",
+   "nameAsPosted": "Yasaka Itachi",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Susanoo Body",
+     "name": "Susanoo Body",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self agility and chakra, 40% speed, 25% damage rate, and 20% avoid injury."
+       },
+       {
+        "text": "Increases allies' speed by 15%."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 15%."
+       },
+       {
+        "text": "Immune to stun and fury reduction."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "Yasaka Beads",
+     "name": "Yasaka Beads",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "80% chance to silence enemies for 2 rounds."
+       },
+       {
+        "text": "Burns enemies with 120% rate for 1 round."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 20% and aid rate by 30% for 1 round."
+       },
+       {
+        "text": "Makes assaulters immune to stun for 1 round."
+       },
+       {
+        "text": "Restores 68  self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Susanoo Body",
+     "name": "Susanoo Body",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp (60%), 92% speed, 70% damage rate, and 60% avoid injury."
+       },
+       {
+        "text": "Increases allies' speed by 116%, attack by 30%, and final damage by 25%."
+       },
+       {
+        "text": "Decreases enemies' attack and avoid injury by 30%."
+       },
+       {
+        "text": "Increases water and earth chakra allies' damage rate by 30%."
+       },
+       {
+        "text": "Increases allies' DoT damage resistance (poison, ignite, power loss, orochi poison, vein damage, bleed, split, unification, safeguard, burst, scorching flame, incinerate) with 30% rate."
+       },
+       {
+        "text": "Increases  own attack by 12%."
+       },
+       {
+        "text": "Immune to 150% reflect rate, freeze, disable, and charm."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening 1: Yasaka Beads",
+     "name": "Yasaka Beads",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemies with 350% growth rate."
+       },
+       {
+        "text": "90% rate to freeze and imprison enemies for 2 rounds."
+       },
+       {
+        "text": "Increases all allies' attack and punch rate by 30%."
+       },
+       {
+        "text": "Applies weakened state to enemy vanguard and 1 random enemy for 2 rounds."
+       },
+       {
+        "text": "Deals 70% penetration damage to fire chakra enemies."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "Nature-specific buff: water and earth chakra allies only.",
+    "“hp (60%)” may be per-stat or group modifier: preserve original text until confirmed.",
+    "DoT resistance names are exact game terms; do not reclassify without glossary support."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "awakening:neji-hyuga",
+   "nameAsPosted": "Neji Hyuga",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "1ri Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self force, agility, 65% speed, 55% damage rate, and 50% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 45%, and damage rate by 30%."
+       },
+       {
+        "text": "Increases all allies' damage rate and hp by 20%."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "1ri Skill",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemy vanguard and assaulters with 350% growth rate."
+       },
+       {
+        "text": "100% rate to acupoint enemy vanguard for 2 rounds."
+       },
+       {
+        "text": "80% rate to blind enemy vanguard and assaulters for 2 rounds."
+       },
+       {
+        "text": "Decreases enemy vanguards' defenses by 70%, and healing by 80% rate."
+       },
+       {
+        "text": "Increases all allies' attack by 25%."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent",
+     "heading": "2ri Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Self ignores 40% of enemy avoid injury and defenses, and super dodge."
+       },
+       {
+        "text": "Immune to blind and acupoint."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "Keep literal “1ri/2ri” stage terminology; do not silently interpret 2ri as an alternate or simultaneous active talent.",
+    "“Ignore super dodge” has no percentage indicated.",
+    "Effect “healing by 80% rate” may be magnitude, not chance."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "awakening:illusion-god-itachi",
+   "nameAsPosted": "Illusion God Itachi",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self force, agility, 82% speed, 70% damage rate, and 50% avoid injury."
+       },
+       {
+        "text": "Decreases all enemies' speed by 52%, and attack by 25%."
+       },
+       {
+        "text": "Increases ally vanguard and assaulters' hp by 40%."
+       },
+       {
+        "text": "Increases ally supporters' attack by 30%."
+       },
+       {
+        "text": "Immune to 40% of enemies' defenses, 40% control rate, death seed, and fury reduction."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks all enemies with 350% growth rate."
+       },
+       {
+        "text": "90% rate to tsukuyomi all enemies for 2 rounds."
+       },
+       {
+        "text": "Applies scorch to all enemies with 120% rate for 2 rounds."
+       },
+       {
+        "text": "Ally vanguard and self enter control immune state for 2 rounds."
+       },
+       {
+        "text": "Decreases all enemies' defenses by 30% for 2 rounds."
+       },
+       {
+        "text": "Increases all allies' punch rate by 40% for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "“Immune to 40% of enemies’ defenses” is unusual wording. Preserve as written; do not silently normalize as ignore defense.",
+    "“Scorch” magnitude of 120% is not a 120% activation chance."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "awakening:nagato-uzumaki",
+   "nameAsPosted": "Nagato uzumaki",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent_awakening",
+     "heading": "Lv.1 Talent Awakening: True Chibaku Tensei",
+     "name": "True Chibaku Tensei",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self chakra, agility, 78% speed, 40% s.attack rate (can exceed cap), 55% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 94%, hp by 25%, and punch rate by 30%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 20%."
+       },
+       {
+        "text": "After being hit, reduces all enemies' fury by 50 points."
+       },
+       {
+        "text": "Immune to 120% reflect rate, death seed, freeze, and shock."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Lv.1 Skill Awakening: Super Shinra Tensei",
+     "name": "Super Shinra Tensei",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks all enemies with 300% growth rate."
+       },
+       {
+        "text": "80% rate to shock enemies for 2 rounds."
+       },
+       {
+        "text": "Incinerates enemies with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       },
+       {
+        "text": "The following apply:"
+       },
+       {
+        "text": "1) Deva Path — Decreases all allies' (except self) reflect damage taken by 70% rate, OR Animal Path — Ally supporters have a 70% chance to enter super dodge."
+       },
+       {
+        "text": "2) Preta Path — Increases ally vanguard and assaulters' attack by 40% for 2 rounds, OR Ashura Path — Increases self defenses by 500% for 1 round."
+       },
+       {
+        "text": "3) Naraka Path — Dispels allies' (except self) debuffs, OR Human Path — Decreases enemies' healing by 60% rate."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "Three independent OR pairs appear WITHIN the skill; do not turn all six into one global talent-choice group.",
+    "No evidence of the selection method or whether options are triggered by nature; record the OR pairs without inventing a mechanic.",
+    "“s.attack rate (can exceed cap)” must retain cap exception.",
+    "Preserve original name capitalization, later resolve existing ninja ID by release list."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "awakening:cursed-seal-sasuke",
+   "nameAsPosted": "Cursed Seal Sasuke",
+   "releaseRef": null,
+   "card": null,
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Bond",
+     "name": "Bond",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self force."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "Chidori Stream",
+     "name": "Chidori Stream",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemies with 100% growth rate."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 40% and attack by 5% for 3 rounds."
+       },
+       {
+        "text": "Increases self defenses by 5% for 3 rounds."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening (unnamed)",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 80% speed, 60% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 100% and hp by 30%."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 30%."
+       },
+       {
+        "text": "Decreases enemy supporters' and assaulters' punch rate by 30%."
+       },
+       {
+        "text": "70% chance to reflect 200% of lost hp as damage."
+       },
+       {
+        "text": "Heals self with 70% rate."
+       },
+       {
+        "text": "Immune to 100% of enemy defenses, 40% control rate, death seed, and fury reduction."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening (unnamed)",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Awakening_Ninjas_7_Reference/awakening_ninjas_batch_001/awakening_ninjas_batch_001_reference.json",
+      "lines": [
+       {
+        "text": "Attacks enemy vanguard/assaulters/supporters with 100/100/450% growth rate."
+       },
+       {
+        "text": "Paralyzes enemies for 2 rounds."
+       },
+       {
+        "text": "Incinerates enemies with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Increases self defenses with 120% rate for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 20%, dodge rate by 50%, and attack by 25% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "The three slash-separated growth rates correspond to vanguard/assaulters/supporters by position; preserve each target-rate pair.",
+    "“Immune to 100% of enemy defenses” is unusually worded; do not rewrite it without confirmation.",
+    "Awakening names not provided."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  }
+ ]
+}

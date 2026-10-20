@@ -1,0 +1,72 @@
+{
+ "_about": "How an awakening stage combines with earlier stages, recorded ONLY where the source says so in words. `sourceText` is the wording the rule rests on and must appear verbatim in the cited file. Every awakening not listed here is stored as UNKNOWN: the source does not say whether it adds to, replaces or cancels what came before.",
+ "rules": [
+  {
+   "sourceId": "vanguards:2-14-hinata-soccer-star",
+   "slot": "talent_awakening",
+   "stage": 2,
+   "rule": "REPLACES_PRIOR",
+   "supersedesStage": 1,
+   "sourceText": "NOTE: The effects of Lvl 2 awakening REPLACE the effects of Lvl 1 awakening.",
+   "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/14-hinata-soccer-star.md"
+  },
+  {
+   "sourceId": "vanguards:2-02-sage-jugo",
+   "slot": "talent_awakening",
+   "stage": 3,
+   "rule": "UPGRADES_BASE",
+   "supersedesStage": null,
+   "sourceText": "Increases self speed from 83% → 86%.",
+   "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md"
+  },
+  {
+   "sourceId": "assaulters:51",
+   "slot": "talent_awakening",
+   "stage": 2,
+   "rule": "REPLACES_PRIOR",
+   "supersedesStage": 1,
+   "sourceText": "The effects of Lvl 2 awakening replace the effects of Lvl 1 awakening.",
+   "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/assaulters/51_kusanagi-kyo.md"
+  },
+  {
+   "sourceId": "assaulters:44",
+   "slot": "talent_awakening",
+   "stage": 3,
+   "rule": "CANCELS_PRIOR",
+   "supersedesStage": 2,
+   "sourceText": "Cancels Talent Awakening 2.",
+   "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/assaulters/44_first-hokage.md",
+   "identityNote": "The text is headed «First Hokage (Shodai Hokage)». Shodai is the Japanese word for First. It sits at position 44 of the channel, the manifest names the entry «First Hokage», and the release list has that name between Kawaki and Cyber Naruto. The link is made on that evidence and the name is kept as a reviewed alias."
+  },
+  {
+   "sourceId": "supporters:74_natsu-dragneel",
+   "slot": "talent_awakening",
+   "stage": 2,
+   "rule": "REPLACES_PRIOR",
+   "supersedesStage": 1,
+   "sourceText": "The effects of Talent Awakening 2 replace those of Talent Awakening 1.",
+   "asset": "m3-handoff/M3_FINAL_SUPPORTER_SYNC_HANDOFF/02_SUPPORTER_SOURCE/NEW_63_EN_ES_TRANSCRIPT_RECOVERY/74_natsu-dragneel_EN_ES.md"
+  },
+  {
+   "sourceId": "supporters:74_natsu-dragneel",
+   "slot": "skill_awakening",
+   "stage": 1,
+   "rule": "UPGRADES_BASE",
+   "supersedesStage": null,
+   "sourceText": "(This skill awakening replaces the growth rate and target of the base skill)",
+   "asset": "m3-handoff/M3_FINAL_SUPPORTER_SYNC_HANDOFF/02_SUPPORTER_SOURCE/NEW_63_EN_ES_TRANSCRIPT_RECOVERY/74_natsu-dragneel_EN_ES.md"
+  },
+  {
+   "sourceId": "supporters:43_cursed-tayuya",
+   "slot": "talent_awakening",
+   "stage": 3,
+   "rule": "UPGRADES_BASE",
+   "supersedesStage": null,
+   "sourceText": "Changes 53% enemy speed reduction to 116% ally speed increase.",
+   "asset": "m3-handoff/M3_FINAL_SUPPORTER_SYNC_HANDOFF/02_SUPPORTER_SOURCE/NEW_63_EN_ES_TRANSCRIPT_RECOVERY/43_cursed-tayuya_EN_ES.md"
+  }
+ ],
+ "statedByHandoffNotesOnly": [],
+ "confirmedRulesWithoutText": [],
+ "_m3SupporterSync": "Natsu Dragneel and Cursed Tayuya rules confirmed by the client (data/reference/client-decisions-m3.md) are now attached to the imported awakenings. For Natsu the rule is also stated in the source text. For Tayuya the client rule is the basis and the quoted line shows the old value being replaced."
+}

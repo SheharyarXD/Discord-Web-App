@@ -10,3 +10,11 @@ next-env.d.ts
 *.tsbuildinfo
 tests/*.log
 prisma/backups
+
+# Supplied client archives: card screenshots and source packages stay out of the repository
+docs/m2-handoff/
+docs/milestone-2-handoff/03_REFERENCE_IMAGES/
+docs/m3-handoff/
+FURIA_NINJA_M3_SUPPORTERS_AND_CLIENT_FIXES_FINAL.zip
+CLAUDE_CODE_M3_SUPPORTERS_FINAL_SYNC_PROMPT.md
+M3_CLIENT_CHANGES_TO_APPLY_FINAL.md

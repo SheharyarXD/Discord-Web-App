@@ -3,18 +3,27 @@ import {
   CONTENT_STATUSES,
   DEFAULT_PAGE_SIZE,
   MAX_PAGE_SIZE,
+  type AliasKind,
+  type AliasStatus,
   type CombatClass,
+  type EquivalenceStatus,
   type MappingStatus,
   type ReviewStatus,
   type SelectionMode,
+  type StackingRule,
   type TranslationStatus,
 } from "../domain/constants";
 import type { EffectView } from "../domain/effects";
-import { resolveFormation, type FormationOrigin, type ReleasePeriod } from "../domain/ninja";
+import { normalizeTerm } from "../domain/localize";
+import { resolveFormation, ruleFormation, type FormationOrigin, type ReleasePeriod } from "../domain/ninja";
 import { slugify } from "../domain/slug";
 import { inTransaction, parseInput, UnknownReferenceError, type Db } from "./db";
 import { effectsArgs, replaceEffects, toEffectView } from "./effects";
 import { ninjaInput, ninjaListParams, type NinjaInput, type NinjaListParams } from "./schemas";
+
+type ParsedNinja = ReturnType<typeof ninjaInput.parse>;
+type ParsedAbility = NonNullable<ParsedNinja["abilities"]>[number];
+type ParsedAwakening = NonNullable<ParsedAbility["awakenings"]>[number];
 
 // ───────────────────────── Vocabulary helpers ─────────────────────────
 
@@ -58,8 +67,23 @@ export const vocabulary = {
   /** `primaryStatisticKey` encodes the client rule "Support → Chakra, Center/Vanguard → Force". */
   formation: async (
     db: Db,
-    r: VocabRow & { positionNote?: string | null; primaryStatisticKey?: string | null; maxPerTeam?: number | null; translationStatus?: TranslationStatus },
+    r: VocabRow & {
+      positionNote?: string | null;
+      primaryStatisticKey?: string | null;
+      maxPerTeam?: number | null;
+      translationStatus?: TranslationStatus;
+      /** Another formation row this one may be the same as. Stays a proposal until APPROVED. */
+      equivalentToKey?: string | null;
+      equivalenceStatus?: EquivalenceStatus;
+      equivalenceNote?: string | null;
+    },
   ) => {
+    let equivalentToId: string | null = null;
+    if (r.equivalentToKey) {
+      const other = await db.formation.findUnique({ where: { key: r.equivalentToKey }, select: { id: true } });
+      if (!other) throw new UnknownReferenceError("formation", r.equivalentToKey);
+      equivalentToId = other.id;
+    }
     let primaryStatisticId: string | null = null;
     if (r.primaryStatisticKey) {
       const stat = await db.statistic.findUnique({ where: { key: r.primaryStatisticKey }, select: { id: true } });
@@ -73,6 +97,9 @@ export const vocabulary = {
       positionNote: r.positionNote ?? null,
       primaryStatisticId,
       maxPerTeam: r.maxPerTeam ?? null,
+      equivalentToId,
+      equivalenceStatus: equivalentToId ? (r.equivalenceStatus ?? "PROPOSED") : "NONE",
+      equivalenceNote: r.equivalenceNote ?? null,
       sortOrder: r.sortOrder ?? 0,
     };
     return db.formation.upsert({ where: { key: r.key }, update: data, create: { key: r.key, ...data } });
@@ -200,33 +227,93 @@ export async function upsertNinja(
       if (prune) await tx.ninjaBaseStat.deleteMany({ where: { ninjaId, statisticId: { notIn: keep } } });
     }
 
-    if (data.abilities) {
-      const current = await tx.ability.findMany({ where: { ninjaId }, select: { id: true, abilityTypeId: true, name: true, stage: true } });
+    if (data.aliases) {
       const keep: string[] = [];
-      for (const [sortOrder, a] of data.abilities.entries()) {
-        const type = await tx.abilityType.findUnique({ where: { key: a.typeKey }, select: { id: true } });
-        if (!type) throw new UnknownReferenceError("ability type", a.typeKey);
-        const stage = a.stage ?? null;
-        const values = {
-          abilityTypeId: type.id,
-          name: a.name,
-          nameEs: a.nameEs ?? null,
-          description: a.description ?? null,
-          descriptionEs: a.descriptionEs ?? null,
-          translationStatus: a.translationStatus,
-          triggerText: a.triggerText ?? null,
-          stage,
-          reviewStatus: a.reviewStatus,
-          sortOrder,
-        };
-        const match = current.find((c) => c.abilityTypeId === type.id && c.name === a.name && c.stage === stage && !keep.includes(c.id));
-        const ability = match
-          ? await tx.ability.update({ where: { id: match.id }, data: values, select: { id: true } })
-          : await tx.ability.create({ data: { ninjaId, ...values }, select: { id: true } });
-        keep.push(ability.id);
-        if (a.effects) await replaceEffects(tx, { abilityId: ability.id }, a.effects);
+      for (const a of data.aliases) {
+        const normalized = normalizeTerm(a.alias);
+        const values = { alias: a.alias, locale: a.locale, status: a.status, note: a.note ?? null };
+        const row = await tx.ninjaAlias.upsert({
+          where: { ninjaId_normalized_kind: { ninjaId, normalized, kind: a.kind } },
+          update: values,
+          create: { ninjaId, normalized, kind: a.kind, ...values },
+          select: { id: true },
+        });
+        keep.push(row.id);
       }
-      if (prune) await tx.ability.deleteMany({ where: { ninjaId, id: { notIn: keep } } });
+      if (prune) await tx.ninjaAlias.deleteMany({ where: { ninjaId, id: { notIn: keep } } });
+    }
+
+    // Abilities of this ninja as they are now, to update in place instead of duplicating.
+    const stored = await tx.ability.findMany({
+      where: { ninjaId },
+      select: { id: true, abilityTypeId: true, name: true, stage: true, parentAbilityId: true, talentOptionId: true },
+    });
+    const kept = new Set<string>();
+    const typeId = async (key: string) => {
+      const type = await tx.abilityType.findUnique({ where: { key }, select: { id: true } });
+      if (!type) throw new UnknownReferenceError("ability type", key);
+      return type.id;
+    };
+    type Parent = { parentAbilityId: string | null; talentOptionId: string | null };
+    const NO_PARENT: Parent = { parentAbilityId: null, talentOptionId: null };
+
+    const saveAbility = async (a: ParsedAbility | ParsedAwakening, parent: Parent, sortOrder: number, rule?: { stackingRule: string; ruleSourceText: string | null }) => {
+      const abilityTypeId = await typeId(a.typeKey);
+      const stage = a.stage ?? null;
+      const values = {
+        abilityTypeId,
+        name: a.name,
+        nameEs: a.nameEs ?? null,
+        description: a.description ?? null,
+        descriptionEs: a.descriptionEs ?? null,
+        translationStatus: a.translationStatus,
+        triggerText: a.triggerText ?? null,
+        stage,
+        cardLabel: a.cardLabel ?? null,
+        cardLabelCut: a.cardLabelCut,
+        sourceHeading: a.sourceHeading ?? null,
+        conditionText: a.conditionText ?? null,
+        note: a.note ?? null,
+        reviewStatus: a.reviewStatus,
+        stackingRule: rule?.stackingRule ?? "NOT_APPLICABLE",
+        ruleSourceText: rule?.ruleSourceText ?? null,
+        sortOrder,
+        ...parent,
+      };
+      const match = stored.find(
+        (c) => c.abilityTypeId === abilityTypeId && c.name === a.name && c.stage === stage && c.parentAbilityId === parent.parentAbilityId && c.talentOptionId === parent.talentOptionId && !kept.has(c.id),
+      );
+      const row = match
+        ? await tx.ability.update({ where: { id: match.id }, data: values, select: { id: true } })
+        : await tx.ability.create({ data: { ninjaId, ...values }, select: { id: true } });
+      kept.add(row.id);
+      if (a.effects) await replaceEffects(tx, { abilityId: row.id }, a.effects);
+      return row.id;
+    };
+
+    /** Saves the awakening stages of one talent or skill, then links "replaces / cancels" pairs. */
+    const saveAwakenings = async (list: ParsedAwakening[], parent: Parent) => {
+      const byStage = new Map<number, string>();
+      const saved: { id: string; supersedesStage: number | null }[] = [];
+      for (const [order, w] of list.entries()) {
+        const id = await saveAbility(w, parent, order, { stackingRule: w.stackingRule, ruleSourceText: w.ruleSourceText ?? null });
+        if (w.stage != null) byStage.set(w.stage, id);
+        saved.push({ id, supersedesStage: w.supersedesStage ?? null });
+      }
+      for (const w of saved) {
+        const supersedesId = w.supersedesStage === null ? null : (byStage.get(w.supersedesStage) ?? null);
+        if (w.supersedesStage !== null && !supersedesId) throw new UnknownReferenceError("awakening stage to supersede", String(w.supersedesStage));
+        await tx.ability.update({ where: { id: w.id }, data: { supersedesId } });
+      }
+    };
+
+    if (data.abilities) {
+      for (const [sortOrder, a] of data.abilities.entries()) {
+        const id = await saveAbility(a, NO_PARENT, sortOrder);
+        if (a.awakenings) await saveAwakenings(a.awakenings, { parentAbilityId: id, talentOptionId: null });
+      }
+      // Base abilities and skill awakenings that are no longer listed. Talent awakenings are handled below.
+      if (prune) await tx.ability.deleteMany({ where: { ninjaId, talentOptionId: null, id: { notIn: [...kept] } } });
     }
 
     if (data.talentGroups) {
@@ -261,6 +348,11 @@ export async function upsertNinja(
             description: o.description ?? null,
             descriptionEs: o.descriptionEs ?? null,
             translationStatus: o.translationStatus,
+            cardLabel: o.cardLabel ?? null,
+            cardLabelCut: o.cardLabelCut,
+            sourceHeading: o.sourceHeading ?? null,
+            note: o.note ?? null,
+            reviewStatus: o.reviewStatus,
             sortOrder: optionOrder,
           };
           const existingOption = match?.options.find((x) => x.name === o.name && !keepOptions.includes(x.id));
@@ -269,6 +361,10 @@ export async function upsertNinja(
             : await tx.talentOption.create({ data: { groupId: group.id, ...optionValues }, select: { id: true } });
           keepOptions.push(option.id);
           if (o.effects) await replaceEffects(tx, { talentOptionId: option.id }, o.effects);
+          if (o.awakenings) {
+            await saveAwakenings(o.awakenings, { parentAbilityId: null, talentOptionId: option.id });
+            if (prune) await tx.ability.deleteMany({ where: { talentOptionId: option.id, id: { notIn: [...kept] } } });
+          }
         }
         if (prune) await tx.talentOption.deleteMany({ where: { groupId: group.id, id: { notIn: keepOptions } } });
       }
@@ -294,8 +390,8 @@ export const NEWEST_FIRST_ORDER_BY = [
 ] satisfies Prisma.NinjaOrderByWithRelationInput[];
 
 const listInclude = {
-  role: { include: { mappedFormation: true } },
-  formation: true,
+  role: { include: { mappedFormation: { include: { equivalentTo: true } } } },
+  formation: { include: { equivalentTo: true } },
   rating: true,
   ninjaType: true,
 } satisfies Prisma.NinjaInclude;
@@ -323,12 +419,18 @@ function summarize(n: ListRow) {
       name: resolved.formation.name,
       nameEs: resolved.formation.nameEs,
       origin: resolved.origin,
+      /** The position this label is the same as, once the client approved it (Assaulter = Center). */
+      sameAs:
+        resolved.formation.equivalentTo && resolved.formation.equivalenceStatus === "APPROVED"
+          ? { key: resolved.formation.equivalentTo.key, name: resolved.formation.equivalentTo.name, nameEs: resolved.formation.equivalentTo.nameEs }
+          : null,
     },
     clientCombatClass: n.clientCombatClass as CombatClass | null,
     reviewStatus: n.reviewStatus as ReviewStatus,
   };
 }
-export type NinjaSummary = ReturnType<typeof summarize>;
+type NinjaSummaryBase = ReturnType<typeof summarize>;
+export type NinjaSummary = NinjaSummaryBase & { sortStat: { key: string; value: string | null; growth: string | null } | null };
 
 export interface Page<T> {
   items: T[];
@@ -346,25 +448,39 @@ const periodAtMost = (p: ReleasePeriod): Prisma.NinjaWhereInput => ({
 });
 
 /**
- * One page of ninjas, newest first. Always bounded (pageSize ≤ MAX_PAGE_SIZE) and loaded with a
- * fixed number of queries regardless of how many rows come back.
- * Filters: values inside one filter are ORed, different filters are ANDed.
+ * Formation filters treat an APPROVED equivalence as one position: filtering «Center» also finds the
+ * cards that print «Assaulter», and the other way round. A merely PROPOSED equivalence changes nothing.
  */
-export async function listNinjas(db: Db, params: NinjaListParams = {}): Promise<Page<NinjaSummary>> {
-  const p = parseInput(ninjaListParams, params, "ninja list parameters");
-  const pageSize = Math.min(p.pageSize ?? DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE);
+async function expandFormationKeys(db: Db, keys: string[]): Promise<string[]> {
+  const rows = await db.formation.findMany({ select: { key: true, equivalenceStatus: true, equivalentTo: { select: { key: true } } } });
+  const out = new Set(keys);
+  for (const f of rows) {
+    if (f.equivalenceStatus !== "APPROVED" || !f.equivalentTo) continue;
+    if (out.has(f.key)) out.add(f.equivalentTo.key);
+    if (out.has(f.equivalentTo.key)) out.add(f.key);
+  }
+  return [...out];
+}
 
+const range = (f: { min?: string | null; max?: string | null }) => ({
+  ...(f.min != null ? { gte: f.min } : {}),
+  ...(f.max != null ? { lte: f.max } : {}),
+});
+
+/** The where-clause of a ninja list. Values inside one filter are ORed, different filters are ANDed. */
+async function ninjaWhere(db: Db, p: ReturnType<typeof ninjaListParams.parse>): Promise<Prisma.NinjaWhereInput> {
   const and: Prisma.NinjaWhereInput[] = [];
   if (!p.includeUnpublished) and.push({ status: CONTENT_STATUSES.PUBLISHED });
   if (p.ratingKeys?.length) and.push({ rating: { key: { in: p.ratingKeys } } });
   if (p.roleKeys?.length) and.push({ role: { key: { in: p.roleKeys } } });
   if (p.typeKeys?.length) and.push({ ninjaType: { key: { in: p.typeKeys } } });
   if (p.formationKeys?.length) {
-    // Direct evidence, or an APPROVED source-category mapping — never a merely proposed one.
+    const keys = await expandFormationKeys(db, p.formationKeys);
+    // Direct evidence, or an APPROVED source-category mapping, never a merely proposed one.
     and.push({
       OR: [
-        { formation: { key: { in: p.formationKeys } } },
-        { formationId: null, role: { mappingStatus: "APPROVED", mappedFormation: { key: { in: p.formationKeys } } } },
+        { formation: { key: { in: keys } } },
+        { formationId: null, role: { mappingStatus: "APPROVED", mappedFormation: { key: { in: keys } } } },
       ],
     });
   }
@@ -378,33 +494,170 @@ export async function listNinjas(db: Db, params: NinjaListParams = {}): Promise<
     });
   }
   if (p.nameContains) and.push({ OR: [{ name: { contains: p.nameContains } }, { nameEs: { contains: p.nameContains } }] });
+  if (p.query) {
+    const slugQuery = slugify(p.query);
+    and.push({
+      OR: [
+        { name: { contains: p.query } },
+        { nameEs: { contains: p.query } },
+        ...(slugQuery ? [{ slug: { contains: slugQuery } }] : []),
+        { aliases: { some: { normalized: { contains: normalizeTerm(p.query) } } } },
+      ],
+    });
+  }
+  for (const f of p.statFilters ?? []) {
+    and.push({ baseStats: { some: { statistic: { key: f.statisticKey }, baseValue: range(f) } } });
+  }
+  if (p.effectStatisticKeys?.length) {
+    const onStat = { effects: { some: { statistic: { key: { in: p.effectStatisticKeys } } } } };
+    and.push({
+      OR: [
+        { abilities: { some: onStat } },
+        { talentGroups: { some: { options: { some: { OR: [onStat, { awakenings: { some: onStat } }] } } } } },
+      ],
+    });
+  }
   if (p.releasedFrom) and.push(periodAtLeast(p.releasedFrom));
   if (p.releasedTo) and.push(periodAtMost(p.releasedTo));
-  const where: Prisma.NinjaWhereInput = { AND: and };
+  return { AND: and };
+}
 
-  const [total, rows] = await Promise.all([
-    db.ninja.count({ where }),
-    db.ninja.findMany({ where, include: listInclude, orderBy: NEWEST_FIRST_ORDER_BY, skip: (p.page - 1) * pageSize, take: pageSize }),
-  ]);
-  return { items: rows.map(summarize), total, page: p.page, pageSize, pageCount: Math.max(1, Math.ceil(total / pageSize)) };
+/**
+ * One page of ninjas. Always bounded (pageSize ≤ MAX_PAGE_SIZE). Default order: newest release first.
+ * Sorting by a statistic puts ninjas that do not have it last, in either direction.
+ */
+export async function listNinjas(db: Db, params: NinjaListParams = {}): Promise<Page<NinjaSummary>> {
+  const p = parseInput(ninjaListParams, params, "ninja list parameters");
+  const pageSize = Math.min(p.pageSize ?? DEFAULT_PAGE_SIZE, MAX_PAGE_SIZE);
+  const where = await ninjaWhere(db, p);
+  const skip = (p.page - 1) * pageSize;
+  const total = await db.ninja.count({ where });
+  const pageCount = Math.max(1, Math.ceil(total / pageSize));
+  const sort = p.sort;
+
+  if (sort && (sort.by === "stat" || sort.by === "growth")) {
+    const field = sort.by === "stat" ? "baseValue" : "growthRate";
+    const all = await db.ninja.findMany({
+      where,
+      select: { id: true, name: true, baseStats: { where: { statistic: { key: sort.statisticKey! } }, select: { baseValue: true, growthRate: true } } },
+    });
+    const value = (n: (typeof all)[number]) => {
+      const row = n.baseStats[0];
+      const v = row?.[field];
+      return v == null ? null : Number(v.toString());
+    };
+    const dir = sort.direction === "asc" ? 1 : -1;
+    const ordered = [...all].sort((a, b) => {
+      const x = value(a);
+      const y = value(b);
+      if (x === null && y === null) return a.name.localeCompare(b.name);
+      if (x === null) return 1;
+      if (y === null) return -1;
+      return x === y ? a.name.localeCompare(b.name) : (x - y) * dir;
+    });
+    const ids = ordered.slice(skip, skip + pageSize).map((n) => n.id);
+    const rows = await db.ninja.findMany({ where: { id: { in: ids } }, include: listInclude });
+    const byId = new Map(rows.map((r) => [r.id, r]));
+    const stats = new Map(all.map((n) => [n.id, n.baseStats[0] ?? null]));
+    const items = ids.map((id) => ({
+      ...summarize(byId.get(id)!),
+      sortStat: { key: sort.statisticKey!, value: stats.get(id)?.baseValue?.toString() ?? null, growth: stats.get(id)?.growthRate?.toString() ?? null },
+    }));
+    return { items, total, page: p.page, pageSize, pageCount };
+  }
+
+  const orderBy: Prisma.NinjaOrderByWithRelationInput[] =
+    sort?.by === "name"
+      ? [{ name: sort.direction }, { id: "asc" }]
+      : sort?.by === "release" && sort.direction === "asc"
+        ? [{ releaseYear: { sort: "asc", nulls: "last" } }, { releaseMonth: { sort: "asc", nulls: "last" } }, { releaseOrder: { sort: "asc", nulls: "last" } }, { name: "asc" }, { id: "asc" }]
+        : NEWEST_FIRST_ORDER_BY;
+  const rows = await db.ninja.findMany({ where, include: listInclude, orderBy, skip, take: pageSize });
+  return { items: rows.map((r) => ({ ...summarize(r), sortStat: null })), total, page: p.page, pageSize, pageCount };
 }
 
 // ───────────────────────── Read: detail ─────────────────────────
 
+const formationInclude = { primaryStatistic: true, equivalentTo: { include: { primaryStatistic: true } } } satisfies Prisma.FormationInclude;
+const abilityInclude = { abilityType: true, effects: effectsArgs } satisfies Prisma.AbilityInclude;
+const awakeningsArgs = { orderBy: [{ stage: "asc" }, { sortOrder: "asc" }], include: abilityInclude } satisfies Prisma.AbilityFindManyArgs;
+
 const detailInclude = {
-  role: { include: { mappedFormation: { include: { primaryStatistic: true } } } },
-  formation: { include: { primaryStatistic: true } },
+  role: { include: { mappedFormation: { include: formationInclude } } },
+  formation: { include: formationInclude },
   rating: true,
   ninjaType: true,
   natures: { include: { nature: true } },
+  aliases: { orderBy: { alias: "asc" } },
   baseStats: { orderBy: { sortOrder: "asc" }, include: { statistic: true } },
-  abilities: { orderBy: { sortOrder: "asc" }, include: { abilityType: true, effects: effectsArgs } },
+  // Base abilities only; each carries its own awakening stages.
+  abilities: {
+    where: { parentAbilityId: null, talentOptionId: null },
+    orderBy: { sortOrder: "asc" },
+    include: { ...abilityInclude, awakenings: awakeningsArgs },
+  },
   talentGroups: {
     orderBy: { sortOrder: "asc" },
-    include: { options: { orderBy: { sortOrder: "asc" }, include: { effects: effectsArgs } } },
+    include: { options: { orderBy: { sortOrder: "asc" }, include: { effects: effectsArgs, awakenings: awakeningsArgs } } },
   },
   sourceRecords: { orderBy: { key: "asc" }, include: { asset: { select: { path: true, category: true } } } },
 } satisfies Prisma.NinjaInclude;
+
+type AbilityRow = Prisma.AbilityGetPayload<{ include: typeof abilityInclude }>;
+
+export interface AbilityDetail {
+  id: string;
+  type: { key: string; name: string };
+  name: string;
+  nameEs: string | null;
+  /** Name printed on the card, when it differs from (or is all that is known of) the name. */
+  cardLabel: string | null;
+  cardLabelCut: boolean;
+  sourceHeading: string | null;
+  description: string | null;
+  descriptionEs: string | null;
+  translationStatus: TranslationStatus;
+  triggerText: string | null;
+  conditionText: string | null;
+  note: string | null;
+  stage: number | null;
+  reviewStatus: ReviewStatus;
+  effects: EffectView[];
+}
+
+/** An awakening stage, with how it relates to earlier stages. */
+export interface AwakeningDetail extends AbilityDetail {
+  stackingRule: StackingRule;
+  supersedesId: string | null;
+  ruleSourceText: string | null;
+}
+
+function toAbilityDetail(a: AbilityRow): AbilityDetail {
+  return {
+    id: a.id,
+    type: { key: a.abilityType.key, name: a.abilityType.name },
+    name: a.name,
+    nameEs: a.nameEs,
+    cardLabel: a.cardLabel,
+    cardLabelCut: a.cardLabelCut,
+    sourceHeading: a.sourceHeading,
+    description: a.description,
+    descriptionEs: a.descriptionEs,
+    translationStatus: a.translationStatus as TranslationStatus,
+    triggerText: a.triggerText,
+    conditionText: a.conditionText,
+    note: a.note,
+    stage: a.stage,
+    reviewStatus: a.reviewStatus as ReviewStatus,
+    effects: a.effects.map(toEffectView),
+  };
+}
+const toAwakeningDetail = (a: AbilityRow): AwakeningDetail => ({
+  ...toAbilityDetail(a),
+  stackingRule: a.stackingRule as StackingRule,
+  supersedesId: a.supersedesId,
+  ruleSourceText: a.ruleSourceText,
+});
 
 export interface NinjaDetail {
   id: string;
@@ -423,26 +676,22 @@ export interface NinjaDetail {
   type: { key: string; name: string; nameEs: string | null } | null;
   /** Source category, with the state of its (reviewable) formation mapping. */
   role: { key: string; name: string; mappingStatus: MappingStatus; proposedFormationName: string | null } | null;
-  formation: { key: string; name: string; nameEs: string | null; origin: FormationOrigin } | null;
-  /** Derived from the formation (client rule). Null whenever the formation itself is unknown. */
+  formation: {
+    key: string;
+    name: string;
+    nameEs: string | null;
+    origin: FormationOrigin;
+    /** Another position this label may be the same as. Acted on only when APPROVED. */
+    equivalence: { status: EquivalenceStatus; toName: string; toNameEs: string | null; note: string | null } | null;
+  } | null;
+  /** Derived from the formation (client rule). Null whenever the formation's rule is not established. */
   primaryStat: { key: string; name: string } | null;
+  aliases: { alias: string; kind: AliasKind; status: AliasStatus; locale: string; note: string | null }[];
   clientCombatClass: CombatClass | null;
   natures: { key: string; name: string }[];
   /** Decimal strings, exactly as stored. */
   baseStats: { statisticKey: string; statisticName: string; sourceLabel: string; baseValue: string; growthRate: string | null; isPrimary: boolean }[];
-  abilities: {
-    id: string;
-    type: { key: string; name: string };
-    name: string;
-    nameEs: string | null;
-    description: string | null;
-    descriptionEs: string | null;
-    translationStatus: TranslationStatus;
-    triggerText: string | null;
-    stage: number | null;
-    reviewStatus: ReviewStatus;
-    effects: EffectView[];
-  }[];
+  abilities: (AbilityDetail & { awakenings: AwakeningDetail[] })[];
   talentGroups: {
     id: string;
     name: string | null;
@@ -451,7 +700,22 @@ export interface NinjaDetail {
     maxSelections: number;
     reviewStatus: ReviewStatus;
     note: string | null;
-    options: { id: string; name: string; description: string | null; isDefault: boolean; effects: EffectView[] }[];
+    options: {
+      id: string;
+      name: string;
+      nameEs: string | null;
+      cardLabel: string | null;
+      cardLabelCut: boolean;
+      sourceHeading: string | null;
+      description: string | null;
+      descriptionEs: string | null;
+      translationStatus: TranslationStatus;
+      note: string | null;
+      reviewStatus: ReviewStatus;
+      isDefault: boolean;
+      effects: EffectView[];
+      awakenings: AwakeningDetail[];
+    }[];
     /** The VIEWER's own picks. Empty unless that user chose; never a canonical default. */
     selectedOptionIds: string[];
   }[];
@@ -479,7 +743,8 @@ export async function getNinjaDetail(
   const picked = new Set(picks.map((s) => s.optionId));
 
   const resolved = resolveFormation({ formation: n.formation, role: n.role });
-  const primary = resolved?.formation.primaryStatistic ?? null;
+  // A card label only takes another position's rule once their equivalence is approved.
+  const primary = resolved ? ruleFormation<{ primaryStatistic: { key: string; name: string } | null }>(resolved.formation).primaryStatistic : null;
   const primaryStat = primary && { key: primary.key, name: primary.name };
 
   return {
@@ -508,8 +773,18 @@ export async function getNinjaDetail(
       name: resolved.formation.name,
       nameEs: resolved.formation.nameEs,
       origin: resolved.origin,
+      equivalence:
+        resolved.formation.equivalentTo && resolved.formation.equivalenceStatus !== "NONE"
+          ? {
+              status: resolved.formation.equivalenceStatus as EquivalenceStatus,
+              toName: resolved.formation.equivalentTo.name,
+              toNameEs: resolved.formation.equivalentTo.nameEs,
+              note: resolved.formation.equivalenceNote,
+            }
+          : null,
     },
     primaryStat,
+    aliases: n.aliases.map((a) => ({ alias: a.alias, kind: a.kind as AliasKind, status: a.status as AliasStatus, locale: a.locale, note: a.note })),
     clientCombatClass: n.clientCombatClass as CombatClass | null,
     natures: n.natures.map((x) => ({ key: x.nature.key, name: x.nature.nameEs ?? x.nature.name })),
     baseStats: n.baseStats.map((s) => ({
@@ -520,19 +795,7 @@ export async function getNinjaDetail(
       growthRate: s.growthRate?.toString() ?? null,
       isPrimary: primaryStat?.key === s.statistic.key,
     })),
-    abilities: n.abilities.map((a) => ({
-      id: a.id,
-      type: { key: a.abilityType.key, name: a.abilityType.name },
-      name: a.name,
-      nameEs: a.nameEs,
-      description: a.description,
-      descriptionEs: a.descriptionEs,
-      translationStatus: a.translationStatus as TranslationStatus,
-      triggerText: a.triggerText,
-      stage: a.stage,
-      reviewStatus: a.reviewStatus as ReviewStatus,
-      effects: a.effects.map(toEffectView),
-    })),
+    abilities: n.abilities.map((a) => ({ ...toAbilityDetail(a), awakenings: a.awakenings.map(toAwakeningDetail) })),
     talentGroups: n.talentGroups.map((g) => ({
       id: g.id,
       name: g.name,
@@ -544,9 +807,18 @@ export async function getNinjaDetail(
       options: g.options.map((o) => ({
         id: o.id,
         name: o.name,
+        nameEs: o.nameEs,
+        cardLabel: o.cardLabel,
+        cardLabelCut: o.cardLabelCut,
+        sourceHeading: o.sourceHeading,
         description: o.description,
+        descriptionEs: o.descriptionEs,
+        translationStatus: o.translationStatus as TranslationStatus,
+        note: o.note,
+        reviewStatus: o.reviewStatus as ReviewStatus,
         isDefault: o.isDefault,
         effects: o.effects.map(toEffectView),
+        awakenings: o.awakenings.map(toAwakeningDetail),
       })),
       selectedOptionIds: g.options.filter((o) => picked.has(o.id)).map((o) => o.id),
     })),

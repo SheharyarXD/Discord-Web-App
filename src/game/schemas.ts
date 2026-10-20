@@ -1,18 +1,23 @@
 import { z } from "zod";
 import {
+  ALIAS_KINDS,
+  ALIAS_STATUSES,
   CLEANSABILITIES,
   COMBAT_CLASSES,
   CONDITION_OPERATORS,
   CONDITION_SCOPES,
   CONTENT_STATUSES,
+  EFFECT_KINDS,
   JEWELRY_BONUS_KINDS,
   MAX_MONTH,
   MIN_MONTH,
   MODIFIER_DIRECTIONS,
   POLARITIES,
+  RATE_KINDS,
   REVIEW_STATUSES,
   SELECTION_MODES,
   SET_STRUCTURE_STATUSES,
+  STACKING_RULES,
   STATUS_KINDS,
   STRUCTURED_STATUSES,
   TIER_STACKING,
@@ -22,7 +27,7 @@ import {
 
 const values = <T extends Record<string, string>>(o: T) => Object.values(o) as [T[keyof T], ...T[keyof T][]];
 
-const text = z.string().trim().min(1).max(4000);
+const text = z.string().trim().min(1).max(8000);
 const optionalText = text.nullish();
 const key = z.string().trim().min(1).max(120);
 
@@ -71,14 +76,34 @@ export const effectInput = z
     chancePercent: decimal.nullish(),
     triggerText: optionalText,
     conditionText: optionalText,
-    structuredStatus: z.enum([STRUCTURED_STATUSES.STRUCTURED, STRUCTURED_STATUSES.NEEDS_REVIEW]).default("STRUCTURED"),
+    structuredStatus: z.enum(values(STRUCTURED_STATUSES)).default("STRUCTURED"),
     sourceText: optionalText,
     description: optionalText,
     descriptionEs: optionalText,
     translationStatus: translationStatus.default("MISSING"),
+    kind: z.enum(values(EFFECT_KINDS)).default("STAT"),
+    /** A rate the source states. `rateKind` says what it is, so it can never pass for a chance. */
+    rateValue: decimal.nullish(),
+    rateKind: z.enum(values(RATE_KINDS)).nullish(),
+    replacesValue: decimal.nullish(),
+    valueNote: optionalText,
+    targetCount: z.number().int().min(1).nullish(),
+    targetSelector: key.nullish(),
+    excludesSelf: z.boolean().default(false),
+    /** Rows sharing a choiceGroup are alternatives of which one applies. */
+    choiceGroup: z.number().int().min(0).nullish(),
+    choiceLabel: optionalText,
+    sourceLine: z.number().int().min(0).nullish(),
+    note: optionalText,
     conditions: z.array(conditionInput).default([]),
   })
   .superRefine((e, ctx) => {
+    if (e.rateValue != null && !e.rateKind) {
+      ctx.addIssue({ code: "custom", path: ["rateKind"], message: "a rate must say what kind of rate it is" });
+    }
+    if (e.choiceLabel != null && e.choiceGroup == null) {
+      ctx.addIssue({ code: "custom", path: ["choiceGroup"], message: "a choice label needs a choice group" });
+    }
     if (!e.statisticKey && !e.statusKey && !e.description && !e.sourceText) {
       ctx.addIssue({ code: "custom", message: "an effect needs a statistic, a status, or text" });
     }
@@ -136,6 +161,36 @@ export const releaseInput = z.object({
   month: z.number().int().min(MIN_MONTH).max(MAX_MONTH),
 });
 
+const abilityCore = {
+  name: text,
+  nameEs: optionalText,
+  description: optionalText,
+  descriptionEs: optionalText,
+  translationStatus: translationStatus.default("MISSING"),
+  triggerText: optionalText,
+  stage: z.number().int().min(0).nullish(),
+  /** Name printed on the card, kept next to the name used in the ability text. */
+  cardLabel: optionalText,
+  cardLabelCut: z.boolean().default(false),
+  sourceHeading: optionalText,
+  conditionText: optionalText,
+  note: optionalText,
+  reviewStatus: reviewStatus.default("NEEDS_REVIEW"),
+  effects: z.array(effectInput).optional(),
+};
+
+/** An awakening stage of a talent or of a skill. */
+const awakeningInput = z.object({
+  ...abilityCore,
+  typeKey: key,
+  /** Only an explicit source statement justifies anything but UNKNOWN. */
+  stackingRule: z.enum(values(STACKING_RULES)).default("UNKNOWN"),
+  /** Stage number of the earlier awakening this one replaces or cancels. */
+  supersedesStage: z.number().int().min(0).nullish(),
+  ruleSourceText: optionalText,
+});
+export type AwakeningInput = z.input<typeof awakeningInput>;
+
 export const ninjaInput = z.object({
   /** Original source name, exactly as written. Each named variant is its own ninja. */
   name: text,
@@ -158,6 +213,18 @@ export const ninjaInput = z.object({
   status: z.enum(values(CONTENT_STATUSES)).optional(),
   reviewStatus: reviewStatus.optional(),
   natureKeys: z.array(key).optional(),
+  /** Other names for the same ninja (card name plate, thread title). Never replace `name`. */
+  aliases: z
+    .array(
+      z.object({
+        alias: text,
+        kind: z.enum(values(ALIAS_KINDS)),
+        locale: z.string().trim().min(2).max(10).default("en"),
+        status: z.enum(values(ALIAS_STATUSES)).default("REVIEWED"),
+        note: optionalText,
+      }),
+    )
+    .optional(),
   baseStats: z
     .array(
       z.object({
@@ -168,22 +235,7 @@ export const ninjaInput = z.object({
       }),
     )
     .optional(),
-  abilities: z
-    .array(
-      z.object({
-        typeKey: key,
-        name: text,
-        nameEs: optionalText,
-        description: optionalText,
-        descriptionEs: optionalText,
-        translationStatus: translationStatus.default("MISSING"),
-        triggerText: optionalText,
-        stage: z.number().int().min(0).nullish(),
-        reviewStatus: reviewStatus.default("NEEDS_REVIEW"),
-        effects: z.array(effectInput).optional(),
-      }),
-    )
-    .optional(),
+  abilities: z.array(z.object({ ...abilityCore, typeKey: key, awakenings: z.array(awakeningInput).optional() })).optional(),
   talentGroups: z
     .array(
       z.object({
@@ -201,7 +253,14 @@ export const ninjaInput = z.object({
               description: optionalText,
               descriptionEs: optionalText,
               translationStatus: translationStatus.default("MISSING"),
+              cardLabel: optionalText,
+              cardLabelCut: z.boolean().default(false),
+              sourceHeading: optionalText,
+              note: optionalText,
+              reviewStatus: reviewStatus.default("NEEDS_REVIEW"),
               effects: z.array(effectInput).optional(),
+              /** Awakening stages of this talent. */
+              awakenings: z.array(awakeningInput).optional(),
             }),
           )
           .min(1),
@@ -288,6 +347,69 @@ export const jewelrySetInput = z.object({
 });
 export type JewelrySetInput = z.input<typeof jewelrySetInput>;
 
+/** A minimum and/or maximum on one statistic. Both ends are inclusive. */
+export const statFilter = z
+  .object({ statisticKey: key, min: decimal.nullish(), max: decimal.nullish() })
+  .refine((f) => f.min == null || f.max == null || Number(f.min) <= Number(f.max), { message: "min must not be greater than max", path: ["min"] });
+export type StatFilter = z.input<typeof statFilter>;
+
+export const SORT_DIRECTIONS = ["asc", "desc"] as const;
+
+// ───────────────────────── Single items (administration) ─────────────────────────
+
+/** One equipment piece, with or without a set. Its own statistics are `effects`; set tiers live on the set. */
+export const equipmentInput = z.object({
+  ...itemBase,
+  slotKey: key.nullish(),
+  /** Slug of an existing equipment set. */
+  setSlug: key.nullish(),
+});
+export type EquipmentInput = z.input<typeof equipmentInput>;
+
+export const jewelryInput = z.object({
+  ...itemBase,
+  typeKey: key.nullish(),
+  setSlug: key.nullish(),
+  /** Key of a sub-group of that set. */
+  groupKey: key.nullish(),
+});
+export type JewelryInput = z.input<typeof jewelryInput>;
+
+export const gemInput = z.object({
+  name: text,
+  slug: key.optional(),
+  typeKey: key.nullish(),
+  level: z.number().int().min(0).nullish(),
+  description: optionalText,
+  status: z.enum(values(CONTENT_STATUSES)).default("DRAFT"),
+  effects: z.array(effectInput).default([]),
+});
+export type GemInput = z.input<typeof gemInput>;
+
+/** Item lists: equipment, jewelry or gems. */
+export const ITEM_KINDS = ["equipment", "jewelry", "gem"] as const;
+export type ItemKind = (typeof ITEM_KINDS)[number];
+
+export const itemListParams = z.object({
+  kind: z.enum(ITEM_KINDS),
+  page: z.number().int().min(1).default(1),
+  pageSize: z.number().int().min(1).optional(),
+  /** Name, Spanish name and the name of the set, ignoring case and accents. */
+  query: z.string().trim().max(120).optional(),
+  /** Equipment slot, jewelry type or gem type keys. */
+  typeKeys: z.array(key).optional(),
+  setSlugs: z.array(key).optional(),
+  /** Minimum / maximum of the piece's own statistics. Several filters must all hold. */
+  statFilters: z.array(statFilter).max(8).optional(),
+  statisticKeys: z.array(key).optional(),
+  sort: z
+    .object({ by: z.enum(["name", "stat"]).default("name"), statisticKey: key.nullish(), direction: z.enum(SORT_DIRECTIONS).default("asc") })
+    .refine((o) => o.by !== "stat" || !!o.statisticKey, { message: "sorting by a statistic needs the statistic", path: ["statisticKey"] })
+    .optional(),
+  includeUnpublished: z.boolean().default(false),
+});
+export type ItemListParams = z.input<typeof itemListParams>;
+
 // ───────────────────────── Lists ─────────────────────────
 
 export const ninjaListParams = z.object({
@@ -301,6 +423,17 @@ export const ninjaListParams = z.object({
   /** "UNASSIGNED" selects ninjas the client has not classified yet. */
   combatClasses: z.array(z.enum([...values(COMBAT_CLASSES), "UNASSIGNED"])).optional(),
   nameContains: z.string().trim().max(120).optional(),
+  /** Free search: name, Spanish name and every alias, ignoring case and accents. */
+  query: z.string().trim().max(120).optional(),
+  /** Minimum / maximum of base statistics. Several filters must all hold. */
+  statFilters: z.array(statFilter).max(8).optional(),
+  /** Ninjas whose abilities, talents or awakenings have an effect on one of these statistics. */
+  effectStatisticKeys: z.array(key).optional(),
+  /** Default: newest release first. «stat» and «growth» sort by one base statistic, ninjas without it last. */
+  sort: z
+    .object({ by: z.enum(["release", "name", "stat", "growth"]).default("release"), statisticKey: key.nullish(), direction: z.enum(SORT_DIRECTIONS).default("desc") })
+    .refine((o) => (o.by !== "stat" && o.by !== "growth") || !!o.statisticKey, { message: "sorting by a statistic needs the statistic", path: ["statisticKey"] })
+    .optional(),
   releasedFrom: releaseInput.optional(),
   releasedTo: releaseInput.optional(),
   includeUnpublished: z.boolean().default(false),

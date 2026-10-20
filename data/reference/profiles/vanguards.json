@@ -1,0 +1,5167 @@
+{
+ "_about": "Staged transcription of one reference channel. Text is copied verbatim from the cited files under docs/m2-handoff/ (only the bullet marker is removed). Card values were read from the card images. Nothing here is interpreted: identities are resolved in identity-map.json and numbers are parsed by the loader.",
+ "channel": "vanguards",
+ "roleKey": "vanguards",
+ "collectionStatus": "COMPLETE",
+ "entries": [
+  {
+   "sourceId": "vanguards:01-cursed-seal-sasuke",
+   "nameAsPosted": "Cursed Seal Sasuke",
+   "releaseRef": "2012-11",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/01-cursed-seal-sasuke.png",
+    "language": "en",
+    "namePlate": "Cursed Seal Sasuke",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "S",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "100",
+      "growth": "2.6"
+     },
+     {
+      "label": "Chakra",
+      "value": "100",
+      "growth": "2.2"
+     },
+     {
+      "label": "Agility",
+      "value": "100",
+      "growth": "2.4"
+     },
+     {
+      "label": "HP",
+      "value": "300",
+      "growth": "2.6"
+     }
+    ],
+    "talentLabel": {
+     "text": "Bond",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Chidori Stream",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Bond",
+     "name": "Bond",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "lines": [
+       {
+        "text": "Increases self force."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "heading": "Bond",
+      "name": "Bond",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza propia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Chidori Stream",
+     "name": "Chidori Stream",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 100% growth rate."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 40% and attack by 5% for 3 rounds."
+       },
+       {
+        "text": "Increases self defenses by 5% for 3 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "heading": "Chidori Stream",
+      "name": "Chidori Stream",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 100%."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los asaltantes aliados en un 40% y el ataque en un 5% durante 3 rondas."
+       },
+       {
+        "text": "Aumenta las defensas propias en un 5% durante 3 rondas."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening (name not supplied)",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 80% speed, 60% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 100% and hp by 30%."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 30%."
+       },
+       {
+        "text": "Decreases enemy supporters' and assaulters' punch rate by 30%."
+       },
+       {
+        "text": "70% chance to reflect 200% of lost hp as damage."
+       },
+       {
+        "text": "Heals self with 70% rate."
+       },
+       {
+        "text": "Immune to 100% of enemy defenses, 40% control rate, death seed, and fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "heading": "Talent Awakening",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propias, 80% de velocidad, 60% de tasa de daño, y 55% de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en un 100% y el hp en un 30%."
+       },
+       {
+        "text": "Disminuye la tasa de daño de los enemigos en un 30%."
+       },
+       {
+        "text": "Disminuye la tasa de golpe de los enemigos, tanto en los apoyadores como en los asaltantes, en un 30%."
+       },
+       {
+        "text": "70% de probabilidad de reflejar el 200% del hp perdido como daño."
+       },
+       {
+        "text": "Sanea al mismo con una tasa del 70%."
+       },
+       {
+        "text": "Ignora el 100% de las defensas enemigas."
+       },
+       {
+        "text": "Inmune al 40% de la tasa de control, semilla de la muerte y reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening (name not supplied)",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "lines": [
+       {
+        "text": "Attacks enemy vanguard/assaulters/supporters with 100/100/450% growth rate."
+       },
+       {
+        "text": "Paralyzes enemies for 2 rounds."
+       },
+       {
+        "text": "Incinerates enemies with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Increases self defenses with 120% rate for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 20%, dodge rate by 50%, and attack by 25% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/01-cursed-seal-sasuke.md",
+      "heading": "Skill Awakening",
+      "name": null,
+      "lines": [
+       {
+        "text": "Ataca a los enemigos de vanguardia/asaltantes/apoyadores con una tasa de crecimiento del 100/100/450%."
+       },
+       {
+        "text": "Paraliza a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Incinera a los enemigos con una tasa del 100% durante 2 rondas."
+       },
+       {
+        "text": "Aumenta las defensas propias con una tasa del 120% durante 2 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de daño de los enemigos en un 20%, la tasa de evasión en un 50%, y el ataque en un 25% durante 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia y 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:02-warm-hinata",
+   "nameAsPosted": "Warm Hinata",
+   "releaseRef": "2013-02",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/02-warm-hinata.png",
+    "language": "en",
+    "namePlate": "Warm Hinata",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "S",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "150",
+      "growth": "2.7"
+     },
+     {
+      "label": "Chakra",
+      "value": "150",
+      "growth": "2.3"
+     },
+     {
+      "label": "Agility",
+      "value": "150",
+      "growth": "2.5"
+     },
+     {
+      "label": "HP",
+      "value": "500",
+      "growth": "2.9"
+     }
+    ],
+    "talentLabel": {
+     "text": "Bya ku yam",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Double Lion Punch",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Bya Ku Yam",
+     "name": "Bya Ku Yam",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/02-warm-hinata.md",
+      "lines": [
+       {
+        "text": "Increases self defenses, 10% avoid injury."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/02-warm-hinata.md",
+      "heading": "Bya Ku Yam",
+      "name": "Bya Ku Yam",
+      "lines": [
+       {
+        "text": "Aumenta las defensas propias, 10% de evasión de daño."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Double Lion Punch",
+     "name": "Double Lion Punch",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/02-warm-hinata.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 90% growth rate."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 70% for 2 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/02-warm-hinata.md",
+      "heading": "Double Lion Punch",
+      "name": "Double Lion Punch",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 90%."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los asaltantes aliados en un 70% durante 2 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:03-butterfly-choji",
+   "nameAsPosted": "Butterfly Choji",
+   "releaseRef": "2013-07",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/03-butterfly-choji.png",
+    "language": "en",
+    "namePlate": "Butterfly Choji",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "1200",
+      "growth": "4.4"
+     },
+     {
+      "label": "Chakra",
+      "value": "1000",
+      "growth": "4.1"
+     },
+     {
+      "label": "Agility",
+      "value": "1200",
+      "growth": "4"
+     },
+     {
+      "label": "HP",
+      "value": "6000",
+      "growth": "4.8"
+     }
+    ],
+    "talentLabel": {
+     "text": "Akimichi clan",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "SButterfly Bomb",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Akimichi Clan",
+     "name": "Akimichi Clan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/03-butterfly-choji.md",
+      "lines": [
+       {
+        "text": "Increases self agility and defenses, 15% speed, 20% damage rate, and 10% avoid injury rate."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/03-butterfly-choji.md",
+      "heading": "Akimichi Clan",
+      "name": "Akimichi Clan",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad y las defensas propias, 15% de velocidad, 20% de tasa de daño, y 10% de evasión de daño."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "S.Butterfly Bomb",
+     "name": "S.Butterfly Bomb",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/03-butterfly-choji.md",
+      "lines": [
+       {
+        "text": "Attacks enemy vanguard and assaulters with 220% growth rate."
+       },
+       {
+        "text": "Increases self defenses by 20% and block rate by 50% for 2 rounds (can exceed cap)."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/03-butterfly-choji.md",
+      "heading": "S.Butterfly Bomb",
+      "name": "S.Butterfly Bomb",
+      "lines": [
+       {
+        "text": "Ataca al vanguardista y los asaltantes enemigos con una tasa de crecimiento del 220%."
+       },
+       {
+        "text": "Aumenta las defensas propias en un 20% y la tasa de bloqueo en un 50% durante 2 rondas (puede superar el límite)."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:04-reanimated-itachi",
+   "nameAsPosted": "Reanimated Itachi",
+   "releaseRef": "2014-05",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/04-reanimated-itachi.png",
+    "language": "en",
+    "namePlate": "Reanimated Itachi",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "2200",
+      "growth": "5"
+     },
+     {
+      "label": "Chakra",
+      "value": "1900",
+      "growth": "4.3"
+     },
+     {
+      "label": "Agility",
+      "value": "1600",
+      "growth": "4.5"
+     },
+     {
+      "label": "HP",
+      "value": "9000",
+      "growth": "5.8"
+     }
+    ],
+    "talentLabel": {
+     "text": "Yatagarasu",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Amaterasu",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Yatagarasu",
+     "name": "Yatagarasu",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/04-reanimated-itachi.md",
+      "lines": [
+       {
+        "text": "Increases force and hp, 15% speed and avoid injury."
+       },
+       {
+        "text": "Immune to stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/04-reanimated-itachi.md",
+      "heading": "Yatagarasu",
+      "name": "Yatagarasu",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp, 15% de velocidad y evasión de daño."
+       },
+       {
+        "text": "Inmune al aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Amaterasu",
+     "name": "Amaterasu",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/04-reanimated-itachi.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 240% growth rate."
+       },
+       {
+        "text": "55% rate to chaos enemies for 2 rounds."
+       },
+       {
+        "text": "Applies burn with 50% rate to enemies for 2 rounds."
+       },
+       {
+        "text": "Increases assaulters' aid rate by 65% for 2 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/04-reanimated-itachi.md",
+      "heading": "Amaterasu",
+      "name": "Amaterasu",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 240%."
+       },
+       {
+        "text": "55% de probabilidad de causar caos a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Aplica quemaduras con una tasa del 50% a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los asaltantes en un 65% durante 2 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:05-kushina-uzumaki",
+   "nameAsPosted": "Kushina Uzumaki",
+   "releaseRef": "2014-12",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/05-kushina-uzumaki.png",
+    "language": "en",
+    "namePlate": "Kushina Uzumaki",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "2600",
+      "growth": "5.3"
+     },
+     {
+      "label": "Chakra",
+      "value": "2500",
+      "growth": "4.6"
+     },
+     {
+      "label": "Agility",
+      "value": "2000",
+      "growth": "4.8"
+     },
+     {
+      "label": "HP",
+      "value": "15000",
+      "growth": "6"
+     }
+    ],
+    "talentLabel": {
+     "text": "Uzumaki Clan",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Sealing Jutsu:Konggo Fus",
+     "truncated": true
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Uzumaki Clan",
+     "name": "Uzumaki Clan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/05-kushina-uzumaki.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 25% speed, and 20% avoid injury rate."
+       },
+       {
+        "text": "Increases all allies' speed and avoid injury rate by 5%."
+       },
+       {
+        "text": "After being attacked, 25% chance to decrease the attacker's fury by 20 points."
+       },
+       {
+        "text": "Immune to super dodge and stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/05-kushina-uzumaki.md",
+      "heading": "Clan Uzumaki",
+      "name": "Clan Uzumaki",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios, 25% de velocidad y 20% de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad y la evasión de daño de todos los aliados en un 5%."
+       },
+       {
+        "text": "Después de ser atacado, 25% de probabilidad de disminuir la furia del atacante en 20 puntos."
+       },
+       {
+        "text": "Inmune a la super evasión y al aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Sealing Jutsu: Kongo Fusa",
+     "name": "Sealing Jutsu: Kongo Fusa",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/05-kushina-uzumaki.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 220% growth rate."
+       },
+       {
+        "text": "75% rate to forbid fury enemy supporters for 2 rounds."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Applies burn with 90% rate to enemies for 1 round."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 65% for 2 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/05-kushina-uzumaki.md",
+      "heading": "Jutsu de Sellado: Kongo Fusa",
+      "name": "Jutsu de Sellado: Kongo Fusa",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 220%."
+       },
+       {
+        "text": "75% de probabilidad de prohibir la furia de los apoyos enemigos durante 2 rondas."
+       },
+       {
+        "text": "Dispels buffs enemigos."
+       },
+       {
+        "text": "Aplica quemaduras con una tasa del 90% a los enemigos durante 1 ronda."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los aliados asaltantes en un 65% durante 2 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Release-order entry reads Uzumaki Kushina; confirm this card is same variant before upsert."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:06-rashomon-orochimaru",
+   "nameAsPosted": "Rashomon Orochimaru",
+   "releaseRef": "2015-05",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/06-rashomon-orochimaru.png",
+    "language": "en",
+    "namePlate": "Rashomon-Orochimaru",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "8000",
+      "growth": "7"
+     },
+     {
+      "label": "Chakra",
+      "value": "5000",
+      "growth": "6.5"
+     },
+     {
+      "label": "Agility",
+      "value": "5000",
+      "growth": "6.5"
+     },
+     {
+      "label": "HP",
+      "value": "50000",
+      "growth": "10"
+     }
+    ],
+    "talentLabel": {
+     "text": "Forbidden Jutsu Merge",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Orochi Jutsu",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Forbidden Jutsu Merge",
+     "name": "Forbidden Jutsu Merge",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/06-rashomon-orochimaru.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 25% speed, 40% damage rate, and 25% avoid injury rate."
+       },
+       {
+        "text": "Increases all allies' speed and avoid injury rate by 8%, and hp and defense by 20%."
+       },
+       {
+        "text": "After being attacked, 75% chance to restore 30 self fury."
+       },
+       {
+        "text": "For every 10% hp loss, increases self damage rate by 2%."
+       },
+       {
+        "text": "Immune to super dodge, stun, and petrification."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/06-rashomon-orochimaru.md",
+      "heading": "Fusión de Jutsu Prohibidos",
+      "name": "Fusión de Jutsu Prohibidos",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios, 25% de velocidad, 40% de tasa de daño y 25% de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad y la evasión de daño de todos los aliados en un 8%, y el hp y las defensas en un 20%."
+       },
+       {
+        "text": "Después de ser atacado, 75% de probabilidad de restaurar 30 de furia propia."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la tasa de daño propia en un 2%."
+       },
+       {
+        "text": "Inmune a la super evasión, aturdimiento y petrificación."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Orochi Jutsu",
+     "name": "Orochi Jutsu",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/06-rashomon-orochimaru.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 260% growth rate."
+       },
+       {
+        "text": "75% rate to chaos enemies for 2 rounds."
+       },
+       {
+        "text": "Poisons enemies with 100% rate for 1 round."
+       },
+       {
+        "text": "Heals self with 50% rate."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 65% for 2 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/06-rashomon-orochimaru.md",
+      "heading": "Jutsu Orochi",
+      "name": "Jutsu Orochi",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 260%."
+       },
+       {
+        "text": "75% de probabilidad de causar caos a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Envenena a los enemigos con una tasa del 100% durante 1 ronda."
+       },
+       {
+        "text": "Se cura a sí mismo con una tasa del 50%."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los aliados asaltantes en un 65% durante 2 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:07-otsutsuki-momoshiki",
+   "nameAsPosted": "Otsutsuki Momoshiki",
+   "releaseRef": "2015-11",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/07-otsutsuki-momoshiki.png",
+    "language": "en",
+    "namePlate": "Otsutsuki Momoshiki",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "12000",
+      "growth": "10.5"
+     },
+     {
+      "label": "Power",
+      "value": "11000",
+      "growth": "8.5"
+     },
+     {
+      "label": "Agility",
+      "value": "9000",
+      "growth": "8.5"
+     },
+     {
+      "label": "HP",
+      "value": "90000",
+      "growth": "13"
+     }
+    ],
+    "talentLabel": {
+     "text": "Rinnegann Absorption",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Esacpe Technique Void",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Rinnegan Absorption",
+     "name": "Rinnegan Absorption",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/07-otsutsuki-momoshiki.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp (40%), 30% speed, 30% damage rate, and 30% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 20%, attack by 12%, and hp by 30%."
+       },
+       {
+        "text": "After being attacked, 75% chance to restore 30 self fury."
+       },
+       {
+        "text": "For every 10% hp loss, increases self avoid injury by 3%."
+       },
+       {
+        "text": "Immune to super dodge, silence and acupoint."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/07-otsutsuki-momoshiki.md",
+      "heading": "Absorción del Rinnegan",
+      "name": "Absorción del Rinnegan",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios (40%), 30% de velocidad, 30% de tasa de daño y 30% de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en un 20%, el ataque en un 12%, y el hp en un 30%."
+       },
+       {
+        "text": "Después de ser atacado, 75% de probabilidad de restaurar 30 de furia propia."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la evasión de daño propia en un 3%."
+       },
+       {
+        "text": "Inmune a la super evasión, silencio y punto de acupuntura."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Escape Technique Void",
+     "name": "Escape Technique Void",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/07-otsutsuki-momoshiki.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "75% rate to petrify enemies for 2 rounds."
+       },
+       {
+        "text": "Dispels enemy buffs."
+       },
+       {
+        "text": "Applies unification with 120% rate to enemies for 1 round."
+       },
+       {
+        "text": "Increases ally assaulters' and supporters' avoid injury rate by 10% for 2 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/07-otsutsuki-momoshiki.md",
+      "heading": "Técnica de Escape Vacío",
+      "name": "Técnica de Escape Vacío",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 300%."
+       },
+       {
+        "text": "75% de probabilidad de petrificar a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Disipa los buffs de los enemigos."
+       },
+       {
+        "text": "Aplica unificación con una tasa del 120% a los enemigos durante 1 ronda."
+       },
+       {
+        "text": "Aumenta la tasa de evasión de daño de los aliados asaltantes y apoyadores en un 10% durante 2 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Second base stat on card is POWER, not Chakra. Preserve literal label."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:08-madara-and-obito",
+   "nameAsPosted": "Madara & Obito",
+   "releaseRef": "2016-05",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/08-madara-and-obito.png",
+    "language": "en",
+    "namePlate": "Madara & Obito",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "15000",
+      "growth": "12.5"
+     },
+     {
+      "label": "Chakra",
+      "value": "13000",
+      "growth": "11"
+     },
+     {
+      "label": "Agility",
+      "value": "13000",
+      "growth": "11"
+     },
+     {
+      "label": "HP",
+      "value": "140000",
+      "growth": "16"
+     }
+    ],
+    "talentLabel": {
+     "text": "Eye of the Moon",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Heavenly Insertion Hamr",
+     "truncated": true
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Eye of the Moon",
+     "name": "Eye of the Moon",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/08-madara-and-obito.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 35% speed, 40% damage rate, and 35% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 35%, attack by 20%, and avoid injury by 15%."
+       },
+       {
+        "text": "Ignores 100% of enemy defenses."
+       },
+       {
+        "text": "After being attacked, 75% chance to restore 30 self fury."
+       },
+       {
+        "text": "For every 10% hp loss, increases self damage rate and avoid injury by 10%."
+       },
+       {
+        "text": "Immune to paralysis, expel, and blind."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/08-madara-and-obito.md",
+      "heading": "Ojo de la Luna",
+      "name": "Ojo de la Luna",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propio, 35% de velocidad, 40% de tasa de daño y 35% de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en un 35%, el ataque en un 20%, y la evasión de daño en un 15%."
+       },
+       {
+        "text": "Ignora el 100% de las defensas enemigas."
+       },
+       {
+        "text": "Después de ser atacado, 75% de probabilidad de restaurar 30 de furia propia."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la tasa de daño y la evasión de daño propios en un 10%."
+       },
+       {
+        "text": "Inmune a la parálisis, expulsión y ceguera."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Heavenly Insertion Hammering Star",
+     "name": "Heavenly Insertion Hammering Star",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/08-madara-and-obito.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 320% growth rate."
+       },
+       {
+        "text": "80% rate to chaos enemies for 2 rounds."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 70% for 2 rounds."
+       },
+       {
+        "text": "Dispels ally supporters' debuffs."
+       },
+       {
+        "text": "Decreases self avoid injury by 30% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' attack by 20% for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' speed by 10% for 1 round."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/08-madara-and-obito.md",
+      "heading": "Martillo Estelar de Inserción Celestial",
+      "name": "Martillo Estelar de Inserción Celestial",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 320%."
+       },
+       {
+        "text": "80% de probabilidad de caos a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los aliados asaltantes en un 70% durante 2 rondas."
+       },
+       {
+        "text": "Disipa los debuffs de los aliados apoyadores."
+       },
+       {
+        "text": "Disminuye la evasión de daño propia en un 30% durante 2 rondas."
+       },
+       {
+        "text": "Disminuye el ataque de los enemigos en un 20% durante 2 rondas."
+       },
+       {
+        "text": "Aumenta la velocidad de los aliados apoyadores en un 10% durante 1 ronda."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Card skill label visually truncated; use supplied full English skill title."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:09-final-sasuke",
+   "nameAsPosted": "Final Sasuke",
+   "releaseRef": "2016-11",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/09-final-sasuke.png",
+    "language": "en",
+    "namePlate": "Final Sasuke",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "17000",
+      "growth": "16.5"
+     },
+     {
+      "label": "Chakra",
+      "value": "15000",
+      "growth": "14"
+     },
+     {
+      "label": "Agility",
+      "value": "15000",
+      "growth": "14"
+     },
+     {
+      "label": "HP",
+      "value": "210000",
+      "growth": "21"
+     }
+    ],
+    "talentLabel": {
+     "text": "Ultimate Samsara",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Chidori Planet Splitter",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Ultimate Samsara",
+     "name": "Ultimate Samsara",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/09-final-sasuke.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 40% speed, 40% damage rate, and 40% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 30%, and avoid injury by 20%."
+       },
+       {
+        "text": "Increases self hp by 60%."
+       },
+       {
+        "text": "When attacked, reflects 120% of lost hp as damage, and dispels self debuffs."
+       },
+       {
+        "text": "For every 10% hp loss, increases self avoid injury and speed by 3%."
+       },
+       {
+        "text": "Immune to death seed and fury reduction."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "Chidori Planet Splitter",
+     "name": "Chidori Planet Splitter",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/09-final-sasuke.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 320% growth rate."
+       },
+       {
+        "text": "60% rate to curse enemies for 2 rounds."
+       },
+       {
+        "text": "Heals self with 250% rate."
+       },
+       {
+        "text": "Increases ally supporters' strategy attack by 20% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' punch rate and aid rate by 30% for 2 rounds."
+       },
+       {
+        "text": "Dispels debuffs from ally assaulters and supporters."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "vanguards:10-minato-and-naruto",
+   "nameAsPosted": "Minato & Naruto",
+   "releaseRef": "2017-05",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/10-minato-and-naruto.png",
+    "language": "en",
+    "namePlate": "Minato & Naruto",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "21000",
+      "growth": "21"
+     },
+     {
+      "label": "Chakra",
+      "value": "19000",
+      "growth": "19"
+     },
+     {
+      "label": "Agility",
+      "value": "19000",
+      "growth": "19"
+     },
+     {
+      "label": "HP",
+      "value": "250000",
+      "growth": "25"
+     }
+    ],
+    "talentLabel": {
+     "text": "Pure Chakra",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "HiraishinRasengan",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Pure Chakra",
+     "name": "Pure Chakra",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/10-minato-and-naruto.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 50% speed, 45% damage rate, and 45% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 40%."
+       },
+       {
+        "text": "Ignores 100% of enemy defenses."
+       },
+       {
+        "text": "Increases all allies' attack and avoid injury by 20%."
+       },
+       {
+        "text": "After being attacked, dispels self debuffs and enters super dodge for 1 round."
+       },
+       {
+        "text": "Immune to super dodge."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/10-minato-and-naruto.md",
+      "heading": "Pure Chakra",
+      "name": "Pure Chakra",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios, 50% de velocidad, 45% de tasa de daño, y 45% de evitar daño."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 40%."
+       },
+       {
+        "text": "Ignora el 100% de las defensas enemigas."
+       },
+       {
+        "text": "Aumenta el ataque y evitar daño de todos los aliados en 20%."
+       },
+       {
+        "text": "Después de ser atacado, dispela los debuffs propios y entra en estado de super evasión durante 1 ronda."
+       },
+       {
+        "text": "Inmune a la super evasión."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Hiraishin Rasengan",
+     "name": "Hiraishin Rasengan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/10-minato-and-naruto.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "70% rate to chaos enemies for 3 rounds."
+       },
+       {
+        "text": "Decreases enemies' control rate by 20% for 2 rounds."
+       },
+       {
+        "text": "Increases all allies' defenses by 20% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' aid rate by 25%, and speed by 10% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/10-minato-and-naruto.md",
+      "heading": "Hiraishin Rasengan",
+      "name": "Hiraishin Rasengan",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con un 300% de tasa de crecimiento."
+       },
+       {
+        "text": "70% de probabilidad de causar caos a los enemigos durante 3 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de control de los enemigos en un 20% durante 2 rondas."
+       },
+       {
+        "text": "Aumenta las defensas de todos los aliados en un 20% durante 2 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de ayuda de los enemigos en un 25% y la velocidad en un 10% durante 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:11-nagato-and-itachi",
+   "nameAsPosted": "Nagato & Itachi",
+   "releaseRef": "2017-11",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/11-nagato-and-itachi.png",
+    "language": "fr",
+    "namePlate": "Nagato & Itachi",
+    "typeLabel": "Super Jutsu",
+    "formationLabel": "Avant-garde",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "24000",
+      "growth": "24"
+     },
+     {
+      "label": "Chakra",
+      "value": "22000",
+      "growth": "22"
+     },
+     {
+      "label": "Agilité",
+      "value": "22000",
+      "growth": "22"
+     },
+     {
+      "label": "HP",
+      "value": "280000",
+      "growth": "28"
+     }
+    ],
+    "talentLabel": {
+     "text": "Tragédie du Destin",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Double Scellement des Yeu",
+     "truncated": true
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Fate's Tragedy",
+     "name": "Fate's Tragedy",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/11-nagato-and-itachi.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 60% speed, 50% damage rate, and 50% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 45%, and supporters' attack by 20%."
+       },
+       {
+        "text": "Ignores 100% of enemy defenses."
+       },
+       {
+        "text": "Increases ally assaulters' and vanguards' avoid injury by 30%, and supporters' hp by 30%."
+       },
+       {
+        "text": "After being attacked, 60% chance to dispel self debuffs."
+       },
+       {
+        "text": "Immune to freeze and blind."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/11-nagato-and-itachi.md",
+      "heading": "Fate's Tragedy",
+      "name": "Fate's Tragedy",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y el hp propios, 60% velocidad, 50% tasa de daño, y 50% tasa de evasión de daño."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 45%, y la tasa de ataque de los supporters en 20%."
+       },
+       {
+        "text": "Ignora el 100% de las defensas enemigas."
+       },
+       {
+        "text": "Aumenta la tasa de evasión de daño de los assaulters y vanguards aliados en 30%, y el hp de los supporters en 30%."
+       },
+       {
+        "text": "Después de ser atacado, 60% de probabilidad de disipar los debuffs propios."
+       },
+       {
+        "text": "Inmune a congelación y ceguera."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Dual Sealing Eyes",
+     "name": "Dual Sealing Eyes",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/11-nagato-and-itachi.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "70% rate to shock and/or accupoint enemies for 2 rounds."
+       },
+       {
+        "text": "Increases supporters' avoid injury and punch rate by 30%."
+       },
+       {
+        "text": "Decreases enemy assaulters' and supporters' damage rate by 20%, and enemies' dodge rate by 50% for 2 rounds."
+       },
+       {
+        "text": "1 random ally enters cc immune state for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/11-nagato-and-itachi.md",
+      "heading": "Dual Sealing Eyes",
+      "name": "Dual Sealing Eyes",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con tasa de crecimiento de 300%."
+       },
+       {
+        "text": "70% de probabilidad de paralizar y/o aplicar puntos de acupuntura a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de evasión de daño y la tasa de golpe de los supporters en 30%."
+       },
+       {
+        "text": "Disminuye la tasa de daño de los assaulters y supporters enemigos en 20%, y la tasa de esquiva de los enemigos en 50% por 2 rondas."
+       },
+       {
+        "text": "1 aliado aleatorio entra en estado de inmunidad al control durante 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Card is in French (Avant-garde, Coefficient, Tragedie du Destin); match English source carefully."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:12-uchiha-obito",
+   "nameAsPosted": "Uchiha Obito",
+   "releaseRef": "2018-05",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/12-uchiha-obito.png",
+    "language": "en",
+    "namePlate": "Uchiha Obito",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "25000",
+      "growth": "25"
+     },
+     {
+      "label": "Chakra",
+      "value": "23000",
+      "growth": "23"
+     },
+     {
+      "label": "Agility",
+      "value": "23000",
+      "growth": "23"
+     },
+     {
+      "label": "HP",
+      "value": "300000",
+      "growth": "30"
+     }
+    ],
+    "talentLabel": {
+     "text": "Awakening - Rebirth",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Wood Style: Hellish Chac",
+     "truncated": true
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Awakening: Rebirth",
+     "name": "Awakening: Rebirth",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/12-uchiha-obito.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 70% speed, 55% damage rate, and 45% avoid injury."
+       },
+       {
+        "text": "Increases allies' speed by 87% and damage rate by 25%."
+       },
+       {
+        "text": "Decreases enemies' avoid injury by 20%."
+       },
+       {
+        "text": "Increases self hp by 60%."
+       },
+       {
+        "text": "After being attacked, reflects 120% of lost hp as damage."
+       },
+       {
+        "text": "Immune to 40% control rate, death seed, and fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/12-uchiha-obito.md",
+      "heading": "Awakening: Rebirth",
+      "name": "Awakening: Rebirth",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y el hp propios, 70% velocidad, 55% tasa de daño, y 45% tasa de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de los aliados en 87% y la tasa de daño en 25%."
+       },
+       {
+        "text": "Disminuye la tasa de evasión de daño de los enemigos en 20%."
+       },
+       {
+        "text": "Aumenta el hp propio en 60%."
+       },
+       {
+        "text": "Después de ser atacado, refleja 120% del hp perdido como daño."
+       },
+       {
+        "text": "Inmune a 40% tasa de control, semilla de muerte, y reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Wood Style: Hellish Chaos",
+     "name": "Wood Style: Hellish Chaos",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/12-uchiha-obito.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "70% rate to silence enemies for 2 rounds."
+       },
+       {
+        "text": "Heals all allies with 120% rate."
+       },
+       {
+        "text": "Increases all allies' attack by 30%."
+       },
+       {
+        "text": "Decreases enemies' aid rate by 50% for 2 rounds."
+       },
+       {
+        "text": "Dispels ally assaulters' and supporters' debuffs."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/12-uchiha-obito.md",
+      "heading": "Wood Style: Hellish Chaos",
+      "name": "Wood Style: Hellish Chaos",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con tasa de crecimiento de 300%."
+       },
+       {
+        "text": "70% de probabilidad de silenciar a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Sana a todos los aliados con tasa de 120%."
+       },
+       {
+        "text": "Aumenta el ataque de todos los aliados en 30%."
+       },
+       {
+        "text": "Disminuye la tasa de ayuda de los enemigos en 50% por 2 rondas."
+       },
+       {
+        "text": "Disipa los debuffs de los assaulters y supporters aliados."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Do not merge with Uchiha Obito (golden), released October 2013."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:13-otsutsuki-indra",
+   "nameAsPosted": "Otsutsuki Indra",
+   "releaseRef": "2018-11",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/13-otsutsuki-indra.png",
+    "language": "en",
+    "namePlate": "Indora",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "31000",
+      "growth": "30"
+     },
+     {
+      "label": "Chakra",
+      "value": "27000",
+      "growth": "27"
+     },
+     {
+      "label": "Agility",
+      "value": "27000",
+      "growth": "27"
+     },
+     {
+      "label": "HP",
+      "value": "310000",
+      "growth": "31"
+     }
+    ],
+    "talentLabel": {
+     "text": "Ninjutsu",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Susanoo Takemikazuchi",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Ninjutsu",
+     "name": "Ninjutsu",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/13-otsutsuki-indra.md",
+      "lines": [
+       {
+        "text": "Increases self hp and force, 75% speed, 55% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 95%."
+       },
+       {
+        "text": "Increases ally vanguards' and assaulters' hp by 30%."
+       },
+       {
+        "text": "Decreases enemy assaulters' and supporters' attack by 25%."
+       },
+       {
+        "text": "After being attacked, 25% chance to dispel all allies' debuffs and 40% chance to dispel self debuffs."
+       },
+       {
+        "text": "Increases self s.crit by 20% (25% chance to trigger in PvE, 100% in PvP)."
+       },
+       {
+        "text": "Immune to 40% control rate, imprison, and fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/13-otsutsuki-indra.md",
+      "heading": "Ninjutsu",
+      "name": "Ninjutsu",
+      "lines": [
+       {
+        "text": "Aumenta el hp y la fuerza propios, 75% velocidad, 55% tasa de daño, y 55% tasa de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 95%."
+       },
+       {
+        "text": "Aumenta el hp de los vanguardias y assaulters aliados en 30%."
+       },
+       {
+        "text": "Disminuye el ataque de los assaulters y supporters enemigos en 25%."
+       },
+       {
+        "text": "Después de ser atacado, 25% de probabilidad de disipar todos los debuffs de los aliados y 40% de probabilidad de disipar los debuffs propios."
+       },
+       {
+        "text": "Aumenta el s.crit propio en 20% (25% de probabilidad de activarse en PvE, 100% en PvP)."
+       },
+       {
+        "text": "Inmune a 40% tasa de control, prisión, y reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Susanoo: Takemikazuchi",
+     "name": "Susanoo: Takemikazuchi",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/13-otsutsuki-indra.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "80% rate to imprison enemies for 2 rounds."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Decreases enemies' punch rate by 50% for 2 rounds."
+       },
+       {
+        "text": "Increases self defenses by 50% for 2 rounds."
+       },
+       {
+        "text": "Increases allies' damage rate by 30% for 2 rounds."
+       },
+       {
+        "text": "Increases self crit rate by 40% (can exceed cap) for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/13-otsutsuki-indra.md",
+      "heading": "Susanoo: Takemikazuchi",
+      "name": "Susanoo: Takemikazuchi",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con tasa de crecimiento de 300%."
+       },
+       {
+        "text": "80% de probabilidad de aprisionar a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Disipa los buffs de los enemigos."
+       },
+       {
+        "text": "Disminuye la tasa de golpe de los enemigos en 50% por 2 rondas."
+       },
+       {
+        "text": "Aumenta las defensas propias en 50% por 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de daño de los aliados en 30% por 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de crítico propia en 40% (puede exceder el límite) por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:14-reanimated-tobirama",
+   "nameAsPosted": "Reanimated Tobirama",
+   "releaseRef": "2019-05",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/original_cards/14-reanimated-tobirama.png",
+    "language": "en",
+    "namePlate": "Reanimated Tobirama",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "32000",
+      "growth": "32"
+     },
+     {
+      "label": "Chakra",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "Agility",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "HP",
+      "value": "340000",
+      "growth": "34"
+     }
+    ],
+    "talentLabel": {
+     "text": "Reanimation",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Water Release: Water Dr",
+     "truncated": true
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Reanimation",
+     "name": "Reanimation",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 78% speed, 55% damage rate, and 60% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 100%."
+       },
+       {
+        "text": "Increases ally assaulters' and supporters' final damage reduction by 40%."
+       },
+       {
+        "text": "Increases self total damage received by 90%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 23%."
+       },
+       {
+        "text": "Increases self hp by 60% and defenses by 30%."
+       },
+       {
+        "text": "Ignores 100% of enemy defenses."
+       },
+       {
+        "text": "After being attacked, restores self hp with 80% rate."
+       },
+       {
+        "text": "Immune to 50% control rate, super dodge, blind, freeze, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "heading": "Reanimation",
+      "name": "Reanimation",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y el hp propios, 78% velocidad, 55% tasa de daño, y 60% tasa de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 100%."
+       },
+       {
+        "text": "Aumenta la reducción de daño final de los assaulters y supporters aliados en 40%."
+       },
+       {
+        "text": "Aumenta el daño total recibido por el propio jugador en un 90%."
+       },
+       {
+        "text": "Disminuye el ataque de todos los enemigos en 23%."
+       },
+       {
+        "text": "Aumenta el hp propio en 60% y las defensas en 30%."
+       },
+       {
+        "text": "Ignora el 100% de las defensas enemigas."
+       },
+       {
+        "text": "Después de ser atacado, restaura 80% de hp propio."
+       },
+       {
+        "text": "Inmune a 50% tasa de control, super evasión, ceguera, congelación, y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening (name not supplied)",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "lines": [
+       {
+        "text": "Immune to 30% penetration damage."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "heading": "Despertar de Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Inmune a 30% de daño por penetración."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Water Release: Water Dragon",
+     "name": "Water Release: Water Dragon",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "lines": [
+       {
+        "text": "Attacks enemy supporters with 600% growth rate."
+       },
+       {
+        "text": "Decreases enemies' hit rate by 300% for 2 rounds."
+       },
+       {
+        "text": "Increases allies' avoid injury by 25%, control resistance by 30%, and supporters' speed by 20% for 2 rounds."
+       },
+       {
+        "text": "Increases self attack by 30% and block by 60% (can exceed cap) for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "heading": "Liberación de Agua: Dragón de Agua",
+      "name": "Liberación de Agua: Dragón de Agua",
+      "lines": [
+       {
+        "text": "Ataca a los supporters enemigos con tasa de crecimiento de 600%."
+       },
+       {
+        "text": "Disminuye la tasa de aciertos de los enemigos en 300% por 2 rondas."
+       },
+       {
+        "text": "Aumenta la evasión de daño de los aliados en 25%, la resistencia al control en 30%, y la velocidad de los supporters en 20% por 2 rondas."
+       },
+       {
+        "text": "Aumenta el ataque propio en 30% y el bloqueo en 60% (puede exceder el límite) por 2 rondas."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening (name not supplied)",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "lines": [
+       {
+        "text": "Deals an additional 200% growth rate attack to the enemy with the lowest hp."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/first_half/transcriptions/14-reanimated-tobirama.md",
+      "heading": "Despertar de Habilidad",
+      "name": null,
+      "lines": [
+       {
+        "text": "Realiza un ataque adicional con tasa de crecimiento de 200% al enemigo con menor hp."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Self total damage received +90% is counterintuitive; preserve the original, do not correct."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-01-guren",
+   "nameAsPosted": "Guren",
+   "releaseRef": "2019-12",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/01-guren.png",
+    "language": "zh",
+    "namePlate": "红莲",
+    "typeLabel": "豪术",
+    "formationLabel": "先锋",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "腕力",
+      "value": "34000",
+      "growth": "33"
+     },
+     {
+      "label": "精神",
+      "value": "29000",
+      "growth": "30"
+     },
+     {
+      "label": "迅捷",
+      "value": "29000",
+      "growth": "30"
+     },
+     {
+      "label": "体力",
+      "value": "360000",
+      "growth": "34"
+     }
+    ],
+    "talentLabel": {
+     "text": "晶遁",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "破晶降龙",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Crystal Dun",
+     "name": "Crystal Dun",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/01-guren.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 82% speed, 60% damage rate, and 60% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 52% and attack by 30%."
+       },
+       {
+        "text": "Increases all allies' hp and defenses by 30%."
+       },
+       {
+        "text": "Increases self block rate by 50% (can exceed cap) and s.block by 60%."
+       },
+       {
+        "text": "Immune to 50% control rate, freeze, imprison, and death seed."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1",
+     "name": null,
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/01-guren.md",
+      "lines": [
+       {
+        "text": "After being attacked, 70% chance to restore all allies' fury by 30."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill",
+     "heading": "Broken Crystal Dragon",
+     "name": "Broken Crystal Dragon",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/01-guren.md",
+      "lines": [
+       {
+        "text": "Attacks 3 random enemies with 400% growth rate."
+       },
+       {
+        "text": "100% rate to freeze enemy supporters for 2 rounds."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Decreases enemy supporters' and assaulters' damage rate by 40%, and enemy vanguards' defenses by 50% for 2 rounds."
+       },
+       {
+        "text": "Increases all allies' aid rate by 40%."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": null
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening 1",
+     "name": null,
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/01-guren.md",
+      "lines": [
+       {
+        "text": "Decreases the highest hp enemy's avoid injury by 30% for 2 rounds."
+       }
+      ]
+     },
+     "es": null
+    }
+   ],
+   "sourceNotes": [
+    "Card is Chinese; do not claim that English title is a direct rendering of exact card text."
+   ],
+   "alignment": [],
+   "spanish": "not supplied"
+  },
+  {
+   "sourceId": "vanguards:2-02-sage-jugo",
+   "nameAsPosted": "Sage Jugo",
+   "releaseRef": "2020-06",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/02-sage-jugo.png",
+    "language": "en",
+    "namePlate": "Jugo Sage",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "35000",
+      "growth": "34"
+     },
+     {
+      "label": "Chakra",
+      "value": "28000",
+      "growth": "29"
+     },
+     {
+      "label": "Agility",
+      "value": "34000",
+      "growth": "34"
+     },
+     {
+      "label": "HP",
+      "value": "360000",
+      "growth": "34"
+     }
+    ],
+    "talentLabel": {
+     "text": "Sage Mode",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Taren Fujizuho",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Sage Mode",
+     "name": "Sage Mode",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md",
+      "lines": [
+       {
+        "text": "Increases self force, agility, and hp, 83% speed, 10% attack, 70% damage rate, and 60% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 110%, hp by 40%, and avoid injury by 30%."
+       },
+       {
+        "text": "Increases self hp by 100%."
+       },
+       {
+        "text": "Increases final damage reduction for ally assaulters and supporters by 30%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self final damage by 4% and s.attack by 10% (can exceed cap)."
+       },
+       {
+        "text": "Initiating skill deducts 60% of all allies' current hp."
+       },
+       {
+        "text": "Immune to 60% control rate, 150% reflect rate, seal, fury reduction, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/02-sage-jugo.es.md",
+      "heading": "Modo Sabio",
+      "name": "Modo Sabio",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza, agilidad, y hp propios, 83% velocidad, 10% ataque, 70% tasa de daño, y 60% tasa de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 110%, el hp en 40%, y la tasa de evasión de daño en 30%."
+       },
+       {
+        "text": "Aumenta el hp propio en 100%."
+       },
+       {
+        "text": "Aumenta la reducción de daño final para los assaulters y supporters aliados en 30%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta el daño final propio en 4% y la s.attack en 10% (puede exceder el límite)."
+       },
+       {
+        "text": "Iniciar habilidad propia deduce el 60% del hp actual de todos los aliados."
+       },
+       {
+        "text": "Inmune a 60% tasa de control, 150% tasa de reflejo de daño, sellado, reducción de furia, y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1",
+     "name": null,
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md",
+      "lines": [
+       {
+        "text": "Immune to super dodge and s-super dodge."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/02-sage-jugo.es.md",
+      "heading": "Despertar de Talento 1",
+      "name": null,
+      "lines": [
+       {
+        "text": "Inmune a super evasión y s-super evasión."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 2",
+     "name": null,
+     "stage": 2,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md",
+      "lines": [
+       {
+        "text": "Decreases enemies' attack by 30%. After being attacked, increases self speed by 20%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/02-sage-jugo.es.md",
+      "heading": "Despertar de Talento 2",
+      "name": null,
+      "lines": [
+       {
+        "text": "Disminuye el ataque de los enemigos en 30%. Después de ser atacado, aumenta la velocidad propia en 20%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 3 (Special Jugo Card Awakening)",
+     "name": null,
+     "stage": 3,
+     "condition": "Special Jugo Card Awakening",
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md",
+      "lines": [
+       {
+        "text": "Increases self speed from 83% → 86%."
+       },
+       {
+        "text": "Increases all allies' speed from 110% → 112%."
+       },
+       {
+        "text": "Increases self damage rate by 40%."
+       },
+       {
+        "text": "Gains immunity to weakened state and charm."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/02-sage-jugo.es.md",
+      "heading": "Despertar de Talento 3 (Despertar de Carta Especial Jugo)",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la velocidad propia de 83% → 86%."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados de 110% → 112%."
+       },
+       {
+        "text": "Aumenta la tasa de daño propia en 40%."
+       },
+       {
+        "text": "Obtiene inmunidad a estado debilitado y encanto."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Taren Fujizuho",
+     "name": "Taren Fujizuho",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md",
+      "lines": [
+       {
+        "text": "Attacks enemy vanguard/assaulters/supporters with 380/330/300% growth rate."
+       },
+       {
+        "text": "Applies split with 100% rate to enemies for 2 rounds."
+       },
+       {
+        "text": "3 random enemies enter painful will for 2 rounds."
+       },
+       {
+        "text": "Ally assaulters and supporters enter shielding state for 1 round and super dodge for 2 rounds."
+       },
+       {
+        "text": "Decreases enemy assaulters' and supporters' attack by 30% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/02-sage-jugo.es.md",
+      "heading": "Taren Fujizuho",
+      "name": "Taren Fujizuho",
+      "lines": [
+       {
+        "text": "Ataca a los vanguardistas/assaulters/supporters enemigos con tasa de crecimiento de 380/330/300%."
+       },
+       {
+        "text": "Aplica división con tasa de 100% a los enemigos por 2 rondas."
+       },
+       {
+        "text": "3 enemigos aleatorios entran en voluntad dolorosa por 2 rondas."
+       },
+       {
+        "text": "Los assaulters y supporters aliados entran en estado de escudo por 1 ronda y super evasión por 2 rondas."
+       },
+       {
+        "text": "Disminuye el ataque de los assaulters y supporters enemigos en 30% por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening 1 (Special Jugo Card Awakening)",
+     "name": null,
+     "stage": 1,
+     "condition": "Special Jugo Card Awakening",
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/02-sage-jugo.md",
+      "lines": [
+       {
+        "text": "3 random enemies enter painful will for 2 rounds."
+       },
+       {
+        "text": "2 random enemies enter weakened state for 2 rounds."
+       },
+       {
+        "text": "Enemy assaulters enter upwind state for 2 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/02-sage-jugo.es.md",
+      "heading": "Despertar de Habilidad 1 (Despertar de Carta Especial Jugo)",
+      "name": null,
+      "lines": [
+       {
+        "text": "3 enemigos aleatorios entran en voluntad dolorosa por 2 rondas."
+       },
+       {
+        "text": "2 enemigos aleatorios entran en estado debilitado por 2 rondas."
+       },
+       {
+        "text": "Los assaulters enemigos entran en estado de viento ascendente por 2 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Release list calls Jugo Sage; verify equivalence."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-03-boa-hancock",
+   "nameAsPosted": "Boa Hancock",
+   "releaseRef": "2020-07",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/03-boa-hancock.png",
+    "language": "en",
+    "namePlate": "Boa Hancock",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "33000",
+      "growth": "33"
+     },
+     {
+      "label": "Chakra",
+      "value": "29000",
+      "growth": "29"
+     },
+     {
+      "label": "Agility",
+      "value": "29000",
+      "growth": "29"
+     },
+     {
+      "label": "HP",
+      "value": "350000",
+      "growth": "34"
+     }
+    ],
+    "talentLabel": {
+     "text": "Haoshoku Haki",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Mero Mero no Mi",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Haoshoku Haki",
+     "name": "Haoshoku Haki",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/03-boa-hancock.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 80% speed, 60% damage rate, and 40% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 102%, damage rate by 30%, and attack by 20%."
+       },
+       {
+        "text": "Increases ally vanguard/assaulters/supporters hp by 50/30/30%."
+       },
+       {
+        "text": "After being attacked, 25% chance to decrease all enemies' fury by 30, and 60% chance to reflect 200% of lost hp as damage."
+       },
+       {
+        "text": "Immune to 50% control rate, imprison, fury reduction, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/03-boa-hancock.es.md",
+      "heading": "Haoshoku Haki",
+      "name": "Haoshoku Haki",
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios, 80% velocidad, 60% tasa de daño, y 40% tasa de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 102%, la tasa de daño en 30%, y el ataque en 20%."
+       },
+       {
+        "text": "Aumenta el hp de los aliados vanguardistas/assaulters/supporters en 50/30/30%."
+       },
+       {
+        "text": "Después de ser atacado, 25% de probabilidad de disminuir la furia de todos los enemigos en 30, y 60% de probabilidad de reflejar 200% del hp perdido como daño."
+       },
+       {
+        "text": "Inmune a 50% tasa de control, encarcelar, reducción de furia, y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Awaken Arrow of the Captives",
+     "name": "Awaken Arrow of the Captives",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/03-boa-hancock.md",
+      "lines": [
+       {
+        "text": "Increases self damage rate and avoid injury by 10%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/03-boa-hancock.es.md",
+      "heading": "Despertar de Talento 1: Despertar Flecha de los Cautivos",
+      "name": "Despertar Flecha de los Cautivos",
+      "lines": [
+       {
+        "text": "Aumenta la tasa de daño y la tasa de evasión de daño propios en 10%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Mero Mero no Mi",
+     "name": "Mero Mero no Mi",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/03-boa-hancock.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "Heals all allies with 120% rate."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Increases all allies' defenses and aid rate by 30%."
+       },
+       {
+        "text": "Decreases enemy vanguard/assaulters/supporters defenses by 50/40/30%."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/03-boa-hancock.es.md",
+      "heading": "Mero Mero no Mi",
+      "name": "Mero Mero no Mi",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con tasa de crecimiento de 300%."
+       },
+       {
+        "text": "Cura a todos los aliados con tasa de 120%."
+       },
+       {
+        "text": "Disipa todos los debuffs de los aliados."
+       },
+       {
+        "text": "Aumenta las defensas y la tasa de ayuda de todos los aliados en 30%."
+       },
+       {
+        "text": "Disminuye las defensas de los vanguardistas/assaulters/supporters enemigos en 50/40/30%."
+       },
+       {
+        "text": "Restaura 50 furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-04-7th-hokage-and-shadow",
+   "nameAsPosted": "7th Hokage & Shadow",
+   "releaseRef": "2021-01",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/04-7th-hokage-and-shadow.png",
+    "language": "en",
+    "namePlate": "7th Hokage & Shadow",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "38000",
+      "growth": "38"
+     },
+     {
+      "label": "Chakra",
+      "value": "27000",
+      "growth": "27"
+     },
+     {
+      "label": "Agility",
+      "value": "35000",
+      "growth": "35"
+     },
+     {
+      "label": "HP",
+      "value": "450000",
+      "growth": "45"
+     }
+    ],
+    "talentLabel": {
+     "text": "Yin-Yang Power",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Majestic Attire: Susanoo",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Ying-Yang Power",
+     "name": "Ying-Yang Power",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/04-7th-hokage-and-shadow.md",
+      "lines": [
+       {
+        "text": "Increases self agility and hp, 86% speed, 70% damage rate, and 60% avoid injury rate."
+       },
+       {
+        "text": "Increases all allies' speed by 110%, hp by 40%, and attack by 30%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 30%."
+       },
+       {
+        "text": "After being attacked, self and lowest hp ally enter bond state for 2 rounds."
+       },
+       {
+        "text": "Immune to 55% control rate, 150% reflect rate, imprison, blind, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/04-7th-hokage-and-shadow.es.md",
+      "heading": "Poder Ying-Yang",
+      "name": "Poder Ying-Yang",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad y hp propios, 86% velocidad, 70% tasa de daño, y 60% tasa de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 110%, hp en 40%, y ataque en 30%."
+       },
+       {
+        "text": "Disminuye el ataque de todos los enemigos en 30%."
+       },
+       {
+        "text": "Después de ser atacado, el propio y el aliado con menor hp entran en estado de vínculo por 2 rondas."
+       },
+       {
+        "text": "Inmune a 55% tasa de control, 150% de daño reflejado, encarcelar, ceguera, y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Will of Fire",
+     "name": "Will of Fire",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/04-7th-hokage-and-shadow.md",
+      "lines": [
+       {
+        "text": "Increases self attack and damage rate by 10%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/04-7th-hokage-and-shadow.es.md",
+      "heading": "Despertar de Talento 1: Voluntad de Fuego",
+      "name": "Voluntad de Fuego",
+      "lines": [
+       {
+        "text": "Aumenta el ataque y la tasa de daño propios en 10%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Majestic Attire: Susano",
+     "name": "Majestic Attire: Susano",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/04-7th-hokage-and-shadow.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "70% chance to deal 50% penetration damage to enemies."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Heals all allies with 150% rate."
+       },
+       {
+        "text": "Decreases enemies' speed by 20%, and avoid injury rate by 40% for 2 rounds."
+       },
+       {
+        "text": "Increases all allies' aid rate and defenses by 30% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 fury for self, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/04-7th-hokage-and-shadow.es.md",
+      "heading": "Atuendo Majestuoso: Susano",
+      "name": "Atuendo Majestuoso: Susano",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con tasa de crecimiento de 330%."
+       },
+       {
+        "text": "70% de probabilidad de hacer 50% de daño penetrante a los enemigos."
+       },
+       {
+        "text": "Disipa todos los debuffs de los aliados."
+       },
+       {
+        "text": "Cura a todos los aliados con tasa de 150%."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 20%, y la tasa de evasión de daño en 40% por 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda y las defensas de todos los aliados en 30% por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 furia para el propio, 30 para los aliados."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Scorch Release: Halo Hurricane Jet Black Arrow Style Zero",
+     "name": "Scorch Release: Halo Hurricane Jet Black Arrow Style Zero",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/04-7th-hokage-and-shadow.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "100% chance to apply death seed to 2 random enemies and 25% chance to apply to another."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Enemy vanguard enters heal forbid state for 2 rounds."
+       },
+       {
+        "text": "Increases self speed by 50%, and allies gain fury shield for 2 rounds."
+       },
+       {
+        "text": "Restores allies' fury by 50 (except self)."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/04-7th-hokage-and-shadow.es.md",
+      "heading": "Liberación Ardiente: Estilo Halo Huracán Flecha Negra Cero",
+      "name": "Liberación Ardiente: Estilo Halo Huracán Flecha Negra Cero",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con tasa de crecimiento de 330%."
+       },
+       {
+        "text": "100% de probabilidad de aplicar semilla de muerte a 2 enemigos aleatorios y 25% de probabilidad de aplicarla a otro."
+       },
+       {
+        "text": "Disipa los buffs de los enemigos."
+       },
+       {
+        "text": "El vanguardista enemigo entra en estado de prohibición de curación por 2 rondas."
+       },
+       {
+        "text": "Aumenta la velocidad propia en 50%, y los aliados ganan escudo de furia por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 furia a los aliados (excepto el propio)."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "IMPORTANT: pasted heading says '7th Hokage & Sasuke', while card name is '7th Hokage & Shadow'. Treat attribution as unverified.",
+    "Pasted ability section says 7th Hokage & Sasuke, while card/release list say 7th Hokage & Shadow. Could be different referents; do not merge or attach descriptions without review. Additional Scorch Release skill in source."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-05-jiongu-kakuzu",
+   "nameAsPosted": "Jiongu Kakuzu",
+   "releaseRef": "2021-07",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/05-jiongu-kakuzu.png",
+    "language": "en",
+    "namePlate": "Jiongu Kakuzu",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "39000",
+      "growth": "39"
+     },
+     {
+      "label": "Chakra",
+      "value": "27000",
+      "growth": "27"
+     },
+     {
+      "label": "Agility",
+      "value": "36000",
+      "growth": "36"
+     },
+     {
+      "label": "HP",
+      "value": "430000",
+      "growth": "43"
+     }
+    ],
+    "talentLabel": {
+     "text": "Five Natures",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "JionguKimen no Bakuen",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Five Natures",
+     "name": "Five Natures",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/05-jiongu-kakuzu.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp (60%), 86% speed, 70% damage rate, and 65% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 112%, and hp by 30%."
+       },
+       {
+        "text": "Increases Eerth and wind chakra allies' avoid injury by 35%, and hp by 20%."
+       },
+       {
+        "text": "Increases thunder and fire chakra allies' damage rate by 40%, and punch rate by 20%."
+       },
+       {
+        "text": "Increases water chakra allies' defenses by 35%, and attack by 35%."
+       },
+       {
+        "text": "For every 10% hp loss, increases all allies' (except self) attack by 5%, and defenses by 10%."
+       },
+       {
+        "text": "Once per battle, reanimates with 80% hp."
+       },
+       {
+        "text": "After being attacked, has 50% chance to apply poisonous wind state to the attacker for 2 rounds, and has 50% chance to apply shatter storm to self for 2 rounds."
+       },
+       {
+        "text": "Immune to 60% control rate, 150% reflect damage, seal, fury reduction, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/05-jiongu-kakuzu.es.md",
+      "heading": "Cinco Naturalezas",
+      "name": "Cinco Naturalezas",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y hp propios (60%), 86% velocidad, 70% tasa de daño y 65% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 112%, y hp en 30%."
+       },
+       {
+        "text": "Aumenta la evasión de daño de los aliados de chakra tierra y viento en 35%, y hp en 20%."
+       },
+       {
+        "text": "Aumenta la tasa de daño y la tasa de golpe de los aliados de chakra trueno y fuego en 40%, y la tasa de golpe en 20%."
+       },
+       {
+        "text": "Aumenta las defensas y el ataque de los aliados de chakra agua en 35%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta el ataque de todos los aliados (excepto el propio) en 5%, y las defensas en 10%."
+       },
+       {
+        "text": "Una vez por batalla, se reanima con 80% de hp."
+       },
+       {
+        "text": "Después de ser atacado, tiene 50% de probabilidad de aplicar estado de viento venenoso al atacante por 2 rondas, y 50% de probabilidad de aplicar tormenta destructiva a sí mismo por 2 rondas."
+       },
+       {
+        "text": "Inmune a 60% tasa de control, 150% de daño reflejado, sello, reducción de furia y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Immortal Fighter",
+     "name": "Immortal Fighter",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/05-jiongu-kakuzu.md",
+      "lines": [
+       {
+        "text": "Increases self block rate and crit rate by 30% (both can exceed cap)."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/05-jiongu-kakuzu.es.md",
+      "heading": "Despertar de Talento 1: Luchador Inmortal",
+      "name": "Luchador Inmortal",
+      "lines": [
+       {
+        "text": "Aumenta la tasa de bloqueo y la tasa de crítico propia en 30% (ambas pueden superar el límite)."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Jiongu Kimen no Baku",
+     "name": "Jiongu Kimen no Baku",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/05-jiongu-kakuzu.md",
+      "lines": [
+       {
+        "text": "Attacks wind/earth/fire/thunder/water chakra enemies with 450/450/300/300/400% growth rate."
+       },
+       {
+        "text": "Attacks inactivated chakra enemies with 500% growth rate."
+       },
+       {
+        "text": "Applies split, scorching flame, and burst with 120% rate to enemies for 2 rounds."
+       },
+       {
+        "text": "Applies weakened state to thunder and wind chakra enemies for 2 rounds."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Increases ally assaulters' and supporters' defenses by 80% for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/05-jiongu-kakuzu.es.md",
+      "heading": "Jiongu Kimen no Baku",
+      "name": "Jiongu Kimen no Baku",
+      "lines": [
+       {
+        "text": "Ataca a enemigos de chakra viento/tierra/fuego/trueno/agua con tasa de crecimiento de 450/450/300/300/400%."
+       },
+       {
+        "text": "Ataca a enemigos con chakra inactivado con tasa de crecimiento de 500%."
+       },
+       {
+        "text": "Aplica dividido, llama abrasadora y explosión con 120% de tasa a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aplica estado debilitado a enemigos de chakra trueno y viento por 2 rondas."
+       },
+       {
+        "text": "Disipa los buffs de los enemigos."
+       },
+       {
+        "text": "Aumenta las defensas de los aliados asaltantes y apoyos en 80% por 2 rondas."
+       },
+       {
+        "text": "Restaura 68 furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-06-animal-path-pain",
+   "nameAsPosted": "Animal Path Pain",
+   "releaseRef": "2022-01",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/06-animal-path-pain.png",
+    "language": "en",
+    "namePlate": "Pain-Animal Path",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "39000",
+      "growth": "39"
+     },
+     {
+      "label": "Chakra",
+      "value": "39000",
+      "growth": "39"
+     },
+     {
+      "label": "Agility",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "HP",
+      "value": "390000",
+      "growth": "39"
+     }
+    ],
+    "talentLabel": {
+     "text": "Summoning Rinnegan",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "PsychicHellhound",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Summoning Rinnegan",
+     "name": "Summoning Rinnegan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/06-animal-path-pain.md",
+      "lines": [
+       {
+        "text": "Increases self chakra, hp, and force (60%), 86% speed, 65% damage rate, and 65% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 112%, hp by 30%, and attack by 30%."
+       },
+       {
+        "text": "Increases thunder chakra nature allies' s.attack by 40% (can exceed cap), control rate by 30%, and final damage by 30%."
+       },
+       {
+        "text": "Increases water chakra allies' defenses by 60%, final damage reduction by 25%, and avoid injury by 40%."
+       },
+       {
+        "text": "Decreases enemies' attack by 30%."
+       },
+       {
+        "text": "Immune to 10% enemy attack, 55% control rate, 150% rate, chaos, charm, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/06-animal-path-pain.es.md",
+      "heading": "Invocación Rinnegan",
+      "name": "Invocación Rinnegan",
+      "lines": [
+       {
+        "text": "Aumenta el chakra, hp y fuerza propios (60%), 86% velocidad, 65% tasa de daño y 65% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 112%, hp en 30% y ataque en 30%."
+       },
+       {
+        "text": "Aumenta el ataque estratégico de los aliados de chakra trueno en 40% (puede superar el límite), la tasa de control en 30% y el daño final en 30%."
+       },
+       {
+        "text": "Aumenta las defensas de los aliados de chakra agua en 60%, la reducción de daño final en 25% y la evasión de daño en 40%."
+       },
+       {
+        "text": "Reduce el ataque de los enemigos en 30%."
+       },
+       {
+        "text": "Inmune a 10% del ataque enemigo, 55% tasa de control, 150% tasa de reflejo, caos, encanto y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Psychic Panda",
+     "name": "Psychic Panda",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/06-animal-path-pain.md",
+      "lines": [
+       {
+        "text": "Increases self block rate by 30% (can exceed cap). Immune to blind."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/06-animal-path-pain.es.md",
+      "heading": "Despertar de Talento 1: Panda Psíquico",
+      "name": "Panda Psíquico",
+      "lines": [
+       {
+        "text": "Aumenta la tasa de bloqueo propia en 30% (puede superar el límite). Inmune a ceguera."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "normal_skill",
+     "heading": "Normal Skill",
+     "name": "Normal Skill",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/06-animal-path-pain.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 150% growth rate."
+       },
+       {
+        "text": "Heals all allies with 120% rate."
+       },
+       {
+        "text": "Triggers the following effects:"
+       },
+       {
+        "text": "Earth chakra enemies enter seal and upwind state for 2 rounds, and dispels their buffs.",
+        "sub": true
+       },
+       {
+        "text": "Fire chakra enemies are dealt 100% rate physical penetration damage, and enter 120% rate incinerate, wind bound, and decreased control resistance by 30% for 2 rounds.",
+        "sub": true
+       },
+       {
+        "text": "Wind chakra enemies are dealt 100% rate strategy penetration damage, and enter freeze, weakened state, and decreased control rate by 30% for 2 rounds.",
+        "sub": true
+       },
+       {
+        "text": "Thunder, water, and inactivated chakra enemies enter blind and decreased attack and defenses by 30% for 2 rounds.",
+        "sub": true
+       },
+       {
+        "text": "Thunder chakra allies enter upwind state and increased crit rate by 30% (can exceed cap) for 2 rounds, and dispels their debuffs.",
+        "sub": true
+       },
+       {
+        "text": "Water chakra allies enter bond state, wind shield state (10% rate), and increased defenses by 200% for 2 rounds.",
+        "sub": true
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/06-animal-path-pain.es.md",
+      "heading": "Habilidad Normal",
+      "name": "Habilidad Normal",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 150%."
+       },
+       {
+        "text": "Cura a todos los aliados con una tasa del 120%."
+       },
+       {
+        "text": "Activa los siguientes efectos:"
+       },
+       {
+        "text": "Los enemigos de chakra tierra entran en estado de sello y viento en contra por 2 rondas, y se disipan sus beneficios.",
+        "sub": true
+       },
+       {
+        "text": "Los enemigos de chakra fuego reciben daño por penetración física con una tasa del 100% y entran en incineración con una tasa del 120%, viento atado y reducción de resistencia al control en 30% por 2 rondas.",
+        "sub": true
+       },
+       {
+        "text": "Los enemigos de chakra viento reciben daño por penetración de estrategia con una tasa del 100% y entran en congelación, estado debilitado y reducción de tasa de control en 30% por 2 rondas.",
+        "sub": true
+       },
+       {
+        "text": "Los enemigos de chakra trueno, agua y chakra inactivo entran en ceguera y reducción de ataque y defensas en 30% por 2 rondas.",
+        "sub": true
+       },
+       {
+        "text": "Los aliados de chakra trueno entran en estado de viento en contra y aumento de tasa de crítico en 30% (puede superar el límite) por 2 rondas, y se disipan sus perjuicios.",
+        "sub": true
+       },
+       {
+        "text": "Los aliados de chakra agua entran en estado de vínculo, escudo de viento (tasa del 10%) y aumento de defensas en 200% por 2 rondas.",
+        "sub": true
+       }
+      ]
+     }
+    },
+    {
+     "slot": "special_skill",
+     "heading": "Special Skill",
+     "name": "Special Skill",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/06-animal-path-pain.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "30% chance to enter super dodge for 2 rounds."
+       },
+       {
+        "text": "50% chance to make ally supporters enter super dodge for 3 rounds."
+       },
+       {
+        "text": "Increases all allies' damage rate and avoid injury by 50% for 3 rounds."
+       },
+       {
+        "text": "Decreases enemies' damage rate and avoid injury by 50% for 3 rounds."
+       },
+       {
+        "text": "Dispels enemies' buffs and applies painful will for 3 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/06-animal-path-pain.es.md",
+      "heading": "Habilidad Especial",
+      "name": "Habilidad Especial",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 330%."
+       },
+       {
+        "text": "30% de probabilidad de entrar en súper esquiva por 2 rondas."
+       },
+       {
+        "text": "50% de probabilidad de hacer que los aliados de apoyo entren en súper esquiva por 3 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de daño y la tasa de evitar daño de todos los aliados en 50% por 3 rondas."
+       },
+       {
+        "text": "Reduce la tasa de daño y la tasa de evitar daño de los enemigos en 50% por 3 rondas."
+       },
+       {
+        "text": "Disipa los beneficios de los enemigos y aplica voluntad dolorosa por 3 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "IMPORTANT: card says Skill Psychic Hellhound; source headings Normal Skill / Special Skill. Clarify relationship.",
+    "Release list calls Pain Animal Path. Source contains Normal Skill and Special Skill; card skill Psychic Hellhound; verify relationships."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-07-reanimated-hanzo",
+   "nameAsPosted": "Reanimated Hanzo",
+   "releaseRef": "2022-08",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/07-reanimated-hanzo.png",
+    "language": "en",
+    "namePlate": "Reanimated Hanzou",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "40000",
+      "growth": "40"
+     },
+     {
+      "label": "Chakra",
+      "value": "25000",
+      "growth": "25"
+     },
+     {
+      "label": "Agility",
+      "value": "38000",
+      "growth": "38"
+     },
+     {
+      "label": "HP",
+      "value": "420000",
+      "growth": "42"
+     }
+    ],
+    "talentLabel": {
+     "text": "Blade Dance",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Sanshoyu Bifu",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Blade Dance",
+     "name": "Blade Dance",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/07-reanimated-hanzo.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp (60%), 86% speed, 65% damage rate, and 65% avoid injury rate."
+       },
+       {
+        "text": "Increases all allies' speed by 112%, avoid injury by 30%, hp by 30%, and penetration damage by 30%."
+       },
+       {
+        "text": "Increases water and fire chakra allies' damage rate by 30%, attack by 30%, defenses by 30%, and final damage reduction by 20%."
+       },
+       {
+        "text": "Decreases enemies' block rate and crit rate by 20%."
+       },
+       {
+        "text": "Immune to 55% control rate, 150% reflect rate, imprison, freeze, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/07-reanimated-hanzo.es.md",
+      "heading": "Danza de la Espada",
+      "name": "Danza de la Espada",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y hp propios (60%), 86% velocidad, 65% tasa de daño y 65% tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 112%, la tasa de evitar daño en 30%, el hp en 30% y el daño por penetración en 30%."
+       },
+       {
+        "text": "Aumenta la tasa de daño, el ataque, las defensas y la reducción de daño final de los aliados de chakra agua y fuego en 30%, 30%, 30% y 20% respectivamente."
+       },
+       {
+        "text": "Reduce la tasa de bloqueo y la tasa de crítico de los enemigos en 20%."
+       },
+       {
+        "text": "Inmune a 55% de tasa de control, 150% de tasa de reflejo, prisión, congelación y semilla de la muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Awaken Body Flicker Technique",
+     "name": "Awaken Body Flicker Technique",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/07-reanimated-hanzo.md",
+      "lines": [
+       {
+        "text": "Increases self resistance to ignore defense by 50%. After being attacked, 80% chance to add 30 fury to water chakra allies, and dispels 2 random allies' debuffs."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/07-reanimated-hanzo.es.md",
+      "heading": "Despertar de Talento 1: Técnica de Parpadeo del Cuerpo Despertada",
+      "name": "Técnica de Parpadeo del Cuerpo Despertada",
+      "lines": [
+       {
+        "text": "Aumenta la resistencia propia a ignorar defensa en 50%. Después de ser atacado, 80% de probabilidad de añadir 30 de furia a los aliados de chakra agua y disipar los perjuicios de 2 aliados aleatorios."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Sanshoyu Bifu",
+     "name": "Sanshoyu Bifu",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/07-reanimated-hanzo.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 360% growth rate."
+       },
+       {
+        "text": "Applies poison, burst, and bleed with 120% rate, painful will, and corrosion state to enemies for 2 rounds."
+       },
+       {
+        "text": "Allies enter pyroblast for 2 rounds."
+       },
+       {
+        "text": "Heals all allies' with 120% rate."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/07-reanimated-hanzo.es.md",
+      "heading": "Sanshoyu Bifu",
+      "name": "Sanshoyu Bifu",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 360%."
+       },
+       {
+        "text": "Aplica veneno, explosión y sangrado con una tasa del 120%, además de voluntad dolorosa y estado de corrosión a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Los aliados entran en estado de piroexplosión por 2 rondas."
+       },
+       {
+        "text": "Cura a todos los aliados con una tasa del 120%."
+       },
+       {
+        "text": "Disipa los beneficios de los enemigos."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-08-uzumaki-boruto",
+   "nameAsPosted": "Uzumaki Boruto",
+   "releaseRef": "2023-02",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/08-uzumaki-boruto.png",
+    "language": "en",
+    "namePlate": "Boruto Uzumaki",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "40000",
+      "growth": "40"
+     },
+     {
+      "label": "Chakra",
+      "value": "25000",
+      "growth": "25"
+     },
+     {
+      "label": "Agility",
+      "value": "41000",
+      "growth": "41"
+     },
+     {
+      "label": "HP",
+      "value": "440000",
+      "growth": "44"
+     }
+    ],
+    "talentLabel": {
+     "text": "Pure Eye",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Ultra-Big Ball Rasengan",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Pure Eye",
+     "name": "Pure Eye",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/08-uzumaki-boruto.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp, 86% speed, 70% damage rate, and 70% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 116%, hp by 40%, attack by 25%, and control resistance by 20%."
+       },
+       {
+        "text": "Increases wind chakra allies' avoid injury by 25%, water chakra allies' defenses by 40%, and fire chakra allies' final damage reduction by 20%."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 35%, and punch rate by 45%."
+       },
+       {
+        "text": "For every 10% hp loss, increases all allies' final damage reduction by 5%, and defenses by 10%."
+       },
+       {
+        "text": "Increases self dodge rate by 120% (can exceed cap)."
+       },
+       {
+        "text": "Immune to 55% control rate, fury reduction, wind bound, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/08-uzumaki-boruto.es.md",
+      "heading": "Ojo Puro",
+      "name": "Ojo Puro",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y hp propios, 86% velocidad, 70% tasa de daño y 70% tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 116%, el hp en 40%, el ataque en 25% y la resistencia al control en 20%."
+       },
+       {
+        "text": "Aumenta la tasa de evitar daño de los aliados de chakra viento en 25%, las defensas de los aliados de chakra agua en 40% y la reducción de daño final de los aliados de chakra fuego en 20%."
+       },
+       {
+        "text": "Reduce la tasa de daño de los enemigos en 35% y la tasa de golpe en 45%."
+       },
+       {
+        "text": "Por cada 10% de hp perdido, aumenta la reducción de daño final de todos los aliados en 5% y sus defensas en 10%."
+       },
+       {
+        "text": "Aumenta la tasa de esquive propio en 120% (puede exceder el límite)."
+       },
+       {
+        "text": "Inmune a 55% de tasa de control, reducción de furia, atadura de viento y semilla de la muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Fuuton: Gale Palm",
+     "name": "Fuuton: Gale Palm",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/08-uzumaki-boruto.md",
+      "lines": [
+       {
+        "text": "After being attacked, 30% chance to dispel wind chakra allies' debuffs."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/08-uzumaki-boruto.es.md",
+      "heading": "Despertar de Talento 1: Fuuton: Palma de Vendaval",
+      "name": "Fuuton: Palma de Vendaval",
+      "lines": [
+       {
+        "text": "Después de ser atacado, 30% de probabilidad de disipar los perjuicios de los aliados de chakra viento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 2",
+     "name": null,
+     "stage": 2,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/08-uzumaki-boruto.md",
+      "lines": [
+       {
+        "text": "When attacked, decreases all allies' aid rate by 90%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/08-uzumaki-boruto.es.md",
+      "heading": "Despertar de Talento 2",
+      "name": null,
+      "lines": [
+       {
+        "text": "Al ser atacado, reduce la tasa de ayuda de todos los aliados en 90%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Ultra-Big Ball Rasengan",
+     "name": "Ultra-Big Ball Rasengan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/08-uzumaki-boruto.md",
+      "lines": [
+       {
+        "text": "Attacks 2 random enemies with 480% growth rate."
+       },
+       {
+        "text": "Highest hp enemy enters wind bound for 2 rounds."
+       },
+       {
+        "text": "Enemy supporters enter weakened state for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' attack by 35%, and healing rate by 50%."
+       },
+       {
+        "text": "All allies enter super dodge for 2 rounds, and ally supporters enter control immune state for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/08-uzumaki-boruto.es.md",
+      "heading": "Rasengan Ultra Gran Bola",
+      "name": "Rasengan Ultra Gran Bola",
+      "lines": [
+       {
+        "text": "Ataca a 2 enemigos aleatorios con una tasa de crecimiento del 480%."
+       },
+       {
+        "text": "El enemigo con mayor hp entra en atadura de viento por 2 rondas."
+       },
+       {
+        "text": "Los apoyadores enemigos entran en estado debilitado por 2 rondas."
+       },
+       {
+        "text": "Reduce el ataque de los enemigos en 35% y su tasa de curación en 50%."
+       },
+       {
+        "text": "Todos los aliados entran en estado de superesquive por 2 rondas, y los apoyadores aliados entran en estado inmune al control por 2 rondas."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Card says Boruto Uzumaki but release list Uzumaki Boruto. Talent Awakening 2 has ally aid rate -90%; preserve."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-09-5-tail-han",
+   "nameAsPosted": "5-tail Han",
+   "releaseRef": "2023-09",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/09-5-tail-han.png",
+    "language": "en",
+    "namePlate": "5-Tails Han",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "43000",
+      "growth": "43"
+     },
+     {
+      "label": "Chakra",
+      "value": "22000",
+      "growth": "22"
+     },
+     {
+      "label": "Agility",
+      "value": "41000",
+      "growth": "41"
+     },
+     {
+      "label": "HP",
+      "value": "440000",
+      "growth": "44"
+     }
+    ],
+    "talentLabel": {
+     "text": "Steam Armor",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Five-Mountain Jump",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Steam Armor",
+     "name": "Steam Armor",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/09-5-tail-han.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp (60%), 86% speed, 70% damage rate, and 70% avoid injury rate."
+       },
+       {
+        "text": "Increases all allies' speed by 116%, hp by 35%, attack by 30%, and final damage by 25%."
+       },
+       {
+        "text": "Increases wind and thunder chakra allies' control rate by 25%, and avoid injury by 40%."
+       },
+       {
+        "text": "Increases water and earth chakra allies' damage rate by 40%, and s.attack by 30%."
+       },
+       {
+        "text": "Increases fire chakra allies' final damage reduction by 30%, crit rate by 30%, and crit damage by 40%."
+       },
+       {
+        "text": "Decreases enemies' attack by 30%."
+       },
+       {
+        "text": "Immune to 7% attack reduction, 55% control rate, 150% reflect rate, super dodge, death seed, poisonous wind, weakened state, disable, and fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/09-5-tail-han.es.md",
+      "heading": "Armadura de Vapor",
+      "name": "Armadura de Vapor",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y hp propios (60%), 86% velocidad, 70% tasa de daño y 70% tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 116%, el hp en 35%, el ataque en 30% y el daño final en 25%."
+       },
+       {
+        "text": "Aumenta la tasa de control de los aliados de chakra viento y trueno en 25% y la tasa de evitar daño en 40%."
+       },
+       {
+        "text": "Aumenta la tasa de daño de los aliados de chakra agua y tierra en 40% y el ataque estratégico en 30%."
+       },
+       {
+        "text": "Aumenta la reducción de daño final de los aliados de chakra fuego en 30%, la tasa de crítico en 30% y el daño crítico en 40%."
+       },
+       {
+        "text": "Reduce el ataque de los enemigos en 30%."
+       },
+       {
+        "text": "Inmune a reducción de ataque en 7%, 55% de tasa de control, 150% de tasa de reflejo, superesquive, semilla de la muerte, viento venenoso, estado debilitado, deshabilitación y reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Steam Armor",
+     "name": "Steam Armor",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/09-5-tail-han.md",
+      "lines": [
+       {
+        "text": "Increases Jinchuriki allies' control resistance by 20% and defenses by 40%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/09-5-tail-han.es.md",
+      "heading": "Despertar de Talento 1: Armadura de Vapor",
+      "name": "Armadura de Vapor",
+      "lines": [
+       {
+        "text": "Aumenta la resistencia al control de los aliados Jinchuriki en 20% y sus defensas en 40%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Five-Mountain Jump",
+     "name": "Five-Mountain Jump",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/09-5-tail-han.md",
+      "lines": [
+       {
+        "text": "Attacks the highest avoid injury enemy with 600% growth rate."
+       },
+       {
+        "text": "Deals 80% physical penetration damage to the highest hp enemy."
+       },
+       {
+        "text": "Heals all allies with 50% rate."
+       },
+       {
+        "text": "2 random allies enter bond state for 2 rounds."
+       },
+       {
+        "text": "50% chance to self enter superarmor state for 2 rounds."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "2 random enemies enter weakened state for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/09-5-tail-han.es.md",
+      "heading": "Salto de las Cinco Montañas",
+      "name": "Salto de las Cinco Montañas",
+      "lines": [
+       {
+        "text": "Ataca al enemigo con mayor tasa de evitar daño con una tasa de crecimiento del 600%."
+       },
+       {
+        "text": "Inflige 80% de daño por penetración física al enemigo con mayor hp."
+       },
+       {
+        "text": "Sana a todos los aliados con una tasa del 50%."
+       },
+       {
+        "text": "2 aliados aleatorios entran en estado de vínculo por 2 rondas."
+       },
+       {
+        "text": "50% de probabilidad de entrar en estado de superarmadura por 2 rondas."
+       },
+       {
+        "text": "Disipa los beneficios de los enemigos."
+       },
+       {
+        "text": "2 enemigos aleatorios entran en estado debilitado por 2 rondas."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-10-warrior-sakura",
+   "nameAsPosted": "Warrior Sakura",
+   "releaseRef": "2024-04",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/10-warrior-sakura.png",
+    "language": "en",
+    "namePlate": "Sakura Warrior",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "40000",
+      "growth": "40"
+     },
+     {
+      "label": "Chakra",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "Agility",
+      "value": "42000",
+      "growth": "42"
+     },
+     {
+      "label": "HP",
+      "value": "380000",
+      "growth": "38"
+     }
+    ],
+    "talentLabel": {
+     "text": "SakuraYin Seal",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "SakuraStorm",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "akura·Yin Seal",
+     "name": "akura·Yin Seal",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/10-warrior-sakura.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp (60%), 86% speed, 115% damage rate, and 70% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 116%, attack by 30%, and ignore defense by 35%."
+       },
+       {
+        "text": "Increases final damage reduction for ally assaulters and supporters by 30%."
+       },
+       {
+        "text": "Increases thunder, water, and wind chakra allies' control rate by 25%."
+       },
+       {
+        "text": "Increases earth, fire, and water chakra allies' control resistance by 25%."
+       },
+       {
+        "text": "Increases all allies' (except self) hp by 50%, and self hp by 100%."
+       },
+       {
+        "text": "Decreases enemies' attack by 30%, and avoid injury by 30%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self attack by 3% and final damage by 4%."
+       },
+       {
+        "text": "Initiating skill deducts 80% of all allies' current hp."
+       },
+       {
+        "text": "Immune to 55% control rate, 150% reflect rate, super dodge and s-super dodge, weakened state, fury reduction, death seed, and poisonous wind."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/10-warrior-sakura.es.md",
+      "heading": "Sakura·Sello Yin",
+      "name": "Sakura·Sello Yin",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y hp propios (60%), 86% velocidad, 115% tasa de daño y 70% tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 116%, el ataque en 30% e ignorar defensa en 35%."
+       },
+       {
+        "text": "Aumenta la reducción de daño final de los asaltantes y soportes aliados en 30%."
+       },
+       {
+        "text": "Aumenta la tasa de control de los aliados de chakra trueno, agua y viento en 25%, y la resistencia al control de los aliados de chakra tierra, agua y fuego en 25%."
+       },
+       {
+        "text": "Aumenta el hp de todos los aliados (excepto propio) en 50%, y el hp propio en 100%."
+       },
+       {
+        "text": "Reduce el ataque de los enemigos en 30% y la tasa de evitar daño en 30%."
+       },
+       {
+        "text": "Por cada 10% de hp perdido, aumenta el ataque propio en 3% y el daño final en 4%."
+       },
+       {
+        "text": "Al iniciar la habilidad propia, deduce el 80% del hp actual de todos los aliados."
+       },
+       {
+        "text": "Inmune a 55% de tasa de control, 150% de tasa de reflejo, superesquive y s-superesquive, estado debilitado, reducción de furia, semilla de la muerte y viento venenoso."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Sakura Regeneration",
+     "name": "Sakura Regeneration",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/10-warrior-sakura.md",
+      "lines": [
+       {
+        "text": "After being attacked, increases self speed by 15% for 1 round."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/10-warrior-sakura.es.md",
+      "heading": "Despertar de Talento 1: Regeneración de Sakura",
+      "name": "Regeneración de Sakura",
+      "lines": [
+       {
+        "text": "Después de ser atacada, aumenta la velocidad propia en 15% por 1 ronda."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Sakura·Storm",
+     "name": "Sakura·Storm",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/10-warrior-sakura.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate, and additional strategy attack based hit to all enemies with 150% growth rate."
+       },
+       {
+        "text": "1 random enemy enters poisonous wind for 2 rounds."
+       },
+       {
+        "text": "2 random enemies enter upwind for 2 rounds."
+       },
+       {
+        "text": "2 random allies enter bond state for 2 rounds."
+       },
+       {
+        "text": "Ally assaulters and supporters enter shielding state and s-super dodge for 2 rounds, and self enters super dodge for 1 round."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/10-warrior-sakura.es.md",
+      "heading": "Sakura·Tormenta",
+      "name": "Sakura·Tormenta",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 330% y un golpe adicional basado en ataque estratégico a todos los enemigos con una tasa de crecimiento del 150%."
+       },
+       {
+        "text": "1 enemigo aleatorio entra en viento venenoso por 2 rondas."
+       },
+       {
+        "text": "2 enemigos aleatorios entran en viento ascendente por 2 rondas."
+       },
+       {
+        "text": "2 aliados aleatorios entran en estado de vínculo por 2 rondas."
+       },
+       {
+        "text": "Los asaltantes y soportes aliados entran en estado de escudo y s-superesquive por 2 rondas, y el propio entra en superesquive por 1 ronda."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Card shows Sakura Warrior; release list Warrior Sakura. The English description first talent header is typo akura·Yin Seal; cross-check."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-11-kashin-koji",
+   "nameAsPosted": "Kashin Koji",
+   "releaseRef": "2024-10",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/11-kashin-koji.png",
+    "language": "en",
+    "namePlate": "Kashin Koji",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "35000",
+      "growth": "35"
+     },
+     {
+      "label": "Chakra",
+      "value": "25000",
+      "growth": "25"
+     },
+     {
+      "label": "Agility",
+      "value": "35000",
+      "growth": "35"
+     },
+     {
+      "label": "HP",
+      "value": "550000",
+      "growth": "55"
+     }
+    ],
+    "talentLabel": {
+     "text": "Magic",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Fire of Flame Mountain",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Magic",
+     "name": "Magic",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/11-kashin-koji.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp, 86% speed, 55% damage rate, and 85% avoid injury rate."
+       },
+       {
+        "text": "Increases all allies' speed by 116%, attack by 30%, final damage reduction by 30%, and resistance to ignore defense by 20%."
+       },
+       {
+        "text": "Increases water, thunder, and wind allies' hp by 40%."
+       },
+       {
+        "text": "Increases ally assaulters' and supporters' aid rate by 20%."
+       },
+       {
+        "text": "Decreases enemies' attack by 30%, and control rate by 25%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self defenses by 10% and avoid injury by 8%."
+       },
+       {
+        "text": "Increases self hp by 150%, and crit damage resistance by 50%."
+       },
+       {
+        "text": "Immune to death seed, chaos, charm, weakened state, and corrosion."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/11-kashin-koji.es.md",
+      "heading": "Magia",
+      "name": "Magia",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y hp propios, 86% velocidad, 55% tasa de daño y 85% tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 116%, el ataque en 30%, la reducción de daño final en 30% y la resistencia a ignorar defensa en 20%."
+       },
+       {
+        "text": "Aumenta el hp de los aliados de chakra agua, trueno y viento en 40%."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los asaltantes y soportes aliados en 20%."
+       },
+       {
+        "text": "Reduce el ataque de los enemigos en 30% y la tasa de control en 25%."
+       },
+       {
+        "text": "Por cada 10% de hp perdido, aumenta las defensas propias en 10% y la tasa de evitar daño en 8%."
+       },
+       {
+        "text": "Aumenta el hp propio en 150% y la resistencia al daño crítico en 50%."
+       },
+       {
+        "text": "Inmune a semilla de la muerte, caos, encanto, estado debilitado y corrosión."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Sage Mode",
+     "name": "Sage Mode",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/11-kashin-koji.md",
+      "lines": [
+       {
+        "text": "Immune to 12% enemy attack."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/11-kashin-koji.es.md",
+      "heading": "Despertar de Talento 1: Modo Sabio",
+      "name": "Modo Sabio",
+      "lines": [
+       {
+        "text": "Inmune al 12% del ataque enemigo."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Spiritual Communication: Fire of Flame Mountain",
+     "name": "Spiritual Communication: Fire of Flame Mountain",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/11-kashin-koji.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "1 random enemy enters poisonous wind for 2 rounds."
+       },
+       {
+        "text": "2 random allies enter shielding state for 2 rounds."
+       },
+       {
+        "text": "2 random allies enter superarmor state for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' final damage by 30% for 2 rounds."
+       },
+       {
+        "text": "Dispels enemies' buffs."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/11-kashin-koji.es.md",
+      "heading": "Comunicación Espiritual: Fuego de la Montaña Llameante",
+      "name": "Comunicación Espiritual: Fuego de la Montaña Llameante",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 300%."
+       },
+       {
+        "text": "1 enemigo aleatorio entra en viento venenoso por 2 rondas."
+       },
+       {
+        "text": "2 aliados aleatorios entran en estado de escudo por 2 rondas."
+       },
+       {
+        "text": "2 aliados aleatorios entran en estado de superarmadura por 2 rondas."
+       },
+       {
+        "text": "Reduce el daño final de los enemigos en 30% por 2 rondas."
+       },
+       {
+        "text": "Disipa los beneficios de los enemigos."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-12-sai-errant-knight",
+   "nameAsPosted": "Sai (Errant Knight)",
+   "releaseRef": "2025-08",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/12-sai-errant-knight.png",
+    "language": "en",
+    "namePlate": "Sai Knight-Errant",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "45000",
+      "growth": "45"
+     },
+     {
+      "label": "Chakra",
+      "value": "23000",
+      "growth": "23"
+     },
+     {
+      "label": "Agility",
+      "value": "42000",
+      "growth": "42"
+     },
+     {
+      "label": "HP",
+      "value": "450000",
+      "growth": "45"
+     }
+    ],
+    "talentLabel": {
+     "text": "Ink Flush",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Choshin Giga",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Ink Flush",
+     "name": "Ink Flush",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/12-sai-errant-knight.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp (60%), 87% speed, 75% damage rate, and 75% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 118%, attack by 30%, damage rate by 30%, and hp by 35%."
+       },
+       {
+        "text": "Increases earth, fire, and thunder chakra allies' control resistance by 25%, and resistance to ignore defense by 30%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 30%, damage rate by 30%, and punch rate by 45%."
+       },
+       {
+        "text": "After being attacked, 30% chance to dispel all allies' debuffs, and 60% chance to make 1 random ally enter (10%) shatter storm for 2 rounds."
+       },
+       {
+        "text": "Born with 50% block rate (can exceed cap)."
+       },
+       {
+        "text": "Immune to 55% control rate, super dodge, s-super dodge, death seed, poisonous wind, and weakened state."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/12-sai-errant-knight.es.md",
+      "heading": "Talento: Tinta Pura",
+      "name": "Tinta Pura",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, fuerza y vida propia (60%), 87% velocidad, 75% tasa de daño y 75% de tasa de evasion de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 118%, ataque en un 30%, la tasa de daño en 30%, y la vida en un 35%."
+       },
+       {
+        "text": "Aumenta la resistencia al control de los aliados de chakra tierra, fuego y trueno en 25%, y la resistencia a ignorar defensa en 30%."
+       },
+       {
+        "text": "Disminuye el ataque de todos los enemigos en 30%, la tasa de daño en 30%, y la tasa de golpe en 45%."
+       },
+       {
+        "text": "Después de ser atacado, 30% de probabilidad de disipar las desventajas de todos los aliados, y 60% de probabilidad de que 1 aliado aleatorio entre en estado de tormenta destructora (10%) por 2 rondas."
+       },
+       {
+        "text": "Nace con 50% de tasa de bloqueo (puede exceder el límite)."
+       },
+       {
+        "text": "Inmune al 55% de control, super esquivar, s-super esquivar, semilla de la muerte, viento venenoso y estado debilitado."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Awakening 1: Ink Clone",
+     "name": "Ink Clone",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/12-sai-errant-knight.md",
+      "lines": [
+       {
+        "text": "Born with 50% s.block (not effective in PvE)."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/12-sai-errant-knight.es.md",
+      "heading": "Despertar 1: Clon de Tinta",
+      "name": "Clon de Tinta",
+      "lines": [
+       {
+        "text": "Nace con 50% de s.bloqueo (no efectivo en PvE)."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Choshin Giga",
+     "name": "Choshin Giga",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/12-sai-errant-knight.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "Heals all allies with 50% rate."
+       },
+       {
+        "text": "Makes 2 random allies enter (10%) bond state for 2 rounds."
+       },
+       {
+        "text": "Makes 2 random enemies enter (10%) chaotic storm state for 2 rounds."
+       },
+       {
+        "text": "Dispels all enemies' buffs."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/12-sai-errant-knight.es.md",
+      "heading": "Habilidad: Choshin Giga",
+      "name": "Choshin Giga",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 300%."
+       },
+       {
+        "text": "Cura a todos los aliados con una tasa del 50%."
+       },
+       {
+        "text": "Hace que 2 aliados aleatorios entren en estado de vínculo (10%) por 2 rondas."
+       },
+       {
+        "text": "Hace que 2 enemigos aleatorios entren en estado de tormenta caótica (10%) por 2 rondas."
+       },
+       {
+        "text": "Disipa todos los beneficios de los enemigos."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para los [TRUNCATED IN SOURCE]."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Card says Sai Knight-Errant, release list Sai (Errant Knight). (10%) Shatter Storm is a magnitude override; 60% separately is activation chance."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-13-karin-guyver",
+   "nameAsPosted": "Karin (Guyver)",
+   "releaseRef": "2025-09",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/13-karin-guyver.png",
+    "language": "en",
+    "namePlate": "Karin Guyver",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "45000",
+      "growth": "45"
+     },
+     {
+      "label": "Chakra",
+      "value": "23000",
+      "growth": "23"
+     },
+     {
+      "label": "Agility",
+      "value": "42000",
+      "growth": "42"
+     },
+     {
+      "label": "HP",
+      "value": "450000",
+      "growth": "45"
+     }
+    ],
+    "talentLabel": {
+     "text": "Mind Disturbance",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Railgun",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Mind Disturbance",
+     "name": "Mind Disturbance",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/13-karin-guyver.md",
+      "lines": [
+       {
+        "text": "Increases self agility, force, and hp (60%), 87% speed, 75% damage rate, and 75% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 118%, final damage by 30%, attack by 30%, ignore defense by 35%, hp by 50%, and avoid injury by 40%."
+       },
+       {
+        "text": "Decreases self hp by 25% and avoid injury by 15%."
+       },
+       {
+        "text": "Increases earth, fire, and thunder allies' control rate by 30% and punch rate by 25%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 20%."
+       },
+       {
+        "text": "Once per battle, reanimates with 65% hp and cleanses all allies' debuffs."
+       },
+       {
+        "text": "Immune to 55% control rate and 150% reflect rate, super dodge, s-super dodge, death seed, fury reduction, weakened state, and poisonous wind."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/13-karin-guyver.es.md",
+      "heading": "Perturbación Mental",
+      "name": "Perturbación Mental",
+      "lines": [
+       {
+        "text": "Aumenta propia agilidad, fuerza y hp (60%), 87% velocidad, 75% tasa de daño y 75% evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 118%, daño final en 30%, ataque en 30%, ignora defensa en 35%, hp en 50% y evitar daño en 40%."
+       },
+       {
+        "text": "Reduce propio hp en 25% y evitar daño en 15%."
+       },
+       {
+        "text": "Aumenta la tasa de control de aliados de tierra, fuego y trueno en 30% y la tasa de golpe en 25%."
+       },
+       {
+        "text": "Reduce el ataque de todos los enemigos en 20%."
+       },
+       {
+        "text": "Una vez por batalla, revive con 65% de hp y limpia las desventajas de todos los aliados."
+       },
+       {
+        "text": "Inmune a 55% de control, 150% de reflejo de daño, super esquiva, s-super esquiva, semilla de muerte, reducción de furia, estado debilitado y viento venenoso."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent awakening 1: Energy Disruption Shield",
+     "name": "Energy Disruption Shield",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/13-karin-guyver.md",
+      "lines": [
+       {
+        "text": "Decreases all enemies' avoid injury by 15%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/13-karin-guyver.es.md",
+      "heading": "Despertar de Talento 1: Escudo de Disrupción de Energía",
+      "name": "Escudo de Disrupción de Energía",
+      "lines": [
+       {
+        "text": "Reduce evitar daño de todos los enemigos en 15%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Railgun",
+     "name": "Railgun",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/13-karin-guyver.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "Deals an additional 150% physical damage strike to the lowest hp enemy."
+       },
+       {
+        "text": "Heals all allies with 50% rate."
+       },
+       {
+        "text": "1 random ally enters superarmor state for 2 rounds."
+       },
+       {
+        "text": "2 random enemies enter dispirited state for 2 rounds."
+       },
+       {
+        "text": "2 random enemies enter upwind state for 2 rounds."
+       },
+       {
+        "text": "Self enters (15%) acceleration state for 2 rounds."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/13-karin-guyver.es.md",
+      "heading": "Railgun",
+      "name": "Railgun",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con 300% de tasa de crecimiento."
+       },
+       {
+        "text": "Inflige un golpe físico adicional de 150% al enemigo con menor hp."
+       },
+       {
+        "text": "Cura a todos los aliados con 50% de tasa."
+       },
+       {
+        "text": "1 aliado aleatorio entra en estado de superarmadura por 2 rondas."
+       },
+       {
+        "text": "2 enemigos aleatorios entran en estado desanimado por 2 rondas."
+       },
+       {
+        "text": "2 enemigos aleatorios entran en estado de viento a favor por 2 rondas."
+       },
+       {
+        "text": "Propio entra en estado de aceleración (15%) por 2 rondas."
+       },
+       {
+        "text": "Elimina los desbuffs de todos los aliados."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "Card says Karin Guyver, release list Karin (Guyver)."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "vanguards:2-14-hinata-soccer-star",
+   "nameAsPosted": "Hinata (Soccer Star)",
+   "releaseRef": "2026-06",
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/original_cards/14-hinata-soccer-star.png",
+    "language": "en",
+    "namePlate": "Hinata [Soccer Star]",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSR",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "44000",
+      "growth": "44"
+     },
+     {
+      "label": "Chakra",
+      "value": "34500",
+      "growth": "34.5"
+     },
+     {
+      "label": "Agility",
+      "value": "43500",
+      "growth": "43.5"
+     },
+     {
+      "label": "HP",
+      "value": "330000",
+      "growth": "33"
+     }
+    ],
+    "talentLabel": {
+     "text": "Mystical Palm",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Eight Trigrams: Rift",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Mystical Palm",
+     "name": "Mystical Palm",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/14-hinata-soccer-star.md",
+      "lines": [
+       {
+        "text": "Increases self force, chakra, agility (60%), power (80%), 87% speed, 75% damage rate, 75% avoid injury, and attack by 10%."
+       },
+       {
+        "text": "Increases all allies' speed by 118%, attack by 30%, damage rate by 30%, final damage by 30%, final damage reduction by 30%, and hp by 40%."
+       },
+       {
+        "text": "Increases self total damage received by 50%."
+       },
+       {
+        "text": "Decreases the highest control resistance enemy's control resistance by 5%, and increases the highest control resistance ally's control resistance by 5%."
+       },
+       {
+        "text": "Decreases all enemies' aid rate by 15%."
+       },
+       {
+        "text": "For every 10% self hp loss, increases all allies' attack by 3% and final damage reduction by 5%."
+       },
+       {
+        "text": "Immune to 55% control rate, 150% reflect rate, super dodge, s-super dodge, death seed, fury reduction, upwind state, weakened state, poisonous wind, and corrosion state."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/14-hinata-soccer-star.es.md",
+      "heading": "Palma Mística",
+      "name": "Palma Mística",
+      "lines": [
+       {
+        "text": "Aumenta fuerza, chakra, agilidad (60%), poder (80%), velocidad (87%), tasa de daño (75%), evitar lesiones (75%) y ataque (10%)."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados un 118%, ataque 30%, tasa de daño 30%, daño final 30%, reducción de daño final 30% y PV 40%."
+       },
+       {
+        "text": "Aumenta el daño total recibido propio un 50%."
+       },
+       {
+        "text": "Reduce un 5% la resistencia al control del enemigo con mayor resistencia al control, y aumenta un 5% la del aliado con mayor resistencia al control."
+       },
+       {
+        "text": "Reduce la tasa de ayuda de todos los enemigos un 15%."
+       },
+       {
+        "text": "Por cada 10% de PV propios perdidos, aumenta el ataque de todos los aliados un 3% y la reducción de daño final un 5%."
+       },
+       {
+        "text": "Inmune al 55% de tasa de control, superesquiva, superesquiva S, reflejo 150%, semilla de muerte, reducción de furia, estado viento a favor, estado debilitado, viento venenoso y corrosión."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent awakening 1: Twin Lion Fists",
+     "name": "Twin Lion Fists",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/14-hinata-soccer-star.md",
+      "lines": [
+       {
+        "text": "Increases all allies' attack by 5%, punch rate by 25%, and control rate by 30%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 15%, aid rate by 15%, and defenses by 40%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/14-hinata-soccer-star.es.md",
+      "heading": "Despertar de talento 1: Puños de Leones Gemelos",
+      "name": "Puños de Leones Gemelos",
+      "lines": [
+       {
+        "text": "Aumenta el ataque de todos los aliados un 5%, tasa de golpe 25% y tasa de control 30%."
+       },
+       {
+        "text": "Reduce el ataque de todos los enemigos un 15%, tasa de ayuda 15% y defensas 40%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent awakening 2: Twin Lion Strike",
+     "name": "Twin Lion Strike",
+     "stage": 2,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/14-hinata-soccer-star.md",
+      "lines": [
+       {
+        "text": "Increases all allies' control resistance by 25%, defenses by 30%, and resistance to ignore defense by 30%."
+       },
+       {
+        "text": "Decreases all enemies' attack by 30%, punch rate by 45%, and damage rate by 50%."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/14-hinata-soccer-star.es.md",
+      "heading": "Despertar de talento 2: Golpe de Leones Gemelos",
+      "name": "Golpe de Leones Gemelos",
+      "lines": [
+       {
+        "text": "Aumenta la resistencia al control de todos los aliados un 25%, defensas 30% y resistencia a ignorar defensa 30%."
+       },
+       {
+        "text": "Reduce el ataque de todos los enemigos un 30%, tasa de golpe 45% y tasa de daño 50%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Eight Trigrams: Rift",
+     "name": "Eight Trigrams: Rift",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_en/14-hinata-soccer-star.md",
+      "lines": [
+       {
+        "text": "Attacks all enemies with 300% growth rate."
+       },
+       {
+        "text": "Deals an additional strategy attack based hit to all enemies with 150% growth rate."
+       },
+       {
+        "text": "Heals all allies with 50% rate."
+       },
+       {
+        "text": "Ally vanguard and assaulters enter pyroblast state for 2 rounds."
+       },
+       {
+        "text": "2 random allies enter (20%) Strong state for 2 rounds."
+       },
+       {
+        "text": "2 random enemies enter (30%) Corrosion state for 2 rounds."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Vanguards_28_Source/vanguards_complete/second_half/transcriptions_es/14-hinata-soccer-star.es.md",
+      "heading": "Habilidad: Ocho Trigramas: Fisura",
+      "name": "Ocho Trigramas: Fisura",
+      "lines": [
+       {
+        "text": "Ataca a todos los enemigos con 300% de crecimiento."
+       },
+       {
+        "text": "Inflige un golpe adicional de ataque estratégico a todos los enemigos con 150% de crecimiento."
+       },
+       {
+        "text": "Cura a todos los aliados con 50% de tasa."
+       },
+       {
+        "text": "La vanguardia y asaltantes aliados entran en estado piroexplosión por 2 rondas."
+       },
+       {
+        "text": "2 aliados aleatorios entran en estado Fuerte (20%) por 2 rondas."
+       },
+       {
+        "text": "2 enemigos aleatorios entran en estado Corrosión (30%) por 2 rondas."
+       },
+       {
+        "text": "Disipa las desventajas de todos los aliados."
+       },
+       {
+        "text": "Restaura 68 de furia propia y 30 a aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "NOTE: The effects of Lvl 2 awakening REPLACE the effects of Lvl 1 awakening.",
+    "Explicitly level-2 talent awakening REPLACES level-1 effects, not additive; (20%) Strong and (30%) Corrosion are per-usage magnitudes."
+   ],
+   "alignment": [],
+   "spanish": "supplied"
+  }
+ ]
+}

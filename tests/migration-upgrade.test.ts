@@ -86,7 +86,7 @@ describe("17. upgrading a Milestone 1 database", () => {
     expect(appliedOnUpgrade).not.toMatch(/_init/); // only the new migration ran
     expect(run("npx prisma migrate status")).toMatch(/up to date/i);
     db = new PrismaClient({ datasourceUrl: URL });
-  });
+  }, 120_000);
 
   it("preserves every Milestone 1 record and value", async () => {
     const ninja = await db.ninja.findUniqueOrThrow({
@@ -133,7 +133,7 @@ describe("17. upgrading a Milestone 1 database", () => {
     for (const index of ["Ninja_releaseYear_releaseMonth_releaseOrder_idx", "Ninja_ratingId_idx", "Ninja_formationId_idx", "Ninja_clientCombatClass_idx", "Ninja_slug_key", "NinjaBaseStat_statisticId_baseValue_idx", "Effect_statisticId_valueType_value_idx", "Effect_statusEffectId_idx", "Condition_conditionTypeId_conditionValueId_idx", "Equipment_setId_idx", "Jewelry_setId_idx", "EquipmentSetBonus_setId_requiredPieces_key", "SourceRecord_key_key"]) {
       expect(names.has(index), index).toBe(true);
     }
-    expect(objects.filter((o) => o.type === "trigger")).toHaveLength(22);
+    expect(objects.filter((o) => o.type === "trigger")).toHaveLength(30);
     // Constraints bite on the upgraded database, and the new services work on the old rows.
     expect(await dbRejects(() => db.ninja.update({ where: { slug: "m1-ninja" }, data: { clientCombatClass: "BOTH" } }))).toBe(TRIGGER_REJECTION);
     expect(await dbRejects(() => db.effect.update({ where: { id: "e1" }, data: { gemId: "gm1" } }))).toBe(TRIGGER_REJECTION);

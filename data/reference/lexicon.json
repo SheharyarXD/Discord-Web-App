@@ -1,0 +1,819 @@
+{
+  "_about": "Vocabulary the ability-text parser recognises. `terms` are the exact words used in the supplied ability texts (lower case). A term is listed under an existing entry only when it is the same words (singular/plural, with or without «rate» or «state»). Anything that merely LOOKS similar gets its own entry with a note, so nothing is merged by guesswork. Entries with `new: true` are created from ability texts; the status guide does not define them. Notes are written in Spanish because the interface shows them.",
+  "statistics": [
+    {
+      "key": "force",
+      "terms": [
+        "force"
+      ]
+    },
+    {
+      "key": "chakra",
+      "terms": [
+        "chakra"
+      ]
+    },
+    {
+      "key": "agility",
+      "terms": [
+        "agility"
+      ]
+    },
+    {
+      "key": "hp",
+      "terms": [
+        "hp"
+      ]
+    },
+    {
+      "key": "power",
+      "name": "Power",
+      "new": true,
+      "category": "base",
+      "valueType": "FLAT",
+      "terms": [
+        "power"
+      ],
+      "note": "Según el cliente, Power se refiere a la Constitución y se relaciona con el HP. Es un atributo propio: no se trata como Chakra.",
+      "nameEs": "Constitución",
+      "reviewStatus": "CONFIRMED"
+    },
+    {
+      "key": "speed",
+      "terms": [
+        "speed"
+      ]
+    },
+    {
+      "key": "attack",
+      "terms": [
+        "attack"
+      ]
+    },
+    {
+      "key": "defenses",
+      "terms": [
+        "defenses",
+        "defense"
+      ]
+    },
+    {
+      "key": "damage-rate",
+      "terms": [
+        "damage rate"
+      ]
+    },
+    {
+      "key": "avoid-injury",
+      "terms": [
+        "avoid injury rate",
+        "avoid injury"
+      ]
+    },
+    {
+      "key": "final-damage",
+      "terms": [
+        "final damage"
+      ]
+    },
+    {
+      "key": "final-damage-reduction",
+      "terms": [
+        "final damage reduction"
+      ]
+    },
+    {
+      "key": "healing-rate",
+      "terms": [
+        "healing rate"
+      ]
+    },
+    {
+      "key": "block-rate",
+      "terms": [
+        "block rate"
+      ]
+    },
+    {
+      "key": "punch-rate",
+      "name": "punch rate",
+      "new": true,
+      "terms": [
+        "punch rate"
+      ]
+    },
+    {
+      "key": "crit-rate",
+      "name": "crit rate",
+      "new": true,
+      "terms": [
+        "crit rate"
+      ]
+    },
+    {
+      "key": "crit-damage",
+      "name": "crit damage",
+      "new": true,
+      "terms": [
+        "crit damage"
+      ]
+    },
+    {
+      "key": "crit-damage-resistance",
+      "name": "crit damage resistance",
+      "new": true,
+      "terms": [
+        "crit damage resistance"
+      ]
+    },
+    {
+      "key": "aid-rate",
+      "name": "aid rate",
+      "new": true,
+      "terms": [
+        "aid rate"
+      ]
+    },
+    {
+      "key": "control-rate",
+      "name": "control rate",
+      "new": true,
+      "terms": [
+        "control rate"
+      ]
+    },
+    {
+      "key": "control-resistance",
+      "name": "control resistance",
+      "new": true,
+      "terms": [
+        "control resistance"
+      ],
+      "note": "La guía de estados escribe «CC resistance». Probablemente es el mismo atributo; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "dodge-rate",
+      "name": "dodge rate",
+      "new": true,
+      "terms": [
+        "dodge rate"
+      ]
+    },
+    {
+      "key": "hit-rate",
+      "name": "hit rate",
+      "new": true,
+      "terms": [
+        "hit rate"
+      ]
+    },
+    {
+      "key": "counter-rate",
+      "name": "counter rate",
+      "new": true,
+      "terms": [
+        "counter rate"
+      ]
+    },
+    {
+      "key": "physical-defense",
+      "name": "physical defense",
+      "new": true,
+      "terms": [
+        "physical defense"
+      ]
+    },
+    {
+      "key": "strategy-defense",
+      "name": "strategy defense",
+      "new": true,
+      "terms": [
+        "strategy defense"
+      ]
+    },
+    {
+      "key": "strategy-attack",
+      "name": "strategy attack",
+      "new": true,
+      "terms": [
+        "strategy attack"
+      ],
+      "note": "Ataque estratégico. Es distinto de S. Attack, que es anti tasa de bloqueo según el cliente."
+    },
+    {
+      "key": "s-attack",
+      "name": "S. Attack",
+      "new": true,
+      "terms": [
+        "s.attack rate",
+        "s.attack"
+      ],
+      "note": "Según el cliente, S. Attack es una estadística propia de anti tasa de bloqueo. No es el ataque estratégico (Strategy Attack).",
+      "nameEs": "S. Attack (anti tasa de bloqueo)",
+      "reviewStatus": "CONFIRMED"
+    },
+    {
+      "key": "s-crit",
+      "name": "s.crit",
+      "new": true,
+      "terms": [
+        "s.crit"
+      ]
+    },
+    {
+      "key": "s-block",
+      "name": "s.block",
+      "new": true,
+      "terms": [
+        "s.block"
+      ]
+    },
+    {
+      "key": "block",
+      "name": "block",
+      "new": true,
+      "terms": [
+        "block"
+      ],
+      "note": "En un texto aparece «block» sin «rate». Podría ser block rate; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "ignore-defense",
+      "name": "ignore defense",
+      "new": true,
+      "terms": [
+        "ignore defense"
+      ]
+    },
+    {
+      "key": "resistance-to-ignore-defense",
+      "name": "resistance to ignore defense",
+      "new": true,
+      "terms": [
+        "resistance to ignore defense"
+      ]
+    },
+    {
+      "key": "penetration-damage-stat",
+      "name": "penetration damage",
+      "new": true,
+      "terms": [
+        "penetration damage"
+      ],
+      "note": "Como atributo que una habilidad aumenta («penetration damage by 30%»). El glosario define además Penetration damage como un tipo de daño."
+    },
+    {
+      "key": "total-damage-received",
+      "name": "total damage received",
+      "new": true,
+      "terms": [
+        "total damage received"
+      ],
+      "note": "La guía de estados escribe «final damage received». Podría ser el mismo atributo; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "fury",
+      "name": "fury",
+      "new": true,
+      "valueType": "FLAT",
+      "terms": [
+        "fury"
+      ]
+    }
+  ],
+  "natures": [
+    {
+      "key": "earth",
+      "name": "Earth",
+      "terms": [
+        "earth",
+        "eerth"
+      ],
+      "note": "«Eerth» aparece una vez como errata en un texto de origen."
+    },
+    {
+      "key": "wind",
+      "name": "Wind",
+      "terms": [
+        "wind"
+      ]
+    },
+    {
+      "key": "fire",
+      "name": "Fire",
+      "terms": [
+        "fire"
+      ]
+    },
+    {
+      "key": "thunder",
+      "name": "Thunder",
+      "terms": [
+        "thunder"
+      ]
+    },
+    {
+      "key": "water",
+      "name": "Water",
+      "terms": [
+        "water"
+      ]
+    },
+    {
+      "key": "inactivated",
+      "name": "Inactivated chakra",
+      "terms": [
+        "inactivated"
+      ],
+      "note": "Los textos dicen «inactivated chakra» para las unidades sin naturaleza activa."
+    }
+  ],
+  "statuses": [
+    {
+      "key": "penetration-damage",
+      "terms": [
+        "penetration damage"
+      ]
+    },
+    {
+      "key": "poison",
+      "terms": [
+        "poison"
+      ],
+      "verbs": [
+        "poisons"
+      ]
+    },
+    {
+      "key": "ignite",
+      "terms": [
+        "ignite"
+      ]
+    },
+    {
+      "key": "power-loss",
+      "terms": [
+        "power loss"
+      ]
+    },
+    {
+      "key": "orochi-poison",
+      "terms": [
+        "orochi poison"
+      ]
+    },
+    {
+      "key": "vein-damage",
+      "terms": [
+        "vein damage"
+      ]
+    },
+    {
+      "key": "bleed",
+      "terms": [
+        "bleed"
+      ]
+    },
+    {
+      "key": "split",
+      "terms": [
+        "split"
+      ]
+    },
+    {
+      "key": "unification",
+      "terms": [
+        "unification"
+      ]
+    },
+    {
+      "key": "safeguard",
+      "terms": [
+        "safeguard"
+      ]
+    },
+    {
+      "key": "burst",
+      "terms": [
+        "burst"
+      ]
+    },
+    {
+      "key": "scorching-flame",
+      "terms": [
+        "scorching flame"
+      ]
+    },
+    {
+      "key": "incinerate",
+      "terms": [
+        "incinerate",
+        "burn"
+      ],
+      "verbs": [
+        "incinerates",
+        "burns"
+      ]
+    },
+    {
+      "key": "blind",
+      "terms": [
+        "blind"
+      ],
+      "verbs": [
+        "blind",
+        "blinds"
+      ]
+    },
+    {
+      "key": "imprison",
+      "terms": [
+        "imprison"
+      ],
+      "verbs": [
+        "imprison",
+        "imprisons"
+      ]
+    },
+    {
+      "key": "freeze",
+      "terms": [
+        "freeze"
+      ],
+      "verbs": [
+        "freeze",
+        "freezes"
+      ]
+    },
+    {
+      "key": "wind-bound",
+      "terms": [
+        "wind bound"
+      ]
+    },
+    {
+      "key": "seal",
+      "terms": [
+        "seal"
+      ]
+    },
+    {
+      "key": "charm",
+      "terms": [
+        "charm"
+      ]
+    },
+    {
+      "key": "curse-fixation",
+      "terms": [
+        "curse fixation"
+      ]
+    },
+    {
+      "key": "painful-will",
+      "terms": [
+        "painful will"
+      ]
+    },
+    {
+      "key": "upwind-headwind-state",
+      "terms": [
+        "upwind state",
+        "upwind"
+      ]
+    },
+    {
+      "key": "weakened-state",
+      "terms": [
+        "weakened state"
+      ]
+    },
+    {
+      "key": "corrosion-state",
+      "terms": [
+        "corrosion state",
+        "corrosion"
+      ]
+    },
+    {
+      "key": "death-seed",
+      "terms": [
+        "death seed"
+      ]
+    },
+    {
+      "key": "poisonous-wind",
+      "terms": [
+        "poisonous wind state",
+        "poisonous wind"
+      ]
+    },
+    {
+      "key": "chaotic-storm",
+      "terms": [
+        "chaotic storm state",
+        "chaotic storm"
+      ]
+    },
+    {
+      "key": "dispirited-state",
+      "terms": [
+        "dispirited state"
+      ]
+    },
+    {
+      "key": "armor-break",
+      "terms": [
+        "armor break state",
+        "armor break"
+      ]
+    },
+    {
+      "key": "s-super-dodge",
+      "terms": [
+        "s-super dodge"
+      ]
+    },
+    {
+      "key": "shatter-storm",
+      "terms": [
+        "shatter storm state",
+        "shatter storm"
+      ]
+    },
+    {
+      "key": "shielding-state",
+      "terms": [
+        "shielding state"
+      ]
+    },
+    {
+      "key": "bond-state",
+      "terms": [
+        "bond state"
+      ]
+    },
+    {
+      "key": "pyroblast-state",
+      "terms": [
+        "pyroblast state",
+        "pyroblast"
+      ]
+    },
+    {
+      "key": "superarmor-state",
+      "terms": [
+        "superarmor state"
+      ]
+    },
+    {
+      "key": "acceleration",
+      "terms": [
+        "acceleration state",
+        "acceleration"
+      ]
+    },
+    {
+      "key": "strong-state",
+      "terms": [
+        "strong state"
+      ]
+    },
+    {
+      "key": "super-dodge",
+      "terms": [
+        "super dodge"
+      ]
+    },
+    {
+      "key": "fury-shield",
+      "terms": [
+        "fury shield"
+      ]
+    },
+    {
+      "key": "chaos",
+      "name": "Chaos",
+      "new": true,
+      "terms": [
+        "chaos"
+      ],
+      "verbs": [
+        "chaos"
+      ]
+    },
+    {
+      "key": "stun",
+      "name": "Stun",
+      "new": true,
+      "terms": [
+        "stun"
+      ],
+      "verbs": [
+        "stun",
+        "stuns"
+      ]
+    },
+    {
+      "key": "silence",
+      "name": "Silence",
+      "new": true,
+      "terms": [
+        "silence"
+      ],
+      "verbs": [
+        "silence",
+        "silences"
+      ]
+    },
+    {
+      "key": "paralysis",
+      "name": "Paralysis",
+      "new": true,
+      "terms": [
+        "paralysis"
+      ],
+      "verbs": [
+        "paralyze",
+        "paralyzes"
+      ]
+    },
+    {
+      "key": "petrify",
+      "name": "Petrify",
+      "new": true,
+      "terms": [
+        "petrify",
+        "petrification"
+      ],
+      "verbs": [
+        "petrify",
+        "petrifies"
+      ]
+    },
+    {
+      "key": "acupoint",
+      "name": "Acupoint",
+      "new": true,
+      "terms": [
+        "acupoint",
+        "accupoint"
+      ],
+      "verbs": [
+        "acupoint",
+        "accupoint"
+      ],
+      "note": "«Accupoint» aparece una vez como variante de escritura."
+    },
+    {
+      "key": "acupuncture",
+      "name": "Acupuncture",
+      "new": true,
+      "terms": [
+        "acupuncture"
+      ],
+      "verbs": [
+        "acupuncture"
+      ],
+      "note": "Podría ser el mismo estado que Acupoint; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "shock",
+      "name": "Shock",
+      "new": true,
+      "terms": [
+        "shock"
+      ],
+      "verbs": [
+        "shock",
+        "shocks"
+      ]
+    },
+    {
+      "key": "expel",
+      "name": "Expel",
+      "new": true,
+      "terms": [
+        "expel"
+      ],
+      "verbs": [
+        "expel"
+      ]
+    },
+    {
+      "key": "curse",
+      "name": "Curse",
+      "new": true,
+      "terms": [
+        "curse"
+      ],
+      "verbs": [
+        "curse",
+        "curses"
+      ],
+      "note": "No es la misma entrada que Curse Fixation de la guía de estados."
+    },
+    {
+      "key": "tsukuyomi",
+      "name": "Tsukuyomi",
+      "new": true,
+      "terms": [
+        "tsukuyomi"
+      ],
+      "verbs": [
+        "tsukuyomi"
+      ]
+    },
+    {
+      "key": "forbid-fury",
+      "name": "Forbid fury",
+      "new": true,
+      "terms": [
+        "forbid fury"
+      ],
+      "verbs": [
+        "forbid fury"
+      ]
+    },
+    {
+      "key": "disable",
+      "name": "Disable",
+      "new": true,
+      "terms": [
+        "disable"
+      ]
+    },
+    {
+      "key": "fury-reduction",
+      "name": "Fury reduction",
+      "new": true,
+      "terms": [
+        "fury reduction"
+      ]
+    },
+    {
+      "key": "control-immune-state",
+      "name": "Control immune state",
+      "new": true,
+      "terms": [
+        "control immune state",
+        "cc immune state"
+      ],
+      "note": "La guía de estados tiene «CC-free State (Immunity to all CC)». Podría ser el mismo estado; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "heal-forbid-state",
+      "name": "Heal forbid state",
+      "new": true,
+      "terms": [
+        "heal forbid state",
+        "forbid heal state"
+      ],
+      "note": "La guía de estados tiene «Untreatment State (Cannot be healed)». Podría ser el mismo estado; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "heal-reduction-state",
+      "name": "Heal reduction state",
+      "new": true,
+      "terms": [
+        "heal reduction state"
+      ]
+    },
+    {
+      "key": "scorch",
+      "name": "Scorch",
+      "new": true,
+      "terms": [
+        "scorch"
+      ],
+      "note": "Podría ser Scorching flame; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "power-drain",
+      "name": "Power drain (DoT)",
+      "new": true,
+      "terms": [
+        "power drain (dot)"
+      ],
+      "note": "Podría ser Power loss; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "vein-injury",
+      "name": "Vein injury (DoT)",
+      "new": true,
+      "terms": [
+        "vein injury (dot)"
+      ],
+      "note": "Podría ser Vein damage; se mantiene aparte hasta confirmarlo."
+    },
+    {
+      "key": "fragmented-state",
+      "name": "Fragmented state (DoT)",
+      "new": true,
+      "terms": [
+        "fragmented state (dot)"
+      ],
+      "note": "Podría ser Split; se mantiene aparte hasta confirmarlo."
+    }
+  ]
+}

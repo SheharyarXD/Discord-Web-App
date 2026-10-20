@@ -1,9 +1,20 @@
 import { isExclusiveChoice, type TalentGroupView } from "@/domain/talents";
+import type { ReviewStatus } from "@/domain/constants";
 import type { EffectView } from "@/domain/effects";
-import type { Translate } from "@/i18n";
-import { EffectList } from "./effect-line";
+import type { MessageKey, Translate } from "@/i18n";
+import { AbilityBody, AwakeningList, type AwakeningData } from "./ability-body";
+import { ReviewBadge } from "./review-badge";
 
-type OptionWithEffects = TalentGroupView["options"][number] & { effects?: EffectView[] };
+type OptionWithEffects = TalentGroupView["options"][number] & {
+  effects?: EffectView[];
+  cardLabel?: string | null;
+  cardLabelCut?: boolean;
+  note?: string | null;
+  descriptionEs?: string | null;
+  reviewStatus?: ReviewStatus;
+  /** Awakening stages of this talent. */
+  awakenings?: AwakeningData[];
+};
 type GroupWithEffects = Omit<TalentGroupView, "options"> & { options: OptionWithEffects[] };
 
 /**
@@ -20,6 +31,7 @@ export function TalentGroup({
   selectAction,
   hiddenFields,
   pendingReview = false,
+  pendingKey = "talents.rulesPending",
   t,
 }: {
   group: GroupWithEffects;
@@ -28,6 +40,8 @@ export function TalentGroup({
   /** Extra hidden inputs posted with a pick (e.g. the page to refresh). */
   hiddenFields?: Record<string, string>;
   pendingReview?: boolean;
+  /** Which open question the pending notice states. */
+  pendingKey?: MessageKey;
   t: Translate;
 }) {
   const exclusive = isExclusiveChoice(group);
@@ -53,7 +67,7 @@ export function TalentGroup({
       {pendingReview && (
         <p className="mb-2 text-xs text-warn">
           <span aria-hidden>⚠ </span>
-          {t("talents.rulesPending")}
+          {t(pendingKey)}
         </p>
       )}
 
@@ -80,6 +94,7 @@ export function TalentGroup({
                 <div className="min-w-0 flex-1">
                   <div className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold">{option.name}</span>
+                    {option.reviewStatus && <ReviewBadge status={option.reviewStatus} t={t} />}
                     {exclusive && (
                       <span className={"text-xs " + (isSelected ? "font-semibold text-accent" : "text-muted")}>
                         {isSelected ? t("talents.yourChoice") : selected.size > 0 ? t("talents.notSelected") : t("talents.alternative")}
@@ -97,12 +112,22 @@ export function TalentGroup({
                       </form>
                     )}
                   </div>
-                  {option.description && <p className="mt-1 text-sm text-muted">{option.description}</p>}
-                  {option.effects && option.effects.length > 0 && (
-                    <div className="mt-2">
-                      <EffectList effects={option.effects} t={t} />
-                    </div>
-                  )}
+                  <div className="mt-2">
+                    <AbilityBody
+                      ability={{
+                        name: option.name,
+                        cardLabel: option.cardLabel ?? null,
+                        cardLabelCut: option.cardLabelCut ?? false,
+                        note: option.note ?? null,
+                        description: option.description,
+                        descriptionEs: option.descriptionEs ?? null,
+                        effects: option.effects ?? [],
+                      }}
+                      emptyHint={option.note !== undefined}
+                      t={t}
+                    />
+                  </div>
+                  {option.awakenings && <AwakeningList awakenings={option.awakenings} t={t} />}
                 </div>
               </div>
             </li>

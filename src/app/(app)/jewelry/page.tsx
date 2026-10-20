@@ -1,5 +1,9 @@
-import { SectionPlaceholder } from "@/components/layout/section-placeholder";
+import { ItemListPage } from "@/components/game/item-list-page";
+import type { RawParams } from "@/server/query-params";
 
-export default function Page() {
-  return <SectionPlaceholder section="jewelry" />;
+export const dynamic = "force-dynamic";
+export const metadata = { title: "Joyería" };
+
+export default function Page({ searchParams }: { searchParams: Promise<RawParams> }) {
+  return <ItemListPage kind="jewelry" searchParams={searchParams} />;
 }

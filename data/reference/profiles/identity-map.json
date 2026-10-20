@@ -1,0 +1,1548 @@
+{
+ "_about": "One identity decision per source entry. EXACT and ALIAS_VERIFIED are mechanical. ALIAS_REVIEWED is a judgement backed by the stated evidence and is listed for the client to confirm. NEW creates a record that the release list does not contain. UNRESOLVED entries are kept as staged evidence only: no ninja is created or changed for them until the identity is confirmed. To resolve one, set its status to ALIAS_REVIEWED (with the release-list name in `ninja`) or NEW (with the new name) and re-run the loader. ALIAS_CONFIRMED is a match the client has confirmed (Milestone 3 brief, section B).",
+ "channelOrderIsChronological": {
+  "vanguards": true,
+  "assaulters": true,
+  "supporters": true
+ },
+ "entries": {
+  "vanguards:01-cursed-seal-sasuke": {
+   "nameAsPosted": "Cursed Seal Sasuke",
+   "cardNamePlate": "Cursed Seal Sasuke",
+   "status": "EXACT",
+   "ninja": "Cursed Seal Sasuke",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:02-warm-hinata": {
+   "nameAsPosted": "Warm Hinata",
+   "cardNamePlate": "Warm Hinata",
+   "status": "EXACT",
+   "ninja": "Warm Hinata",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:03-butterfly-choji": {
+   "nameAsPosted": "Butterfly Choji",
+   "cardNamePlate": "Butterfly Choji",
+   "status": "EXACT",
+   "ninja": "Butterfly Choji",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:04-reanimated-itachi": {
+   "nameAsPosted": "Reanimated Itachi",
+   "cardNamePlate": "Reanimated Itachi",
+   "status": "EXACT",
+   "ninja": "Reanimated Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:05-kushina-uzumaki": {
+   "nameAsPosted": "Kushina Uzumaki",
+   "cardNamePlate": "Kushina Uzumaki",
+   "status": "ALIAS_VERIFIED",
+   "ninja": "Uzumaki Kushina",
+   "evidence": "Same words as the release-list name in a different order, and no other release-list entry uses exactly these words.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "Las mismas palabras que el nombre de la lista de lanzamientos, en otro orden; ninguna otra entrada de la lista usa exactamente esas palabras."
+  },
+  "vanguards:06-rashomon-orochimaru": {
+   "nameAsPosted": "Rashomon Orochimaru",
+   "cardNamePlate": "Rashomon-Orochimaru",
+   "status": "EXACT",
+   "ninja": "Rashomon Orochimaru",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:07-otsutsuki-momoshiki": {
+   "nameAsPosted": "Otsutsuki Momoshiki",
+   "cardNamePlate": "Otsutsuki Momoshiki",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Momoshiki",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:08-madara-and-obito": {
+   "nameAsPosted": "Madara & Obito",
+   "cardNamePlate": "Madara & Obito",
+   "status": "EXACT",
+   "ninja": "Madara & Obito",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:09-final-sasuke": {
+   "nameAsPosted": "Final Sasuke",
+   "cardNamePlate": "Final Sasuke",
+   "status": "EXACT",
+   "ninja": "Final Sasuke",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:10-minato-and-naruto": {
+   "nameAsPosted": "Minato & Naruto",
+   "cardNamePlate": "Minato & Naruto",
+   "status": "EXACT",
+   "ninja": "Minato & Naruto",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:11-nagato-and-itachi": {
+   "nameAsPosted": "Nagato & Itachi",
+   "cardNamePlate": "Nagato & Itachi",
+   "status": "EXACT",
+   "ninja": "Nagato & Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:12-uchiha-obito": {
+   "nameAsPosted": "Uchiha Obito",
+   "cardNamePlate": "Uchiha Obito",
+   "status": "EXACT",
+   "ninja": "Uchiha Obito",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:13-otsutsuki-indra": {
+   "nameAsPosted": "Otsutsuki Indra",
+   "cardNamePlate": "Indora",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Indra",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:14-reanimated-tobirama": {
+   "nameAsPosted": "Reanimated Tobirama",
+   "cardNamePlate": "Reanimated Tobirama",
+   "status": "EXACT",
+   "ninja": "Reanimated Tobirama",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-01-guren": {
+   "nameAsPosted": "Guren",
+   "cardNamePlate": "红莲",
+   "status": "EXACT",
+   "ninja": "Guren",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-02-sage-jugo": {
+   "nameAsPosted": "Sage Jugo",
+   "cardNamePlate": "Jugo Sage",
+   "status": "ALIAS_VERIFIED",
+   "ninja": "Jugo Sage",
+   "evidence": "Same words as the release-list name in a different order, and no other release-list entry uses exactly these words.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "Las mismas palabras que el nombre de la lista de lanzamientos, en otro orden; ninguna otra entrada de la lista usa exactamente esas palabras."
+  },
+  "vanguards:2-03-boa-hancock": {
+   "nameAsPosted": "Boa Hancock",
+   "cardNamePlate": "Boa Hancock",
+   "status": "EXACT",
+   "ninja": "Boa Hancock",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-04-7th-hokage-and-shadow": {
+   "nameAsPosted": "7th Hokage & Shadow",
+   "cardNamePlate": "7th Hokage & Shadow",
+   "status": "EXACT",
+   "ninja": "7th hokage & shadow",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos.",
+   "textAttribution": {
+    "status": "REVIEW",
+    "note": "The pasted ability text is headed «7th Hokage & Sasuke», while the card and the release list say «7th Hokage & Shadow». The talent and first skill names in the text match the card (Yin-Yang Power, Majestic Attire: Susanoo), so the text is attached to this ninja, marked for review. The text also contains a second skill that the card does not show.",
+    "noteEs": "El texto de habilidades pegado lleva el título «7th Hokage & Sasuke», pero la ficha y la lista de lanzamientos dicen «7th Hokage & Shadow». Los nombres del talento y de la primera habilidad coinciden con la ficha (Yin-Yang Power, Majestic Attire: Susanoo), por eso el texto se asocia a este ninja, marcado para revisión. El texto incluye además una segunda habilidad que la ficha no muestra."
+   }
+  },
+  "vanguards:2-05-jiongu-kakuzu": {
+   "nameAsPosted": "Jiongu Kakuzu",
+   "cardNamePlate": "Jiongu Kakuzu",
+   "status": "EXACT",
+   "ninja": "Jiongu Kakuzu",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-06-animal-path-pain": {
+   "nameAsPosted": "Animal Path Pain",
+   "cardNamePlate": "Pain-Animal Path",
+   "status": "ALIAS_VERIFIED",
+   "ninja": "Pain Animal Path",
+   "evidence": "Same words as the release-list name in a different order, and no other release-list entry uses exactly these words.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "Las mismas palabras que el nombre de la lista de lanzamientos, en otro orden; ninguna otra entrada de la lista usa exactamente esas palabras."
+  },
+  "vanguards:2-07-reanimated-hanzo": {
+   "nameAsPosted": "Reanimated Hanzo",
+   "cardNamePlate": "Reanimated Hanzou",
+   "status": "EXACT",
+   "ninja": "Reanimated Hanzo",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-08-uzumaki-boruto": {
+   "nameAsPosted": "Uzumaki Boruto",
+   "cardNamePlate": "Boruto Uzumaki",
+   "status": "EXACT",
+   "ninja": "Uzumaki Boruto",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-09-5-tail-han": {
+   "nameAsPosted": "5-tail Han",
+   "cardNamePlate": "5-Tails Han",
+   "status": "EXACT",
+   "ninja": "5-tail Han",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-10-warrior-sakura": {
+   "nameAsPosted": "Warrior Sakura",
+   "cardNamePlate": "Sakura Warrior",
+   "status": "EXACT",
+   "ninja": "Warrior Sakura",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-11-kashin-koji": {
+   "nameAsPosted": "Kashin Koji",
+   "cardNamePlate": "Kashin Koji",
+   "status": "EXACT",
+   "ninja": "Kashin Koji",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-12-sai-errant-knight": {
+   "nameAsPosted": "Sai (Errant Knight)",
+   "cardNamePlate": "Sai Knight-Errant",
+   "status": "EXACT",
+   "ninja": "Sai (Errant Knight)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-13-karin-guyver": {
+   "nameAsPosted": "Karin (Guyver)",
+   "cardNamePlate": "Karin Guyver",
+   "status": "EXACT",
+   "ninja": "Karin (Guyver)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "vanguards:2-14-hinata-soccer-star": {
+   "nameAsPosted": "Hinata (Soccer Star)",
+   "cardNamePlate": "Hinata [Soccer Star]",
+   "status": "EXACT",
+   "ninja": "Hinata (Soccer Star)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:01": {
+   "nameAsPosted": "Variable Sakura",
+   "cardNamePlate": "Variable Sakura",
+   "status": "EXACT",
+   "ninja": "Variable Sakura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:02": {
+   "nameAsPosted": "Star Sakura",
+   "cardNamePlate": "Star Sakura",
+   "status": "EXACT",
+   "ninja": "Star Sakura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:03": {
+   "nameAsPosted": "Toad Sage",
+   "cardNamePlate": "Toad Sage",
+   "status": "EXACT",
+   "ninja": "Toad Sage",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:04": {
+   "nameAsPosted": "Ginkaku",
+   "cardNamePlate": "Reanimation Silver",
+   "status": "EXACT",
+   "ninja": "Ginkaku",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:05": {
+   "nameAsPosted": "Eight Gates Gai",
+   "cardNamePlate": "Eight Gates Gai",
+   "status": "EXACT",
+   "ninja": "Eight Gates Gai",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:06": {
+   "nameAsPosted": "Susanoo Itachi",
+   "cardNamePlate": "Susanoo Itachi",
+   "status": "EXACT",
+   "ninja": "Susanoo Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:07": {
+   "nameAsPosted": "Shisui the Teleporter",
+   "cardNamePlate": "Shisui the Teleporter",
+   "status": "EXACT",
+   "ninja": "Shisui the Teleporter",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:08": {
+   "nameAsPosted": "Susanoo Kakashi",
+   "cardNamePlate": "Susanoo Kakashi",
+   "status": "EXACT",
+   "ninja": "Susanoo Kakashi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:09": {
+   "nameAsPosted": "Otsutsuki Kaguya",
+   "cardNamePlate": "Ohtsutsuki Kaguya",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Kaguya",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:10": {
+   "nameAsPosted": "Asura Naruto",
+   "cardNamePlate": "Asura Naruto",
+   "status": "EXACT",
+   "ninja": "Asura Naruto",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:11": {
+   "nameAsPosted": "Otsutsuki Hamura",
+   "cardNamePlate": "Otsutsuki Hamura",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Hamura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:12": {
+   "nameAsPosted": "The Rabbit Goddess",
+   "cardNamePlate": "The Rabbit Goddess",
+   "status": "EXACT",
+   "ninja": "The Rabbit Goddess",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:13": {
+   "nameAsPosted": "Sand Burial Gaara",
+   "cardNamePlate": "Sand Burial Gaara",
+   "status": "EXACT",
+   "ninja": "Sand Burial Gaara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:14": {
+   "nameAsPosted": "Naruto & Hinata",
+   "cardNamePlate": "Naruto & Hinata",
+   "status": "EXACT",
+   "ninja": "Naruto & Hinata",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:15": {
+   "nameAsPosted": "Kakashi & Gai",
+   "cardNamePlate": "Kakashi & Gai",
+   "status": "EXACT",
+   "ninja": "Kakashi & Gai",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:16": {
+   "nameAsPosted": "Hidan & Kakuzu",
+   "cardNamePlate": "Hidan & Kakuzu",
+   "status": "EXACT",
+   "ninja": "Hidan & Kakuzu",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:17": {
+   "nameAsPosted": "Minato & Kushina",
+   "cardNamePlate": "Minato & Kushina",
+   "status": "EXACT",
+   "ninja": "Minato & Kushina",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:18": {
+   "nameAsPosted": "The Seventh Hokage",
+   "cardNamePlate": "The Seventh Hokage",
+   "status": "ALIAS_CONFIRMED",
+   "ninja": "7th Hokage",
+   "evidence": "Card name plate reads «The Seventh Hokage» (Seventh = 7th). It is the 18th card of the channel, between Minato & Kushina (September 2016) and Cheongsam Tenten (March 2017), which is where 7th Hokage (January 2017) falls; its stats (Force 18000 / growth 18) sit between those two cards.",
+   "evidenceEs": "Confirmado por el cliente. La ficha se llama «The Seventh Hokage» (Seventh = 7th). Es la ficha 18 del canal, entre Minato & Kushina (septiembre de 2016) y Cheongsam Tenten (marzo de 2017), justo donde cae 7th Hokage (enero de 2017), y sus estadísticas (Force 18000, crecimiento 18) quedan entre las de esas dos fichas.",
+   "confirmedBy": "client, Milestone 3 brief (B. Ninja identity and aliases)"
+  },
+  "assaulters:19": {
+   "nameAsPosted": "Cheongsam Tenten",
+   "cardNamePlate": "Cheongsam Tenten",
+   "status": "EXACT",
+   "ninja": "Cheongsam Tenten",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:20": {
+   "nameAsPosted": "Zabuza & Haku",
+   "cardNamePlate": "Haku & Zabuza",
+   "status": "EXACT",
+   "ninja": "Zabuza & Haku",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:21": {
+   "nameAsPosted": "Gai & Rock Lee",
+   "cardNamePlate": "凯&李洛克",
+   "status": "EXACT",
+   "ninja": "Gai & Rock Lee",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:22": {
+   "nameAsPosted": "Samehada Kisame",
+   "cardNamePlate": "Samehada Kisame",
+   "status": "EXACT",
+   "ninja": "Samehada Kisame",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:23": {
+   "nameAsPosted": "Chino",
+   "cardNamePlate": "千乃",
+   "status": "EXACT",
+   "ninja": "Chino",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:24": {
+   "nameAsPosted": "Ay-Bee Combo",
+   "cardNamePlate": "雷影艾&奇拉比",
+   "status": "ALIAS_CONFIRMED",
+   "ninja": "A-B Combo",
+   "evidence": "Posted as «Ay-Bee Combo». The card is in Chinese: its name plate reads 雷影艾&奇拉比 (Raikage Ay & Killer Bee) and its description calls the pair «AB组合» (AB combo). It is the 24th card, between Chino (March 2018) and the September 2018 release, which is where A-B Combo (July 2018) falls.",
+   "evidenceEs": "Confirmado por el cliente. Se publicó como «Ay-Bee Combo». La ficha está en chino: se llama 雷影艾&奇拉比 (Raikage Ay y Killer Bee) y su descripción llama a la pareja «AB组合» (combo AB). Es la ficha 24, entre Chino (marzo de 2018) y el lanzamiento de septiembre de 2018, justo donde cae A-B Combo (julio de 2018).",
+   "confirmedBy": "client, Milestone 3 brief (B. Ninja identity and aliases)"
+  },
+  "assaulters:25": {
+   "nameAsPosted": "Might Gai",
+   "cardNamePlate": null,
+   "status": "ALIAS_CONFIRMED",
+   "ninja": "Might Guy",
+   "evidence": "Posted as «Might Gai» (Gai / Guy is the same name spelled two ways; the release list itself uses both). It is the 25th entry, between A-B Combo (July 2018) and Konoha's Shadow Sasuke (January 2019), which is where Might Guy (September 2018) falls. NOTE: the card file supplied for this entry is a copy of the Kakashi & Gai card, so no card data exists for this ninja.",
+   "evidenceEs": "Confirmado por el cliente. Se publicó como «Might Gai» (Gai y Guy son el mismo nombre escrito de dos formas; la propia lista de lanzamientos usa las dos). Es la entrada 25, entre A-B Combo (julio de 2018) y Konoha's Shadow Sasuke (enero de 2019), justo donde cae Might Guy (septiembre de 2018). Aviso: el archivo de ficha entregado para esta entrada es una copia de la ficha de Kakashi & Gai, así que no hay datos de ficha de este ninja.",
+   "confirmedBy": "client, Milestone 3 brief (B. Ninja identity and aliases)"
+  },
+  "assaulters:26": {
+   "nameAsPosted": "Konoha's Shadow Sasuke",
+   "cardNamePlate": "木叶暗影",
+   "status": "EXACT",
+   "ninja": "Konoha's Shadow Sasuke",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:27": {
+   "nameAsPosted": "Cursed Kimimaro",
+   "cardNamePlate": "Cursed Kimimaro",
+   "status": "EXACT",
+   "ninja": "Cursed Kimimaro",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:28": {
+   "nameAsPosted": "Ultra Instinct Goku",
+   "cardNamePlate": "Ultra Instinct Goku",
+   "status": "EXACT",
+   "ninja": "Ultra Instinct Goku",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:29": {
+   "nameAsPosted": "Orochimaru & Kabuto",
+   "cardNamePlate": "大蛇丸&兜",
+   "status": "EXACT",
+   "ninja": "Orochimaru & Kabuto",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:30": {
+   "nameAsPosted": "Hiruko",
+   "cardNamePlate": "卑留乎",
+   "status": "EXACT",
+   "ninja": "Hiruko",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:31": {
+   "nameAsPosted": "1-tail Gaara",
+   "cardNamePlate": "一尾我爱罗",
+   "status": "EXACT",
+   "ninja": "1-Tail Gaara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:32": {
+   "nameAsPosted": "4-tail Roshi",
+   "cardNamePlate": "4-Tail Roshi",
+   "status": "EXACT",
+   "ninja": "4-Tail Roshi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:33": {
+   "nameAsPosted": "Armored Jiraiya",
+   "cardNamePlate": "铠衣自来也",
+   "status": "EXACT",
+   "ninja": "Armored Jiraiya",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:34": {
+   "nameAsPosted": "Nadeshiko Shizuka",
+   "cardNamePlate": "Nadeshiko Shizuka",
+   "status": "ALIAS_CONFIRMED",
+   "ninja": "Shizuka",
+   "evidence": "Card name plate reads «Nadeshiko Shizuka». It is the 34th card, between Armored Jiraiya (September 2020) and Uchiha Mikoto (March 2021), which is where Shizuka (October 2020) falls, and no other release of that period is unaccounted for in this channel.",
+   "evidenceEs": "Confirmado por el cliente. La ficha se llama «Nadeshiko Shizuka». Es la ficha 34, entre Armored Jiraiya (septiembre de 2020) y Uchiha Mikoto (marzo de 2021), justo donde cae Shizuka (octubre de 2020), y no queda ningún otro lanzamiento de ese periodo sin asignar en este canal.",
+   "confirmedBy": "client, Milestone 3 brief (B. Ninja identity and aliases)"
+  },
+  "assaulters:35": {
+   "nameAsPosted": "Uchiha Mikoto",
+   "cardNamePlate": "Uchiha Mikoto",
+   "status": "EXACT",
+   "ninja": "Uchiha Mikoto",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:36": {
+   "nameAsPosted": "Gekko Hayate",
+   "cardNamePlate": "Gekkou Hayate",
+   "status": "EXACT",
+   "ninja": "Gekko Hayate",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:37": {
+   "nameAsPosted": "Daiguren Toshiro",
+   "cardNamePlate": "Daiguren Tōshirō",
+   "status": "EXACT",
+   "ninja": "Daiguren Toshiro",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:38": {
+   "nameAsPosted": "Hotaru",
+   "cardNamePlate": "Hotaru",
+   "status": "EXACT",
+   "ninja": "Hotaru",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:39": {
+   "nameAsPosted": "Urashiki Ōtsutsuki",
+   "cardNamePlate": "Urashiki Ōtsutsuki",
+   "status": "EXACT",
+   "ninja": "Urashiki Ōtsutsuki",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:40": {
+   "nameAsPosted": "Warlord Sakura",
+   "cardNamePlate": "Warlord Sakura",
+   "status": "EXACT",
+   "ninja": "Warlord Sakura",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:41": {
+   "nameAsPosted": "6th Mizukage Chojuro",
+   "cardNamePlate": "Sixth Mizukage",
+   "status": "EXACT",
+   "ninja": "6th Mizukage Chojuro",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:42": {
+   "nameAsPosted": "Hades",
+   "cardNamePlate": "Hades",
+   "status": "EXACT",
+   "ninja": "Hades",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:43": {
+   "nameAsPosted": "Kawaki",
+   "cardNamePlate": "Kawaki",
+   "status": "EXACT",
+   "ninja": "Kawaki",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:44": {
+   "nameAsPosted": "First Hokage",
+   "cardNamePlate": "First Hokage",
+   "status": "EXACT",
+   "ninja": "First Hokage",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:45": {
+   "nameAsPosted": "Cyber Naruto",
+   "cardNamePlate": "Cyber Naruto",
+   "status": "EXACT",
+   "ninja": "Cyber Naruto",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:46": {
+   "nameAsPosted": "Uzumaki Kushina (Summer)",
+   "cardNamePlate": "Summer Kushina",
+   "status": "EXACT",
+   "ninja": "Uzumaki Kushina (Summer)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:47": {
+   "nameAsPosted": "Hashirama-Madara",
+   "cardNamePlate": "Hashirama & Madara",
+   "status": "EXACT",
+   "ninja": "Hashirama-Madara",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:48": {
+   "nameAsPosted": "Ōtsutsuki Jigen",
+   "cardNamePlate": "Jigen",
+   "status": "EXACT",
+   "ninja": "Ōtsutsuki Jigen",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:49": {
+   "nameAsPosted": "Human Path Pain",
+   "cardNamePlate": "Human Path Pain",
+   "status": "EXACT",
+   "ninja": "Human Path Pain",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:50": {
+   "nameAsPosted": "Reanimated Deidara",
+   "cardNamePlate": "Reanimated Deidara",
+   "status": "EXACT",
+   "ninja": "Reanimated Deidara",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:51": {
+   "nameAsPosted": "Kusanagi Kyo",
+   "cardNamePlate": "Kyo Kusanagi",
+   "status": "EXACT",
+   "ninja": "Kusanagi Kyo",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:52": {
+   "nameAsPosted": "Hayate&Yugao",
+   "cardNamePlate": "Yugao&Hayate",
+   "status": "EXACT",
+   "ninja": "Hayate&Yugao",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:53": {
+   "nameAsPosted": "7-tail Fuu",
+   "cardNamePlate": "7-Tails Fuu",
+   "status": "EXACT",
+   "ninja": "7-tail Fuu",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:54": {
+   "nameAsPosted": "Hiruko Sasori",
+   "cardNamePlate": "Sasori Hiruko",
+   "status": "EXACT",
+   "ninja": "Hiruko Sasori",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:55": {
+   "nameAsPosted": "Hokage Candidate Danzo",
+   "cardNamePlate": "Danzo Root Hokage",
+   "status": "EXACT",
+   "ninja": "Hokage Candidate Danzo",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:56": {
+   "nameAsPosted": "Awakened Kawaki",
+   "cardNamePlate": "Awaken Kawaki",
+   "status": "EXACT",
+   "ninja": "Awakened Kawaki",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:57": {
+   "nameAsPosted": "Might Gai (Gate of Death)",
+   "cardNamePlate": "Gai [Dead Gate]",
+   "status": "EXACT",
+   "ninja": "Might Gai (Gate of Death)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:58": {
+   "nameAsPosted": "Kakashi (Kamui)",
+   "cardNamePlate": "Kakashi [Kamui]",
+   "status": "EXACT",
+   "ninja": "Kakashi (Kamui)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:59": {
+   "nameAsPosted": "Naruto (6-tails mode)",
+   "cardNamePlate": "Naruto [Six-Tails Mode]",
+   "status": "EXACT",
+   "ninja": "Naruto (6-tails mode)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "assaulters:60": {
+   "nameAsPosted": "Sasuke (Taka)",
+   "cardNamePlate": null,
+   "status": "EXACT",
+   "ninja": "Sasuke (Taka)",
+   "evidence": "Name as posted equals the release-list name.",
+   "releaseRefAgrees": true,
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:01_angel-konan": {
+   "nameAsPosted": "Angel Konan",
+   "cardNamePlate": "Angel Konan",
+   "status": "EXACT",
+   "ninja": "Angel Konan",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:02_cool-hinata": {
+   "nameAsPosted": "Cool Hinata",
+   "cardNamePlate": "Cool Hinata",
+   "status": "EXACT",
+   "ninja": "Cool Hinata",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:03_yagura": {
+   "nameAsPosted": "Yagura",
+   "cardNamePlate": "Yagura",
+   "status": "EXACT",
+   "ninja": "Yagura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:04_uchiha-obito-golden": {
+   "nameAsPosted": "Uchiha Obito (Golden)",
+   "cardNamePlate": "Uchiha Obito",
+   "status": "EXACT",
+   "ninja": "Uchiha Obito (golden)",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:05_outer-path-obito": {
+   "nameAsPosted": "Outer Path Obito",
+   "cardNamePlate": "Outer Path-Obito",
+   "status": "EXACT",
+   "ninja": "Outer Path Obito",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:06_10-tailed-obito": {
+   "nameAsPosted": "10-Tailed Obito",
+   "cardNamePlate": "10-Tails Obito",
+   "status": "ALIAS_CONFIRMED",
+   "ninja": "10-Tails Obito",
+   "evidence": "Posted as «10-Tailed Obito»; the card name plate reads «10-Tails Obito», exactly the release-list name. It is also the only release up to August 2015 that no other supplied card accounts for.",
+   "evidenceEs": "Confirmado por el cliente. Se publicó como «10-Tailed Obito»; la ficha se llama «10-Tails Obito», exactamente el nombre de la lista de lanzamientos. Además es el único lanzamiento hasta agosto de 2015 que ninguna otra ficha entregada cubre.",
+   "confirmedBy": "client, Milestone 3 brief (B. Ninja identity and aliases)"
+  },
+  "supporters:07_uchiha-madara": {
+   "nameAsPosted": "Uchiha Madara",
+   "cardNamePlate": "Uchiha Madara",
+   "status": "EXACT",
+   "ninja": "Uchiha Madara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:08_reanimated-madara": {
+   "nameAsPosted": "Reanimated Madara",
+   "cardNamePlate": "Reanimated Madara",
+   "status": "EXACT",
+   "ninja": "Reanimated Madara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:09_six-paths-madara": {
+   "nameAsPosted": "Six Paths Madara",
+   "cardNamePlate": "Six Paths Madara",
+   "status": "EXACT",
+   "ninja": "Six Paths Madara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:10_six-paths-sage": {
+   "nameAsPosted": "Six Paths Sage",
+   "cardNamePlate": "Six Paths Sage",
+   "status": "EXACT",
+   "ninja": "Six Paths Sage",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:11_three-eyed-madara": {
+   "nameAsPosted": "Three Eyed Madara",
+   "cardNamePlate": "Three Eyed Madara",
+   "status": "EXACT",
+   "ninja": "Three Eyed Madara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:12_reanimated-nagato": {
+   "nameAsPosted": "Reanimated Nagato",
+   "cardNamePlate": "Reanimated Nagato",
+   "status": "EXACT",
+   "ninja": "Reanimated Nagato",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:13_indra-sasuke": {
+   "nameAsPosted": "Indra Sasuke",
+   "cardNamePlate": "Indra-Sasuke",
+   "status": "EXACT",
+   "ninja": "Indra Sasuke",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:14_otsutsuki-toneri": {
+   "nameAsPosted": "Otsutsuki Toneri",
+   "cardNamePlate": "Otsutsuki Toneri",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Toneri",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:15_hinata-uzumaki": {
+   "nameAsPosted": "Hinata Uzumaki",
+   "cardNamePlate": "Hinata Uzumaki",
+   "status": "ALIAS_VERIFIED",
+   "ninja": "Uzumaki Hinata",
+   "evidence": "Same words as the release-list name in a different order, and no other release-list entry uses exactly these words.",
+   "evidenceEs": "Las mismas palabras que el nombre de la lista de lanzamientos, en otro orden; ninguna otra entrada de la lista usa exactamente esas palabras."
+  },
+  "supporters:16_shin-uchiha": {
+   "nameAsPosted": "Shin Uchiha",
+   "cardNamePlate": "Shin Uchiha",
+   "status": "ALIAS_VERIFIED",
+   "ninja": "Uchiha Shin",
+   "evidence": "Same words as the release-list name in a different order, and no other release-list entry uses exactly these words.",
+   "evidenceEs": "Las mismas palabras que el nombre de la lista de lanzamientos, en otro orden; ninguna otra entrada de la lista usa exactamente esas palabras."
+  },
+  "aliens:alien-juugo": {
+   "nameAsPosted": "Alien Jugo",
+   "cardNamePlate": "Alien Juugo",
+   "status": "NEW",
+   "ninja": "Alien Juugo",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-fuguki": {
+   "nameAsPosted": "Alien Fuguki",
+   "cardNamePlate": "Alien Fuguki",
+   "status": "NEW",
+   "ninja": "Alien Fuguki",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-shizune": {
+   "nameAsPosted": "Alien Shizune",
+   "cardNamePlate": "Alien Shizune",
+   "status": "NEW",
+   "ninja": "Alien Shizune",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-mifune": {
+   "nameAsPosted": "Alien Mifune",
+   "cardNamePlate": "Alien Mifune",
+   "status": "NEW",
+   "ninja": "Alien Mifune",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-terumi-mei": {
+   "nameAsPosted": "Alien Mei",
+   "cardNamePlate": "Alien Terumi Mei",
+   "status": "NEW",
+   "ninja": "Alien Terumi Mei",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-raikage": {
+   "nameAsPosted": "Alien Raikage",
+   "cardNamePlate": "Alien Raikage",
+   "status": "NEW",
+   "ninja": "Alien Raikage",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-sasuke": {
+   "nameAsPosted": "Alien Sasuke",
+   "cardNamePlate": "Alien Sasuke",
+   "status": "NEW",
+   "ninja": "Alien Sasuke",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-obito": {
+   "nameAsPosted": "Alien Obito",
+   "cardNamePlate": "Alien Obito",
+   "status": "NEW",
+   "ninja": "Alien Obito",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-naruto": {
+   "nameAsPosted": "Alien Naruto",
+   "cardNamePlate": "Alien Naruto",
+   "status": "NEW",
+   "ninja": "Alien Naruto",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "aliens:alien-madara": {
+   "nameAsPosted": "Alien Madara",
+   "cardNamePlate": "Alien Madara",
+   "status": "NEW",
+   "ninja": "Alien Madara",
+   "evidence": "Alien Ninjas are a separate collection that the release list does not cover. The record is named after the card name plate; no release month is known.",
+   "evidenceEs": "Los Alien Ninjas son una colección aparte que la lista de lanzamientos no cubre. El registro toma el nombre de la ficha; no se conoce mes de lanzamiento."
+  },
+  "awakening:immortal-madara": {
+   "nameAsPosted": "Immortal Madara",
+   "cardNamePlate": null,
+   "status": "UNRESOLVED",
+   "ninja": null,
+   "proposed": null,
+   "evidence": "No release-list entry has this name and no card was supplied. It could be a separate character or the awakened form of an existing Madara (for example Legend Madara, April 2025); the source does not say.",
+   "evidenceEs": "Ninguna entrada de la lista de lanzamientos tiene este nombre y no se entregó ficha. Puede ser un personaje aparte o la forma despertada de un Madara existente (por ejemplo Legend Madara, abril de 2025); la fuente no lo dice."
+  },
+  "awakening:six-paths-sage": {
+   "nameAsPosted": "Six Paths Sage",
+   "cardNamePlate": null,
+   "status": "EXACT",
+   "ninja": "Six Paths Sage",
+   "evidence": "Name as posted equals the release-list name.",
+   "sameNinjaAs": "supporters:10_six-paths-sage",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "awakening:yasaka-itachi": {
+   "nameAsPosted": "Yasaka Itachi",
+   "cardNamePlate": null,
+   "status": "EXACT",
+   "ninja": "Yasaka Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "awakening:neji-hyuga": {
+   "nameAsPosted": "Neji Hyuga",
+   "cardNamePlate": null,
+   "status": "UNRESOLVED",
+   "ninja": null,
+   "proposed": "Hyūga Neji",
+   "evidence": "The words match the release-list entry «Hyūga Neji» (March 2023) in reverse order, the same pattern as other channel names, but no card or release month was supplied to confirm it, and «Neji & Hinata» (June 2017) also exists.",
+   "evidenceEs": "Las palabras coinciden con la entrada «Hyūga Neji» (marzo de 2023) en orden inverso, igual que otros nombres de canal, pero no se entregó ficha ni mes de lanzamiento que lo confirme, y también existe «Neji & Hinata» (junio de 2017)."
+  },
+  "awakening:illusion-god-itachi": {
+   "nameAsPosted": "Illusion God Itachi",
+   "cardNamePlate": null,
+   "status": "UNRESOLVED",
+   "ninja": null,
+   "proposed": null,
+   "evidence": "No release-list entry has this name and no card was supplied. Susanoo Itachi, Reanimated Itachi and Yasaka Itachi exist; the source does not say whether this is one of them.",
+   "evidenceEs": "Ninguna entrada de la lista de lanzamientos tiene este nombre y no se entregó ficha. Existen Susanoo Itachi, Reanimated Itachi y Yasaka Itachi; la fuente no dice si es alguno de ellos."
+  },
+  "awakening:nagato-uzumaki": {
+   "nameAsPosted": "Nagato uzumaki",
+   "cardNamePlate": null,
+   "status": "UNRESOLVED",
+   "ninja": null,
+   "proposed": null,
+   "evidence": "No release-list entry has this name and no card was supplied. The handoff notes say it must not be merged with Reanimated Nagato without confirmation.",
+   "evidenceEs": "Ninguna entrada de la lista de lanzamientos tiene este nombre y no se entregó ficha. Las notas de entrega piden no unirlo con Reanimated Nagato sin confirmación."
+  },
+  "awakening:cursed-seal-sasuke": {
+   "nameAsPosted": "Cursed Seal Sasuke",
+   "cardNamePlate": null,
+   "status": "EXACT",
+   "ninja": "Cursed Seal Sasuke",
+   "evidence": "Name as posted equals the release-list name.",
+   "sameNinjaAs": "vanguards:01-cursed-seal-sasuke",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:17_yasaka-itachi": {
+   "nameAsPosted": "Yasaka Itachi",
+   "cardNamePlate": "Yasaka Itachi",
+   "status": "EXACT",
+   "ninja": "Yasaka Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:18_reanimated-hiruzen": {
+   "nameAsPosted": "Reanimated Hiruzen",
+   "cardNamePlate": "Reanimated Hiruzen",
+   "status": "EXACT",
+   "ninja": "Reanimated Hiruzen",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:19_sasuke-itachi": {
+   "nameAsPosted": "Sasuke & Itachi",
+   "cardNamePlate": "Sasuke & Itachi",
+   "status": "EXACT",
+   "ninja": "Sasuke & Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:20_pain-konan": {
+   "nameAsPosted": "Pain & Konan",
+   "cardNamePlate": "Pain & Konan",
+   "status": "EXACT",
+   "ninja": "Pain & Konan",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:21_deidara-sasori": {
+   "nameAsPosted": "Deidara & Sasori",
+   "cardNamePlate": "迪达拉&蝎",
+   "status": "EXACT",
+   "ninja": "Deidara & Sasori",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:22_sasuke-sakura": {
+   "nameAsPosted": "Sasuke & Sakura",
+   "cardNamePlate": "Sasuke & Sakura",
+   "status": "EXACT",
+   "ninja": "Sasuke & Sakura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:23_naruto-sasuke": {
+   "nameAsPosted": "Naruto & Sasuke",
+   "cardNamePlate": "Naruto & Sasuke",
+   "status": "EXACT",
+   "ninja": "Naruto & Sasuke",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:24_tsunade-terumi-mei": {
+   "nameAsPosted": "Tsunade & Terumi Mei",
+   "cardNamePlate": "Tsunade & Terumi Mei",
+   "status": "EXACT",
+   "ninja": "Tsunade & Terumi Mei",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:25_shisui-itachi": {
+   "nameAsPosted": "Shisui & Itachi",
+   "cardNamePlate": "Shisui & Itachi",
+   "status": "EXACT",
+   "ninja": "Shisui & Itachi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:26_uchiha-sakura": {
+   "nameAsPosted": "Uchiha Sakura",
+   "cardNamePlate": "Uchiha Sakura",
+   "status": "ALIAS_REVIEWED",
+   "ninja": "Sakura Uchiha",
+   "evidence": "The posted name differs from the release-list name (Sakura Uchiha). It is the only release-list entry for this ninja and it sits at the same chronological position in the Supporter order. Judgement match, not confirmed.",
+   "evidenceEs": "El nombre publicado difiere del de la lista de lanzamientos (Sakura Uchiha). Es la unica entrada de la lista para este ninja y ocupa la misma posicion cronologica en el orden de Supporters. Coincidencia por criterio, sin confirmar."
+  },
+  "supporters:27_neji-hinata": {
+   "nameAsPosted": "Neji & Hinata",
+   "cardNamePlate": "Neji & Hinata",
+   "status": "EXACT",
+   "ninja": "Neji & Hinata",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:28_kakashi-obito": {
+   "nameAsPosted": "Kakashi & Obito",
+   "cardNamePlate": "Kakashi & Obito",
+   "status": "EXACT",
+   "ninja": "Kakashi & Obito",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:29_hagoromo-hamura": {
+   "nameAsPosted": "Hagoromo & Hamura",
+   "cardNamePlate": "Hagoromo & Hamura",
+   "status": "EXACT",
+   "ninja": "Hagoromo & Hamura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:30_hyuuga-hanabi": {
+   "nameAsPosted": "Hyuuga Hanabi",
+   "cardNamePlate": "日向花火",
+   "status": "EXACT",
+   "ninja": "Hyuuga Hanabi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:31_otsutsuki-kinshiki": {
+   "nameAsPosted": "Otsutsuki Kinshiki",
+   "cardNamePlate": "大筒木金式",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Kinshiki",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:32_swimsuit-tsunade": {
+   "nameAsPosted": "Swimsuit Tsunade",
+   "cardNamePlate": "纲手姬",
+   "status": "EXACT",
+   "ninja": "Swimsuit Tsunade",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:33_chiriku": {
+   "nameAsPosted": "Chiriku",
+   "cardNamePlate": "Chiriku",
+   "status": "EXACT",
+   "ninja": "Chiriku",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:34_momoshiki-awaken": {
+   "nameAsPosted": "Momoshiki (Awaken)",
+   "cardNamePlate": "桃式(觉醒)",
+   "status": "EXACT",
+   "ninja": "Momoshiki (Awaken)",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:35_xmas-haku": {
+   "nameAsPosted": "Xmas Haku",
+   "cardNamePlate": "Xmas Haku",
+   "status": "EXACT",
+   "ninja": "Xmas Haku",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:36_otsutsuki-ashura": {
+   "nameAsPosted": "Otsutsuki Ashura",
+   "cardNamePlate": "大筒木阿修罗",
+   "status": "EXACT",
+   "ninja": "Otsutsuki Ashura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:37_naori-uchiha": {
+   "nameAsPosted": "Naori Uchiha",
+   "cardNamePlate": "宇智波冈里",
+   "status": "EXACT",
+   "ninja": "Naori Uchiha",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:38_wind-blaster-temari": {
+   "nameAsPosted": "Wind Blaster Temari",
+   "cardNamePlate": "疾风手鞠",
+   "status": "EXACT",
+   "ninja": "Wind Blaster Temari",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:39_yamanaka-ino": {
+   "nameAsPosted": "Yamanaka Ino",
+   "cardNamePlate": "花の井野",
+   "status": "EXACT",
+   "ninja": "Yamanaka Ino",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:40_mui": {
+   "nameAsPosted": "Mui",
+   "cardNamePlate": "无为",
+   "status": "EXACT",
+   "ninja": "Mui",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:41_princess-hinata": {
+   "nameAsPosted": "Princess Hinata",
+   "cardNamePlate": "白眼公主",
+   "status": "EXACT",
+   "ninja": "Princess Hinata",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:42_naraka-path-pain": {
+   "nameAsPosted": "Naraka Path Pain",
+   "cardNamePlate": "Naraka Path Pain",
+   "status": "EXACT",
+   "ninja": "Naraka Path Pain",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:43_cursed-tayuya": {
+   "nameAsPosted": "Cursed Tayuya",
+   "cardNamePlate": "咒印多由也",
+   "status": "EXACT",
+   "ninja": "Cursed Tayuya",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:44_sage-dragon-kabuto": {
+   "nameAsPosted": "Sage Dragon Kabuto",
+   "cardNamePlate": "龙仙人兜",
+   "status": "EXACT",
+   "ninja": "Sage Dragon Kabuto",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:45_miko-shion": {
+   "nameAsPosted": "Miko Shion",
+   "cardNamePlate": "Miko Shion",
+   "status": "EXACT",
+   "ninja": "Miko Shion",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:46_mitsuki": {
+   "nameAsPosted": "Mitsuki",
+   "cardNamePlate": "月",
+   "status": "EXACT",
+   "ninja": "Mitsuki",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:47_kimono-kurenai": {
+   "nameAsPosted": "Kimono Kurenai",
+   "cardNamePlate": "Kimono Kurenai",
+   "status": "EXACT",
+   "ninja": "Kimono Kurenai",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:48_uzumaki-naruko": {
+   "nameAsPosted": "Uzumaki Naruko",
+   "cardNamePlate": "鸣子",
+   "status": "EXACT",
+   "ninja": "Uzumaki Naruko",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:49_yugao-uzuki": {
+   "nameAsPosted": "Yugao Uzuki",
+   "cardNamePlate": "卯月夕颜",
+   "status": "EXACT",
+   "ninja": "Yugao Uzuki",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:50_sakon-ukon": {
+   "nameAsPosted": "Sakon Ukon",
+   "cardNamePlate": "Sakon Ukon",
+   "status": "EXACT",
+   "ninja": "Sakon Ukon",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:51_christmas-mito": {
+   "nameAsPosted": "Christmas Mito",
+   "cardNamePlate": "Christmas Mito",
+   "status": "EXACT",
+   "ninja": "Christmas Mito",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:52_reanimated-hidan": {
+   "nameAsPosted": "Reanimated Hidan",
+   "cardNamePlate": "Reanimated Hidan",
+   "status": "EXACT",
+   "ninja": "Reanimated Hidan",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:53_hyakki-sasori": {
+   "nameAsPosted": "Hyakki Sasori",
+   "cardNamePlate": "Hyakki Sasori",
+   "status": "EXACT",
+   "ninja": "Hyakki Sasori",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:54_kurotsuchi": {
+   "nameAsPosted": "Kurotsuchi",
+   "cardNamePlate": "Kurotsuchi",
+   "status": "EXACT",
+   "ninja": "Kurotsuchi",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:55_6-tail-utakata": {
+   "nameAsPosted": "6-tail Utakata",
+   "cardNamePlate": "6-tail Utakata",
+   "status": "ALIAS_REVIEWED",
+   "ninja": "Utakata",
+   "evidence": "The posted name differs from the release-list name (Utakata). It is the only release-list entry for this ninja and it sits at the same chronological position in the Supporter order. Judgement match, not confirmed.",
+   "evidenceEs": "El nombre publicado difiere del de la lista de lanzamientos (Utakata). Es la unica entrada de la lista para este ninja y ocupa la misma posicion cronologica en el orden de Supporters. Coincidencia por criterio, sin confirmar."
+  },
+  "supporters:56_terumi-mei-summer": {
+   "nameAsPosted": "Terumi Mei (Summer)",
+   "cardNamePlate": "Terumi Mei (Summer)",
+   "status": "ALIAS_REVIEWED",
+   "ninja": "Terumi Mei",
+   "evidence": "The posted name differs from the release-list name (Terumi Mei). It is the only release-list entry for this ninja and it sits at the same chronological position in the Supporter order. Judgement match, not confirmed.",
+   "evidenceEs": "El nombre publicado difiere del de la lista de lanzamientos (Terumi Mei). Es la unica entrada de la lista para este ninja y ocupa la misma posicion cronologica en el orden de Supporters. Coincidencia por criterio, sin confirmar."
+  },
+  "supporters:57_baryon-naruto": {
+   "nameAsPosted": "Baryon Naruto",
+   "cardNamePlate": "Baryon Naruto",
+   "status": "EXACT",
+   "ninja": "Baryon Naruto",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:58_snow-sakura": {
+   "nameAsPosted": "Snow Sakura",
+   "cardNamePlate": "Snow Sakura",
+   "status": "EXACT",
+   "ninja": "Snow Sakura",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:59_neji-hyuga": {
+   "nameAsPosted": "Neji Hyūga",
+   "cardNamePlate": "Neji Hyūga",
+   "status": "ALIAS_REVIEWED",
+   "ninja": "Hyūga Neji",
+   "evidence": "The posted name differs from the release-list name (Hyūga Neji). It is the only release-list entry for this ninja and it sits at the same chronological position in the Supporter order. Judgement match, not confirmed.",
+   "evidenceEs": "El nombre publicado difiere del de la lista de lanzamientos (Hyūga Neji). Es la unica entrada de la lista para este ninja y ocupa la misma posicion cronologica en el orden de Supporters. Coincidencia por criterio, sin confirmar."
+  },
+  "supporters:60_uzumaki-menma": {
+   "nameAsPosted": "Uzumaki Menma",
+   "cardNamePlate": "Uzumaki Menma",
+   "status": "EXACT",
+   "ninja": "Uzumaki Menma",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:61_summer-pain": {
+   "nameAsPosted": "Summer Pain",
+   "cardNamePlate": "Summer Pain",
+   "status": "EXACT",
+   "ninja": "Summer Pain",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:62_kyubi-minato": {
+   "nameAsPosted": "Kyūbi Minato",
+   "cardNamePlate": "Kyūbi Minato",
+   "status": "EXACT",
+   "ninja": "Kyūbi Minato",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:63_kamado-nezuko": {
+   "nameAsPosted": "Kamado Nezuko",
+   "cardNamePlate": "Kamado Nezuko",
+   "status": "EXACT",
+   "ninja": "Kamado Nezuko",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:64_orochimaru-new-era": {
+   "nameAsPosted": "Orochimaru (New Era)",
+   "cardNamePlate": "Orochimaru (New Era)",
+   "status": "ALIAS_REVIEWED",
+   "ninja": "Orochimaru from Boruto",
+   "evidence": "The posted name differs from the release-list name (Orochimaru from Boruto). It is the only release-list entry for this ninja and it sits at the same chronological position in the Supporter order. Judgement match, not confirmed.",
+   "evidenceEs": "El nombre publicado difiere del de la lista de lanzamientos (Orochimaru from Boruto). Es la unica entrada de la lista para este ninja y ocupa la misma posicion cronologica en el orden de Supporters. Coincidencia por criterio, sin confirmar."
+  },
+  "supporters:65_uchiha-hikari": {
+   "nameAsPosted": "Uchiha Hikari",
+   "cardNamePlate": "Uchiha Hikari",
+   "status": "EXACT",
+   "ninja": "Uchiha Hikari",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:66_otsutsuki-isshiki": {
+   "nameAsPosted": "Ōtsutsuki Isshiki",
+   "cardNamePlate": "Ōtsutsuki Isshiki",
+   "status": "EXACT",
+   "ninja": "Ōtsutsuki Isshiki",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:67_indra-ashura": {
+   "nameAsPosted": "Indra & Ashura",
+   "cardNamePlate": "Indra & Ashura",
+   "status": "ALIAS_VERIFIED",
+   "ninja": "Indra&Ashura",
+   "evidence": "Same name as the release-list entry apart from spacing or punctuation (Indra&Ashura), and no other release-list entry matches.",
+   "evidenceEs": "Mismo nombre que la entrada de la lista de lanzamientos salvo espacios o puntuacion (Indra&Ashura), y ninguna otra entrada coincide."
+  },
+  "supporters:68_hinata-the-last": {
+   "nameAsPosted": "Hinata the Last",
+   "cardNamePlate": "Hinata the Last",
+   "status": "EXACT",
+   "ninja": "Hinata the Last",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:69_susanoo-itachi-sasuke": {
+   "nameAsPosted": "Susanoo Itachi & Sasuke",
+   "cardNamePlate": "Susanoo Itachi & Sasuke",
+   "status": "ALIAS_REVIEWED",
+   "ninja": "Susano Itachi&Sasuke",
+   "evidence": "The posted name differs from the release-list name (Susano Itachi&Sasuke). It is the only release-list entry for this ninja and it sits at the same chronological position in the Supporter order. Judgement match, not confirmed.",
+   "evidenceEs": "El nombre publicado difiere del de la lista de lanzamientos (Susano Itachi&Sasuke). Es la unica entrada de la lista para este ninja y ocupa la misma posicion cronologica en el orden de Supporters. Coincidencia por criterio, sin confirmar."
+  },
+  "supporters:70_mitarashi-anko": {
+   "nameAsPosted": "Mitarashi Anko",
+   "cardNamePlate": "Mitarashi Anko",
+   "status": "EXACT",
+   "ninja": "Mitarashi Anko",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:71_uchiha-sarada": {
+   "nameAsPosted": "Uchiha Sarada",
+   "cardNamePlate": "Uchiha Sarada",
+   "status": "EXACT",
+   "ninja": "Uchiha Sarada",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:72_legend-madara": {
+   "nameAsPosted": "Legend Madara",
+   "cardNamePlate": "Legend Madara",
+   "status": "EXACT",
+   "ninja": "Legend Madara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:73_awakened-mitsuki": {
+   "nameAsPosted": "Awakened Mitsuki",
+   "cardNamePlate": "Awakened Mitsuki",
+   "status": "EXACT",
+   "ninja": "Awakened Mitsuki",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:74_natsu-dragneel": {
+   "nameAsPosted": "Natsu Dragneel",
+   "cardNamePlate": "Natsu Dragneel",
+   "status": "EXACT",
+   "ninja": "Natsu Dragneel",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:75_xmas-temari": {
+   "nameAsPosted": "Xmas Temari",
+   "cardNamePlate": "Xmas Temari",
+   "status": "EXACT",
+   "ninja": "Xmas Temari",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:76_shikamaru-nara": {
+   "nameAsPosted": "Shikamaru Nara",
+   "cardNamePlate": "Shikamaru Nara",
+   "status": "EXACT",
+   "ninja": "Shikamaru Nara",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:77_uchiha-madara-moon-s-eye": {
+   "nameAsPosted": "Uchiha Madara (Moon's Eye)",
+   "cardNamePlate": "Uchiha Madara (Moon's Eye)",
+   "status": "EXACT",
+   "ninja": "Uchiha Madara (Moon's Eye)",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:78_tsunade-sakura-summer": {
+   "nameAsPosted": "Tsunade-Sakura (Summer)",
+   "cardNamePlate": "Tsunade-Sakura (Summer)",
+   "status": "EXACT",
+   "ninja": "Tsunade-Sakura (Summer)",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  },
+  "supporters:79_orochimaru-akatsuki": {
+   "nameAsPosted": "Orochimaru (Akatsuki)",
+   "cardNamePlate": "Orochimaru (Akatsuki)",
+   "status": "EXACT",
+   "ninja": "Orochimaru (Akatsuki)",
+   "evidence": "Name as posted equals the release-list name.",
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+  }
+ }
+}

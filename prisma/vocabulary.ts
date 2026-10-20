@@ -5,8 +5,8 @@ import type { PrismaClient } from "@prisma/client";
  * It contains no game content (no statistics, natures, roles, ninjas or items);
  * those are entered by the admin from the client's reference material.
  */
-export const ABILITY_TYPES = ["skill", "passive", "awakening", "attack"] as const;
-export const CONDITION_TYPES = ["nature", "role", "element", "target", "trigger", "status", "restriction", "formation", "ninja", "gender"] as const;
+export const ABILITY_TYPES = ["skill", "passive", "awakening", "attack", "normal_skill", "special_skill", "talent_awakening", "skill_awakening", "status_note"] as const;
+export const CONDITION_TYPES = ["nature", "role", "element", "target", "trigger", "status", "restriction", "formation", "ninja", "gender", "battle_mode", "trait"] as const;
 export const EFFECT_TARGETS = ["self", "ally", "enemy"] as const;
 
 const titleCase = (key: string) => key.charAt(0).toUpperCase() + key.slice(1);
@@ -18,6 +18,9 @@ const NAMES_ES: Record<string, string> = {
   trigger: "Activador", status: "Estado", restriction: "Restricción",
   self: "Propio", ally: "Aliado", enemy: "Enemigo",
   formation: "Formación", ninja: "Ninja", gender: "Género",
+  normal_skill: "Habilidad normal", special_skill: "Habilidad especial",
+  talent_awakening: "Despertar de talento", skill_awakening: "Despertar de habilidad",
+  battle_mode: "Modo de combate", trait: "Rasgo", status_note: "Definición de estado",
 };
 
 export async function seedVocabulary(db: PrismaClient): Promise<void> {

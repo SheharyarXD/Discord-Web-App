@@ -7,6 +7,13 @@ import { ensureStatusCategory } from "../src/game/status-effects";
 export const TEST_DB_URL = `file:${path.resolve(__dirname, ".tmp/test.db").replace(/\\/g, "/")}`;
 export const REFERENCE_DIR = path.resolve(__dirname, "../data/reference");
 export const HANDOFF_DIR = path.resolve(__dirname, "../docs/milestone-2-handoff");
+/** The second handoff (cards and ability texts). Staging paths under data/reference/profiles are relative to it. */
+export const PROFILE_HANDOFF_DIR = path.resolve(__dirname, "../docs/m2-handoff");
+/** The Milestone 3 Supporter package: staged paths that start with `m3-handoff/` are relative to docs/. */
+export const M3_HANDOFF_DIR = path.resolve(__dirname, "../docs/m3-handoff");
+/** Absolute path of a staged asset, whichever package it belongs to. */
+export const handoffFile = (asset: string) =>
+  asset.startsWith("m3-handoff/") ? path.resolve(__dirname, "../docs", asset) : asset.startsWith("m2-handoff/") ? path.join(PROFILE_HANDOFF_DIR, asset.slice("m2-handoff/".length)) : path.join(PROFILE_HANDOFF_DIR, asset);
 
 export const testDb = () => new PrismaClient({ datasourceUrl: TEST_DB_URL });
 
@@ -25,12 +32,15 @@ export async function seedTestVocabulary(db: PrismaClient): Promise<void> {
   await vocabulary.formation(db, { key: "support", name: "Support", nameEs: "Apoyo", translationStatus: "VERIFIED", primaryStatisticKey: "chakra", maxPerTeam: 3, sortOrder: 0 });
   await vocabulary.formation(db, { key: "center", name: "Center", nameEs: "Centro", translationStatus: "VERIFIED", primaryStatisticKey: "force", maxPerTeam: 2, sortOrder: 1 });
   await vocabulary.formation(db, { key: "vanguard", name: "Vanguard", nameEs: "Vanguardia", translationStatus: "VERIFIED", primaryStatisticKey: "force", maxPerTeam: 1, sortOrder: 2 });
+  // The card label. Its equivalence with Center is a proposal; a status another test file set on purpose is kept.
+  const assaulter = await db.formation.findUnique({ where: { key: "assaulter" }, select: { equivalenceStatus: true } });
+  await vocabulary.formation(db, { key: "assaulter", name: "Assaulter", equivalentToKey: "center", equivalenceStatus: assaulter?.equivalenceStatus === "APPROVED" ? "APPROVED" : "PROPOSED", sortOrder: 3 });
   // Never downgrade a mapping another test file approved on purpose.
-  for (const [key, formation] of [["supporters", "support"], ["assaulters", "center"], ["vanguards", "vanguard"]] as const) {
+  for (const [key, formation] of [["supporters", "support"], ["assaulters", "assaulter"], ["vanguards", "vanguard"]] as const) {
     const existing = await db.ninjaRole.findUnique({ where: { key } });
     if (!existing) await vocabulary.role(db, { key, name: key, mappedFormationKey: formation, mappingStatus: "PROPOSED" });
   }
-  for (const [i, key] of ["S", "SS", "SSS", "SR", "SSR"].entries()) await vocabulary.rating(db, { key, name: key, sortOrder: i });
+  for (const [i, key] of ["D", "C", "B-", "B", "B+", "A-", "A", "A+", "S-", "S", "S+", "SS", "SSS", "SR", "SSR"].entries()) await vocabulary.rating(db, { key, name: key, sortOrder: i });
   for (const key of ["dot", "cc", "stat_modifier", "immunity", "protection", "restriction"]) await ensureStatusCategory(db, { key, name: key });
 }
 

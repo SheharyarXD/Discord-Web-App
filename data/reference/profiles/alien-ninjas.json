@@ -1,0 +1,1621 @@
+{
+ "_about": "Staged transcription of one reference channel. Text is copied verbatim from the cited files under docs/m2-handoff/ (only the bullet marker is removed). Card values were read from the card images. Nothing here is interpreted: identities are resolved in identity-map.json and numbers are parsed by the loader.",
+ "channel": "alien-ninjas",
+ "roleKey": "alien-ninjas",
+ "collectionStatus": "COMPLETE",
+ "entries": [
+  {
+   "sourceId": "aliens:alien-juugo",
+   "nameAsPosted": "Alien Jugo",
+   "cardName": "Alien Juugo",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-juugo.png",
+    "language": "en",
+    "namePlate": "Alien Juugo",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "33000",
+      "growth": "33"
+     },
+     {
+      "label": "Chakra",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "Agility",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "HP",
+      "value": "320000",
+      "growth": "32"
+     }
+    ],
+    "talentLabel": {
+     "text": "Curse",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Curse Mark",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-juugo.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 70% speed, 60% aid rate, 50% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 87%, attack by 20%, and avoid injury by 20%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self damage rate and avoid injury by 10%."
+       },
+       {
+        "text": "Immune to blind, paralysis, and shock."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-juugo.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios, 70% velocidad, 60% tasa de ayuda, 50% tasa de daño y 55% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 87%, el ataque en 20% y la evasión de daño en 20%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la tasa de daño y la evasión de daño propios en 10%."
+       },
+       {
+        "text": "Inmune a ceguera, parálisis y shock."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1",
+     "name": null,
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-juugo.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 84% speed, 60% aid rate, 60% damage rate, and 65% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 107%, attack by 30%, and avoid injury by 35%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self damage rate and avoid injury by 10%."
+       },
+       {
+        "text": "Ignores 50% of enemy defenses."
+       },
+       {
+        "text": "Immune to 50% control rate, blind, paralysis, and expel."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-juugo.md",
+      "heading": "Despertar de Talento 1",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y hp propios, 84% velocidad, 60% tasa de ayuda, 60% tasa de daño y 65% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 107%, el ataque en 30% y la evasión de daño en 35%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la tasa de daño y la evasión de daño propios en 10%."
+       },
+       {
+        "text": "Ignora el 50% de las defensas enemigas."
+       },
+       {
+        "text": "Inmune al 50% de la tasa de control, ceguera, parálisis y expulsión."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Curse Mark",
+     "name": "Curse Mark",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-juugo.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "80% rate to chaos enemies for 2 rounds."
+       },
+       {
+        "text": "Increases ally assaulters' aid rate by 70%, and dispels all allies' debuffs."
+       },
+       {
+        "text": "Decreases self avoid injury by 30% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' attack by 20% for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' speed by 10% for 1 round."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-juugo.md",
+      "heading": "Marca Maldita",
+      "name": "Marca Maldita",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 300%."
+       },
+       {
+        "text": "80% de probabilidad de causar caos a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de ayuda de los asaltantes aliados en 70%, y disipa todos los debuffs de los aliados."
+       },
+       {
+        "text": "Disminuye la evasión de daño propia en 30% durante 2 rondas."
+       },
+       {
+        "text": "Disminuye el ataque de los enemigos en 20% durante 2 rondas."
+       },
+       {
+        "text": "Aumenta la velocidad de los apoyos aliados en 10% por 1 ronda."
+       },
+       {
+        "text": "Restaura 50 furia propia y 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-fuguki",
+   "nameAsPosted": "Alien Fuguki",
+   "cardName": "Alien Fuguki",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-fuguki.png",
+    "language": "en",
+    "namePlate": "Alien Fuguki",
+    "typeLabel": "Taijutsu",
+    "formationLabel": "Assaulter",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "29000",
+      "growth": "29"
+     },
+     {
+      "label": "Chakra",
+      "value": "26000",
+      "growth": "26"
+     },
+     {
+      "label": "Agility",
+      "value": "26000",
+      "growth": "26"
+     },
+     {
+      "label": "HP",
+      "value": "300000",
+      "growth": "30"
+     }
+    ],
+    "talentLabel": {
+     "text": "Samehada",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Needle Senbon",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-fuguki.md",
+      "lines": [
+       {
+        "text": "Increases self agility and force, 78% speed, 50% damage rate, and 50% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 44% and attack by 30%."
+       },
+       {
+        "text": "Increases all allies' hp by 30%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self avoid injury by 6%."
+       },
+       {
+        "text": "Immune to shock, petrify, and stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-fuguki.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la agilidad y la fuerza propias, 78% velocidad, 50% tasa de daño y 50% evasión de daño."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 44% y el ataque en 30%."
+       },
+       {
+        "text": "Aumenta los hp de todos los aliados en 30%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la evasión de daño propia en 6%."
+       },
+       {
+        "text": "Inmune a shock, petrificación y aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Needle Senbon",
+     "name": "Needle Senbon",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-fuguki.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 320% growth rate."
+       },
+       {
+        "text": "80% rate to silence enemies for 2 rounds."
+       },
+       {
+        "text": "Applies burst with 120% rate to enemies for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' attack by 40%."
+       },
+       {
+        "text": "Decreases enemies' defenses by 30% for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 50 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-fuguki.md",
+      "heading": "Agujas Senbon",
+      "name": "Agujas Senbon",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 320%."
+       },
+       {
+        "text": "80% de probabilidad de silenciar a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aplica explosión con 120% de tasa a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aumenta el ataque de los apoyos aliados en 40%."
+       },
+       {
+        "text": "Disminuye las defensas de los enemigos en 30% por 2 rondas."
+       },
+       {
+        "text": "Restaura 68 de furia propia y 50 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-shizune",
+   "nameAsPosted": "Alien Shizune",
+   "cardName": "Alien Shizune",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-shizune.png",
+    "language": "en",
+    "namePlate": "Alien Shizune",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "24000",
+      "growth": "24"
+     },
+     {
+      "label": "Chakra",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "Agility",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "HP",
+      "value": "290000",
+      "growth": "29"
+     }
+    ],
+    "talentLabel": {
+     "text": "Alien Flower",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Cubic Barrier",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-shizune.md",
+      "lines": [
+       {
+        "text": "Increases self chakra and agility, 80% speed, 50% damage rate, 50% avoid injury, and 50% punch rate"
+       },
+       {
+        "text": "Increases all allies' speed by 92%, and supporters' hp by 30%."
+       },
+       {
+        "text": "Decreases enemies' avoid injury by 40%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self attack by 5%."
+       },
+       {
+        "text": "Immune to silence and chaos."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-shizune.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta el chakra y la agilidad propios, 80% velocidad, 50% tasa de daño, 50% evasión de daño y 50% tasa de golpe."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 92% y el hp de los apoyos en 30%."
+       },
+       {
+        "text": "Disminuye la evasión de daño de los enemigos en 40%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta el ataque propio en 5%."
+       },
+       {
+        "text": "Inmune a silencio y caos."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Cubic Barrier",
+     "name": "Cubic Barrier",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-shizune.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 320% growth rate."
+       },
+       {
+        "text": "65% rate to stun enemies for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' defenses by 30% for 2 rounds, and applies power loss with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Dispels all allies' debuffs."
+       },
+       {
+        "text": "Increases control resistance of ally supporters' by 30%."
+       },
+       {
+        "text": "Restores 100 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-shizune.md",
+      "heading": "Barrera Cúbica",
+      "name": "Barrera Cúbica",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 320%."
+       },
+       {
+        "text": "65% de probabilidad de aturdir a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Disminuye las defensas de los enemigos en 30% por 2 rondas y aplica pérdida de poder con 100% de tasa por 2 rondas."
+       },
+       {
+        "text": "Disipa los desventajas de todos los aliados."
+       },
+       {
+        "text": "Aumenta la resistencia al control de los apoyos aliados en 30%."
+       },
+       {
+        "text": "Restaura 100 de furia propia y 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-mifune",
+   "nameAsPosted": "Alien Mifune",
+   "cardName": "Alien Mifune",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-mifune.png",
+    "language": "en",
+    "namePlate": "Alien Mifune",
+    "typeLabel": "Taijutsu",
+    "formationLabel": "Assaulter",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "31000",
+      "growth": "31"
+     },
+     {
+      "label": "Chakra",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "Agility",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "HP",
+      "value": "320000",
+      "growth": "32"
+     }
+    ],
+    "talentLabel": {
+     "text": "Alien Power",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Iaido Cut",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-mifune.md",
+      "lines": [
+       {
+        "text": "Increases self force and agility, 80% speed, 52% damage rate, and 50% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 48%."
+       },
+       {
+        "text": "Increases all allies' damage rate by 20%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self damage rate by 5%."
+       },
+       {
+        "text": "After being attacked, increases self speed by 30% for 1 round, and has 80% chance to recover 50 fury for self."
+       },
+       {
+        "text": "Ignores 40% of enemy defenses."
+       },
+       {
+        "text": "Immune to blind, silence, and tsukuyomi."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-mifune.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y la agilidad propias, 80% velocidad, 52% tasa de daño y 50% evasión de daño."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 48%."
+       },
+       {
+        "text": "Aumenta la tasa de daño de todos los aliados en 20%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la tasa de daño propia en 5%."
+       },
+       {
+        "text": "Después de ser atacado, aumenta la velocidad propia en 30% por 1 ronda y tiene 80% de probabilidad de recuperar 50 de furia propia."
+       },
+       {
+        "text": "Ignora 40% de las defensas enemigas."
+       },
+       {
+        "text": "Inmune a ceguera, silencio y tsukuyomi."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Iaido Cut",
+     "name": "Iaido Cut",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-mifune.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 320% growth rate."
+       },
+       {
+        "text": "70% rate to shock or expel, and chaos or paralysis enemies for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' attack and damage rate by 30% for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' defenses by 30% for 2 rounds, and increases 2 random allies' avoid injury by 30% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-mifune.md",
+      "heading": "Corte Iaido",
+      "name": "Corte Iaido",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 320%."
+       },
+       {
+        "text": "70% de probabilidad de aplicar shock o expulsión, y caos o parálisis a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Disminuye el ataque y la tasa de daño de los enemigos en 30% por 2 rondas."
+       },
+       {
+        "text": "Aumenta las defensas de los apoyos aliados en 30% por 2 rondas y la evasión de daño de 2 aliados aleatorios en 30% por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia y 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-terumi-mei",
+   "nameAsPosted": "Alien Mei",
+   "cardName": "Alien Terumi Mei",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-terumi-mei.png",
+    "language": "en",
+    "namePlate": "Alien Terumi Mei",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "26000",
+      "growth": "26"
+     },
+     {
+      "label": "Chakra",
+      "value": "32000",
+      "growth": "32"
+     },
+     {
+      "label": "Agility",
+      "value": "32000",
+      "growth": "32"
+     },
+     {
+      "label": "HP",
+      "value": "310000",
+      "growth": "31"
+     }
+    ],
+    "talentLabel": {
+     "text": "Power of the 5th Kage",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Melting Jutsu",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-terumi-mei.md",
+      "lines": [
+       {
+        "text": "Increases self chakra and agility, 82% speed, 50% damage rate, and 50% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 96%."
+       },
+       {
+        "text": "Decreases enemy supporters' and vanguard's defenses by 25%, and aid rate by 40%."
+       },
+       {
+        "text": "Upon death, increases all allies' speed by 45%, and attack by 25%."
+       },
+       {
+        "text": "Ignores 20% of enemy defenses."
+       },
+       {
+        "text": "Immune to stun, and curse."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-terumi-mei.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta el chakra y la agilidad propios, 82% velocidad, 50% tasa de daño y 50% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 96%."
+       },
+       {
+        "text": "Disminuye las defensas de los apoyos y vanguardias enemigos en 25% y su tasa de ayuda en 40%."
+       },
+       {
+        "text": "Al morir, aumenta la velocidad de todos los aliados en 45% y el ataque en 25%."
+       },
+       {
+        "text": "Ignora 20% de las defensas enemigas."
+       },
+       {
+        "text": "Inmune a aturdimiento y maldición."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Melting Jutsu",
+     "name": "Melting Jutsu",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-terumi-mei.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "60% rate to blind and 60% rate to paralyze enemies for 2 rounds."
+       },
+       {
+        "text": "Applies fury shield to all allies for 2 rounds, and forbid heal state to enemies for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-terumi-mei.md",
+      "heading": "Jutsu de Fusión",
+      "name": "Jutsu de Fusión",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 300%."
+       },
+       {
+        "text": "60% de probabilidad de aplicar ceguera y 60% de probabilidad de aplicar parálisis a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aplica escudo de furia a todos los aliados por 2 rondas y estado de prohibición de curación a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia y 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-raikage",
+   "nameAsPosted": "Alien Raikage",
+   "cardName": "Alien Raikage",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-raikage.png",
+    "language": "en",
+    "namePlate": "Alien Raikage",
+    "typeLabel": "Great Jutsu",
+    "formationLabel": "Vanguard",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "36000",
+      "growth": "36"
+     },
+     {
+      "label": "Chakra",
+      "value": "31000",
+      "growth": "31"
+     },
+     {
+      "label": "Agility",
+      "value": "31000",
+      "growth": "31"
+     },
+     {
+      "label": "HP",
+      "value": "370000",
+      "growth": "37"
+     }
+    ],
+    "talentLabel": {
+     "text": "Cloak of Lightning",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Prowess Spear",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-raikage.md",
+      "lines": [
+       {
+        "text": "Increases self force and hp, 80% speed, 55% damage rate, and 60% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 96%, assaulters' and vanguard's avoid injury by 30%, and all allies' hp by 30%."
+       },
+       {
+        "text": "Decreases enemy supporters' attack by 20%."
+       },
+       {
+        "text": "After being attacked, 60% chance to dispel self debuffs."
+       },
+       {
+        "text": "Ignores 100% of enemy defenses."
+       },
+       {
+        "text": "Immune to freeze, and blind."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-raikage.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la fuerza y la hp propios, 80% velocidad, 55% tasa de daño y 60% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 96%, la evasión de daño de los asaltantes y vanguardias en 30% y la hp de todos los aliados en 30%."
+       },
+       {
+        "text": "Disminuye el ataque de los apoyos enemigos en 20%."
+       },
+       {
+        "text": "Tras ser atacado, 60% de probabilidad de disipar sus propios perjuicios."
+       },
+       {
+        "text": "Ignora 100% de las defensas enemigas."
+       },
+       {
+        "text": "Inmune a congelación y ceguera."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Prowess Spear",
+     "name": "Prowess Spear",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-raikage.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 400% growth rate."
+       },
+       {
+        "text": "70% rate to shock and 70% rate to acupuncture enemies for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' avoid injury by 30%, and punch rate by 50%."
+       },
+       {
+        "text": "Decreases enemy supporters' and vanguard's damage rate by 20%."
+       },
+       {
+        "text": "1 random ally enters control immune state for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-raikage.md",
+      "heading": "Lanza de Prowess",
+      "name": "Lanza de Prowess",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 400%."
+       },
+       {
+        "text": "70% de probabilidad de aplicar shock y 70% de probabilidad de aplicar acupuntura a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aumenta la evasión de daño de los apoyos aliados en 30% y su tasa de golpe en 50%."
+       },
+       {
+        "text": "Disminuye la tasa de daño de los apoyos y vanguardias enemigos en 20%."
+       },
+       {
+        "text": "1 aliado aleatorio entra en estado inmune al control por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-sasuke",
+   "nameAsPosted": "Alien Sasuke",
+   "cardName": "Alien Sasuke",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-sasuke.png",
+    "language": "en",
+    "namePlate": "Alien Sasuke",
+    "typeLabel": "Taijutsu",
+    "formationLabel": "Assaulter",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "33000",
+      "growth": "33"
+     },
+     {
+      "label": "Chakra",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "Agility",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "HP",
+      "value": "340000",
+      "growth": "34"
+     }
+    ],
+    "talentLabel": {
+     "text": "Rebirth",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Susanoo",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-sasuke.md",
+      "lines": [
+       {
+        "text": "Increases self agility and force, 82% speed, 55% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 50%."
+       },
+       {
+        "text": "Increases ally supporters' hp by 40%."
+       },
+       {
+        "text": "After being attacked, 40% chance to enter s-super dodge for 1 round."
+       },
+       {
+        "text": "Immune 20% enemy attack, 40% control rate, blind, and imprison."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-sasuke.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la agilidad y la fuerza propias, 82% velocidad, 55% tasa de daño y 55% evasión de daño."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 50%."
+       },
+       {
+        "text": "Aumenta la hp de los apoyos aliados en 40%."
+       },
+       {
+        "text": "Tras ser atacado, 40% de probabilidad de entrar en s-super esquiva por 1 ronda."
+       },
+       {
+        "text": "Inmune a 20% del ataque enemigo, 40% de tasa de control, ceguera e imprison."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Susanoo",
+     "name": "Susanoo",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-sasuke.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "80% rate to blind enemies for 2 rounds."
+       },
+       {
+        "text": "Heals all allies with 120% rate."
+       },
+       {
+        "text": "Increases all allies' attack by 25% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 20% and aid rate by 30% for 2 rounds."
+       },
+       {
+        "text": "Dispels enemy buffs."
+       },
+       {
+        "text": "Restores 100 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-sasuke.md",
+      "heading": "Susanoo",
+      "name": "Susanoo",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 330%."
+       },
+       {
+        "text": "80% de probabilidad de aplicar ceguera a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Cura a todos los aliados con una tasa de 120%."
+       },
+       {
+        "text": "Aumenta el ataque de todos los aliados en 25% por 2 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de daño de los enemigos en 20% y su tasa de ayuda en 30% por 2 rondas."
+       },
+       {
+        "text": "Disipa los buffs de los enemigos."
+       },
+       {
+        "text": "Restaura 100 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-obito",
+   "nameAsPosted": "Alien Obito",
+   "cardName": "Alien Obito",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-obito.png",
+    "language": "en",
+    "namePlate": "Alien Obito",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "28000",
+      "growth": "28"
+     },
+     {
+      "label": "Chakra",
+      "value": "34000",
+      "growth": "34"
+     },
+     {
+      "label": "Agility",
+      "value": "34000",
+      "growth": "34"
+     },
+     {
+      "label": "HP",
+      "value": "330000",
+      "growth": "33"
+     }
+    ],
+    "talentLabel": {
+     "text": "Temporal",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Fire ReleaseBomb Blast D",
+     "truncated": true
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-obito.md",
+      "lines": [
+       {
+        "text": "Increases self chakra and agility, 84% speed, 57% damage rate, and 52% avoid injury."
+       },
+       {
+        "text": "Increases all allies' speed by 100%, and supporters' attack by 20%."
+       },
+       {
+        "text": "Decreases enemies' avoid injury by 30%."
+       },
+       {
+        "text": "After being attacked, reflects 120% of lost hp as damage."
+       },
+       {
+        "text": "Immune to freeze and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-obito.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta el chakra y la agilidad propios, 84% velocidad, 57% tasa de daño y 52% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de todos los aliados en 100% y el ataque de los apoyos en 20%."
+       },
+       {
+        "text": "Disminuye la evasión de daño de los enemigos en 30%."
+       },
+       {
+        "text": "Tras ser atacado, refleja 120% de la hp perdida como daño."
+       },
+       {
+        "text": "Inmune a congelación y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Fire Release - Bomb Blast Dance",
+     "name": "Fire Release - Bomb Blast Dance",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-obito.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "60% rate to freeze and 60% rate to chaos enemies for 2 rounds."
+       },
+       {
+        "text": "Applies painful will to 3 random enemies for 2 rounds."
+       },
+       {
+        "text": "Increases all allies' damage rate by 30% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' punch rate by 50% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-obito.md",
+      "heading": "Liberación de Fuego - Danza de Explosión de Bombas",
+      "name": "Liberación de Fuego - Danza de Explosión de Bombas",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 330%."
+       },
+       {
+        "text": "60% de probabilidad de aplicar congelación y 60% de probabilidad de aplicar caos a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Aplica voluntad dolorosa a 3 enemigos aleatorios por 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de daño de todos los aliados en 30% por 2 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de golpe de los enemigos en 50% por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-naruto",
+   "nameAsPosted": "Alien Naruto",
+   "cardName": "Alien Naruto",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-naruto.png",
+    "language": "en",
+    "namePlate": "Alien Naruto",
+    "typeLabel": "Taijutsu",
+    "formationLabel": "Assaulter",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "35000",
+      "growth": "35"
+     },
+     {
+      "label": "Chakra",
+      "value": "32000",
+      "growth": "32"
+     },
+     {
+      "label": "Agility",
+      "value": "32000",
+      "growth": "32"
+     },
+     {
+      "label": "HP",
+      "value": "360000",
+      "growth": "36"
+     }
+    ],
+    "talentLabel": {
+     "text": "Six Paths",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Six Paths Mode",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-naruto.md",
+      "lines": [
+       {
+        "text": "Increases self agility and force, 85% speed, 58% damage rate, and 53% avoid injury."
+       },
+       {
+        "text": "Decreases enemies' speed by 50%."
+       },
+       {
+        "text": "Increases ally vanguard and assaulters' hp by 40%, and supporters' damage rate by 30%."
+       },
+       {
+        "text": "Upon death, applies death seed to one random enemy, and 60% chance to apply it to another."
+       },
+       {
+        "text": "Immune to 40% control rate, fury reduction, and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-naruto.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la agilidad y la fuerza propias, 85% velocidad, 58% tasa de daño y 53% evasión de daño."
+       },
+       {
+        "text": "Disminuye la velocidad de los enemigos en 50%."
+       },
+       {
+        "text": "Aumenta la hp de los vanguardias y asaltantes aliados en 40%, y la tasa de daño de los apoyos en 30%."
+       },
+       {
+        "text": "Al morir, aplica semilla de muerte a un enemigo aleatorio, con 60% de probabilidad de aplicarla a otro."
+       },
+       {
+        "text": "Inmune a 40% de tasa de control, reducción de furia y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Six Paths Mode",
+     "name": "Six Paths Mode",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-naruto.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "80% rate to acupoint enemies for 2 rounds."
+       },
+       {
+        "text": "Decreases enemy supporters' fury by 50 points."
+       },
+       {
+        "text": "Increases all allies' avoid injury by 30% for 2 rounds."
+       },
+       {
+        "text": "1 random ally enters super dodge for 1 round."
+       },
+       {
+        "text": "Decreases enemies' attack by 20%, and punch rate by 40% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-naruto.md",
+      "heading": "Modo Seis Caminos",
+      "name": "Modo Seis Caminos",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 330%."
+       },
+       {
+        "text": "80% de probabilidad de aplicar acupuntura a los enemigos por 2 rondas."
+       },
+       {
+        "text": "Disminuye la furia de los apoyos enemigos en 50 puntos."
+       },
+       {
+        "text": "Aumenta la evasión de daño de todos los aliados en 30% por 2 rondas."
+       },
+       {
+        "text": "1 aliado aleatorio entra en super esquiva por 1 ronda."
+       },
+       {
+        "text": "Disminuye el ataque de los enemigos en 20% y su tasa de golpe en 40% por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  },
+  {
+   "sourceId": "aliens:alien-madara",
+   "nameAsPosted": "Alien Madara",
+   "cardName": "Alien Madara",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/original_character_cards/alien-madara.png",
+    "language": "en",
+    "namePlate": "Alien Madara",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "30000",
+      "growth": "30"
+     },
+     {
+      "label": "Chakra",
+      "value": "36000",
+      "growth": "36"
+     },
+     {
+      "label": "Agility",
+      "value": "36000",
+      "growth": "36"
+     },
+     {
+      "label": "HP",
+      "value": "350000",
+      "growth": "35"
+     }
+    ],
+    "talentLabel": {
+     "text": "Reanimation",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Trees Destruction",
+     "truncated": false
+    },
+    "verification": "collector manifest + own reading (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent",
+     "name": null,
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-madara.md",
+      "lines": [
+       {
+        "text": "Increases self chakra and agility, 86% speed, 60% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases allies' speed by 100%, supporters' attack by 20%, and all allies' defenses by 20%."
+       },
+       {
+        "text": "Decreases enemies' avoid injury by 30%."
+       },
+       {
+        "text": "After being attacked, increases self speed by 40% for 1 round."
+       },
+       {
+        "text": "Ignores 100% of enemy defenses."
+       },
+       {
+        "text": "Immune to freeze and death seed."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-madara.md",
+      "heading": "Talento",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta el chakra y la agilidad propios, 86% velocidad, 60% tasa de daño y 55% evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de los aliados en 100%, el ataque de los apoyos en 20% y las defensas de todos los aliados en 20%."
+       },
+       {
+        "text": "Disminuye la evasión de daño de los enemigos en 30%."
+       },
+       {
+        "text": "Tras ser atacado, aumenta la velocidad propia en 40% por 1 ronda."
+       },
+       {
+        "text": "Ignora 100% de las defensas enemigas."
+       },
+       {
+        "text": "Inmune a congelación y semilla de muerte."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Trees Destruction",
+     "name": "Trees Destruction",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-madara.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "80% rate to freeze enemies for 2 rounds."
+       },
+       {
+        "text": "70% chance to enter control immune state for 1 round."
+       },
+       {
+        "text": "Increases all allies' attack by 30% and avoid injury by 30% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' aid rate by 50% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Part_2_Vanguards_Alien_Awakening/02_CHANNEL_PACKAGES/Alien_Ninjas_10_Source/Alien_Ninjas_Complete_10_Source_Package/bilingual_ability_texts/alien-madara.md",
+      "heading": "Destrucción de Árboles",
+      "name": "Destrucción de Árboles",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento de 300%."
+       },
+       {
+        "text": "80% de probabilidad de congelar a los enemigos por 2 rondas."
+       },
+       {
+        "text": "70% de probabilidad de entrar en estado inmune al control por 1 ronda."
+       },
+       {
+        "text": "Aumenta el ataque de todos los aliados en 30% y su evasión de daño en 30% por 2 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de ayuda de los enemigos en 50% por 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied"
+  }
+ ]
+}

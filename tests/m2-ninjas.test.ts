@@ -134,7 +134,7 @@ describe("5. source category is not the formation", () => {
     await db.ninjaRole.update({ where: { key: "assaulters" }, data: { mappingStatus: "PROPOSED" } });
     const { slug } = await upsertNinja(db, { name: "T5 assaulter", roleKey: "assaulters", status: "PUBLISHED" });
     const read = (await detail(slug))!;
-    expect(read.role).toMatchObject({ key: "assaulters", mappingStatus: "PROPOSED", proposedFormationName: "Center" });
+    expect(read.role).toMatchObject({ key: "assaulters", mappingStatus: "PROPOSED", proposedFormationName: "Assaulter" });
     expect(read.formation).toBeNull();
     expect(read.primaryStat).toBeNull();
     expect((await db.ninja.findUniqueOrThrow({ where: { slug } })).formationId).toBeNull();

@@ -1,0 +1,125 @@
+{
+ "_about": "How the labels printed on ninja cards map to the vocabulary. `direct: true` means the card prints that word. `direct: false` means the card is in another language and the label was matched by its position on the card (same game screen, same field), which is recorded on the ninja as only partly confirmed.",
+ "types": {
+  "Taijutsu": {
+   "key": "taijutsu",
+   "name": "Taijutsu",
+   "direct": true
+  },
+  "Great Jutsu": {
+   "key": "great-jutsu",
+   "name": "Great Jutsu",
+   "direct": true
+  },
+  "Genjutsu": {
+   "key": "genjutsu",
+   "name": "Genjutsu",
+   "direct": true
+  },
+  "体术": {
+   "key": "taijutsu",
+   "name": "Taijutsu",
+   "direct": false,
+   "note": "Chinese card. 体术 is the word taijutsu, and every English card of the same channel prints Taijutsu."
+  },
+  "豪术": {
+   "key": "great-jutsu",
+   "name": "Great Jutsu",
+   "direct": false,
+   "note": "Chinese card. Every English card of the same channel prints Great Jutsu in this field."
+  },
+  "Super Jutsu": {
+   "key": "great-jutsu",
+   "name": "Great Jutsu",
+   "direct": false,
+   "note": "French-language card. Every English card of the same channel prints Great Jutsu in this field."
+  },
+  "幻术": {
+   "key": "genjutsu",
+   "name": "Genjutsu",
+   "direct": false,
+   "note": "Chinese card. 幻术 is the word genjutsu, and every English card of the same channel prints Genjutsu."
+  }
+ },
+ "formations": {
+  "Support": {
+   "key": "support",
+   "direct": true
+  },
+  "Assaulter": {
+   "key": "assaulter",
+   "direct": true
+  },
+  "Vanguard": {
+   "key": "vanguard",
+   "direct": true
+  },
+  "中坚": {
+   "key": "assaulter",
+   "direct": false,
+   "note": "Chinese card. Every English card of the same channel prints Assaulter in this field. 中坚 literally means the middle or backbone."
+  },
+  "先锋": {
+   "key": "vanguard",
+   "direct": false,
+   "note": "Chinese card. 先锋 is the word vanguard, and every English card of the same channel prints Vanguard."
+  },
+  "Avant-garde": {
+   "key": "vanguard",
+   "direct": false,
+   "note": "French-language card. Avant-garde is the word vanguard."
+  },
+  "后军": {
+   "key": "support",
+   "direct": false,
+   "note": "Chinese card. 后军 literally means the rear guard. Every English card of the same channel prints Support in this field."
+  }
+ },
+ "stats": {
+  "Force": {
+   "key": "force",
+   "direct": true
+  },
+  "Chakra": {
+   "key": "chakra",
+   "direct": true
+  },
+  "Power": {
+   "key": "power",
+   "direct": true
+  },
+  "Agility": {
+   "key": "agility",
+   "direct": true
+  },
+  "HP": {
+   "key": "hp",
+   "direct": true
+  },
+  "腕力": {
+   "key": "force",
+   "direct": false,
+   "note": "Chinese card, first attribute (Force on English cards)."
+  },
+  "精神": {
+   "key": "chakra",
+   "direct": false,
+   "note": "Chinese card, second attribute. English cards print Chakra here, or Power on a few; recorded as Chakra."
+  },
+  "迅捷": {
+   "key": "agility",
+   "direct": false,
+   "note": "Chinese card, third attribute (Agility on English cards)."
+  },
+  "体力": {
+   "key": "hp",
+   "direct": false,
+   "note": "Chinese card, fourth attribute (HP on English cards)."
+  },
+  "Agilité": {
+   "key": "agility",
+   "direct": false,
+   "note": "French-language card (Agility)."
+  }
+ }
+}

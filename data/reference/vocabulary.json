@@ -2,80 +2,313 @@
   "_about": "Vocabulary confirmed by the supplied material. Each row names the evidence it rests on. Nothing here is inferred from general knowledge of the franchise.",
   "client": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md",
   "ratings": {
-    "evidence": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Confirmed requirements, item 4", "sourceText": "Ratings include S, SS, SSS, SR, SSR, with extensible categories.", "reviewStatus": "CONFIRMED" },
-    "orderNote": "sortOrder follows the order in which the client listed them. It is a display order, not a confirmed ranking.",
-    "rows": ["S", "SS", "SSS", "SR", "SSR"]
+    "evidence": {
+      "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md",
+      "section": "Confirmed requirements, item 4",
+      "sourceText": "Ratings include S, SS, SSS, SR, SSR, with extensible categories.",
+      "reviewStatus": "CONFIRMED"
+    },
+    "orderNote": "sortOrder is the order in which the client listed the ranks (D to SSR). It is a display order only: no ranking power hierarchy has been defined.",
+    "rows": [
+      "D",
+      "C",
+      "B-",
+      "B",
+      "B+",
+      "A-",
+      "A",
+      "A+",
+      "S-",
+      "S",
+      "S+",
+      "SS",
+      "SSS",
+      "SR",
+      "SSR"
+    ],
+    "evidenceM3": {
+      "asset": "m3-client/CLIENT_CONFIRMED_DECISIONS_M3.md",
+      "section": "E. Ranks",
+      "sourceText": "D, C, B-, B, B+, A-, A, A+, S-, S, S+, SS, SSS, SR, SSR.",
+      "reviewStatus": "CONFIRMED"
+    }
   },
   "baseStatistics": {
-    "evidence": { "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png", "section": "ninja card", "reviewStatus": "CONFIRMED" },
+    "evidence": {
+      "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png",
+      "section": "ninja card",
+      "reviewStatus": "CONFIRMED"
+    },
     "rows": [
-      { "key": "force", "name": "Force" },
-      { "key": "agility", "name": "Agility" },
-      { "key": "chakra", "name": "Chakra" },
-      { "key": "hp", "name": "HP" }
+      {
+        "key": "force",
+        "name": "Force"
+      },
+      {
+        "key": "agility",
+        "name": "Agility"
+      },
+      {
+        "key": "chakra",
+        "name": "Chakra"
+      },
+      {
+        "key": "hp",
+        "name": "HP"
+      }
     ]
   },
   "guideStatistics": {
     "_about": "Stat terms exactly as the status guide words them. They are kept apart even when two may be the same stat (e.g. 'final damage' and 'final damage dealt'); merging is the client's call.",
     "rows": [
-      { "key": "attack", "name": "attack" },
-      { "key": "defenses", "name": "defenses", "note": "Plural group term as written in the guide. Which defenses it covers (physical, strategy, both) is not stated." },
-      { "key": "speed", "name": "speed" },
-      { "key": "healing-rate", "name": "healing rate" },
-      { "key": "cc-resistance", "name": "CC resistance" },
-      { "key": "avoid-injury", "name": "avoid injury" },
-      { "key": "final-damage-received", "name": "final damage received" },
-      { "key": "block-rate", "name": "block rate" },
-      { "key": "damage-rate", "name": "damage rate" },
-      { "key": "final-damage", "name": "final damage", "note": "As written under Dispirited State. May or may not be the same stat as 'final damage dealt'." },
-      { "key": "final-damage-dealt", "name": "final damage dealt", "note": "As written under Pyroblast state and Fury Shield. May or may not be the same stat as 'final damage'." },
-      { "key": "final-damage-reduction", "name": "final damage reduction" },
-      { "key": "crit-resistance", "name": "crit resistance" }
+      {
+        "key": "attack",
+        "name": "attack"
+      },
+      {
+        "key": "defenses",
+        "name": "defenses",
+        "note": "Plural group term as written in the guide. Which defenses it covers (physical, strategy, both) is not stated."
+      },
+      {
+        "key": "speed",
+        "name": "speed"
+      },
+      {
+        "key": "healing-rate",
+        "name": "healing rate"
+      },
+      {
+        "key": "cc-resistance",
+        "name": "CC resistance"
+      },
+      {
+        "key": "avoid-injury",
+        "name": "avoid injury"
+      },
+      {
+        "key": "final-damage-received",
+        "name": "final damage received"
+      },
+      {
+        "key": "block-rate",
+        "name": "block rate"
+      },
+      {
+        "key": "damage-rate",
+        "name": "damage rate"
+      },
+      {
+        "key": "final-damage",
+        "name": "final damage",
+        "note": "As written under Dispirited State. May or may not be the same stat as 'final damage dealt'."
+      },
+      {
+        "key": "final-damage-dealt",
+        "name": "final damage dealt",
+        "note": "As written under Pyroblast state and Fury Shield. May or may not be the same stat as 'final damage'."
+      },
+      {
+        "key": "final-damage-reduction",
+        "name": "final damage reduction"
+      },
+      {
+        "key": "crit-resistance",
+        "name": "crit resistance"
+      }
     ]
   },
   "formations": {
-    "_about": "In-game positions. English names: 'Support' is printed on the ninja card; 'Center' and 'Vanguard' are the client's wording. Spanish names are printed on the in-game formation screen.",
-    "evidenceEs": { "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(20261012-010500).png", "section": "position labels", "sourceText": "Apoyo · Centro · Vanguardia", "reviewStatus": "CONFIRMED" },
-    "evidenceRule": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Confirmed requirements, items 6-8", "sourceText": "Support, Center, Vanguard describe formation positions (rear, middle, front). All Support units primarily use Chakra; Center/Vanguard primarily use Force. Future teams contain four ninjas; max 3 Support, 2 Center, 1 Vanguard.", "reviewStatus": "CONFIRMED" },
+    "_about": "In-game positions. English names: 'Support' is printed on the ninja card; 'Center' and 'Vanguard' are the client's wording. Spanish names are printed on the in-game formation screen. «Assaulter» is the label printed on cards; it is kept as its own row with a PROPOSED equivalence to Center, so no card label is rewritten and no rule of Center is applied to it until the client confirms.",
+    "evidenceEs": {
+      "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(20261012-010500).png",
+      "section": "position labels",
+      "sourceText": "Apoyo · Centro · Vanguardia",
+      "reviewStatus": "CONFIRMED"
+    },
+    "evidenceRule": {
+      "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md",
+      "section": "Confirmed requirements, items 6-8",
+      "sourceText": "Support, Center, Vanguard describe formation positions (rear, middle, front). All Support units primarily use Chakra; Center/Vanguard primarily use Force. Future teams contain four ninjas; max 3 Support, 2 Center, 1 Vanguard.",
+      "reviewStatus": "CONFIRMED"
+    },
     "rows": [
-      { "key": "support", "name": "Support", "nameEs": "Apoyo", "positionNote": "rear", "primaryStatisticKey": "chakra", "maxPerTeam": 3 },
-      { "key": "center", "name": "Center", "nameEs": "Centro", "positionNote": "middle", "primaryStatisticKey": "force", "maxPerTeam": 2 },
-      { "key": "vanguard", "name": "Vanguard", "nameEs": "Vanguardia", "positionNote": "front", "primaryStatisticKey": "force", "maxPerTeam": 1 }
+      {
+        "key": "support",
+        "name": "Support",
+        "nameEs": "Apoyo",
+        "positionNote": "rear",
+        "primaryStatisticKey": "chakra",
+        "maxPerTeam": 3
+      },
+      {
+        "key": "center",
+        "name": "Center",
+        "nameEs": "Centro",
+        "positionNote": "middle",
+        "primaryStatisticKey": "force",
+        "maxPerTeam": 2
+      },
+      {
+        "key": "vanguard",
+        "name": "Vanguard",
+        "nameEs": "Vanguardia",
+        "positionNote": "front",
+        "primaryStatisticKey": "force",
+        "maxPerTeam": 1
+      },
+      {
+        "key": "assaulter",
+        "name": "Assaulter",
+        "nameEs": null,
+        "positionNote": null,
+        "primaryStatisticKey": null,
+        "maxPerTeam": null,
+        "equivalentToKey": "center",
+        "equivalenceStatus": "APPROVED",
+        "equivalenceNote": "Confirmado por el cliente: «Assaulter» y «Center» son la misma posición de formación. La ficha conserva su etiqueta original y se aplican las reglas de Centro (fuerza como estadística principal, máximo 2 por equipo).",
+        "ownEvidence": {
+          "asset": "m2-handoff/M2_Part_3_Assaulters_01_to_30/02_CHANNEL_PACKAGES/Assaulters_60_Source/cards/01_171627.png",
+          "section": "ninja card, Formation field",
+          "sourceText": "Formation: Assaulter",
+          "reviewStatus": "CONFIRMED"
+        },
+        "equivalenceEvidence": {
+          "asset": "m3-client/CLIENT_CONFIRMED_DECISIONS_M3.md",
+          "section": "A. Assaulter and Center",
+          "sourceText": "Assaulter = Center. They represent the same formation position.",
+          "reviewStatus": "CONFIRMED"
+        }
+      }
     ]
   },
   "roles": {
-    "_about": "Source categories: the labels the reference forum files ninjas under. They are NOT the in-game formation. Every mapping below is a PROPOSAL awaiting the client's approval; until then a category resolves to no formation.",
+    "_about": "Source categories: the channels of the reference material a ninja is filed under. They are NOT the in-game formation. A mapping to a formation is a PROPOSAL until the client approves it; a ninja's formation is otherwise taken only from its own card.",
     "rows": [
       {
-        "key": "supporters", "name": "supporters", "mappedFormationKey": "support", "mappingStatus": "PROPOSED",
-        "mappingNote": "One data point: 'Uchiha Madara (Moon's Eye)' is filed under 'supporters' and its card prints Formation: Support. Not yet confirmed as a general rule.",
-        "evidence": { "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png", "section": "thread header", "sourceText": "supporters", "reviewStatus": "CONFIRMED" }
+        "key": "supporters",
+        "name": "supporters",
+        "mappedFormationKey": "support",
+        "mappingStatus": "PROPOSED",
+        "mappingNote": "Las 17 fichas entregadas de este canal imprimen «Formation: Support». Falta la confirmación del cliente para aplicarlo a los ninjas sin ficha.",
+        "evidence": {
+          "asset": "03_REFERENCE_IMAGES/ninja_and_UI/image(10).png",
+          "section": "thread header",
+          "sourceText": "supporters",
+          "reviewStatus": "CONFIRMED"
+        }
       },
       {
-        "key": "assaulters", "name": "assaulters", "mappedFormationKey": "center", "mappingStatus": "PROPOSED",
-        "mappingNote": "Unproven. The names differ ('assaulters' vs 'Center') and no card of a ninja filed under 'assaulters' has been supplied.",
-        "evidence": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Known unresolved items", "sourceText": "The Discord channels are named supporters, assaulters, vanguards [...] Assaulter = Center is not proven.", "reviewStatus": "NEEDS_REVIEW" }
+        "key": "assaulters",
+        "name": "assaulters",
+        "mappedFormationKey": "assaulter",
+        "mappingStatus": "APPROVED",
+        "mappingNote": "Confirmado por el cliente: Assaulter = Center. Las 58 fichas entregadas de este canal imprimen «Formation: Assaulter» (中坚 en las fichas en chino).",
+        "evidence": {
+          "asset": "m3-client/CLIENT_CONFIRMED_DECISIONS_M3.md",
+          "section": "A. Assaulter and Center",
+          "sourceText": "Assaulter = Center. They represent the same formation position.",
+          "reviewStatus": "CONFIRMED"
+        }
       },
       {
-        "key": "vanguards", "name": "vanguards", "mappedFormationKey": "vanguard", "mappingStatus": "PROPOSED",
-        "mappingNote": "Same word as the formation, but no card of a ninja filed under 'vanguards' has been supplied.",
-        "evidence": { "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md", "section": "Known unresolved items", "sourceText": "The Discord channels are named supporters, assaulters, vanguards", "reviewStatus": "NEEDS_REVIEW" }
+        "key": "vanguards",
+        "name": "vanguards",
+        "mappedFormationKey": "vanguard",
+        "mappingStatus": "PROPOSED",
+        "mappingNote": "Las 28 fichas entregadas de este canal imprimen «Formation: Vanguard» (先锋 en la ficha en chino, Avant-garde en la francesa). Falta la confirmación del cliente para aplicarlo a los ninjas sin ficha.",
+        "evidence": {
+          "asset": "02_REQUIREMENTS/CLIENT_CONFIRMED_DECISIONS.md",
+          "section": "Known unresolved items",
+          "sourceText": "The Discord channels are named supporters, assaulters, vanguards",
+          "reviewStatus": "NEEDS_REVIEW"
+        }
+      },
+      {
+        "key": "alien-ninjas",
+        "name": "alien-ninjas",
+        "mappedFormationKey": null,
+        "mappingStatus": "UNMAPPED",
+        "mappingNote": "Colección aparte de la lista de lanzamientos. No corresponde a una formación: cada ficha imprime la suya.",
+        "evidence": {
+          "asset": "m2-handoff/M2_Part_1_Core_and_Claude_Prompt/04_REVIEW_AND_DELIVERY/COLLECTION_INVENTORY.csv",
+          "section": "Alien Ninjas",
+          "sourceText": "Alien Ninjas,10,complete,separate category from 167-month release roster",
+          "reviewStatus": "CONFIRMED"
+        }
+      },
+      {
+        "key": "awakening-ninjas",
+        "name": "awakening-ninjas",
+        "mappedFormationKey": null,
+        "mappingStatus": "UNMAPPED",
+        "mappingNote": "Canal de despertares. No corresponde a una formación.",
+        "evidence": {
+          "asset": "m2-handoff/M2_Part_1_Core_and_Claude_Prompt/04_REVIEW_AND_DELIVERY/COLLECTION_INVENTORY.csv",
+          "section": "Awakening Ninjas",
+          "sourceText": "Awakening Ninjas,7,complete,overlaps with two formation channels",
+          "reviewStatus": "CONFIRMED"
+        }
       }
     ]
   },
   "statusCategories": {
     "_about": "Structural facets used to classify dictionary entries. Spanish labels are interface wording, not game terms.",
     "rows": [
-      { "key": "dot", "name": "DoT", "nameEs": "Daño en el tiempo (DoT)" },
-      { "key": "cc", "name": "CC", "nameEs": "Control (CC)" },
-      { "key": "stat_modifier", "name": "Stat modifier", "nameEs": "Modifica estadísticas" },
-      { "key": "immunity", "name": "Immunity", "nameEs": "Inmunidad" },
-      { "key": "protection", "name": "Protection", "nameEs": "Protección" },
-      { "key": "restriction", "name": "Restriction", "nameEs": "Restricción" },
-      { "key": "hp_loss", "name": "HP loss", "nameEs": "Pérdida de vida" },
-      { "key": "instant_death", "name": "Instant death", "nameEs": "Muerte instantánea" },
-      { "key": "damage_mechanic", "name": "Damage mechanic", "nameEs": "Mecánica de daño" },
-      { "key": "shield_mechanic", "name": "Shield mechanic", "nameEs": "Mecánica de escudo" }
+      {
+        "key": "dot",
+        "name": "DoT",
+        "nameEs": "Daño en el tiempo (DoT)"
+      },
+      {
+        "key": "cc",
+        "name": "CC",
+        "nameEs": "Control (CC)"
+      },
+      {
+        "key": "stat_modifier",
+        "name": "Stat modifier",
+        "nameEs": "Modifica estadísticas"
+      },
+      {
+        "key": "immunity",
+        "name": "Immunity",
+        "nameEs": "Inmunidad"
+      },
+      {
+        "key": "protection",
+        "name": "Protection",
+        "nameEs": "Protección"
+      },
+      {
+        "key": "restriction",
+        "name": "Restriction",
+        "nameEs": "Restricción"
+      },
+      {
+        "key": "hp_loss",
+        "name": "HP loss",
+        "nameEs": "Pérdida de vida"
+      },
+      {
+        "key": "instant_death",
+        "name": "Instant death",
+        "nameEs": "Muerte instantánea"
+      },
+      {
+        "key": "damage_mechanic",
+        "name": "Damage mechanic",
+        "nameEs": "Mecánica de daño"
+      },
+      {
+        "key": "shield_mechanic",
+        "name": "Shield mechanic",
+        "nameEs": "Mecánica de escudo"
+      }
     ]
+  },
+  "clientDecisionsM3": {
+    "asset": "m3-client/CLIENT_CONFIRMED_DECISIONS_M3.md",
+    "file": "client-decisions-m3.md"
   }
 }

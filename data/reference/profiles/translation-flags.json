@@ -1,0 +1,96 @@
+{
+ "_about": "Differences between the English original and the supplied Spanish text that a person found by reading both. Differences in line count or in numbers are detected by the loader on its own and are not listed here. Nothing is corrected: both texts are stored as supplied and the line is marked for review. `line` is the English line, verbatim.",
+ "flags": [
+  {
+   "sourceId": "vanguards:01-cursed-seal-sasuke",
+   "line": "Immune to 100% of enemy defenses, 40% control rate, death seed, and fury reduction.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English says «Immune to 100% of enemy defenses». The Spanish splits this line in two and says «Ignora el 100% de las defensas enemigas» (ignores), which is a different effect.",
+   "noteEs": "El inglés dice «Immune to 100% of enemy defenses» (inmune). El español parte la línea en dos y dice «Ignora el 100% de las defensas enemigas», que es otro efecto. Hay que confirmar cuál es el correcto."
+  },
+  {
+   "sourceId": "vanguards:2-12-sai-errant-knight",
+   "line": "Restores 68 self fury, 30 for allies.",
+   "code": "ES_TEXT_CUT",
+   "note": "The supplied Spanish line is cut off in the source after «30 para los».",
+   "noteEs": "La línea en español está cortada en el material entregado después de «30 para los»."
+  },
+  {
+   "sourceId": "assaulters:60",
+   "line": "Increases self agility, force, and hp (60%), 87% speed, 75% damage rate, and 75% avoid injury.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The Spanish says «reducción de daño» for «avoid injury». Other supplied translations say «evasión de daño» or «tasa de evitar daño» for the same stat.",
+   "noteEs": "El español dice «reducción de daño» para «avoid injury». Otras traducciones entregadas dicen «evasión de daño» o «tasa de evitar daño» para el mismo atributo."
+  },
+  {
+   "sourceId": "assaulters:60",
+   "line": "Decreases all enemies' crit rate by 20%, avoid injury by 30%, attack by 30%, damage rate by 30%, and punch rate by 45%.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The Spanish says «reducción de daño» for «avoid injury» and «tasa de perforación» for «punch rate». Other supplied translations say «tasa de golpe» for punch rate.",
+   "noteEs": "El español dice «reducción de daño» para «avoid injury» y «tasa de perforación» para «punch rate». Otras traducciones entregadas dicen «tasa de golpe» para punch rate."
+  },
+  {
+   "sourceId": "assaulters:06",
+   "line": "Decreases enemies' s.attack by 30% and avoid injury by 15% for 3 rounds.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English says s.attack; the Spanish says the generic 'ataque'. Whether s.attack is strategy attack or plain attack is not settled.",
+   "noteEs": "El inglés dice s.attack y el español dice «ataque» a secas. No está resuelto si s.attack es el ataque estratégico o el ataque normal."
+  },
+  {
+   "sourceId": "assaulters:50",
+   "line": "Increases all allies' speed by 116%, attack by 35%, damage rate by 30%, and ignore defense by 40%.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English raises 'ignore defense' by 40%; the Spanish says 'resistencia a la ignorancia de defensa', which is the resistance stat.",
+   "noteEs": "El inglés aumenta «ignore defense» en 40%; el español dice «resistencia a la ignorancia de defensa», que es el atributo de resistencia."
+  },
+  {
+   "sourceId": "assaulters:55",
+   "line": "Increases earth, fire, and thunder chakra allies' control resistance by 25%, and damage rate by 30%.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English names earth, fire and thunder chakra allies; the Spanish names only fire and thunder ('fuego y rayo'). Earth is missing in the Spanish.",
+   "noteEs": "El inglés nombra aliados de chakra tierra, fuego y trueno; el español solo nombra fuego y rayo. Falta tierra en el español."
+  },
+  {
+   "sourceId": "assaulters:58",
+   "line": "After being attacked, heals all allies with 30% rate, and has a 50% chance to make 1 random enemy enter (15%) corrosion state for 2 rounds.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English says 'rate' or 'growth rate'; the Spanish renders it as 'probabilidad' (chance). The rate is kept as a rate and not read as a chance.",
+   "noteEs": "El inglés dice «rate» o «growth rate»; el español lo traduce como «probabilidad». Se conserva como tasa y no se lee como probabilidad de activación."
+  },
+  {
+   "sourceId": "assaulters:58",
+   "line": "Attacks all enemies with 300% growth rate.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English says 'rate' or 'growth rate'; the Spanish renders it as 'probabilidad' (chance). The rate is kept as a rate and not read as a chance.",
+   "noteEs": "El inglés dice «rate» o «growth rate»; el español lo traduce como «probabilidad». Se conserva como tasa y no se lee como probabilidad de activación."
+  },
+  {
+   "sourceId": "assaulters:58",
+   "line": "Deals an additional strategy attack based hit to all enemies with 150% growth rate.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English says 'rate' or 'growth rate'; the Spanish renders it as 'probabilidad' (chance). The rate is kept as a rate and not read as a chance.",
+   "noteEs": "El inglés dice «rate» o «growth rate»; el español lo traduce como «probabilidad». Se conserva como tasa y no se lee como probabilidad de activación."
+  },
+  {
+   "sourceId": "assaulters:58",
+   "line": "Heals all allies with 50% rate.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The English says 'rate' or 'growth rate'; the Spanish renders it as 'probabilidad' (chance). The rate is kept as a rate and not read as a chance.",
+   "noteEs": "El inglés dice «rate» o «growth rate»; el español lo traduce como «probabilidad». Se conserva como tasa y no se lee como probabilidad de activación."
+  },
+  {
+   "sourceId": "supporters:16_shin-uchiha",
+   "line": "Decreases enemy supporters' fury by 50 and defenses by 30% for 1 round.",
+   "code": "ES_WORDING_DIFFERS",
+   "note": "The Spanish says 'furia de los aliados enemigos' (allied enemies), which contradicts itself. The English says enemy supporters.",
+   "noteEs": "El español dice «aliados enemigos», que se contradice. El inglés dice enemy supporters (soportes enemigos)."
+  },
+  {
+   "sourceId": "supporters:47_kimono-kurenai",
+   "line": "Restores 68 self fury, 30 for allies.",
+   "code": "ES_TEXT_CUT",
+   "note": "The supplied Spanish skill text ends after alternative 3. The English fury restoration line has no Spanish counterpart. Not invented.",
+   "noteEs": "El texto en español de la habilidad termina tras la alternativa 3. La línea de restauración de furia del original en inglés no tiene equivalente en español. No se ha inventado."
+  }
+ ]
+}

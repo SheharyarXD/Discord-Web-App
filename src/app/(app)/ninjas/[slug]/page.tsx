@@ -6,7 +6,7 @@ import { requireUser } from "@/server/auth/guards";
 import { getNinjaBySlug } from "@/server/queries/ninjas";
 import { Card, PageHeader, Tag } from "@/components/ui/primitives";
 import { ResponsiveTable } from "@/components/ui/responsive-table";
-import { EffectList } from "@/components/game/effect-line";
+import { AbilityBody, AwakeningList } from "@/components/game/ability-body";
 import { Localized } from "@/components/game/localized";
 import { ReviewBadge } from "@/components/game/review-badge";
 import { TalentGroup } from "@/components/game/talent-group";
@@ -57,7 +57,16 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
             <Fact label={t("ninja.type")}>{ninja.type ? (ninja.type.nameEs ?? ninja.type.name) : unknown}</Fact>
             <Fact
               label={t("ninja.formation")}
-              hint={ninja.formation?.origin === "APPROVED_MAPPING" ? t("ninja.formationFromMapping") : undefined}
+              hint={
+                ninja.formation?.origin === "APPROVED_MAPPING"
+                  ? t("ninja.formationFromMapping")
+                  : ninja.formation?.equivalence
+                    ? t(ninja.formation.equivalence.status === "APPROVED" ? "ninja.equivalenceApproved" : "ninja.equivalenceProposed", {
+                        label: ninja.formation.name,
+                        formation: ninja.formation.equivalence.toNameEs ?? ninja.formation.equivalence.toName,
+                      })
+                    : undefined
+              }
             >
               {ninja.formation ? (
                 <>
@@ -93,6 +102,23 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
             <Fact label={t("ninja.natures")}>
               {ninja.natures.length > 0 ? ninja.natures.map((n) => n.name).join(", ") : <span className="text-muted">{t("ninja.noNatures")}</span>}
             </Fact>
+            {ninja.aliases.length > 0 && (
+              <Fact label={t("ninja.aliases")}>
+                <ul className="flex flex-col gap-1" data-aliases>
+                  {ninja.aliases.map((a) => (
+                    <li key={`${a.kind}-${a.alias}`}>
+                      <span lang={a.locale}>{a.alias}</span> <span className="text-xs text-muted">({t(`ninja.aliasKind.${a.kind}`)})</span>
+                      {a.status === "REVIEWED" && (
+                        <span className="block text-xs text-warn" title={a.note ?? undefined}>
+                          <span aria-hidden>⚠ </span>
+                          {t("ninja.aliasReviewed")}
+                        </span>
+                      )}
+                    </li>
+                  ))}
+                </ul>
+              </Fact>
+            )}
           </dl>
         </Card>
       </section>
@@ -102,7 +128,7 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
           {t("ninja.baseStats")}
         </h2>
         {ninja.baseStats.length === 0 ? (
-          <p className="text-sm text-muted">{t("ninja.noBaseStats")}</p>
+          <p className="text-sm text-muted">{t(sparse || ninja.rating ? "ninja.noBaseStats" : "ninja.noCard")}</p>
         ) : (
           <Card>
             <ResponsiveTable
@@ -139,7 +165,7 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
         {ninja.abilities.length === 0 ? (
           <p className="text-sm text-muted">{t("ninja.noAbilities")}</p>
         ) : (
-          <div className="grid gap-3 lg:grid-cols-2">
+          <div className="flex flex-col gap-3">
             {ninja.abilities.map((a) => (
               <Card key={a.id}>
                 <div className="flex flex-wrap items-center justify-between gap-2">
@@ -150,23 +176,15 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
                   <ReviewBadge status={a.reviewStatus} t={t} />
                 </div>
                 <h3 className="mt-1 font-semibold">{a.nameEs ?? a.name}</h3>
-                {a.description ? (
-                  <p className="mt-1 text-sm text-muted">
-                    <Localized source={a.description} spanish={a.descriptionEs} status={a.translationStatus} t={t} />
-                  </p>
-                ) : (
-                  a.effects.length === 0 && <p className="mt-1 text-sm text-muted">{t("ninja.nameOnly")}</p>
-                )}
                 {a.triggerText && (
                   <p className="mt-1 text-xs text-muted">
                     {t("ninja.trigger")}: {a.triggerText}
                   </p>
                 )}
-                {a.effects.length > 0 && (
-                  <div className="mt-3">
-                    <EffectList effects={a.effects} t={t} />
-                  </div>
-                )}
+                <div className="mt-2">
+                  <AbilityBody ability={a} t={t} />
+                </div>
+                <AwakeningList awakenings={a.awakenings} t={t} />
               </Card>
             ))}
           </div>
@@ -188,7 +206,8 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
                 selectedOptionIds={g.selectedOptionIds}
                 selectAction={selectTalentAction}
                 hiddenFields={{ slug: ninja.slug }}
-                pendingReview={g.reviewStatus !== "CONFIRMED"}
+                pendingReview={g.reviewStatus === "NEEDS_REVIEW"}
+                pendingKey={g.note === "SEVERAL_TALENTS" ? "talents.severalPending" : "talents.rulesPending"}
                 t={t}
               />
             ))}
@@ -209,7 +228,8 @@ export default async function NinjaDetailPage({ params }: { params: Promise<{ sl
                   <ReviewBadge status={s.reviewStatus} t={t} />
                   <span className="break-all text-muted">{s.assetPath.split("/").pop()}</span>
                 </div>
-                {s.sourceText && <q className="mt-1 block">{s.sourceText}</q>}
+                {s.field && <p className="mt-1 text-muted">{s.field}</p>}
+                {s.sourceText && <q className="mt-1 block whitespace-pre-line">{s.sourceText}</q>}
                 {s.ambiguityNote && <p className="mt-1 text-warn">{s.ambiguityNote}</p>}
               </li>
             ))}

@@ -1,4 +1,4 @@
-import { MAPPING_STATUSES, MAX_MONTH, MIN_MONTH, type MappingStatus } from "./constants";
+import { EQUIVALENCE_STATUSES, MAPPING_STATUSES, MAX_MONTH, MIN_MONTH, type MappingStatus } from "./constants";
 
 // ───────────────────────── Release period ─────────────────────────
 
@@ -82,4 +82,15 @@ export function resolveFormation<F extends FormationRef>(input: {
     return { formation: role.mappedFormation, origin: "APPROVED_MAPPING" };
   }
   return null;
+}
+
+// ───────────────────────── Formation equivalence ─────────────────────────
+
+/**
+ * The formation whose rules apply. A card label such as "Assaulter" only takes the rules of
+ * another row ("Center": primary stat, team limit) once their equivalence is APPROVED.
+ * While it is merely PROPOSED the label stands on its own and nothing is derived from it.
+ */
+export function ruleFormation<R>(formation: R & { equivalenceStatus: string; equivalentTo: R | null }): R {
+  return formation.equivalenceStatus === EQUIVALENCE_STATUSES.APPROVED && formation.equivalentTo ? formation.equivalentTo : formation;
 }

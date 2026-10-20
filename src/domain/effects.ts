@@ -5,6 +5,8 @@ import {
   VALUE_TYPES,
   type Cleansability,
   type ConditionScope,
+  type EffectKind,
+  type RateKind,
   type ModifierDirection,
   type Polarity,
   type StatusKind,
@@ -130,6 +132,7 @@ export interface StatusUsageView {
 export interface EffectView {
   id: string;
   statisticName: string | null;
+  statisticKey: string | null;
   value: number | null;
   valueType: ValueType;
   targetName: string | null;
@@ -147,6 +150,23 @@ export interface EffectView {
   structuredStatus: StructuredStatus;
   sourceText: string | null;
   status: StatusUsageView | null;
+  kind: EffectKind;
+  /** A rate stated by the source. Never a probability unless rateKind is APPLICATION. */
+  rateValue: number | null;
+  rateKind: RateKind | null;
+  replacesValue: number | null;
+  valueNote: string | null;
+  targetCount: number | null;
+  targetSelector: string | null;
+  excludesSelf: boolean;
+  /** Rows sharing a choiceGroup are alternatives: ONE of them applies. */
+  choiceGroup: number | null;
+  choiceLabel: string | null;
+  /** Position of the source line inside its ability; rows parsed from one line share it. */
+  sourceLine: number | null;
+  note: string | null;
+  descriptionEs: string | null;
+  translationStatus: TranslationStatus;
 }
 
 /** Fills the M2 fields with neutral defaults; used by fixtures and mappers. */
@@ -155,6 +175,7 @@ export function makeEffectView(
 ): EffectView {
   return {
     statisticName: null,
+    statisticKey: null,
     value: null,
     valueType: VALUE_TYPES.FLAT,
     targetName: null,
@@ -169,6 +190,20 @@ export function makeEffectView(
     structuredStatus: STRUCTURED_STATUSES.STRUCTURED,
     sourceText: null,
     status: null,
+    kind: "STAT",
+    rateValue: null,
+    rateKind: null,
+    replacesValue: null,
+    valueNote: null,
+    targetCount: null,
+    targetSelector: null,
+    excludesSelf: false,
+    choiceGroup: null,
+    choiceLabel: null,
+    sourceLine: null,
+    note: null,
+    descriptionEs: null,
+    translationStatus: "MISSING",
     ...base,
   };
 }
@@ -177,16 +212,20 @@ export function makeEffectView(
  *   UNCONDITIONAL          nothing restricts activation
  *   CONDITIONAL            structured activation conditions exist
  *   CONDITIONAL_UNRESOLVED a requirement is known only as text
+ *   TRIGGERED              applies only when something happens ("after being attacked")
  *   NEEDS_REVIEW           the structure is unverified — must NOT be shown as "always active"
+ *   TEXT_ONLY              kept as source wording only — nothing is claimed about when it applies
  */
-export type ConditionState = "UNCONDITIONAL" | "CONDITIONAL" | "CONDITIONAL_UNRESOLVED" | "NEEDS_REVIEW";
+export type ConditionState = "UNCONDITIONAL" | "CONDITIONAL" | "CONDITIONAL_UNRESOLVED" | "TRIGGERED" | "NEEDS_REVIEW" | "TEXT_ONLY";
 
-type Conditionality = Pick<EffectView, "conditions"> & Partial<Pick<EffectView, "conditionText" | "structuredStatus">>;
+type Conditionality = Pick<EffectView, "conditions"> & Partial<Pick<EffectView, "conditionText" | "structuredStatus" | "triggerText">>;
 
 export function effectConditionState(effect: Conditionality): ConditionState {
   if (effect.conditions.length > 0) return "CONDITIONAL";
   if (effect.conditionText) return "CONDITIONAL_UNRESOLVED";
+  if (effect.structuredStatus === STRUCTURED_STATUSES.TEXT_ONLY) return "TEXT_ONLY";
   if (effect.structuredStatus === STRUCTURED_STATUSES.NEEDS_REVIEW) return "NEEDS_REVIEW";
+  if (effect.triggerText) return "TRIGGERED";
   return "UNCONDITIONAL";
 }
 
@@ -271,6 +310,51 @@ export function evaluateActivation(effect: Conditionality, ctx: ActivationContex
     effect.conditions.length === 0
       ? "MET"
       : or(groupConditions(effect.conditions).map((group) => and(group.map((c) => evaluateOne(c, ctx)))));
-  const unresolved = Boolean(effect.conditionText) || effect.structuredStatus === STRUCTURED_STATUSES.NEEDS_REVIEW;
+  const unresolved =
+    Boolean(effect.conditionText) ||
+    Boolean(effect.triggerText) ||
+    effect.structuredStatus === STRUCTURED_STATUSES.NEEDS_REVIEW ||
+    effect.structuredStatus === STRUCTURED_STATUSES.TEXT_ONLY;
   return unresolved ? and([structured, "UNKNOWN"]) : structured;
+}
+
+// ───────────────────────── Alternatives & source lines ─────────────────────────
+
+export interface ChoiceGroupView<E> {
+  group: number;
+  /** Options of which ONE applies. The source does not always say how the option is picked. */
+  options: { label: string | null; effects: E[] }[];
+}
+
+/**
+ * Separates effects that always belong to the ability from alternatives ("A — … OR B — …").
+ * Groups are independent of each other; inside a group the options are never combined.
+ */
+export function splitChoices<E extends Pick<EffectView, "choiceGroup" | "choiceLabel">>(effects: E[]): { fixed: E[]; choices: ChoiceGroupView<E>[] } {
+  const fixed: E[] = [];
+  const groups = new Map<number, Map<string, E[]>>();
+  for (const e of effects) {
+    if (e.choiceGroup === null) {
+      fixed.push(e);
+      continue;
+    }
+    const options = groups.get(e.choiceGroup) ?? new Map<string, E[]>();
+    const key = e.choiceLabel ?? "";
+    options.set(key, [...(options.get(key) ?? []), e]);
+    groups.set(e.choiceGroup, options);
+  }
+  const choices = [...groups.entries()]
+    .sort(([a], [b]) => a - b)
+    .map(([group, options]) => ({ group, options: [...options.entries()].map(([label, list]) => ({ label: label || null, effects: list })) }));
+  return { fixed, choices };
+}
+
+/** Groups rows by the source line they were read from, keeping the order of the source. */
+export function groupBySourceLine<E extends Pick<EffectView, "sourceLine" | "id">>(effects: E[]): E[][] {
+  const lines = new Map<string, E[]>();
+  for (const e of effects) {
+    const key = e.sourceLine === null ? `single:${e.id}` : `line:${e.sourceLine}`;
+    lines.set(key, [...(lines.get(key) ?? []), e]);
+  }
+  return [...lines.values()];
 }

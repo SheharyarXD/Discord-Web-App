@@ -1,0 +1,2148 @@
+{
+ "_about": "Staged transcription of one reference channel. Text is copied verbatim from the cited files under docs/m2-handoff/ (only the bullet marker is removed). Card values were read from the card images. Nothing here is interpreted: identities are resolved in identity-map.json and numbers are parsed by the loader. The Spanish text of entries 1 to 16 comes from the supplementary recovery package (M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters).",
+ "channel": "supporters",
+ "roleKey": "supporters",
+ "collectionStatus": "PARTIAL",
+ "entries": [
+  {
+   "sourceId": "supporters:01_angel-konan",
+   "nameAsPosted": "Angel Konan",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/01_angel-konan.png",
+    "language": "en",
+    "namePlate": "Angel Konan",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "200",
+      "growth": "2.6"
+     },
+     {
+      "label": "Chakra",
+      "value": "200",
+      "growth": "2.6"
+     },
+     {
+      "label": "Agility",
+      "value": "200",
+      "growth": "3"
+     },
+     {
+      "label": "HP",
+      "value": "400",
+      "growth": "2.8"
+     }
+    ],
+    "talentLabel": {
+     "text": "Twilight Valkyrie",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Paper Plane Dance",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Twilight Valkyrie",
+     "name": "Twilight Valkyrie",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self chakra."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/01_angel-konan_ES.md",
+      "heading": "Valkiria del Crepúsculo",
+      "name": "Valkiria del Crepúsculo",
+      "lines": [
+       {
+        "text": "Aumenta el chakra propio."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Paper Plane Dance",
+     "name": "Paper Plane Dance",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 100% damage rate."
+       },
+       {
+        "text": "Heals allies except self with 130% rate."
+       },
+       {
+        "text": "Restores 100 self fury."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/01_angel-konan_ES.md",
+      "heading": "Baile del Avión de Papel",
+      "name": "Baile del Avión de Papel",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de daño del 100%."
+       },
+       {
+        "text": "Sanea a los aliados, excepto a sí misma, con una tasa del 130%."
+       },
+       {
+        "text": "Restaura 100 puntos de furia propia."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:02_cool-hinata",
+   "nameAsPosted": "Cool Hinata",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/02_cool-hinata.png",
+    "language": "en",
+    "namePlate": "Cool Hinata",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "S",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "800",
+      "growth": "3.8"
+     },
+     {
+      "label": "Chakra",
+      "value": "1200",
+      "growth": "4.2"
+     },
+     {
+      "label": "Agility",
+      "value": "1000",
+      "growth": "4.2"
+     },
+     {
+      "label": "HP",
+      "value": "2000",
+      "growth": "4"
+     }
+    ],
+    "talentLabel": {
+     "text": "Chakra Talent",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Gentle Step: Twin Lion Fi",
+     "truncated": true
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Chakra Talent",
+     "name": "Chakra Talent",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility and chakra, 10% damage rate, 10% crit rate, and 10% punch rate."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/02_cool-hinata_ES.md",
+      "heading": "Talento de Chakra",
+      "name": "Talento de Chakra",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia y el chakra, 10% de tasa de daño, 10% de tasa crítica, y 10% de tasa de golpe."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Gentle Step: Twin Lion",
+     "name": "Gentle Step: Twin Lion",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemy assaulters and supporters with 155% growth rate."
+       },
+       {
+        "text": "Decreases enemies' fury by 10 points."
+       },
+       {
+        "text": "Has a chance to control enemies for 3 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/02_cool-hinata_ES.md",
+      "heading": "Paso Gentil: León Gemelo",
+      "name": "Paso Gentil: León Gemelo",
+      "lines": [
+       {
+        "text": "Ataca a los asaltantes y apoyos enemigos con una tasa de crecimiento del 155%."
+       },
+       {
+        "text": "Reduce la furia de los enemigos en 10 puntos."
+       },
+       {
+        "text": "Tiene una probabilidad de controlar a los enemigos durante 3 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:03_yagura",
+   "nameAsPosted": "Yagura",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/03_yagura.png",
+    "language": "en",
+    "namePlate": "Yagura",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "S",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "200",
+      "growth": "2.4"
+     },
+     {
+      "label": "Chakra",
+      "value": "300",
+      "growth": "2.6"
+     },
+     {
+      "label": "Agility",
+      "value": "300",
+      "growth": "2.6"
+     },
+     {
+      "label": "HP",
+      "value": "400",
+      "growth": "3"
+     }
+    ],
+    "talentLabel": {
+     "text": "3-Tails Jinchuriki",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Water ReleaseGreat Wat",
+     "truncated": true
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: 3-Tails Jinchuriki",
+     "name": "3-Tails Jinchuriki",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility and defenses by a certain percentage, 10% avoid injury, and 5% punch rate."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/03_yagura_ES.md",
+      "heading": "Jinchuriki de 3 Colas",
+      "name": "Jinchuriki de 3 Colas",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia y las defensas en un cierto porcentaje, 10% de tasa de evitar daño, y 5% de tasa de golpe."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Water Release - Great Waterfall",
+     "name": "Water Release - Great Waterfall",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 120% growth rate."
+       },
+       {
+        "text": "Reduces enemies' healing rate by 50%."
+       },
+       {
+        "text": "Poisons enemies with 50% rate for 2 rounds."
+       },
+       {
+        "text": "Increases ally supporters' defenses by 10% for 3 rounds."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/03_yagura_ES.md",
+      "heading": "Liberación de Agua • Gran Cascada",
+      "name": "Liberación de Agua • Gran Cascada",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 120%."
+       },
+       {
+        "text": "Reduce la tasa de curación de los enemigos en un 50%."
+       },
+       {
+        "text": "Envenena a los enemigos con una tasa del 50% durante 2 rondas."
+       },
+       {
+        "text": "Aumenta las defensas de los apoyos aliados en un 10% durante 3 rondas."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:04_uchiha-obito-golden",
+   "nameAsPosted": "Uchiha Obito (Golden)",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/04_uchiha-obito-golden.png",
+    "language": "en",
+    "namePlate": "Uchiha Obito",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "200",
+      "growth": "2.6"
+     },
+     {
+      "label": "Chakra",
+      "value": "200",
+      "growth": "3.2"
+     },
+     {
+      "label": "Agility",
+      "value": "200",
+      "growth": "2.6"
+     },
+     {
+      "label": "HP",
+      "value": "400",
+      "growth": "3"
+     }
+    ],
+    "talentLabel": {
+     "text": "Temporal",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Fire ReleaseBomb Blast D",
+     "truncated": true
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Temporal",
+     "name": "Temporal",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility and 4% punch rate."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/04_uchiha-obito-golden_ES.md",
+      "heading": "Temporal",
+      "name": "Temporal",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia y un 4% la tasa de golpe."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Fire Release - Bomb Blast Dance",
+     "name": "Fire Release - Bomb Blast Dance",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 120% growth rate."
+       },
+       {
+        "text": "Enters control immune state for 2 rounds."
+       },
+       {
+        "text": "Dispels ally supporters' debuffs."
+       },
+       {
+        "text": "Restores 100 self fury, 25 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/04_uchiha-obito-golden_ES.md",
+      "heading": "Liberación de Fuego • Danza de la Explosión de la Bomba",
+      "name": "Liberación de Fuego • Danza de la Explosión de la Bomba",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 120%."
+       },
+       {
+        "text": "Entra en el estado inmune a control durante 2 rondas."
+       },
+       {
+        "text": "Disipa los debuffs de los apoyos aliados."
+       },
+       {
+        "text": "Restaura 100 de furia propia, 25 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:05_outer-path-obito",
+   "nameAsPosted": "Outer Path Obito",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/05_outer-path-obito.png",
+    "language": "en",
+    "namePlate": "Outer Path-Obito",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "700",
+      "growth": "3.6"
+     },
+     {
+      "label": "Chakra",
+      "value": "800",
+      "growth": "4"
+     },
+     {
+      "label": "Agility",
+      "value": "1000",
+      "growth": "4"
+     },
+     {
+      "label": "HP",
+      "value": "2000",
+      "growth": "4"
+     }
+    ],
+    "talentLabel": {
+     "text": "Power of Outer Path",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Otoke Boya Yainma",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Power of Outer Path",
+     "name": "Power of Outer Path",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility and 10% self punch rate."
+       },
+       {
+        "text": "Immune to fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/05_outer-path-obito_ES.md",
+      "heading": "Poder del Camino Exterior",
+      "name": "Poder del Camino Exterior",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia y 10% a la tasa de golpe propia."
+       },
+       {
+        "text": "Inmune a la reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Otoke Boya Yainma",
+     "name": "Otoke Boya Yainma",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 160% growth rate."
+       },
+       {
+        "text": "Ally supporters enter control immune state for 2 rounds."
+       },
+       {
+        "text": "Dispels ally supporters' debuffs."
+       },
+       {
+        "text": "Restores 100 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/05_outer-path-obito_ES.md",
+      "heading": "Otoke Boya Yainma",
+      "name": "Otoke Boya Yainma",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 160%."
+       },
+       {
+        "text": "Los apoyos aliados entran en un estado inmune al control durante 2 rondas."
+       },
+       {
+        "text": "Disipa los debuffs de los apoyos aliados."
+       },
+       {
+        "text": "Restaura 100 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:06_10-tailed-obito",
+   "nameAsPosted": "10-Tailed Obito",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/06_10-tailed-obito.png",
+    "language": "en",
+    "namePlate": "10-Tails Obito",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "1200",
+      "growth": "3.9"
+     },
+     {
+      "label": "Chakra",
+      "value": "1600",
+      "growth": "4.8"
+     },
+     {
+      "label": "Agility",
+      "value": "1200",
+      "growth": "4.2"
+     },
+     {
+      "label": "HP",
+      "value": "5000",
+      "growth": "4.2"
+     }
+    ],
+    "talentLabel": {
+     "text": "10-Tailed Jinchuriki",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Tsukuyomi unlimited",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: 10-Tailed Jinchuriki",
+     "name": "10-Tailed Jinchuriki",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, but decreases 10% avoid injury and 10% punch rate."
+       },
+       {
+        "text": "Immune to stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/06_10-tailed-obito_ES.md",
+      "heading": "Jinchuriki de 10 Colas",
+      "name": "Jinchuriki de 10 Colas",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia, pero disminuye un 10% la tasa de evitar daño y un 10% la tasa de golpe."
+       },
+       {
+        "text": "Inmune al aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Tsukuyomi Unlimited",
+     "name": "Tsukuyomi Unlimited",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 180% growth rate."
+       },
+       {
+        "text": "High rate to stun enemies."
+       },
+       {
+        "text": "Decreases enemies' attack by 10%."
+       },
+       {
+        "text": "Restores 30 self fury, 20 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/06_10-tailed-obito_ES.md",
+      "heading": "Tsukuyomi Ilimitado",
+      "name": "Tsukuyomi Ilimitado",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 180%."
+       },
+       {
+        "text": "Alta probabilidad de aturdir a los enemigos."
+       },
+       {
+        "text": "Disminuye un 10% el ataque de los enemigos."
+       },
+       {
+        "text": "Restaura 30 de furia propia, 20 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:07_uchiha-madara",
+   "nameAsPosted": "Uchiha Madara",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/07_uchiha-madara.png",
+    "language": "en",
+    "namePlate": "Uchiha Madara",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "200",
+      "growth": "2.6"
+     },
+     {
+      "label": "Chakra",
+      "value": "200",
+      "growth": "3"
+     },
+     {
+      "label": "Agility",
+      "value": "200",
+      "growth": "2.6"
+     },
+     {
+      "label": "HP",
+      "value": "400",
+      "growth": "2.8"
+     }
+    ],
+    "talentLabel": {
+     "text": "Blood Sacrifice",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Aerolite Swipe",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Blood Sacrifice",
+     "name": "Blood Sacrifice",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, but decreases 10% crit rate and 10% punch rate."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/07_uchiha-madara_ES.md",
+      "heading": "Sacrificio de Sangre",
+      "name": "Sacrificio de Sangre",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia, pero disminuye un 10% la tasa de crítico y un 10% la tasa de golpe."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Aerolite Swipe",
+     "name": "Aerolite Swipe",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemy supporters with 150% growth rate."
+       },
+       {
+        "text": "Increases ally supporters' attack by 10% for 2 rounds."
+       },
+       {
+        "text": "Restores 100 self fury, 25 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/07_uchiha-madara_ES.md",
+      "heading": "Golpe de Aerolito",
+      "name": "Golpe de Aerolito",
+      "lines": [
+       {
+        "text": "Ataca a los apoyos enemigos con una tasa de crecimiento del 150%."
+       },
+       {
+        "text": "Aumenta el ataque de los apoyos aliados en un 10% durante 2 rondas."
+       },
+       {
+        "text": "Restaura 100 de furia propia, 25 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:08_reanimated-madara",
+   "nameAsPosted": "Reanimated Madara",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/08_reanimated-madara.png",
+    "language": "en",
+    "namePlate": "Reanimated Madara",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "600",
+      "growth": "3.4"
+     },
+     {
+      "label": "Chakra",
+      "value": "500",
+      "growth": "4"
+     },
+     {
+      "label": "Agility",
+      "value": "900",
+      "growth": "3.4"
+     },
+     {
+      "label": "HP",
+      "value": "1200",
+      "growth": "3.9"
+     }
+    ],
+    "talentLabel": {
+     "text": "Reanimation",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Trees Destruction",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Reanimation",
+     "name": "Reanimation",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility and 10% damage rate, but 10% lower rate of crit and punch."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/08_reanimated-madara_ES.md",
+      "heading": "Reanimación",
+      "name": "Reanimación",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad propia y un 10% de tasa de daño, pero disminuye la tasa de crítico y golpe en un 10%."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Trees Destruction",
+     "name": "Trees Destruction",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemy supporters with 185% growth rate."
+       },
+       {
+        "text": "Increases ally supporters' attack by 15% for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' fury by 5."
+       },
+       {
+        "text": "Restores 100 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/08_reanimated-madara_ES.md",
+      "heading": "Destrucción de Árboles",
+      "name": "Destrucción de Árboles",
+      "lines": [
+       {
+        "text": "Ataca a los soportes enemigos con una tasa de crecimiento del 185%."
+       },
+       {
+        "text": "Aumenta el ataque de los soportes aliados en un 15% durante 2 rondas."
+       },
+       {
+        "text": "Disminuye la furia de los enemigos en 5."
+       },
+       {
+        "text": "Restaura 100 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:09_six-paths-madara",
+   "nameAsPosted": "Six Paths Madara",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/09_six-paths-madara.png",
+    "language": "en",
+    "namePlate": "Six Paths Madara",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "1400",
+      "growth": "4"
+     },
+     {
+      "label": "Chakra",
+      "value": "2000",
+      "growth": "5"
+     },
+     {
+      "label": "Agility",
+      "value": "1400",
+      "growth": "4.3"
+     },
+     {
+      "label": "HP",
+      "value": "6000",
+      "growth": "4.4"
+     }
+    ],
+    "talentLabel": {
+     "text": "Yin-Yang Style",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Truth-Seeking Ball",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Yin-Yang Style",
+     "name": "Yin-Yang Style",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 10% avoid injury, and 10% punch rate."
+       },
+       {
+        "text": "Immune to stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/09_six-paths-madara_ES.md",
+      "heading": "Estilo Yin-Yang",
+      "name": "Estilo Yin-Yang",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 10% de evasión de daño, y 10% de tasa de golpe."
+       },
+       {
+        "text": "Inmune al aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Truth-Seeking Ball",
+     "name": "Truth-Seeking Ball",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 200% growth rate."
+       },
+       {
+        "text": "Decreases enemy vanguard's avoid injury by 50%, and enemy assaulters' and supporters' damage rate by 30% for 1 round."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/09_six-paths-madara_ES.md",
+      "heading": "Esfera de Búsqueda de la Verdad",
+      "name": "Esfera de Búsqueda de la Verdad",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 200%."
+       },
+       {
+        "text": "Disminuye la evasión de daño de la vanguardia enemiga en un 50%, y la tasa de daño de los asaltantes y soportes enemigos en un 30% durante 1 ronda."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:10_six-paths-sage",
+   "nameAsPosted": "Six Paths Sage",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/10_six-paths-sage.png",
+    "language": "en",
+    "namePlate": "Six Paths Sage",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "1600",
+      "growth": "4.2"
+     },
+     {
+      "label": "Chakra",
+      "value": "2500",
+      "growth": "5.5"
+     },
+     {
+      "label": "Agility",
+      "value": "1700",
+      "growth": "4.7"
+     },
+     {
+      "label": "HP",
+      "value": "7000",
+      "growth": "4.6"
+     }
+    ],
+    "talentLabel": {
+     "text": "Sage's Power",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Fusion of Tailed Beasts",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Sage's Power",
+     "name": "Sage's Power",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 10% avoid injury, and 10% damage rate."
+       },
+       {
+        "text": "Immune to stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/10_six-paths-sage_ES.md",
+      "heading": "Poder del Sabio",
+      "name": "Poder del Sabio",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 10% de evasión de daño, y 10% de tasa de daño."
+       },
+       {
+        "text": "Inmune al aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Fusion of Tailed Beast",
+     "name": "Fusion of Tailed Beast",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 180% growth rate."
+       },
+       {
+        "text": "50% rate to silence enemies for 2 rounds."
+       },
+       {
+        "text": "Poisons enemies with 70% rate for 1 round."
+       },
+       {
+        "text": "Increases supporters' punch rate by 10% and damage rate by 15% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/10_six-paths-sage_ES.md",
+      "heading": "Fusión de la Bestia con Cola",
+      "name": "Fusión de la Bestia con Cola",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 180%."
+       },
+       {
+        "text": "50% de probabilidad de silenciar a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Envenena a los enemigos con una tasa del 70% durante 1 ronda."
+       },
+       {
+        "text": "Aumenta la tasa de golpe de los soportes en un 10% y la tasa de daño en un 15% durante 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "talent_awakening",
+     "heading": "Talent Awakening 1: Sage Mode",
+     "name": "Sage Mode",
+     "stage": 1,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 92% speed, 55% damage rate, and 55% avoid injury."
+       },
+       {
+        "text": "Increases allies' speed by 116%, avoid injury and hp by 30%."
+       },
+       {
+        "text": "Increases ally supporters' physical defense and ally assaulters' strategy defense by 45%."
+       },
+       {
+        "text": "For every 10% hp loss, increases allies' avoid injury by 8%."
+       },
+       {
+        "text": "After being attacked, has 60% chance to dispel self debuffs, and 45% chance to dispel ally assaulters' debuffs."
+       },
+       {
+        "text": "Immune to fury reduction, stun, and imprison."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/10_six-paths-sage_ES.md",
+      "heading": "Despertar de Talento 1: <Nombre>",
+      "name": null,
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 92% de velocidad, 55% de tasa de daño, y 55% de evasión de daño."
+       },
+       {
+        "text": "Aumenta la velocidad de los aliados en un 116%, la evasión de daño y hp en un 30%."
+       },
+       {
+        "text": "Aumenta la defensa física de los soportes aliados y la defensa estratégica de los asaltantes aliados en un 45%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la evasión de daño de los aliados en un 8%."
+       },
+       {
+        "text": "Después de ser atacado, tiene un 60% de probabilidad de disipar los debuffs propios, y un 45% de probabilidad de disipar los debuffs de los asaltantes aliados."
+       },
+       {
+        "text": "Inmune a la reducción de furia, aturdimiento e imprison."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill_awakening",
+     "heading": "Skill Awakening: Ying Yang Release",
+     "name": "Ying Yang Release",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 330% growth rate."
+       },
+       {
+        "text": "80% rate to silence and stun enemies for 2 rounds."
+       },
+       {
+        "text": "Poisons enemies with 120% rate for 2 rounds."
+       },
+       {
+        "text": "Applies vein damage to enemy supporters with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Applies safeguard to enemy assaulters with 100% rate for 2 rounds."
+       },
+       {
+        "text": "Applies unification to enemy vanguard with 150% rate for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' attack by 30% for 2 rounds."
+       },
+       {
+        "text": "Increases allies' damage rate by 30% and attack by 20% for 2 rounds."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/10_six-paths-sage_ES.md",
+      "heading": "Despertar de Habilidad: <Nombre>",
+      "name": null,
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 330%."
+       },
+       {
+        "text": "80% de probabilidad de silenciar y aturdir a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Envenena a los enemigos con una tasa del 120% durante 2 rondas."
+       },
+       {
+        "text": "Aplica daño de venas a los soportes enemigos con una tasa del 100% durante 2 rondas."
+       },
+       {
+        "text": "Aplica protección a los asaltantes enemigos con una tasa del 100% durante 2 rondas."
+       },
+       {
+        "text": "Aplica unificación a la vanguardia enemiga con una tasa del 150% durante 2 rondas."
+       },
+       {
+        "text": "Disminuye el ataque de los enemigos en un 30% durante 2 rondas."
+       },
+       {
+        "text": "Aumenta la tasa de daño y ataque de los aliados en un 30% y un 20% respectivamente durante 2 rondas."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [
+    "This awakening also exists in the Awakening Ninjas source ZIP: deduplicate evidence, not identity."
+   ],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:11_three-eyed-madara",
+   "nameAsPosted": "Three Eyed Madara",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/11_three-eyed-madara.png",
+    "language": "en",
+    "namePlate": "Three Eyed Madara",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "1800",
+      "growth": "4.1"
+     },
+     {
+      "label": "Chakra",
+      "value": "2800",
+      "growth": "5.7"
+     },
+     {
+      "label": "Agility",
+      "value": "2000",
+      "growth": "4.8"
+     },
+     {
+      "label": "HP",
+      "value": "8500",
+      "growth": "4.7"
+     }
+    ],
+    "talentLabel": {
+     "text": "Rinnegan",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "RinneUltimate Tsukuyom",
+     "truncated": true
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Rinnegan",
+     "name": "Rinnegan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 18% speed, and 20% avoid injury."
+       },
+       {
+        "text": "Immune to stun and fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/11_three-eyed-madara_ES.md",
+      "heading": "Rinnegan",
+      "name": "Rinnegan",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 18% de velocidad, y 20% de evasión de daño."
+       },
+       {
+        "text": "Inmune al aturdimiento y a la reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Rinne - Ultimate Tsukuyomi",
+     "name": "Rinne - Ultimate Tsukuyomi",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 230% growth rate."
+       },
+       {
+        "text": "Decreases enemies' damage rate by 30% for 2 rounds."
+       },
+       {
+        "text": "Grants allies super dodge for 1 round."
+       },
+       {
+        "text": "Restores 25 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/11_three-eyed-madara_ES.md",
+      "heading": "Rinne – Ultimate Tsukuyomi",
+      "name": "Rinne – Ultimate Tsukuyomi",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 230%."
+       },
+       {
+        "text": "Disminuye la tasa de daño de los enemigos en 30% durante 2 rondas."
+       },
+       {
+        "text": "Otorga a los aliados superdodge durante 1 ronda."
+       },
+       {
+        "text": "Restaura 25 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:12_reanimated-nagato",
+   "nameAsPosted": "Reanimated Nagato",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/12_reanimated-nagato.png",
+    "language": "en",
+    "namePlate": "Reanimated Nagato",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "2000",
+      "growth": "4.5"
+     },
+     {
+      "label": "Chakra",
+      "value": "3000",
+      "growth": "5.7"
+     },
+     {
+      "label": "Agility",
+      "value": "2000",
+      "growth": "5"
+     },
+     {
+      "label": "HP",
+      "value": "9000",
+      "growth": "4.8"
+     }
+    ],
+    "talentLabel": {
+     "text": "Six Path Power",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Almighty Push",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Six Path Power",
+     "name": "Six Path Power",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 15% speed, and 20% damage rate."
+       },
+       {
+        "text": "Immune to fury reduction and stun."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/12_reanimated-nagato_ES.md",
+      "heading": "Six Path Power",
+      "name": "Six Path Power",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 15% de velocidad, y 20% de tasa de daño."
+       },
+       {
+        "text": "Inmune a la reducción de furia y al aturdimiento."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Almighty Push",
+     "name": "Almighty Push",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 240% growth rate."
+       },
+       {
+        "text": "Dispels allies' debuffs."
+       },
+       {
+        "text": "Increases allies' attack by 30% for 1 round."
+       },
+       {
+        "text": "Decreases enemies' defenses by 30% for 1 round."
+       },
+       {
+        "text": "Increases caster's speed by 20% for 2 rounds."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/12_reanimated-nagato_ES.md",
+      "heading": "Almighty Push",
+      "name": "Almighty Push",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 240%."
+       },
+       {
+        "text": "Dispels los debuffs de los aliados."
+       },
+       {
+        "text": "Aumenta el ataque de los aliados en 30% durante 1 ronda."
+       },
+       {
+        "text": "Disminuye las defensas de los enemigos en 30% durante 1 ronda."
+       },
+       {
+        "text": "Aumenta la velocidad del lanzador en 20% durante 2 rondas."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:13_indra-sasuke",
+   "nameAsPosted": "Indra Sasuke",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/13_indra-sasuke.png",
+    "language": "en",
+    "namePlate": "Indra-Sasuke",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "2000",
+      "growth": "4.5"
+     },
+     {
+      "label": "Chakra",
+      "value": "3200",
+      "growth": "6"
+     },
+     {
+      "label": "Agility",
+      "value": "2500",
+      "growth": "5.2"
+     },
+     {
+      "label": "HP",
+      "value": "10000",
+      "growth": "5.5"
+     }
+    ],
+    "talentLabel": {
+     "text": "Indra Power",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Indra Arrow",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Indra Power",
+     "name": "Indra Power",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 22% speed, 15% avoid injury, and 10% damage rate."
+       },
+       {
+        "text": "Decreases enemies' attack by 15%."
+       },
+       {
+        "text": "Immune to fury reduction and silence."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/13_indra-sasuke_ES.md",
+      "heading": "Indra Power",
+      "name": "Indra Power",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 22% de velocidad, 15% de evitar daño, y 10% de tasa de daño."
+       },
+       {
+        "text": "Disminuye el ataque de los enemigos en 15%."
+       },
+       {
+        "text": "Inmune a la reducción de furia y al silencio."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Indra Arrow",
+     "name": "Indra Arrow",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 240% growth rate."
+       },
+       {
+        "text": "65% rate to petrify enemies for 2 rounds."
+       },
+       {
+        "text": "Decreases enemies' counter rate by 20% for 2 rounds."
+       },
+       {
+        "text": "Poisons enemies with 100% rate for 1 round."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/13_indra-sasuke_ES.md",
+      "heading": "Indra Arrow",
+      "name": "Indra Arrow",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 240%."
+       },
+       {
+        "text": "65% de probabilidad de petrificar a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Disminuye la tasa de contraataque de los enemigos en 20% durante 2 rondas."
+       },
+       {
+        "text": "Envenena a los enemigos con una tasa del 100% durante 1 ronda."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:14_otsutsuki-toneri",
+   "nameAsPosted": "Otsutsuki Toneri",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/14_otsutsuki-toneri.png",
+    "language": "en",
+    "namePlate": "Otsutsuki Toneri",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "2000",
+      "growth": "5"
+     },
+     {
+      "label": "Chakra",
+      "value": "3500",
+      "growth": "6.5"
+     },
+     {
+      "label": "Agility",
+      "value": "2500",
+      "growth": "5.5"
+     },
+     {
+      "label": "HP",
+      "value": "12000",
+      "growth": "6"
+     }
+    ],
+    "talentLabel": {
+     "text": "Tenseigan",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Ginrin Reincarnation Exp",
+     "truncated": true
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Tenseigan",
+     "name": "Tenseigan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 25% speed, 15% damage rate, 15% avoid injury, and 15% punch rate."
+       },
+       {
+        "text": "Increases ally supporters' hp by 30%, and attack by 20%."
+       },
+       {
+        "text": "Immune to silence and chaos."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/14_otsutsuki-toneri_ES.md",
+      "heading": "Tenseigan",
+      "name": "Tenseigan",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 25% de velocidad, 15% de tasa de daño, 15% de evitar daño, y 15% de tasa de golpe."
+       },
+       {
+        "text": "Aumenta el hp de los aliados seguidores en 30%, y el ataque en 20%."
+       },
+       {
+        "text": "Inmune al silencio y al caos."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Ginrin Reincarnation Explosive",
+     "name": "Ginrin Reincarnation Explosive",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 280% growth rate."
+       },
+       {
+        "text": "65% rate to stun enemies for 2 rounds."
+       },
+       {
+        "text": "Decreases enemy defenses by 30% for 1 round."
+       },
+       {
+        "text": "Applies power drain (DoT) to all enemies with 100% rate for 1 round."
+       },
+       {
+        "text": "Dispels all allies debuffs, and ally supporters gain stun immunity for 1 round."
+       },
+       {
+        "text": "Restores 100 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/14_otsutsuki-toneri_ES.md",
+      "heading": "Explosión de Reencarnación Ginrin",
+      "name": "Explosión de Reencarnación Ginrin",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 280%."
+       },
+       {
+        "text": "65% de probabilidad de aturdir a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Disminuye las defensas de los enemigos en 30% durante 1 ronda."
+       },
+       {
+        "text": "Aplica drenaje de poder (DoT) a todos los enemigos con una tasa del 100% durante 1 ronda."
+       },
+       {
+        "text": "Dispels los debuffs de todos los aliados, y los aliados seguidores ganan inmunidad al aturdimiento durante 1 ronda."
+       },
+       {
+        "text": "Restaura 100 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:15_hinata-uzumaki",
+   "nameAsPosted": "Hinata Uzumaki",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/15_hinata-uzumaki.png",
+    "language": "en",
+    "namePlate": "Hinata Uzumaki",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "5000",
+      "growth": "6"
+     },
+     {
+      "label": "Chakra",
+      "value": "8000",
+      "growth": "7.5"
+     },
+     {
+      "label": "Agility",
+      "value": "6000",
+      "growth": "6.5"
+     },
+     {
+      "label": "HP",
+      "value": "40000",
+      "growth": "7"
+     }
+    ],
+    "talentLabel": {
+     "text": "Advanced Byakugan",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Secret JutsuEight Diagrar",
+     "truncated": true
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Advanced Byakugan",
+     "name": "Advanced Byakugan",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility, chakra, and hp, 30% speed, 20% damage rate, and 20% avoid injury."
+       },
+       {
+        "text": "Increases allies' attack by 15%."
+       },
+       {
+        "text": "Decreases enemies' avoid injury by 15%."
+       },
+       {
+        "text": "50% chance to restore 30 fury when attacked."
+       },
+       {
+        "text": "Immune to petrification and silence."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/15_hinata-uzumaki_ES.md",
+      "heading": "Byakugan Avanzado",
+      "name": "Byakugan Avanzado",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad, chakra y hp propios, 30% de velocidad, 20% de tasa de daño y 20% de tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta el ataque de los aliados en 15%."
+       },
+       {
+        "text": "Disminuye la tasa de evitar daño de los enemigos en 15%."
+       },
+       {
+        "text": "50% de probabilidad de restaurar 30 de furia cuando es atacado."
+       },
+       {
+        "text": "Inmune a la petrificación y al silencio."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Secret Jutsu: Eight Trigrams Lion Tiger",
+     "name": "Secret Jutsu: Eight Trigrams Lion Tiger",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 300% growth rate."
+       },
+       {
+        "text": "70% rate to acupoint enemies for 2 rounds."
+       },
+       {
+        "text": "Applies vein injury (DoT) to enemies with 120% rate for 1 round."
+       },
+       {
+        "text": "Reduces enemies' attack by 30% for 1 round."
+       },
+       {
+        "text": "Stuns self but increases avoid injury by 10% for 1 round."
+       },
+       {
+        "text": "Restores 68 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/15_hinata-uzumaki_ES.md",
+      "heading": "Jutsu Secreto: Ocho Trigramas León Tigre",
+      "name": "Jutsu Secreto: Ocho Trigramas León Tigre",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 300%."
+       },
+       {
+        "text": "70% de probabilidad de acupunturar a los enemigos durante 2 rondas."
+       },
+       {
+        "text": "Aplica daño por venas (DoT) a los enemigos con una tasa del 120% durante 1 ronda."
+       },
+       {
+        "text": "Reduce el ataque de los enemigos en 30% durante 1 ronda."
+       },
+       {
+        "text": "Aturde a sí mismo pero aumenta la tasa de evitar daño en 10% durante 1 ronda."
+       },
+       {
+        "text": "Restaura 68 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  },
+  {
+   "sourceId": "supporters:16_shin-uchiha",
+   "nameAsPosted": "Shin Uchiha",
+   "releaseRef": null,
+   "card": {
+    "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/original_cards/16_shin-uchiha.png",
+    "language": "en",
+    "namePlate": "Shin Uchiha",
+    "typeLabel": "Genjutsu",
+    "formationLabel": "Support",
+    "rating": "SSS",
+    "stats": [
+     {
+      "label": "Force",
+      "value": "8000",
+      "growth": "7.5"
+     },
+     {
+      "label": "Chakra",
+      "value": "10000",
+      "growth": "8.5"
+     },
+     {
+      "label": "Agility",
+      "value": "8000",
+      "growth": "8"
+     },
+     {
+      "label": "HP",
+      "value": "60000",
+      "growth": "9"
+     }
+    ],
+    "talentLabel": {
+     "text": "Cloning Tech",
+     "truncated": false
+    },
+    "skillLabel": {
+     "text": "Regroup Metal Storm",
+     "truncated": false
+    },
+    "verification": "read twice from the image (identical)"
+   },
+   "abilities": [
+    {
+     "slot": "talent",
+     "heading": "Talent: Cloning Tech",
+     "name": "Cloning Tech",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Increases self agility and chakra, 40% speed, 25% damage rate, and 20% avoid injury rate."
+       },
+       {
+        "text": "Increases allies' speed by 12% and decreases enemy defenses by 20%."
+       },
+       {
+        "text": "For every 10% hp loss, increases self damage rate by 10%."
+       },
+       {
+        "text": "Immune to acupoint and fury reduction."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/16_shin-uchiha_ES.md",
+      "heading": "Técnica de Clonación",
+      "name": "Técnica de Clonación",
+      "lines": [
+       {
+        "text": "Aumenta la agilidad y chakra propios, 40% de velocidad, 25% de tasa de daño y 20% de tasa de evitar daño."
+       },
+       {
+        "text": "Aumenta la velocidad de los aliados en 12% y disminuye las defensas de los enemigos en 20%."
+       },
+       {
+        "text": "Por cada 10% de pérdida de hp, aumenta la tasa de daño propio en 10%."
+       },
+       {
+        "text": "Inmune a los puntos de acupuntura y reducción de furia."
+       }
+      ]
+     }
+    },
+    {
+     "slot": "skill",
+     "heading": "Skill: Regroup Metal Storm",
+     "name": "Regroup Metal Storm",
+     "stage": null,
+     "condition": null,
+     "en": {
+      "asset": "M2_Part_5_Supporters_Partial/03_SUPPORTERS_PARTIAL/SUPPORTERS_16_EN_MANUAL_STAGING.md",
+      "lines": [
+       {
+        "text": "Attacks enemies with 320% growth rate."
+       },
+       {
+        "text": "Decreases enemy supporters' fury by 50 and defenses by 30% for 1 round."
+       },
+       {
+        "text": "Applies fragmented state (DoT) to enemies with 120% rate for 1 round."
+       },
+       {
+        "text": "Increases own speed by 20% for 1 round."
+       },
+       {
+        "text": "Makes ally supporters immune to stun for 1 round."
+       },
+       {
+        "text": "Restores 50 self fury, 30 for allies."
+       }
+      ]
+     },
+     "es": {
+      "asset": "M2_Supplementary_Text_Recovery_58_Assaulters_16_Supporters/per_profile/supporters_es/16_shin-uchiha_ES.md",
+      "heading": "Tormenta Metálica de Regroup",
+      "name": "Tormenta Metálica de Regroup",
+      "lines": [
+       {
+        "text": "Ataca a los enemigos con una tasa de crecimiento del 320%."
+       },
+       {
+        "text": "Disminuye la furia de los aliados enemigos en 50 y las defensas en 30% durante 1 ronda."
+       },
+       {
+        "text": "Aplica el estado fragmentado (DoT) a los enemigos con una tasa del 120% durante 1 ronda."
+       },
+       {
+        "text": "Aumenta la velocidad propia en 20% durante 1 ronda."
+       },
+       {
+        "text": "Hace que los aliados seguidores sean inmunes a aturdir durante 1 ronda."
+       },
+       {
+        "text": "Restaura 50 de furia propia, 30 para los aliados."
+       }
+      ]
+     }
+    }
+   ],
+   "sourceNotes": [],
+   "alignment": [],
+   "spanish": "supplied (supplementary recovery package, Spanish only; English from the original package)"
+  }
+ ]
+}

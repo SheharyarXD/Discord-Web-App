@@ -6,6 +6,17 @@ import type { ReviewStatus } from "../domain/constants";
 import { isValidReleasePeriod, releasePeriodKey } from "../domain/ninja";
 import { slugify } from "../domain/slug";
 import { upsertNinja, vocabulary } from "./ninjas";
+import {
+  applyProfilePlan,
+  ensureProfileVocabulary,
+  planProfiles,
+  readProfileData,
+  registerProfileAssets,
+  summarizePlan,
+  type LedgerRow,
+  type ProfileApplyResult,
+  type ProfileSummary,
+} from "./profile-loader";
 import { recordEvidence, registerAsset } from "./provenance";
 import type { StatusEffectInput } from "./schemas";
 import { ensureStatusCategory, upsertStatusEffect } from "./status-effects";
@@ -16,7 +27,8 @@ import { ensureStatusCategory, upsertStatusEffect } from "./status-effects";
  *  - Operator-run only (`npm run db:ingest`). It reads local files that a person transcribed
  *    from the supplied screenshots; it never contacts Discord or any other network service.
  *  - Idempotent: every record is upserted on a stable key, so it can be re-run after a correction.
- *  - Non-destructive: nothing is truncated and no child record is pruned.
+ *  - Non-destructive: nothing is truncated. Only the children of a ninja that has a staged
+ *    profile are replaced by that profile, which is the full reviewed record for that ninja.
  *  - Sparse on purpose: a ninja known only from the release list gets a name and a release
  *    period and nothing else.
  */
@@ -45,16 +57,33 @@ interface SourcesFile {
 }
 
 interface VocabularyFile {
-  ratings: { evidence: Evidence; rows: string[] };
+  ratings: { evidence: Evidence; evidenceM3?: Evidence; rows: string[] };
+  /** The client decisions confirmed after Milestone 2, kept as a document asset that evidence can cite. */
+  clientDecisionsM3?: { asset: string; file: string };
   baseStatistics: { evidence: Evidence; rows: { key: string; name: string }[] };
   guideStatistics: { rows: { key: string; name: string; note?: string }[] };
   formations: {
     evidenceEs: Evidence;
     evidenceRule: Evidence;
-    rows: { key: string; name: string; nameEs: string; positionNote: string; primaryStatisticKey: string; maxPerTeam: number }[];
+    rows: {
+      key: string;
+      name: string;
+      nameEs: string | null;
+      positionNote: string | null;
+      primaryStatisticKey: string | null;
+      maxPerTeam: number | null;
+      /** A card label that may be the same position as another row. A proposal until the client confirms. */
+      equivalentToKey?: string;
+      equivalenceStatus?: "PROPOSED" | "APPROVED";
+      equivalenceNote?: string;
+      /** Evidence for the label itself, when it does not come from the shared formation evidence. */
+      ownEvidence?: Evidence;
+      /** Evidence for the equivalence itself (the client's confirmation). */
+      equivalenceEvidence?: Evidence;
+    }[];
   };
   roles: {
-    rows: { key: string; name: string; mappedFormationKey: string; mappingStatus: "PROPOSED" | "APPROVED" | "UNMAPPED"; mappingNote: string; evidence: Evidence }[];
+    rows: { key: string; name: string; mappedFormationKey: string | null; mappingStatus: "PROPOSED" | "APPROVED" | "UNMAPPED"; mappingNote: string; evidence: Evidence }[];
   };
   statusCategories: { rows: { key: string; name: string; nameEs: string }[] };
 }
@@ -231,6 +260,8 @@ export interface ReferenceInventory {
   glossary: { entries: number; terms: number; statuses: number; withStructuredModifiers: number; partiallyConfirmed: string[]; evidenceRecords: number };
   vocabulary: { ratings: number; formations: number; roles: number; statistics: number; statusCategories: number };
   staged: { withoutRecords: string[] };
+  /** Ninja profiles (cards, ability texts, awakenings). null when the folder has none. */
+  profiles: (ProfileSummary & ProfileApplyResult & { ledger: LedgerRow[]; releaseOnly: string[] }) | null;
   equipment: { sets: number; pieces: number };
   jewelry: { sets: number; pieces: number };
   totals: Record<string, number>;
@@ -262,6 +293,25 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
       notes: [a.notes, a.remainingQuestions && `Open question: ${a.remainingQuestions}`].filter(Boolean).join(" ") || null,
     });
   }
+  // Ninja profiles are planned up front: their assets are cited by the vocabulary below.
+  const analysis = analyzeReleaseList(release);
+  if (analysis.invalid.length) throw new Error(`release-order.json has invalid lines: ${analysis.invalid.join("; ")}`);
+  const profileData = readProfileData(dir);
+  const plan = profileData
+    ? planProfiles(profileData, { partialReleaseSlugs: new Set(analysis.entries.filter((e) => e.fullIn.length === 0).map((e) => e.slug)) })
+    : null;
+  if (plan) await registerProfileAssets(db, plan);
+  if (vocab.clientDecisionsM3) {
+    await registerAsset(db, {
+      path: vocab.clientDecisionsM3.asset,
+      category: "CLIENT_MESSAGE",
+      description: "Client decisions confirmed after Milestone 2 (Assaulter = Center, name matches, source authority, stat terms, ranks, awakening rules).",
+      reviewed: true,
+      fullyLegible: true,
+      notes: "Relayed in the Milestone 3 brief; kept in data/reference/client-decisions-m3.md.",
+    });
+  }
+
   const evidence = (key: string, e: Evidence, field: string, target?: Parameters<typeof recordEvidence>[2]) =>
     recordEvidence(db, { key, assetPath: e.asset, section: e.section, field, sourceText: e.sourceText, reviewStatus: e.reviewStatus }, target);
 
@@ -274,9 +324,14 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
     await vocabulary.statistic(db, { ...s, category: "combat", defaultValueType: "PERCENT", sortOrder: 100 + i });
   }
   for (const [sortOrder, f] of vocab.formations.rows.entries()) {
-    const row = await vocabulary.formation(db, { ...f, translationStatus: "VERIFIED", sortOrder });
-    await evidence(`formation:${f.key}:name-es`, vocab.formations.evidenceEs, "nameEs", { formationId: row.id });
-    await evidence(`formation:${f.key}:rule`, vocab.formations.evidenceRule, "positionNote, primaryStatistic, maxPerTeam", { formationId: row.id });
+    // An equivalence the client has already APPROVED is never downgraded back to a proposal by a re-run.
+    const stored = await db.formation.findUnique({ where: { key: f.key }, select: { equivalenceStatus: true } });
+    const equivalenceStatus = stored?.equivalenceStatus === "APPROVED" ? "APPROVED" : f.equivalenceStatus;
+    const row = await vocabulary.formation(db, { ...f, equivalenceStatus, translationStatus: f.nameEs ? "VERIFIED" : "MISSING", sortOrder });
+    if (f.nameEs) await evidence(`formation:${f.key}:name-es`, vocab.formations.evidenceEs, "nameEs", { formationId: row.id });
+    if (f.maxPerTeam != null) await evidence(`formation:${f.key}:rule`, vocab.formations.evidenceRule, "positionNote, primaryStatistic, maxPerTeam", { formationId: row.id });
+    if (f.ownEvidence) await evidence(`formation:${f.key}:label`, f.ownEvidence, "name", { formationId: row.id });
+    if (f.equivalenceEvidence) await evidence(`formation:${f.key}:equivalence`, f.equivalenceEvidence, "equivalence", { formationId: row.id });
   }
   for (const [sortOrder, r] of vocab.roles.rows.entries()) {
     const existing = await db.ninjaRole.findUnique({ where: { key: r.key }, select: { mappingStatus: true } });
@@ -287,6 +342,7 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
   }
   for (const [sortOrder, key] of vocab.ratings.rows.entries()) await vocabulary.rating(db, { key, name: key, sortOrder });
   await evidence("vocab:ratings", vocab.ratings.evidence, "rating vocabulary");
+  if (vocab.ratings.evidenceM3) await evidence("vocab:ratings:m3", vocab.ratings.evidenceM3, "rating vocabulary (full list)");
 
   // 4. Status dictionary.
   let glossaryEvidence = 0;
@@ -325,8 +381,6 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
   }
 
   // 5. Release list → sparse ninjas.
-  const analysis = analyzeReleaseList(release);
-  if (analysis.invalid.length) throw new Error(`release-order.json has invalid lines: ${analysis.invalid.join("; ")}`);
   const ambiguous = new Set(analysis.duplicateSlugs.map((d) => d.slug));
   let ninjasCreated = 0;
   let ninjasUpdated = 0;
@@ -378,7 +432,10 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
 
   // 6. Ninja cards.
   const ingestedCards: string[] = [];
+  const profiled = new Set(plan?.ninjas.map((n) => n.slug));
   for (const card of cards.cards) {
+    // A staged profile is the fuller record of the same card; it is loaded in step 7 instead.
+    if (profiled.has(slugify(card.name))) continue;
     await vocabulary.ninjaType(db, card.type);
     const { id } = await upsertNinja(
       db,
@@ -445,7 +502,21 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
     ingestedCards.push(card.name);
   }
 
-  // 7. Staged evidence: recorded, attached to a ninja when its owner is known, never turned into game records.
+  // 7. Ninja profiles: cards, ability texts, awakenings, names.
+  let profiles: ReferenceInventory["profiles"] = null;
+  if (profileData && plan) {
+    await ensureProfileVocabulary(db, profileData, plan);
+    const applied = await applyProfilePlan(db, plan);
+    const covered = new Set([...profiled, ...cards.cards.map((c) => slugify(c.name))]);
+    profiles = {
+      ...summarizePlan(plan),
+      ...applied,
+      ledger: plan.ledger,
+      releaseOnly: analysis.entries.filter((e) => !covered.has(e.slug)).map((e) => e.name),
+    };
+  }
+
+  // 8. Staged evidence: recorded, attached to a ninja when its owner is known, never turned into game records.
   for (const item of staged.items) {
     const owner = item.ownerName ? await db.ninja.findUnique({ where: { slug: slugify(item.ownerName) }, select: { id: true } }) : null;
     for (const [i, asset] of [item.asset, ...item.alsoIn].entries()) {
@@ -519,8 +590,14 @@ export async function loadReferenceData(db: PrismaClient, dir = path.resolve("da
       statusCategories: vocab.statusCategories.rows.length,
     },
     staged: { withoutRecords: staged.items.map((i) => `${i.kind}: ${i.rawText}`) },
+    profiles,
     equipment: { sets: equipmentSets, pieces: equipment },
     jewelry: { sets: jewelrySets, pieces: jewelry },
-    totals: { ninjas, baseStats, abilities, talentOptions, statusEffects, effectUsages: effects, sourceRecords, gems },
+    totals: {
+      ninjas, baseStats, abilities, talentOptions, statusEffects, effectUsages: effects, sourceRecords, gems,
+      aliases: await db.ninjaAlias.count(),
+      conditions: await db.condition.count(),
+      sourceAssets: await db.sourceAsset.count(),
+    },
   };
 }

@@ -115,7 +115,7 @@ describe("16. authorization", () => {
 
   it("every mutation of the API is covered by the write guard", () => {
     const api = gameApi(db, user) as unknown as Record<string, (...args: unknown[]) => unknown>;
-    const readers = new Set(["listNinjas", "getNinja", "listStatusEffects", "getStatusEffect", "findStatusEffectsByTerm", "listSets", "getEquipmentSet", "getJewelrySet", "selectTalent"]);
+    const readers = new Set(["listNinjas", "getNinja", "listStatusEffects", "getStatusEffect", "findStatusEffectsByTerm", "listSets", "getEquipmentSet", "getJewelrySet", "selectTalent", "listItems", "listItemFacets", "listNinjaFacets", "listStatistics", "listItemChoices", "getItemDetail", "searchAll"]);
     const mutations = Object.keys(api).filter((k) => !readers.has(k));
     expect(mutations.length).toBeGreaterThanOrEqual(15);
     for (const name of mutations) expect(() => api[name]!({}), name).toThrow(ForbiddenError);
@@ -166,7 +166,7 @@ describe("integrity triggers", () => {
   it("every trigger declared in prisma/constraints.sql exists after migrating", async () => {
     const declared = [...readFileSync(path.join(ROOT, "prisma/constraints.sql"), "utf8").matchAll(/CREATE TRIGGER "([^"]+)"/g)].map((m) => m[1]!).sort();
     const present = (await db.$queryRawUnsafe<{ name: string }[]>("SELECT name FROM sqlite_master WHERE type = 'trigger' ORDER BY name")).map((r) => r.name);
-    expect(declared.length).toBe(22);
+    expect(declared.length).toBe(30);
     expect(present).toEqual(declared);
   });
 
@@ -182,7 +182,8 @@ describe("integrity triggers", () => {
 
   it("the migration carries the same trigger statements as the reference file", () => {
     const migrations = path.join(ROOT, "prisma/migrations");
-    const m2 = readdirSync(migrations).find((d) => d.endsWith("_m2_core_game_data"))!;
+    // The latest migration that rebuilds tables re-creates every trigger, so it is the one that must match.
+    const m2 = readdirSync(migrations).find((d) => d.endsWith("_m2_ninja_profiles"))!;
     const sql = readFileSync(path.join(migrations, m2, "migration.sql"), "utf8").replace(/\r\n/g, "\n");
     const reference = readFileSync(path.join(ROOT, "prisma/constraints.sql"), "utf8").replace(/\r\n/g, "\n");
     expect(sql.endsWith(reference)).toBe(true);
