@@ -89,12 +89,20 @@ Earlier commit `01ec88b` (Milestone 3 and Supporter sync) is on `origin/mileston
 
 > Hello,
 >
-> Milestone 3 is ready for your review. The report is attached (11 pages, with screenshots of the real application).
+> Milestone 3 is now ready for your review.
 >
-> Everything you sent for the Supporters is now in: all 79 Supporter cards with their English and Spanish text. No ninja was created twice. The application has 177 ninjas, 175 of them with a full card. Natsu Dragneel and Cursed Tayuya have their text and your awakening rules. We also re-checked every Supporter card against the images.
+> We have completed the synchronization of all 79 Supporter cards, including their supplied ability descriptions, and implemented the agreed search, filtering, sorting, ninja detail pages, and administration functionality.
 >
-> To finish the data, we need a few answers: please confirm six name matches, three cards that print a five digit HP, one skill name for Shikamaru Nara, and the Spanish lines that are cut in the text we received (Kimono Kurenai and Sai). Equipment, jewelry and gems are still waiting for source material; nothing was invented.
+> The application now contains 177 ninjas, with 175 complete character cards. All available English ability descriptions have been imported, and the remaining Spanish translation gaps are clearly documented.
 >
-> Please review the report and let us know whether you accept Milestone 3. It stays open until you do.
+> Natsu Dragneel, Cursed Tayuya, and their awakening rules have also been implemented according to the supplied information.
+>
+> The report includes application screenshots, verification results, and the remaining data clarifications.
+>
+> Please review the attached Milestone 3 report and confirm whether the milestone is accepted, or let us know if any corrections are required.
+>
+> Equipment, jewelry, and gems remain pending their source material and are documented separately.
 >
 > Thank you.
+
+Report note: the screenshots hide the empty picture boxes of ninja cards, because no character images have been supplied.

@@ -415,6 +415,8 @@ try {
   await M2.ctx.close();
 
   // ── 10c. screenshots for the client report: narrower window and a higher scale, so the text prints larger ──
+  // No character images have been supplied, so the empty picture boxes are hidden in the report screenshots only.
+  const STATIC_R = STATIC + " a.group > div:first-child:has(> span[aria-hidden]) { display: none !important; }";
   const R = await login(adminMail, adminPw, 960);
   const around = async (url, pattern, name, height = 800, before = 60) => {
     await R.page.goto(BASE + url, { waitUntil: "networkidle" });
@@ -425,12 +427,12 @@ try {
       return el ? el.getBoundingClientRect().top + window.scrollY : null;
     }, pattern.source);
     if (y === null) { check(`report screenshot ${name}: anchor text found`, false, pattern.source); return; }
-    await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+    await R.page.addStyleTag({ content: STATIC_R }).catch(() => {});
     await R.page.screenshot({ path: path.join(OUT, name), fullPage: true, clip: { x: 0, y: Math.max(0, y - before), width: 960, height } });
   };
   const top = async (url, name, height) => {
     await R.page.goto(BASE + url, { waitUntil: "networkidle" });
-    await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+    await R.page.addStyleTag({ content: STATIC_R }).catch(() => {});
     await R.page.screenshot({ path: path.join(OUT, name), fullPage: true, clip: { x: 0, y: 0, width: 960, height } });
   };
   await top("/ninjas/natsu-dragneel", "r04-natsu-top.png", 1150);
@@ -442,15 +444,15 @@ try {
   await top("/ninjas/uchiha-madara-moon-s-eye", "r10-moon-eye.png", 1150);
   await top("/ninjas/uchiha-hikari", "r11-hikari.png", 1150);
   await R.page.goto(BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force", { waitUntil: "networkidle" });
-  await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+  await R.page.addStyleTag({ content: STATIC_R }).catch(() => {});
   const listY = await R.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
   await R.page.screenshot({ path: path.join(OUT, "r01-results.png"), fullPage: true, clip: { x: 0, y: Math.max(0, listY - 520), width: 960, height: 1100 } });
   await R.page.goto(BASE + "/ninjas?formation=support", { waitUntil: "networkidle" });
-  await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+  await R.page.addStyleTag({ content: STATIC_R }).catch(() => {});
   const supY = await R.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
   await R.page.screenshot({ path: path.join(OUT, "r03-supporters-list.png"), fullPage: true, clip: { x: 0, y: Math.max(0, supY - 40), width: 960, height: 950 } });
   await R.page.goto(BASE + "/search?q=Might+Gai", { waitUntil: "networkidle" });
-  await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+  await R.page.addStyleTag({ content: STATIC_R }).catch(() => {});
   await R.page.screenshot({ path: path.join(OUT, "r02-search-alias.png"), clip: { x: 0, y: 0, width: 960, height: 420 } });
   await top("/admin/ninjas/natsu-dragneel", "r12-admin-ninja.png", 1100);
   await top("/admin/users", "r13-admin-users.png", 900);
