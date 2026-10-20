@@ -1,15 +1,14 @@
 import { readFileSync, writeFileSync, existsSync } from "node:fs";
 import { createHash } from "node:crypto";
-import path from "node:path";
-import { PrismaClient } from "@prisma/client";
 
 /**
- * Writes two files from the live database and the staged profiles:
- *   MILESTONE_3_DATA_RECONCILIATION.csv         one row per ninja in the database
- *   MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv        the 79 Supporter cards and the text sources behind them
- * Usage: node scripts/ninja-reconciliation.mjs
+ * Writes the three data files of the Milestone 3 delivery from ONE source of numbers: scripts/final-audit.mjs.
+ *   MILESTONE_3_DATA_RECONCILIATION.csv   one row per ninja in the database
+ *   MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv  one row per Supporter card (79)
+ *   MILESTONE_3_DATA_METRICS.csv          totals with their counting definitions
+ * Usage: node scripts/final-audit.mjs && node scripts/ninja-reconciliation.mjs
+ * (the import ledger MILESTONE_3_IMPORT_LEDGER.csv comes from: npx tsx prisma/ingest-reference.ts --ledger MILESTONE_3_IMPORT_LEDGER.csv)
  */
-const db = new PrismaClient();
 const q = (v) => `"${String(v ?? "").replaceAll('"', '""')}"`;
 const csv = (rows) => rows.map((r) => r.map(q).join(",")).join("\n") + "\n";
 const parseCsv = (text) => {
@@ -26,68 +25,78 @@ const parseCsv = (text) => {
   const [head, ...body] = out;
   return body.filter((r) => r.length === head.length).map((r) => Object.fromEntries(head.map((h, i) => [h, r[i]])));
 };
+const { figures: F, per } = JSON.parse(readFileSync("scripts/.audit-figures.json", "utf8"));
 const ledger = parseCsv(readFileSync("MILESTONE_3_IMPORT_LEDGER.csv", "utf8").replace(/\r/g, "")).filter((r) => r.source_id);
 const bySlug = new Map();
 for (const r of ledger) if (r.slug) bySlug.set(r.slug, [...(bySlug.get(r.slug) ?? []), r]);
+const spanishWord = { COMPLETE: "complete", PARTIAL: "partial (Spanish text cut in the source)", MISSING: "missing", MISSING_SOME: "missing for some blocks", NO_ENGLISH: "no text" };
 
-const ninjas = await db.ninja.findMany({
-  orderBy: [{ releaseOrder: "asc" }, { name: "asc" }],
-  include: {
-    role: true, formation: true, rating: true, ninjaType: true,
-    baseStats: true,
-    abilities: { include: { abilityType: true, effects: { select: { structuredStatus: true } } } },
-    talentGroups: { include: { options: { include: { effects: { select: { structuredStatus: true } }, awakenings: true } } } },
-    aliases: true,
-  },
-});
-const rows = [["ninja", "slug", "channel", "release", "rating", "formation_as_printed", "type", "card", "base_stats", "talent_options", "skills", "awakenings", "awakenings_with_stated_rule", "effect_rows", "rows_needing_review_or_text_only", "english_text", "spanish_text", "aliases", "source_entries", "identity_statuses", "flags", "completeness"]];
-for (const n of ninjas) {
+// ── 1. one row per ninja ──
+const rows = [["ninja", "slug", "channel", "rating", "formation_as_printed", "type", "full_card", "text_blocks", "awakening_stages", "awakening_stages_with_stated_rule", "effect_rows", "english_text", "spanish_text_status", "status_definitions", "status_definitions_with_spanish", "aliases", "source_entries", "identity_statuses", "flags"]];
+for (const n of per) {
   const sources = bySlug.get(n.slug) ?? [];
-  const skills = n.abilities.filter((a) => ["skill", "normal_skill", "special_skill"].includes(a.abilityType.key));
-  const awakenings = [...n.abilities.filter((a) => a.abilityType.key.endsWith("_awakening")), ...n.talentGroups.flatMap((g) => g.options.flatMap((o) => o.awakenings))];
-  const effects = [...n.abilities.flatMap((a) => a.effects), ...n.talentGroups.flatMap((g) => g.options.flatMap((o) => o.effects))];
-  const withText = n.abilities.filter((a) => a.description).length + n.talentGroups.flatMap((g) => g.options).filter((o) => o.description).length;
-  const withEs = n.abilities.filter((a) => a.descriptionEs).length + n.talentGroups.flatMap((g) => g.options).filter((o) => o.descriptionEs).length;
   const flags = [...new Set(sources.flatMap((s) => (s.flags ? s.flags.split(" | ") : [])))];
-  rows.push([
-    n.name, n.slug, n.role?.key ?? "", n.releaseYear ? `${n.releaseYear}-${String(n.releaseMonth).padStart(2, "0")}` : "", n.rating?.key ?? "", n.formation?.name ?? "", n.ninjaType?.name ?? "",
-    n.baseStats.length ? "yes" : "no", n.baseStats.length, n.talentGroups.flatMap((g) => g.options).length, skills.length, awakenings.length,
-    awakenings.filter((a) => a.stackingRule !== "UNKNOWN").length, effects.length, effects.filter((e) => e.structuredStatus !== "STRUCTURED").length,
-    withText ? "yes" : "no", withEs ? (withEs >= withText ? "complete" : "partial") : "no", n.aliases.length,
-    sources.map((s) => s.source_id).join(" + "), sources.map((s) => s.identity_status).join(" + "), flags.join(" | "),
-    sources.some((s) => s.completeness) ? sources.map((s) => s.completeness)[0] : "NAME_ONLY",
-  ]);
+  rows.push([n.name, n.slug, n.role, n.rating, n.formation, n.type, n.fullCard ? "yes" : "no", n.textBlocks, n.awakeningStages, n.awakeningStated, n.effectRows, n.enText ? "yes" : "no", spanishWord[n.esNinja], n.statusDefs, n.statusDefsWithEs, n.aliases, sources.map((s) => s.source_id).join(" + "), sources.map((s) => s.identity_status).join(" + "), flags.join(" | ")]);
 }
 writeFileSync("MILESTONE_3_DATA_RECONCILIATION.csv", csv(rows));
-console.log(`reconciliation: ${rows.length - 1} ninjas`);
 
-// ── the 79 Supporter cards ──
-const handoff = "docs/m3-handoff/M3_FINAL_SUPPORTER_SYNC_HANDOFF/02_SUPPORTER_SOURCE";
+// ── 2. the 79 Supporter cards ──
 const sha = (file) => (existsSync(file) ? createHash("sha256").update(readFileSync(file)).digest("hex") : "");
-const man = parseCsv(readFileSync(`${handoff}/M3_Supporters_and_Client_Changes_Handoff/sources/supporters_additional_17_to_79/supporters_additional_manifest_63.csv`, "utf8").replace(/^﻿/, "").replace(/\r/g, ""));
-const sup = ledger.filter((r) => r.channel === "supporters");
-const audit = [["card_no", "name_as_posted", "ninja_in_database", "identity_status", "card_file", "card_sha256", "card_status", "text_source", "english_lines", "spanish_lines", "spanish_status", "effect_rows_structured", "rows_needing_review", "rows_text_only", "mapping_status", "notes"]];
-for (const r of sup) {
+const perBySlug = new Map(per.map((n) => [n.slug, n]));
+const audit = [["card_no", "name_as_posted", "ninja_in_database", "identity_status", "card_file", "card_sha256", "card_values", "english_lines", "spanish_lines", "spanish_ability_text", "spanish_status_definitions", "effect_rows_structured", "rows_needing_review", "rows_text_only", "mapping_status", "notes"]];
+for (const r of ledger.filter((x) => x.channel === "supporters")) {
   const no = Number(r.source_id.match(/:(\d+)_/)?.[1] ?? 0);
   const cardFile = r.card_asset ? r.card_asset.replace(/^m3-handoff\//, "docs/m3-handoff/") : "";
   const cardPath = cardFile && !cardFile.startsWith("docs/") ? "docs/m2-handoff/" + cardFile : cardFile;
+  const p = perBySlug.get(r.slug);
   const note = [];
-  if (no === 74) note.push("Spanish has no copy of the two status definition lines (Armor Break, Crit Resistance Reduction); English kept");
-  if (no === 47) note.push("Spanish source stops after alternative 3; fury line has no Spanish (not invented)");
-  if (no === 70) note.push("HP printed as 45000 on the card; stored as printed, needs review");
-  if (no === 76) note.push("Card skill label differs from the text heading (Explosive Shadow Stab / Shadow Fang)");
+  if (no === 47) note.push("Spanish source stops after alternative 3; the fury line has no Spanish (not invented)");
+  if (no === 74) note.push("the two status definitions (Armor Break, Crit Resistance Reduction) exist in English only; the ability text is fully translated");
+  if ([65, 66, 70].includes(no)) note.push("the card prints a five digit HP where similar cards print six; stored as printed, client to confirm");
+  if (no === 76) note.push("card skill label differs from the text heading (Explosive Shadow Stab / Shadow Fang)");
   if (r.flags.includes("CARD_LANGUAGE_ZH")) note.push("Chinese card, labels matched by position, name plate not translated");
   if (r.flags.includes("CARD_LABEL_CUT")) note.push("a name on the card is cut off by the layout");
   if (r.identity_status === "ALIAS_REVIEWED") note.push("name matched by judgement, client to confirm");
   if (no === 17 || no === 77) note.push("enriches an existing ninja record");
-  const esFull = r.spanish === "SUPPLIED" && !r.flags.includes("ES_TEXT_CUT");
+  const defs = p.statusDefs === 0 ? "none in the source" : p.statusDefsWithEs >= p.statusDefs ? "complete" : "English only";
   audit.push([
-    no || r.source_id, r.name_as_posted, r.ninja, r.identity_status, cardPath, sha(cardPath), r.has_card === "yes" ? "VERIFIED (read from image)" : "NOT_FOUND",
-    r.text_asset_en ? (no >= 17 ? "NEW_63_EN_ES_TRANSCRIPT_RECOVERY" : "supporters 1-16 EN/ES staging") : "NOT_FOUND", r.en_lines, r.es_lines,
-    esFull ? "VERIFIED" : r.spanish === "NONE" ? "NOT_FOUND" : "PARTIAL", r.effect_rows_structured, r.effect_rows_needs_review, r.effect_rows_text_only,
-    r.action === "LOADED" || r.action === "MERGED" ? (r.has_card === "yes" ? "VERIFIED" : "PARTIAL") : "BLOCKED", note.join("; "),
+    no, r.name_as_posted, r.ninja, r.identity_status, cardPath, sha(cardPath), r.has_card === "yes" ? "VERIFIED against the card image" : "NOT_FOUND",
+    r.en_lines, r.es_lines, spanishWord[p.esNinja] === "complete" ? "complete" : spanishWord[p.esNinja], defs, r.effect_rows_structured, r.effect_rows_needs_review, r.effect_rows_text_only,
+    r.action === "LOADED" || r.action === "MERGED" ? "LINKED" : "BLOCKED", note.join("; "),
   ]);
 }
 writeFileSync("MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv", csv(audit));
-console.log(`audit: ${audit.length - 1} cards (${man.length} in the 63-card manifest)`);
-await db.$disconnect();
+
+// ── 3. metrics with definitions ──
+const m = [["category", "metric", "value", "detail"]];
+const add = (c, k, v, d = "") => m.push([c, k, v, d]);
+add("Definitions", "awakening stage", "one stored talent or skill awakening level", "counted once per level; the per-ninja column awakening_stages sums to the same total");
+add("Definitions", "stated rule", "an awakening stage whose stacking rule is not UNKNOWN", "comes from the source text or from a client decision");
+add("Definitions", "text block", "a talent, a skill (normal, special) or an awakening stage that has English text", "status definitions are separate and optional");
+add("Definitions", "Spanish complete (ninja)", "every text block has Spanish and none is cut in the source", "line count may differ when the Spanish merges or splits lines; numbers are compared and differences are flagged");
+add("Definitions", "full card", "rating, formation, type and four base statistics", "");
+add("Totals", "ninjas in the database", F.ninjas, `no duplicate slugs (${F.duplicateNames} duplicates)`);
+add("Totals", "ninjas with a full card", F.fullCards, `without a card: ${F.noCard.join("; ")}`);
+add("Totals", "ninjas with English ability text", F.withEnglish);
+add("Totals", "ninjas with complete Spanish", F.esNinja.COMPLETE);
+add("Totals", "ninjas with partial Spanish", F.esNinja.PARTIAL, F.esNinjaNames.PARTIAL.join("; ") + " (Spanish text cut in the source)");
+add("Totals", "ninjas with no Spanish", F.esNinja.MISSING + F.esNinja.MISSING_SOME, F.esNinjaNames.MISSING.concat(F.esNinjaNames.MISSING_SOME).join("; "));
+add("Totals", "text blocks (English)", F.textBlocks, `Spanish complete ${F.esBlocks.complete}, partial ${F.esBlocks.partial}, missing ${F.esBlocks.missing}`);
+add("Totals", "status definitions", F.statusDefs.total, `with Spanish ${F.statusDefs.withSpanish}; English only: ${F.statusDefs.ninjasMissingSpanish.join("; ")}`);
+add("Totals", "effect rows", F.effectRows, Object.entries(F.effectStatus).map(([k, v]) => `${k}=${v}`).join(", "));
+const flagged = new Set(ledger.filter((r) => /ES_(LINE_COUNT_DIFFERS|NUMBERS_DIFFER|WORDING_DIFFERS|TEXT_CUT)/.test(r.flags)).map((r) => r.slug));
+add("Totals", "ninjas with any flagged English/Spanish difference", flagged.size, "line count, wording, numbers or cut text; both texts are kept and English is the original");
+add("Totals", "English and Spanish number differences kept and flagged", F.esNumberMismatch.length, "ninjas with at least one text block whose numbers differ between the two languages");
+for (const [role, n] of Object.entries(F.roles)) add("By channel", `${role}: ninjas / with full card`, `${n} / ${F.roleFullCards[role]}`);
+add("Supporters", "Supporter cards supplied and linked", ledger.filter((r) => r.channel === "supporters").length, "16 earlier + 63 new; each linked to exactly one existing ninja");
+add("Supporters", "ninjas in the Supporter channel", F.roles.supporters, "equals the number of cards: no duplicate and no missing ninja");
+add("Supporters", "ninjas whose card prints the Support formation", F.supportFormation, `${F.roles.supporters} Supporter channel + ${F.supportFormationNotSupporterRole.length} Alien cards that also print Support (${F.supportFormationNotSupporterRole.join("; ")}). This is not the Supporter count`);
+add("Supporters", "name matches by judgement (client to confirm)", F.aliases.byStatus.REVIEWED - 1, "6 new Supporter names; the 7th REVIEWED alias is Shodai Hokage (older decision)");
+add("Awakenings", "awakening stages", F.awakening.stages, `${F.awakening.talent} talent, ${F.awakening.skill} skill, on ${F.awakening.ninjas} ninjas; per-ninja sum ${F.awakening.sumOfPerNinja}`);
+add("Awakenings", "stages with a stated rule", F.awakening.stated, `per-ninja sum ${F.awakening.statedSumOfPerNinja}`);
+for (const rule of ["REPLACES_PRIOR", "CANCELS_PRIOR", "UPGRADES_BASE", "CUMULATIVE"]) add("Awakenings", `rule ${rule}`, F.awakening.byRule[rule].length, F.awakening.byRule[rule].join("; "));
+add("Awakenings", "rule UNKNOWN", F.awakening.byRule.UNKNOWN.length, "the source does not say; shown separately and never added together");
+for (const [k, v] of Object.entries(F.ratings)) add("Ranks", k, v, v ? "" : "defined, no card uses it yet");
+add("Equipment, jewelry, gems", "equipment pieces / jewelry pieces / gems", `${F.items.equipment} / ${F.items.jewelry} / ${F.items.gems}`, "no source material supplied; nothing invented; gems stay hidden (404)");
+writeFileSync("MILESTONE_3_DATA_METRICS.csv", csv(m));
+console.log(`reconciliation ${rows.length - 1} ninjas; audit ${audit.length - 1} cards; metrics ${m.length - 1} rows`);

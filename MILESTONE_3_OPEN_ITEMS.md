@@ -4,10 +4,10 @@
 
 | # | Item | Effect |
 | --- | --- | --- |
-| A1 | Spanish line for Kimono Kurenai's skill (the fury restoration line). The supplied Spanish ends after alternative 3 | Spanish shown up to alternative 3, flagged `ES_TEXT_CUT`. Nothing invented. Send the exact line, or authorise an English fallback |
+| A1 | Spanish line for Kimono Kurenai's skill (the fury restoration line). The supplied Spanish ends after alternative 3. Also the end of Sai (Errant Knight)'s Spanish, which is cut in its source (`[TRUNCATED IN SOURCE]`) | Spanish shown as far as it goes, flagged `ES_TEXT_CUT`. Nothing invented. Send the exact lines, or authorise an English fallback |
 | A2 | Cards for Might Guy (the supplied file is a copy of another ninja's card) and Sasuke (Taka) | No rating, type or statistics for these two |
 | A3 | Spanish text for Guren and Final Sasuke | English shown, marked untranslated |
-| A4 | Spanish copy of the two status definitions in Natsu Dragneel's text (Armor Break, Crit Resistance Reduction) | English shown |
+| A4 | Spanish copy of the two status definitions in Natsu Dragneel's text (Armor Break, Crit Resistance Reduction). Optional text: his ability text is fully translated | English shown |
 | A5 | Equipment, jewelry and gem source material | None exists in the application. Search, filters, sorting, detail pages and admin forms are ready and tested with test data |
 | A6 | Natures per ninja | None assigned; nature requirements stay conditions on effects |
 | A7 | The original Discord messages to compare the recovered texts exactly | The texts are transcriptions |
@@ -21,7 +21,7 @@
 | B3 | Is «Shodai Hokage» First Hokage? (linked by position, kept as a reviewed name) |
 | B4 | Which text is right where English and Spanish differ? 27 ninjas have such lines; English is kept as the original |
 | B5 | Do other awakenings add up, replace or cancel? 113 stages are unknown and are never summed |
-| B6 | Mitarashi Anko's HP is printed as 45000 on the card. Is that the real value or a missing digit? Stored as printed |
+| B6 | Three cards print a five digit HP where similar cards print six: Mitarashi Anko 45000, Uchiha Hikari 46000, Ōtsutsuki Isshiki 38000. Are these the real values or a missing digit? Stored as printed, flagged |
 | B7 | Shikamaru Nara: the card says «Explosive Shadow Stab», the text says «Shadow Fang». Which name is correct? |
 | B8 | Do the Support and Vanguard collections match the Support and Vanguard positions for ninjas without a card? Only Assaulter = Center was confirmed |
 | B9 | Tank or DPS per ninja: none assigned; the admin can set it |

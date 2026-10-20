@@ -38,6 +38,9 @@ describe("the 63 additional Supporter cards", () => {
   it("prints Power where the card says Power, and keeps the printed HP of Mitarashi Anko without adding a digit", () => {
     expect(planned("Reanimated Hiruzen").input.baseStats!.map((s) => s.statisticKey)).toEqual(["force", "power", "agility", "hp"]);
     expect(planned("Mitarashi Anko").input.baseStats!.find((s) => s.statisticKey === "hp")).toMatchObject({ baseValue: "45000", growthRate: "45" });
+    // Two more cards print a five digit HP (found in the final audit, zoomed): stored as printed, never completed.
+    expect(planned("Uchiha Hikari").input.baseStats!.find((s) => s.statisticKey === "hp")).toMatchObject({ baseValue: "46000", growthRate: "46" });
+    expect(planned("Ōtsutsuki Isshiki").input.baseStats!.find((s) => s.statisticKey === "hp")).toMatchObject({ baseValue: "38000", growthRate: "38" });
   });
 
   it("the six judgement matches stay reviewed with their evidence; spacing-only differences are verified", () => {

@@ -47,7 +47,7 @@ const browser = await chromium.launch({ executablePath: "C:/Program Files (x86)/
 const STATIC = "header, [class*='sticky'], [class*='fixed'] { position: static !important; }";
 
 async function login(email, password, width = 1280) {
-  const ctx = await browser.newContext({ viewport: { width, height: 900 }, locale: "es", deviceScaleFactor: width < 600 ? 2 : 1.25 });
+  const ctx = await browser.newContext({ viewport: { width, height: 900 }, locale: "es", deviceScaleFactor: width < 600 ? 2 : width < 1100 ? 1.75 : 1.25 });
   const page = await ctx.newPage();
   await page.goto(BASE + "/login");
   await page.fill('input[name="email"]', email);
@@ -413,6 +413,48 @@ try {
   await go(M2.page, BASE + "/ninjas/natsu-dragneel");
   await shot(M2.page, "17-mobile-natsu.png");
   await M2.ctx.close();
+
+  // ── 10c. screenshots for the client report: narrower window and a higher scale, so the text prints larger ──
+  const R = await login(adminMail, adminPw, 960);
+  const around = async (url, pattern, name, height = 800, before = 60) => {
+    await R.page.goto(BASE + url, { waitUntil: "networkidle" });
+    await openAll(R.page);
+    const y = await R.page.evaluate((src) => {
+      const re = new RegExp(src, "i");
+      const el = [...document.querySelectorAll("main *")].find((e) => re.test(e.textContent ?? "") && ![...e.children].some((c) => re.test(c.textContent ?? "")));
+      return el ? el.getBoundingClientRect().top + window.scrollY : null;
+    }, pattern.source);
+    if (y === null) { check(`report screenshot ${name}: anchor text found`, false, pattern.source); return; }
+    await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+    await R.page.screenshot({ path: path.join(OUT, name), fullPage: true, clip: { x: 0, y: Math.max(0, y - before), width: 960, height } });
+  };
+  const top = async (url, name, height) => {
+    await R.page.goto(BASE + url, { waitUntil: "networkidle" });
+    await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+    await R.page.screenshot({ path: path.join(OUT, name), fullPage: true, clip: { x: 0, y: 0, width: 960, height } });
+  };
+  await top("/ninjas/natsu-dragneel", "r04-natsu-top.png", 1150);
+  await around("/ninjas/natsu-dragneel", /Skill Awakening 1/, "r05-natsu-skill-awakening.png", 820);
+  await around("/ninjas/natsu-dragneel", /Fire Dragon's Talon/, "r06-natsu-talent2.png", 820);
+  await around("/ninjas/cursed-tayuya", /Special Tayuya Card Awakening/, "r07-tayuya.png", 1000);
+  await around("/ninjas/kimono-kurenai", /Applies the below/, "r08-kimono.png", 900, 40);
+  await around("/ninjas/otsutsuki-isshiki", /only one of the following skills/, "r09-isshiki.png", 1000, 40);
+  await top("/ninjas/uchiha-madara-moon-s-eye", "r10-moon-eye.png", 1150);
+  await top("/ninjas/uchiha-hikari", "r11-hikari.png", 1150);
+  await R.page.goto(BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force", { waitUntil: "networkidle" });
+  await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+  const listY = await R.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
+  await R.page.screenshot({ path: path.join(OUT, "r01-results.png"), fullPage: true, clip: { x: 0, y: Math.max(0, listY - 520), width: 960, height: 1100 } });
+  await R.page.goto(BASE + "/ninjas?formation=support", { waitUntil: "networkidle" });
+  await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+  const supY = await R.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
+  await R.page.screenshot({ path: path.join(OUT, "r03-supporters-list.png"), fullPage: true, clip: { x: 0, y: Math.max(0, supY - 40), width: 960, height: 950 } });
+  await R.page.goto(BASE + "/search?q=Might+Gai", { waitUntil: "networkidle" });
+  await R.page.addStyleTag({ content: STATIC }).catch(() => {});
+  await R.page.screenshot({ path: path.join(OUT, "r02-search-alias.png"), clip: { x: 0, y: 0, width: 960, height: 420 } });
+  await top("/admin/ninjas/natsu-dragneel", "r12-admin-ninja.png", 1100);
+  await top("/admin/users", "r13-admin-users.png", 900);
+  await R.ctx.close();
 
   // ── 11. cleanup of the test records and final state ──
   await go(page, BASE + "/admin/equipment/prueba-espada");

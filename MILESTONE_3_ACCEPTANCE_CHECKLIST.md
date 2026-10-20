@@ -31,14 +31,14 @@ VERIFIED = checked by an automated test and/or the real-browser run in this roun
 | 24 | Ranks D to SSR | VERIFIED | 15 stored |
 | 25 | Awakening: Hinata, Kusanagi Kyo, First Hokage, Sage Jugo | VERIFIED | |
 | 26 | Awakening: Natsu Dragneel, Cursed Tayuya | VERIFIED | text imported, rules attached, tested |
-| 27 | Other awakening rules unknown, never summed | VERIFIED | 113 UNKNOWN |
+| 27 | Other awakening rules unknown, never summed | VERIFIED | 113 UNKNOWN of 120 stages |
 | | **Data** | | |
-| 28 | All supplied Supporters imported | VERIFIED | 79 of 79 cards, 63 of 63 text files, 0 duplicate ninjas, second run +0 |
-| 29 | Kimono Kurenai Spanish complete | PARTIAL | source ends early; flagged, not invented |
-| 30 | Mitarashi Anko HP | PARTIAL | stored as printed (45000), awaiting client answer |
+| 28 | All supplied Supporters imported | VERIFIED | 79 of 79 cards linked to 79 distinct existing ninjas, 63 of 63 text files, 1,941 text lines checked word for word, card values re-read against the images, 0 duplicate ninjas, second run +0 |
+| 29 | Spanish complete for every ninja | PARTIAL | 173 complete, 2 partial (Kimono Kurenai, Sai (Errant Knight): cut in the source), 2 without Spanish (Guren, Final Sasuke); nothing invented |
+| 30 | Cards that print a five digit HP | PARTIAL | Mitarashi Anko 45000, Uchiha Hikari 46000, Ōtsutsuki Isshiki 38000 stored as printed, awaiting client answer |
 | 31 | Equipment, jewelry, gems data | BLOCKED | no source supplied |
 | 32 | Import: dry run, idempotent, no duplicates, backup | VERIFIED | |
 | 33 | Database integrity | VERIFIED | |
-| 34 | Typecheck, lint, build, tests | VERIFIED | 252 tests, clean, build ok |
-| 35 | Desktop and mobile browser | VERIFIED | 111 checks, 390 px without horizontal scrolling |
+| 34 | Typecheck, lint, build, tests | VERIFIED | 252 tests, tsc and eslint clean, build ok (final audit run) |
+| 35 | Desktop and mobile browser | VERIFIED | 111 checks (final audit run), 390 px without horizontal scrolling |
 | 36 | Milestone closed | BLOCKED | needs client review and acceptance |

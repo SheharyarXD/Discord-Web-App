@@ -8685,7 +8685,7 @@
      },
      {
       "label": "HP",
-      "value": "460000",
+      "value": "46000",
       "growth": "46"
      }
     ],
@@ -8697,7 +8697,7 @@
      "text": "Unlimited engraving tsuk",
      "truncated": true
     },
-    "verification": "read from the image twice for the clearest cards; the least legible were re-read zoomed (identical)"
+    "verification": "read from the image twice for the clearest cards; the least legible were re-read zoomed (identical); HP re-read zoomed in the final audit"
    },
    "abilities": [
     {
@@ -8836,7 +8836,9 @@
      }
     }
    ],
-   "sourceNotes": [],
+   "sourceNotes": [
+    "The card prints HP as 46000 (growth 46) where most similar cards print a six digit HP. Stored as printed and flagged for review; no digit was added."
+   ],
    "alignment": []
   },
   {
@@ -8869,7 +8871,7 @@
      },
      {
       "label": "HP",
-      "value": "380000",
+      "value": "38000",
       "growth": "38"
      }
     ],
@@ -8881,7 +8883,7 @@
      "text": "Big Box Sky",
      "truncated": false
     },
-    "verification": "read from the image twice for the clearest cards; the least legible were re-read zoomed (identical)"
+    "verification": "read from the image twice for the clearest cards; the least legible were re-read zoomed (identical); HP re-read zoomed in the final audit"
    },
    "abilities": [
     {
@@ -9062,7 +9064,9 @@
      }
     }
    ],
-   "sourceNotes": [],
+   "sourceNotes": [
+    "The card prints HP as 38000 (growth 38) where most similar cards print a six digit HP. Stored as printed and flagged for review; no digit was added."
+   ],
    "alignment": []
   },
   {

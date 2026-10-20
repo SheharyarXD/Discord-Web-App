@@ -1,8 +1,8 @@
-# Milestone 3: final technical report (Supporter sync round)
+# Milestone 3: final technical report (after the final quality audit)
 
 **Status: READY_FOR_CLIENT_REVIEW.** Every Supporter source that was supplied (79 cards: the 16 earlier ones and the 63 additional ones) is imported with its English and Spanish text. What is still open is listed in `MILESTONE_3_OPEN_ITEMS.md`. Milestone 3 is **not closed**: it needs the client's review and acceptance.
 
-All figures below were counted from the database after the import, and every automated result was produced in this round. The numbers in the earlier report (241 tests, 97 browser checks, 121 entries, 115 profiled ninjas) are the previous baseline and are not reused as evidence.
+All figures below were counted from the database after the import, and every automated result was produced in this round. The numbers in the earlier report (241 tests, 97 browser checks, 121 entries, 115 profiled ninjas) are the previous baseline and are not reused as evidence. A final independent audit then recomputed every figure from the database, re-read all 79 card values against the images, and corrected the points listed in section 9.
 
 ## 1. What this round did
 
@@ -26,16 +26,16 @@ All figures below were counted from the database after the import, and every aut
 | Supporter source entries | 16 | **79** |
 | Ninjas with a card | 113 | **175** (Might Guy and Sasuke (Taka) still have no card) |
 | Ninjas with English ability text | 115 | **177** |
-| Ninjas with complete Spanish text | 112 | **174** (Kimono Kurenai partial, Guren and Final Sasuke none) |
+| Ninjas with complete Spanish text | 112 | **173** (2 partial: Kimono Kurenai and Sai (Errant Knight), whose Spanish is cut in the source; 2 without: Guren and Final Sasuke) |
 | Release-list ninjas with name and date only | 61 | **0** |
-| Awakening stages | 69 | **120**, on 92 ninjas |
-| Awakenings with a rule stated by the source or the client | 4 | **7** |
+| Awakening stages (one stored talent or skill level, counted once) | 69 | **120** (111 talent, 9 skill), on 92 ninjas |
+| Awakening stages with a stated rule | 4 | **7** (113 stay UNKNOWN) |
 | Effect rows | 2,781 | **4,395** (3,876 structured, 105 need review, 414 kept as source text) |
 | Aliases | 53 | **76** |
 | Ranks in use | S 6, SS 4, SSS 78, SR 12, SSR 13 | S 6, SS 4, SSS 119, SR 24, SSR 22, none 2 |
 | Equipment, jewelry, gems | 0 | 0 (no material supplied; nothing invented) |
 
-By channel after the import: Vanguard 28, Center/Assaulter 60 (58 cards), Supporter 79 (79 cards), Alien 10, plus the ninjas that only come from the awakening channel and the release list, all with a profile. The per-ninja table is `MILESTONE_3_DATA_RECONCILIATION.csv` (177 rows). The 79 Supporter cards, with file, hash, status and notes, are in `MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv`. Each source entry is in `MILESTONE_3_IMPORT_LEDGER.csv` (184 rows). Summary metrics are in `MILESTONE_3_DATA_METRICS.csv`.
+By channel after the import: Vanguard 28, Center/Assaulter 60 (58 cards), Supporter 79 (79 cards), Alien 10, plus the ninjas that only come from the awakening channel and the release list, all with a profile. The per-ninja table is `MILESTONE_3_DATA_RECONCILIATION.csv` (177 rows; its awakening column sums to 120 and its stated-rule column to 7). The 79 Supporter cards, with file, hash, status and notes, are in `MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv`. Each source entry is in `MILESTONE_3_IMPORT_LEDGER.csv` (184 rows). Summary metrics with their counting definitions are in `MILESTONE_3_DATA_METRICS.csv`. The Support formation count (83) is not the Supporter count: it is the 79 Supporter-channel cards plus 4 Alien cards that also print Support.
 
 ## 3. Reconciliation of the 79 Supporter cards
 
@@ -45,7 +45,8 @@ By channel after the import: Vanguard 28, Center/Assaulter 60 (58 cards), Suppor
 - Cards matched by judgement (`ALIAS_REVIEWED`, searchable, listed for the client to confirm): Uchiha Sakura = Sakura Uchiha, 6-tail Utakata = Utakata, Terumi Mei (Summer) = Terumi Mei, Neji Hyūga = Hyūga Neji, Orochimaru (New Era) = Orochimaru from Boruto, Susanoo Itachi & Sasuke = Susano Itachi&Sasuke. Each is the only release-list entry that fits and sits at the same place in the Supporter order.
 - The legacy unresolved entry «Neji Hyuga» (awakening channel) is **not** merged with the new Neji Hyūga card: the new texts say nothing that proves they are the same ninja. The four old unresolved identities stay staged evidence.
 - Chinese cards (16 of the 63: cards 21, 30 to 32, 34, 36 to 41, 43, 44, 46, 48 and 49): rating, type and formation are matched by position (`体术`/`幻术`, `后军` = Support), flagged as partly confirmed, names not translated. The label text was transcribed from small images.
-- Special card readings: cards that print **Power** instead of Chakra keep `Power` (its own statistic, Constitución): Yasaka Itachi, Reanimated Hiruzen, Sasuke & Itachi, Pain & Konan, Xmas Haku (plus the four from earlier). Mitarashi Anko's HP is stored exactly as printed, **45000**, flagged for review: no digit was added. Several skill labels are cut by the card layout and are stored as printed with the `CARD_LABEL_CUT` flag; the full name comes from the text.
+- Special card readings: cards that print **Power** instead of Chakra keep `Power` (its own statistic, Constitución): Yasaka Itachi, Reanimated Hiruzen, Sasuke & Itachi, Pain & Konan, Xmas Haku (plus the four from earlier). Three cards print a five digit HP where similar cards print six: Mitarashi Anko **45000**, Uchiha Hikari **46000** and Ōtsutsuki Isshiki **38000**. They are stored exactly as printed and flagged for review; no digit was added. (Hikari and Isshiki had been transcribed with an extra zero and were corrected by the final audit.) Several skill labels are cut by the card layout and are stored as printed with the `CARD_LABEL_CUT` flag; the full name comes from the text.
+- Counting definitions: an awakening stage is one stored talent or skill awakening level. A ninja has complete Spanish when every talent, skill and awakening that has English text also has uncut Spanish. Status definitions (for example Armor Break) are optional text and reported separately: Natsu Dragneel's two are English only, his ability text is fully translated.
 - Shikamaru Nara: the card says «Explosive Shadow Stab» and the text heading says «Shadow Fang». Both are kept and noted.
 
 ## 4. Client rules applied to the new data
@@ -81,15 +82,17 @@ Code changes needed for this round (small, in existing files): the loader reads 
 
 | Check | Result |
 | --- | --- |
-| `vitest run` | **252 tests, 14 files, all pass** (new `m3-supporters.test.ts` with 10 tests; profile, reference and decision tests updated to the new counts) |
+| `vitest run` | **252 tests, 14 files, all pass**, run again in the final audit after the data correction |
 | `tsc --noEmit` | clean |
-| `eslint` | clean |
+| `eslint .` | clean, no warnings |
 | `next build` | succeeds |
+| `scripts/final-audit.mjs` | recomputes every figure of this report from the database (one counting methodology) |
+| `scripts/verify-supporters.mjs` | for all 79 cards: stored rating and four statistics equal the staged card values; 1,941 English and Spanish lines are word for word in their files and stored on the right ninja; awakening levels equal the source headings. No mismatch |
 | Importer | dry run, real run, second run +0 on every table |
 | Database | integrity ok, foreign keys empty |
-| Real-browser run (Edge, built application, `scripts/browser-check.mjs`) | **111 checks, 111 pass**: the 97 earlier checks plus 14 for the new Supporters (Natsu, Tayuya, Kimono, Isshiki, Moon's Eye, Yasaka, Anko; 177 ninjas listed; search by name; rank filter; gems 404; 390 px without horizontal scrolling on three new pages) |
+| Real-browser run (Edge, built application, `scripts/browser-check.mjs`) | **111 checks, 111 pass** (re-run in the final audit): the 97 earlier checks plus 14 for the new Supporters (Natsu, Tayuya, Kimono, Isshiki, Moon's Eye, Yasaka, Anko; 177 ninjas listed; search by name; rank filter; gems 404; 390 px without horizontal scrolling on three new pages) |
 
-## 7. Git and deployment
+## 7. Git and deployment (see MILESTONE_3_FINAL_DELIVERY_VERIFICATION.md for the final commit)
 
 The work is committed on branch `milestone-2` and pushed to the `origin` repository at the end of this round, as authorised by the owner, under the owner's Git identity. Nothing is deployed. Private material (client card screenshots, source packages, database backups, the prompt files) is in `.gitignore` and is not published. The owner's real email address still exists in older Git history; history was not rewritten.
 
@@ -98,3 +101,14 @@ The work is committed on branch `milestone-2` and pushed to the `origin` reposit
 - The administrator's ability editor reads `data/reference/lexicon.json` at run time; the deployment (Milestone 4) must ship it.
 - Chinese card labels are transcriptions of small images and may contain misread characters; they are not used for identity.
 - Might Guy and Sasuke (Taka) have text but no card. Equipment, jewelry and gems have no source material.
+
+## 9. Corrections made by the final audit
+
+| Finding | Correction |
+| --- | --- |
+| The reconciliation CSV summed to 231 awakenings and a wrong stated-rule total, because talent awakenings were counted twice (as ability rows and again through their talent option) | One definition: an awakening stage is one stored ability row of type talent or skill awakening. The CSV now sums to 120 stages and 7 stated rules, equal to the report and the database |
+| 174 ninjas were reported as fully translated, but Sai (Errant Knight) has Spanish text cut in its source (marked `[TRUNCATED IN SOURCE]`) | Corrected to 173 complete, 2 partial (Kimono Kurenai, Sai), 2 without Spanish (Guren, Final Sasuke). The audit CSV, metrics CSV, reconciliation CSV, this report and the PDF agree |
+| Natsu Dragneel was shown as partially translated, because two status definitions have no Spanish | Reclassified: his ability text is complete; the two optional status definitions are English only and reported as a separate item |
+| The metrics CSV still said the Natsu and Tayuya rules were waiting for text | Removed: the metrics are now generated from the database, with no hard-coded statements |
+| The Support formation count (83) could be read as the number of Supporter cards | Explained wherever it appears: 79 Supporter cards plus 4 Alien cards that print Support |
+| Uchiha Hikari and Ōtsutsuki Isshiki had HP transcribed as 460000 and 380000; the cards print 46000 and 38000 | Corrected to the printed values, flagged like Mitarashi Anko's 45000, reimported (second run +0) and covered by a test |
