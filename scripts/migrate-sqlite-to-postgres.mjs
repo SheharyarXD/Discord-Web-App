@@ -8,7 +8,7 @@ import { PrismaClient as SqliteClient, Prisma } from "@prisma/client";
  * Copies every row of the SQLite database into an EMPTY PostgreSQL database, in foreign-key order, inside ONE transaction
  * (all or nothing, so a failed run leaves nothing behind and can simply be run again), then compares every table.
  *
- *   TARGET_DATABASE_URL=<direct postgres url> node scripts/migrate-sqlite-to-postgres.mjs [--source prisma/dev.db] [--csv file.csv] [--dry-run]
+ *   TARGET_DATABASE_URL=<direct postgres url> node scripts/migrate-sqlite-to-postgres.mjs [--source prisma/dev.db] [--csv file.csv] [--dry-run | --verify-only]
  *
  * Needs the PostgreSQL client: npm run db:pg:schema, then  npx prisma generate --schema .local-pg/schema.prisma  (after  node prisma/make-postgres-schema.mjs --local).
  * Refuses to run when the target already holds data. Never prints a connection string.
@@ -18,6 +18,7 @@ const arg = (name, fallback) => (process.argv.includes(name) ? process.argv[proc
 const source = path.resolve(arg("--source", "prisma/dev.db"));
 const csvPath = arg("--csv", null);
 const dryRun = process.argv.includes("--dry-run");
+const verifyOnly = process.argv.includes("--verify-only"); // writes nothing; compares an already migrated target with the source
 const target = process.env.TARGET_DATABASE_URL;
 if (!target || !/^postgres(ql)?:\/\//.test(target)) throw new Error("TARGET_DATABASE_URL (a PostgreSQL direct connection URL) is required");
 if (!existsSync(source)) throw new Error(`SQLite source not found: ${source}`);
@@ -78,14 +79,14 @@ const all = (client, m) => client[delegate(m)].findMany();
 console.log(`source ${path.basename(source)} -> PostgreSQL ${host}${dryRun ? " (dry run: nothing is written)" : ""}`);
 const nonEmpty = [];
 for (const m of models) if ((await pg[delegate(m)].count()) > 0) nonEmpty.push(m.name);
-if (nonEmpty.length) throw new Error(`the target is not empty (${nonEmpty.slice(0, 5).join(", ")}...). Refusing to write.`);
+if (nonEmpty.length && !verifyOnly) throw new Error(`the target is not empty (${nonEmpty.slice(0, 5).join(", ")}...). Refusing to write.`);
 
 const data = new Map();
 for (const name of order) data.set(name, await all(lite, byName.get(name)));
 const total = [...data.values()].reduce((n, r) => n + r.length, 0);
 console.log(`read ${total} rows from ${order.length} tables`);
 
-if (!dryRun) {
+if (!dryRun && !verifyOnly) {
   await pg.$transaction(
     async (tx) => {
       for (const name of order) {
