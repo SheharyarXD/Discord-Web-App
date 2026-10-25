@@ -1,70 +1,60 @@
 # Production deployment report
 
-**Status: BLOCKED on one account action in the client's Vercel team.** Everything that can be prepared and verified outside Vercel is finished. Nothing was deployed, no database was created in the cloud, and no billing resource was created.
+**Status: LIVE AND VERIFIED** at **https://furia-ninja.vercel.app** (alias https://furia-ninja-furia-ninja.vercel.app). Date: 26 October 2026. Milestone 4 is not accepted and not closed; the first administrator account still has to be created by the owner (section 7).
 
-Date: 26 October 2026. Branch `milestone-4`, last commit of this round pushed to `origin/milestone-4`.
+## 1. Where it runs
 
-## 1. Access check
-
-| Check | Result |
+| Item | Value |
 | --- | --- |
-| Vercel CLI | 59.11.7, signed in through the supported device flow (the account owner approved it in the browser) as `sheharyarxd-3241` |
-| Team `furia-ninja` (FURIA NINJA, plan Pro) | visible to the account |
-| Role of the account in the team | **Developer** |
-| Existing projects in the team | none |
-| Creating the project `furia-ninja` | **refused: 403 "You don't have permission to create the project"** |
-| Installing Neon from the Marketplace | refused until the Marketplace terms are accepted in the browser (`action_required`) |
-| Personal account `xd-gamings-projects` | **not used**; nothing was created there |
+| Vercel team / project | `furia-ninja` (FURIA NINJA, Pro) / `furia-ninja` (framework Next.js, Node 22.x) |
+| Account used | `sheharyarxd-3241`, role Member (upgraded by the client from Developer after the first attempt was refused with 403) |
+| Git | repository `SheharyarXD/Discord-Web-App`, branch **`milestone-4`** (the final tested release) |
+| Production deployment | `dpl_GXvzE8hAHXV4xnYMXNqebJ1nbciq`, built from commit **`1873342`** (application code identical to the later documentation commits), region iad1 |
+| Production database | Neon PostgreSQL `neon-indigo-blanket`, **Free** plan, AWS us-east-1 (next to the Vercel functions), connected to **Production only** |
+| Preview database | Neon `furia-preview`, **Free** plan, a separate Neon project, connected to **Preview only**. Production and Preview never share a database |
+| Preview deployment verified | `https://furia-ninja-d1isyjlen-furia-ninja.vercel.app` (protected by Vercel Authentication; tested with a temporary bypass secret that was revoked afterwards: 0 secrets remain) |
+| Costs | none: Neon Free (no payment method), Vercel plan already owned by the client. No domain bought |
 
-## 2. What the account owner must do (smallest set)
+## 2. Environment variables (values are never printed or committed)
 
-1. **Role.** In the Vercel dashboard open the team `furia-ninja`, Settings, Members, and change the role of the developer account (`sheharyarxd-3241`) from *Developer* to *Member* (or *Owner*). A Developer cannot create projects, install integrations or deploy to production. Alternative: the client creates the project himself (step 3) and gives the developer the Member role.
-2. **Database terms.** Open https://vercel.com/furia-ninja/~/integrations/accept-terms/neon?source=cli and accept the Neon Marketplace terms. Choose the **Free** plan. No paid plan is needed for this data (about 9,000 rows). Any paid upgrade needs the client's decision.
-3. **Git connection.** The repository `SheharyarXD/Discord-Web-App` belongs to a personal GitHub account. The Vercel GitHub app must be installed on that account (Vercel project, Settings, Git, Connect). Production branch: **`milestone-4`**, because it holds the final tested release. (`main` is still the Milestone 1 code. Merging `milestone-4` into `main` is a separate decision for the owner.)
+| Variable | Production | Preview | Source |
+| --- | --- | --- | --- |
+| `DATABASE_URL` | pooled Neon URL | pooled URL of the preview database | Neon integration |
+| `DATABASE_URL_UNPOOLED` | direct URL | direct URL of the preview database | Neon integration |
+| `DIRECT_URL` | = direct URL (migrations) | = direct URL | set by `scripts/vercel-set-env.mjs`, stored as a secret |
+| `SESSION_DAYS` | 14 | 14 | set by the script |
+| `FEATURE_GEMS` | false | false | set by the script |
+| other `POSTGRES_*`, `PG*`, `NEON_*` | provided by the integration, not used by the code | | |
 
-After these three actions the remaining work is mechanical and scripted (section 5). Estimated time: under one hour.
+No `NEXT_PUBLIC_` variable exists. The Development environment has no database variables (local work uses SQLite).
 
-## 3. What is ready
+## 3. Sequence actually followed
 
-- PostgreSQL schema derived from the single source schema (`prisma/postgres/schema.prisma`), baseline migration with the 16 integrity triggers translated to PostgreSQL, and a test that fails when the derived file is out of date.
-- Data migration script with all-or-nothing transaction, per-table content checksums and a refusal to write into a populated database; rehearsed successfully (see `PRODUCTION_DATABASE_MIGRATION_REPORT.md`).
-- The application builds with the PostgreSQL client exactly as Vercel will build it (`npm run vercel-build`) and passes the whole real-browser run against PostgreSQL (see `PRODUCTION_SMOKE_TEST_RESULTS.md`).
-- Name searches are case-insensitive on PostgreSQL; the parser vocabulary file is traced into the serverless admin routes; `.vercelignore` keeps client screenshots, source packages, backups and local databases out of any CLI upload; `engines.node` is 22.x.
+1. Vercel sign-in through the supported device flow (approved by the account owner); team and role checked.
+2. Project linked to the GitHub repository; Neon installed from the Marketplace; the integration first connected one database to all environments, so it was **disconnected and re-connected to Production only**, and a second Neon database was created for Preview.
+3. Schema applied to the **Preview** database, data copied and checksummed (41 of 41 tables match), preview deployed, **165 of 165 browser checks passed over HTTPS against it**.
+4. Same steps on the **Production** database after a fresh backup of `prisma/dev.db` (`prisma/backups/dev-pre-production-migration-20261026.db`): baseline migration applied, data copied in one transaction, **41 of 41 tables match** (`PRODUCTION_DATA_RECONCILIATION.csv`).
+5. Read-only smoke test of the live site: **37 of 37 checks passed** (`PRODUCTION_SMOKE_TEST_RESULTS.md`); the two throw-away accounts were deleted and no game data changed.
+6. Runtime logs checked: no error after the data was loaded.
 
-## 4. Deployment architecture
+## 4. Incident and deviations (reported plainly)
 
-| Part | Choice |
-| --- | --- |
-| Hosting | Vercel (Next.js 16, serverless functions), team `furia-ninja` |
-| Database | Neon PostgreSQL through the Vercel Marketplace, Free plan; region near the Vercel function region |
-| Connections | `DATABASE_URL` pooled (runtime), `DIRECT_URL` direct (migrations only) |
-| Sessions | database-backed sessions with a Secure, HttpOnly cookie in production, so they persist across serverless instances |
-| Environments | Production, Preview (separate Neon branch with safe test data), local development (SQLite or local PostgreSQL) |
-| Local development | unchanged: SQLite file; the PostgreSQL schema is generated from the same source |
+- **Unplanned early production deployment.** The first Git push after linking created the project's first deployment, and Vercel treats a project's first deployment as Production. It therefore went live at the production address **before the production database had its tables**. For a few minutes the home page returned an error (logged at 01:54 local time); no data was exposed because none existed yet. The migration (step 4) followed immediately and the site then worked. Lesson applied: the later steps were done deployment-first only for Preview.
+- **Production branch.** Vercel's API would not change the project's production branch, so it is still `main` (which holds the Milestone 1 code). Pushing to `main` would deploy that old code to production. Safe release method until the owner decides: `vercel deploy --prod` from `milestone-4`, **or** change the production branch to `milestone-4` in the dashboard (Project, Settings, Git), **or** merge `milestone-4` into `main`. Pushes to `milestone-4` now create Preview deployments that use the Preview database.
+- **Preview isolation.** The Preview database is a separate Neon project (stronger than a branch). Preview deployments cannot reach production data.
+- **Neon Free limits.** 1 GB storage, short point-in-time history, compute that sleeps when idle (first request after a pause is slower). Current data is a few MB. Keep a periodic copy (handover guide).
 
-Environment variables (names found in the code; values are set in Vercel, never committed):
+## 5. Rollback
+- Code: Vercel Instant Rollback to the previous production deployment (or redeploy a previous commit).
+- Data: the production database is never reset. Restore from the Neon history window, or recreate an empty database and rerun the migration script from the SQLite file (kept untouched and backed up).
 
-| Variable | Production | Preview |
-| --- | --- | --- |
-| `DATABASE_URL` | Neon pooled connection | Neon preview-branch pooled connection |
-| `DIRECT_URL` | Neon direct connection | Neon preview-branch direct connection |
-| `SESSION_DAYS` | 14 | 14 |
-| `FEATURE_GEMS` | false | false |
+## 6. Not done on purpose
+- No custom domain, no paid plan, no change to the production branch, no merge into `main`.
+- No administrator account was created: the password is the owner's choice.
 
-No `NEXT_PUBLIC_` variable exists or is needed. `ADMIN_EMAIL` and `ADMIN_PASSWORD` are used only once, on the owner's machine, to create the administrator (section 5, step 6); they are not stored in Vercel.
-
-## 5. Runbook once access is granted
-
-1. `vercel link --yes --project furia-ninja --scope furia-ninja`; set framework Next.js, Node 22.x, build command `npm run vercel-build`, production branch `milestone-4`.
-2. `vercel integration add neon --scope furia-ninja` (Free plan); create a separate Neon branch for Preview; map `DATABASE_URL` and `DIRECT_URL` (= the unpooled URL) in Production and Preview; set `SESSION_DAYS` and `FEATURE_GEMS`.
-3. Back up: copy `prisma/dev.db` (done again immediately before migration) and note the Neon restore point.
-4. Preview database: `prisma migrate deploy --schema prisma/postgres/schema.prisma`, then `TARGET_DATABASE_URL=<preview direct url> node scripts/migrate-sqlite-to-postgres.mjs --csv ...`.
-5. Preview deployment from the final commit; log in with a staging administrator created only in the preview database; run the browser checks against the preview URL; read the build and runtime logs.
-6. Production: same migration and checksum comparison on the production database, then `ADMIN_EMAIL=... ADMIN_PASSWORD=... npm run db:seed` from the owner's machine pointed at the production `DIRECT_URL` (creates the first administrator; the password is chosen by the owner and never written to a file).
-7. Promote to production; verify `https://<project>.vercel.app/api/health`, sign in, run the read-only smoke list, check function logs.
-8. Rollback plan: Vercel "Instant Rollback" to the previous deployment; database is never reset; restore from the Neon restore point or from the SQLite backup plus a repeat of step 4 on an empty database.
-
-## 6. Costs and approvals outstanding
-- Neon Free plan and Vercel Pro (already owned by the client): no extra cost expected. Nothing paid was started.
-- Custom domain: optional, not purchased.
-- Approvals needed from the account owner: the three actions in section 2.
+## 7. Owner actions that remain
+1. **Create the first administrator** (on the owner's machine, nothing is stored):
+   `npx prisma generate --schema prisma/postgres/schema.prisma`, then
+   `ADMIN_EMAIL=<email> ADMIN_PASSWORD='<10+ characters>' node scripts/with-vercel-env.mjs production -- node scripts/create-admin.mjs`, then `npx prisma generate` to return the local client to SQLite. Regular approved users are then created from the administration screen.
+2. Decide the production branch (section 4).
+3. Review and accept Milestone 4 after seeing the live site.

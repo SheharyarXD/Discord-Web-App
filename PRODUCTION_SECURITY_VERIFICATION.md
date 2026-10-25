@@ -1,6 +1,6 @@
 # Production security verification
 
-**Status: code and configuration checked locally; the live deployment checks are pending** (nothing is deployed yet).
+**Status: verified locally and on the live site https://furia-ninja.vercel.app (26 October 2026).**
 
 | Area | Check | Result |
 | --- | --- | --- |
@@ -19,8 +19,13 @@
 | Runtime files | writes to disk | none at run time; the only runtime file read is `data/reference/lexicon.json`, traced into the serverless admin routes |
 | Dependencies | additions | `embedded-postgres` (development only, used for local verification; not used at run time) |
 
-## Pending until the deployment exists
-- Same checks against the live HTTPS URL (anonymous, regular user, administrator).
-- Secure cookie flag observed in the live response.
-- Function logs inspected; environment variable review in the Vercel dashboard (values never printed).
-- A write made in production survives a new deployment.
+## Verified on the live site (`PRODUCTION_SMOKE_TEST_RESULTS.md`, 37 of 37)
+- Anonymous, regular user and administrator tested over HTTPS: redirect to login, 404 on `/admin` for the regular user, administrator access.
+- Session cookie observed in the live browser: **Secure, HttpOnly, SameSite=Lax**; HSTS enabled; private pages `no-store`.
+- Function logs inspected: no error after the data was loaded.
+- Environment variables reviewed by name only; `DIRECT_URL`, `SESSION_DAYS` and `FEATURE_GEMS` are stored as secrets; the temporary preview bypass secret was revoked (0 left); the local `.env.local` token file was deleted.
+- Production and Preview use different Neon databases; the browser test script refuses to target the production address.
+
+## Still to do by the owner
+- Create the first administrator (`scripts/create-admin.mjs`); no account exists and no default or debug account exists.
+- A write made in production surviving a new deployment is guaranteed by the external database; it can be confirmed after the first administrator exists by editing a harmless field.

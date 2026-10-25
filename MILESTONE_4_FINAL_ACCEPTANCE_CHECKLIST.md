@@ -12,12 +12,13 @@ VERIFIED = checked in this round. PENDING OWNER = needs an account action in the
 | 6 | Production build with the PostgreSQL client | VERIFIED | `npm run vercel-build` |
 | 7 | Real-browser run on the production build with PostgreSQL | VERIFIED | 165 of 165 |
 | 8 | Security configuration (cookies, roles, caching, secrets) | VERIFIED (code and local) | `PRODUCTION_SECURITY_VERIFICATION.md` |
-| 9 | Vercel project created in team `furia-ninja` | PENDING OWNER | the account has the Developer role; creation is refused (403). Role change or project creation needed |
-| 10 | Neon database created in the client's team | PENDING OWNER | Marketplace terms must be accepted in the browser; Free plan |
-| 11 | Git repository connected, production branch `milestone-4` | PENDING OWNER | Vercel GitHub app must be installed on the repository's GitHub account |
-| 12 | Preview deployment verified | BLOCKED | needs items 9 to 11 |
-| 13 | Production deployment and live verification | BLOCKED | needs item 12 and the owner's release approval |
-| 14 | Final PDF with screenshots of the live application | BLOCKED | needs item 13 |
+| 9 | Vercel project created in team `furia-ninja` | VERIFIED | project `furia-ninja`, Member role granted by the client |
+| 10 | Neon databases in the client's team | VERIFIED | production `neon-indigo-blanket` and a separate `furia-preview`, both Free plan |
+| 11 | Git repository connected | VERIFIED (branch note) | `SheharyarXD/Discord-Web-App` connected; Vercel's production branch is still `main` (the API would not change it); the release was made from `milestone-4`; the owner decides the branch |
+| 12 | Preview deployment verified | VERIFIED | 165 of 165 browser checks over HTTPS |
+| 13 | Production deployment and live verification | VERIFIED | https://furia-ninja.vercel.app, 41 of 41 tables identical, 37 of 37 live checks |
+| 14 | Final PDF with screenshots of the live application | VERIFIED | `MILESTONE_4_FINAL_DELIVERY_REPORT_EN.pdf` (8 pages) |
 | 15 | Source code delivered | VERIFIED | branch `milestone-4` on GitHub |
 | 16 | Handover document | VERIFIED | `FINAL_PROJECT_HANDOVER.md` |
-| 17 | Milestone 4 accepted and closed | BLOCKED | the client must accept after the site is live |
+| 17 | First administrator account created | PENDING OWNER | `scripts/create-admin.mjs`; the owner chooses e-mail and password |
+| 18 | Milestone 4 accepted and closed | BLOCKED | the client must review the live site and accept |

@@ -1,17 +1,25 @@
 # Production smoke test results
 
-**Live production URL: none yet** (deployment blocked, see `PRODUCTION_DEPLOYMENT_REPORT.md`). The results below were produced on 26 October 2026 against the **production build running on a local PostgreSQL** that holds a verified copy of the real data. They prove the production configuration, not the Vercel environment.
+Run on 26 October 2026 against the **live site https://furia-ninja.vercel.app** with `scripts/production-smoke.mjs`. It is read-only: the only writes were two throw-away accounts (random passwords, never printed) and their sessions, deleted at the end. Row counts before and after were identical (177 ninjas, 316 abilities, 4,395 effects, 0 users).
 
-| Check | Result |
+**37 of 37 checks passed.**
+
+| Area | Checks |
 | --- | --- |
-| `vercel-build` (PostgreSQL client generation and `next build`) | succeeds |
-| `tsc --noEmit` with the PostgreSQL client | clean |
-| `eslint .` | clean |
-| Automated tests, SQLite (local and CI database) | 267 passed, 1 skipped, 0 failed (268 tests in 18 files) |
-| Automated tests, PostgreSQL (`npm run test:pg`) | 261 passed, 7 skipped (SQLite-only), 0 failed (268 tests in 18 files) |
-| Real-browser run (Edge) on the PostgreSQL production build | **165 of 165 checks pass**: sign-in, anonymous redirect, regular-user 404, search by name and alias, combined filters, sorting, ninja pages with awakenings (Natsu Dragneel, Cursed Tayuya, Kimono Kurenai, Ōtsutsuki Isshiki, Madara (Moon's Eye), Yasaka Itachi, Mitarashi Anko), administration create, edit and delete, accounts and roles, 360, 390, 768, 1024 and 1280 px without sideways scrolling, gems 404, health endpoint |
-| Test data created by the browser run | removed afterwards (checked) |
-| Data copy | 41 of 41 tables identical by count and content checksum |
+| Availability and transport | health endpoint answers `{"status":"ok"}` over HTTPS; HSTS enabled (`max-age=63072000; includeSubDomains; preload`) |
+| Anonymous visitor | redirected to the login on `/ninjas`, `/admin`, `/search` and a ninja page (307); each private response is `private, no-cache, no-store`; `/gems` is 404 |
+| Regular user | can sign in; `/admin` answers 404; `/ninjas` answers 200 |
+| Administrator | can sign in; session cookie is **Secure and HttpOnly** (SameSite=Lax); `/admin`, `/admin/ninjas`, `/admin/users` open; `/gems` is 404 even for the administrator; the session persists across repeated requests |
+| Data | 177 ninjas listed; Center and Assaulter filters return the same list; search «shodai» finds First Hokage; «might gai» finds Might Guy; accent-insensitive «otsutsuki» finds the Ōtsutsuki ninjas; Support formation lists 83 (79 Supporters and 4 Alien cards) |
+| Client corrections visible | Natsu Dragneel (550% skill awakening and the replacement rule); Cursed Tayuya (88% and 92%); Kimono Kurenai's final Spanish line; Yamanaka Ino shows «Decisión del cliente»; Mitarashi Anko HP 45000 as printed |
+| Mobile | no horizontal scrolling at 390 px on `/ninjas`, a ninja page, `/search` and `/admin` |
+| Cleanup | smoke accounts removed, no game data changed |
 
-## To run on the live URL (after the deployment)
-Read-only: `/api/health`, sign-in as the administrator, `/ninjas` (177 results), search "Shodai" and "gai", `/ninjas/natsu-dragneel`, `/ninjas/cursed-tayuya`, `/ninjas/kimono-kurenai`, `/search`, `/gems` (404), `/admin` as a regular user (404) and anonymous (redirect). The browser script `scripts/browser-check.mjs` must not be pointed at production (it creates and deletes test accounts); a read-only variant list is above. Preview deployments use the Neon preview branch only.
+## Before production (Preview deployment, same code, Preview database)
+`scripts/browser-check.mjs` was run against `https://furia-ninja-d1isyjlen-furia-ninja.vercel.app`: **165 of 165 checks passed** (sign-in, access rules, search, combined filters, sorting, ninja pages and awakenings, administration create, edit and delete, accounts, 360 to 1280 px widths, gems 404, health endpoint). The script refuses to run against the production address.
+
+## Local verification (same round)
+SQLite suite 267 passed, 1 skipped, 0 failed (268 tests); PostgreSQL suite 261 passed, 7 skipped (SQLite-only), 0 failed (268 tests); `tsc` and `eslint` clean; `vercel-build` succeeds; PostgreSQL production build with the full browser run 165 of 165.
+
+## Logs
+Production runtime logs: no error after the data was loaded. The only errors in the log are two requests to `/` at 01:54 local time, made before the production database had its tables (see `PRODUCTION_DEPLOYMENT_REPORT.md`, section 4).

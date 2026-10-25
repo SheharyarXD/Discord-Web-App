@@ -1,6 +1,6 @@
 # Production database migration report
 
-**Status: rehearsal complete and verified; production migration pending** (no cloud database exists yet; see `PRODUCTION_DEPLOYMENT_REPORT.md`).
+**Status: migrated and verified on Preview and on Production (26 October 2026).** Local rehearsal first, then the Neon Preview database, then the Neon Production database.
 
 ## 1. Approach
 SQLite stays the local and CI database. The production target is PostgreSQL (Neon). One source schema (`prisma/schema.prisma`) produces the PostgreSQL schema with `prisma/make-postgres-schema.mjs`; the committed result is checked by a test. Prisma 6.19 and Next.js 16 were not upgraded.
@@ -41,11 +41,22 @@ Differences handled: trigger syntax, case-insensitive `contains`, SQLite-only te
 
 Client corrections confirmed present in the copied data by the tests and checksums: Shodai Hokage verified as an alias of First Hokage (one ninja); each later awakening replaces the previous (17 replace, 1 cancels, 3 upgrade; Natsu Dragneel, Cursed Tayuya, Kusanagi Kyo, First Hokage, Hinata, Sage Jugo cases tested); Kimono Kurenai's Spanish complete (10 of 10 lines); Mitarashi Anko 45000, Uchiha Hikari 46000, Ōtsutsuki Isshiki 38000 unchanged; Sai still flagged partial (the Spanish screenshot has not been supplied to the workspace); all 15 ranks present; gems hidden.
 
-## 4. Production procedure and restore strategy
+## 4. Executed on Neon (Preview, then Production)
+
+| Step | Preview database | Production database |
+| --- | --- | --- |
+| Backup before | `prisma/backups/dev-pre-neon-20261026.db` | `prisma/backups/dev-pre-production-migration-20261026.db` (integrity ok, 177 ninjas) |
+| `prisma migrate deploy` (direct URL) | applied | applied |
+| Data copy, one transaction | committed | committed |
+| Comparison | 41 of 41 MATCH | 41 of 41 MATCH |
+| First production attempt | | stopped before writing anything: the default Prisma client was still the PostgreSQL one used for the preview test; fixed by regenerating the SQLite client; no data was touched |
+| Users | 0 | 0 (the owner creates the administrator with `scripts/create-admin.mjs`) |
+
+## 5. Restore strategy
 1. Take a fresh copy of `prisma/dev.db` and record the Neon restore point.
 2. `prisma migrate deploy --schema prisma/postgres/schema.prisma` with the direct URL (never `migrate dev` or `migrate reset`).
 3. Run the migration script with `TARGET_DATABASE_URL` set to the direct URL; keep the CSV.
-4. If anything fails: nothing was written (single transaction). Fix and run again. If a later problem is found: restore the Neon branch to the restore point (or drop and recreate the empty database) and repeat; the SQLite file is the untouched source of truth.
+4. If anything fails: nothing was written (single transaction). Fix and run again. If a later problem is found: restore from the Neon history window (short on the Free plan) or drop and recreate the empty database and repeat; the SQLite file is the untouched source of truth. `--verify-only` compares an existing database with the source at any time.
 5. The production database is never reset after users exist.
 
-The reconciliation file `PRODUCTION_DATA_RECONCILIATION.csv` currently documents the rehearsal (column `environment`). It will be regenerated against the real production database when the migration is run.
+`PRODUCTION_DATA_RECONCILIATION.csv` is the comparison of the real production database with the SQLite source: 41 of 41 tables identical by row count and content checksum (9,074 rows).

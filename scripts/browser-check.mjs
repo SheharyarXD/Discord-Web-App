@@ -10,7 +10,13 @@ import { chromium } from "playwright-core";
 const OUT = process.argv[2];
 mkdirSync(OUT, { recursive: true });
 const PORT = 3100;
-const BASE = `http://127.0.0.1:${PORT}`;
+// TARGET_BASE_URL runs the checks against a deployed PREVIEW (with VERCEL_BYPASS_SECRET for its deployment protection). Never against production.
+const REMOTE = process.env.TARGET_BASE_URL?.replace(/\/$/, "");
+if (REMOTE && /^https:\/\/furia-ninja(-furia-ninja)?\.vercel\.app$/.test(REMOTE)) throw new Error("refusing to run the test script against the production address");
+const BASE = REMOTE ?? `http://127.0.0.1:${PORT}`;
+const BYPASS = process.env.VERCEL_BYPASS_SECRET ? { "x-vercel-protection-bypass": process.env.VERCEL_BYPASS_SECRET } : {};
+const _fetch = fetch;
+globalThis.fetch = (url, init = {}) => _fetch(url, { ...init, headers: { ...BYPASS, ...(init.headers ?? {}) } });
 const db = new PrismaClient();
 const adminMail = "m3-admin@example.test";
 const userMail = "m3-user@example.test";
@@ -37,8 +43,9 @@ await CLEAN();
 await db.user.create({ data: { email: adminMail, name: "Admin prueba", role: "ADMIN", passwordHash: await bcrypt.hash(adminPw, 10) } });
 await db.user.create({ data: { email: userMail, name: "Usuario prueba", role: "USER", passwordHash: await bcrypt.hash(userPw, 10) } });
 
-const server = spawn(process.execPath, [path.resolve("node_modules/next/dist/bin/next"), "start", "-p", String(PORT), "-H", "127.0.0.1"], { stdio: "pipe" });
+const server = REMOTE ? { kill() {} } : spawn(process.execPath, [path.resolve("node_modules/next/dist/bin/next"), "start", "-p", String(PORT), "-H", "127.0.0.1"], { stdio: "pipe" });
 await new Promise((resolve, reject) => {
+  if (REMOTE) return resolve();
   const t = setTimeout(() => reject(new Error("server did not start")), 60000);
   server.stdout.on("data", (d) => { if (String(d).includes("Ready") || String(d).includes("started")) { clearTimeout(t); resolve(); } });
   server.on("exit", () => reject(new Error("server exited")));
@@ -47,7 +54,7 @@ const browser = await chromium.launch({ executablePath: "C:/Program Files (x86)/
 const STATIC = "header, [class*='sticky'], [class*='fixed'] { position: static !important; }";
 
 async function login(email, password, width = 1280) {
-  const ctx = await browser.newContext({ viewport: { width, height: 900 }, locale: "es", deviceScaleFactor: width < 600 ? 2 : width < 1100 ? 1.75 : 1.25 });
+  const ctx = await browser.newContext({ viewport: { width, height: 900 }, locale: "es", deviceScaleFactor: width < 600 ? 2 : width < 1100 ? 1.75 : 1.25, extraHTTPHeaders: BYPASS });
   const page = await ctx.newPage();
   await page.goto(BASE + "/login");
   await page.fill('input[name="email"]', email);
