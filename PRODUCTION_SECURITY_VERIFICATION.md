@@ -12,6 +12,8 @@
 | Public endpoint | `GET /api/health` | answers only `{"status":"ok"}` or 503; reveals no data |
 | Gems | `/gems` | 404 for everyone while `FEATURE_GEMS=false` |
 | Secrets | repository audit | `.env`, `.vercel`, local databases, backups and `.local-pg` are git-ignored; no connection string, password or token is committed (the PostgreSQL schema test fails if one appears); the only password-like string in the repository is the fixed placeholder of the throw-away local test server in `scripts/pg-embedded.mjs` (it listens on 127.0.0.1 only and holds no real data) |
+| First administrator | `/setup` | 404 without the right private token or once any account exists; constant-time token comparison; serializable transaction; password 12 or more characters, hashed; no credential in code, Git, logs or reports; the token is a sensitive Vercel variable and the link lives in a git-ignored local file; tested on a Preview deployment (15 of 15) |
+| Release guard | Vercel project | Ignored Build Step prevents any build of `main` (Milestone 1 code); Production and Preview variables are bound to separate Neon databases |
 | `NEXT_PUBLIC_` | variables | none exist |
 | Upload content | `.vercelignore` | `docs/` (client screenshots and source packages), backups, `*.db`, `*.zip`, `*.pdf`, tests and prompts are never uploaded by a CLI deployment; Git deployments contain only what is committed, which excludes the same material |
 | Accounts | defaults | no default or debug account exists; the development database holds 0 users; the first administrator is created by the owner with a password of his choice, never stored in a file |
@@ -26,6 +28,11 @@
 - Environment variables reviewed by name only; `DIRECT_URL`, `SESSION_DAYS` and `FEATURE_GEMS` are stored as secrets; the temporary preview bypass secret was revoked (0 left); the local `.env.local` token file was deleted.
 - Production and Preview use different Neon databases; the browser test script refuses to target the production address.
 
+## Final re-verification on commit `89cb71b` (26 October 2026)
+- Production data identical to the source: 41 of 41 tables by count and content checksum.
+- A marker row written before the redeploy was still present after it (data persists across deployments); it was then removed.
+- Live smoke test again 37 of 37; no error in the production logs.
+- Production users: 0. No default, debug or test account remains.
+
 ## Still to do by the owner
-- Create the first administrator (`scripts/create-admin.mjs`); no account exists and no default or debug account exists.
-- A write made in production surviving a new deployment is guaranteed by the external database; it can be confirmed after the first administrator exists by editing a harmless field.
+- Send the private setup link to the client and remove `SETUP_TOKEN` afterwards.

@@ -14,11 +14,13 @@ VERIFIED = checked in this round. PENDING OWNER = needs an account action in the
 | 8 | Security configuration (cookies, roles, caching, secrets) | VERIFIED (live) | `PRODUCTION_SECURITY_VERIFICATION.md` |
 | 9 | Vercel project created in team `furia-ninja` | VERIFIED | project `furia-ninja`, Member role granted by the client |
 | 10 | Neon databases in the client's team | VERIFIED | production `neon-indigo-blanket` and a separate `furia-preview`, both Free plan |
-| 11 | Git repository connected | VERIFIED (branch note) | `SheharyarXD/Discord-Web-App` connected; Vercel's production branch is still `main` (the API would not change it); the release was made from `milestone-4`; the owner decides the branch |
+| 11 | Git repository connected, production branch `milestone-4` | PARTIAL | repository connected; the production branch is a dashboard-only setting (API and CLI refuse it): Settings, Environments, Production, Branch Tracking. Protected meanwhile: builds of `main` are skipped; the release was made with `vercel deploy --prod` from commit `89cb71b` |
 | 12 | Preview deployment verified | VERIFIED | 165 of 165 browser checks over HTTPS |
 | 13 | Production deployment and live verification | VERIFIED | https://furia-ninja.vercel.app, 41 of 41 tables identical, 37 of 37 live checks |
 | 14 | Final PDF with screenshots of the live application | VERIFIED | `MILESTONE_4_FINAL_DELIVERY_REPORT_EN.pdf` (8 pages) |
 | 15 | Source code delivered | VERIFIED | branch `milestone-4` on GitHub |
 | 16 | Handover document | VERIFIED | `FINAL_PROJECT_HANDOVER.md` |
-| 17 | First administrator account created | PENDING OWNER | `scripts/create-admin.mjs`; the owner chooses e-mail and password |
+| 17 | First administrator setup | READY, PENDING CLIENT | private one-time page `/setup` (tested 15 of 15 on Preview; production page answers correctly); the client chooses e-mail and password; no account exists yet |
+| 17b | Backup and restore procedure | VERIFIED | production backup (41 tables, 9,074 rows) restores identically on a clean server; second restore into a populated database is refused (`scripts/pg-backup-restore.mjs`) |
+| 17c | Data persists across deployments | VERIFIED | marker row survived the redeploy of 26 October |
 | 18 | Milestone 4 accepted and closed | BLOCKED | the client must review the live site and accept |

@@ -15,6 +15,16 @@ Run on 26 October 2026 against the **live site https://furia-ninja.vercel.app** 
 | Mobile | no horizontal scrolling at 390 px on `/ninjas`, a ninja page, `/search` and `/admin` |
 | Cleanup | smoke accounts removed, no game data changed |
 
+## Final round on commit `89cb71b` (production deployment of 26 October 2026)
+- Live smoke test repeated after the redeploy: **37 of 37 passed**; accounts removed; no game data changed.
+- Data identity: `scripts/migrate-sqlite-to-postgres.mjs --verify-only` against production: **41 of 41 tables identical**.
+- Persistence: a marker row (`scripts/production-marker.mjs set`) written before the deployment was present after it (`check`), then removed (`clear`); rows 177 ninjas, 394 source assets, 0 users.
+- `/setup` on production: no token 404, wrong token 404, right token 200 (form shown, nothing submitted).
+- First-administrator flow on a Preview deployment (`scripts/verify-setup-flow.mjs`): **15 of 15 passed**.
+- Deployed commit read from the deployment metadata: `89cb71b41f06c2d2fe5a91e0d12b484adac35e52`, target production, aliases `furia-ninja.vercel.app` and `furia-ninja-furia-ninja.vercel.app`.
+- Logs: no error entries.
+- Local suites after the last change: SQLite 273 passed, 1 skipped (274 tests, 19 files); `tsc` and `eslint` clean.
+
 ## Before production (Preview deployment, same code, Preview database)
 `scripts/browser-check.mjs` was run against `https://furia-ninja-d1isyjlen-furia-ninja.vercel.app`: **165 of 165 checks passed** (sign-in, access rules, search, combined filters, sorting, ninja pages and awakenings, administration create, edit and delete, accounts, 360 to 1280 px widths, gems 404, health endpoint). The script refuses to run against the production address.
 
