@@ -1,3 +1,4 @@
+import { CLIENT_AWAKENING_RULE_TEXT } from "../domain/awakenings";
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { z } from "zod";
@@ -12,7 +13,7 @@ import { effectInput } from "./schemas";
  * The same parser that loaded the reference data turns each English line into effect rows, so a
  * hand-entered ability is stored exactly like an imported one: the verbatim line is kept, what the
  * parser cannot structure is kept as text and flagged, and Spanish lines are paired only when the
- * counts match. Nothing about stacking is guessed: an awakening starts as UNKNOWN.
+ * counts match. An awakening replaces the earlier numbered stage of the same talent or skill (client rule); otherwise it starts as UNKNOWN and nothing is guessed.
  */
 
 export const ABILITY_KINDS = ["skill", "normal_skill", "special_skill", "passive", "talent", "talent_awakening", "skill_awakening"] as const;
@@ -99,7 +100,17 @@ export async function saveAbilityText(db: Db, input: AbilityTextInput, parser: A
     if (d.kind === "skill_awakening" && !(await tx.ability.findFirst({ where: { id: d.parentId!, ninjaId: ninja.id, parentAbilityId: null, talentOptionId: null, abilityType: { key: { in: ["skill", "normal_skill", "special_skill"] } } }, select: { id: true } }))) {
       throw new UnknownReferenceError("skill of this ninja", d.parentId!);
     }
-    const values = { ...common, abilityTypeId: type.id, stage: d.stage ?? null, ...parent, ...(d.kind.endsWith("awakening") ? { stackingRule: "UNKNOWN" } : {}) };
+    // Client rule: a new awakening replaces the previous stage of the same talent or skill. Without an earlier numbered stage nothing is assumed.
+    let rule: { stackingRule: string; supersedesId?: string; ruleSourceText?: string } = { stackingRule: "UNKNOWN" };
+    if (d.kind.endsWith("awakening") && d.stage != null) {
+      const earlier = await tx.ability.findFirst({
+        where: { ...parent, stage: { lt: d.stage }, ...(d.existingId ? { id: { not: d.existingId } } : {}) },
+        orderBy: { stage: "desc" },
+        select: { id: true },
+      });
+      if (earlier) rule = { stackingRule: "REPLACES_PRIOR", supersedesId: earlier.id, ruleSourceText: CLIENT_AWAKENING_RULE_TEXT };
+    }
+    const values = { ...common, abilityTypeId: type.id, stage: d.stage ?? null, ...parent, ...(d.kind.endsWith("awakening") ? rule : {}) };
     const row = d.existingId
       ? await tx.ability.update({ where: { id: d.existingId }, data: values, select: { id: true } })
       : await tx.ability.create({ data: { ninjaId: ninja.id, sortOrder: await tx.ability.count({ where: { ninjaId: ninja.id } }), ...values }, select: { id: true } });

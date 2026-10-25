@@ -621,9 +621,10 @@
    "cardNamePlate": "First Hokage",
    "status": "EXACT",
    "ninja": "First Hokage",
-   "evidence": "Name as posted equals the release-list name.",
+   "evidence": "Name as posted equals the release-list name. The client confirmed on 25 October 2026 that Shodai Hokage is the First Hokage.",
    "releaseRefAgrees": true,
-   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos."
+   "evidenceEs": "El nombre publicado es igual al de la lista de lanzamientos. El cliente confirmó el 25 de octubre de 2026 que Shodai Hokage es el Primer Hokage.",
+   "textNamesConfirmed": true
   },
   "assaulters:45": {
    "nameAsPosted": "Cyber Naruto",

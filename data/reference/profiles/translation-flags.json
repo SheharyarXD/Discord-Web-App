@@ -84,13 +84,6 @@
    "code": "ES_WORDING_DIFFERS",
    "note": "The Spanish says 'furia de los aliados enemigos' (allied enemies), which contradicts itself. The English says enemy supporters.",
    "noteEs": "El español dice «aliados enemigos», que se contradice. El inglés dice enemy supporters (soportes enemigos)."
-  },
-  {
-   "sourceId": "supporters:47_kimono-kurenai",
-   "line": "Restores 68 self fury, 30 for allies.",
-   "code": "ES_TEXT_CUT",
-   "note": "The supplied Spanish skill text ends after alternative 3. The English fury restoration line has no Spanish counterpart. Not invented.",
-   "noteEs": "El texto en español de la habilidad termina tras la alternativa 3. La línea de restauración de furia del original en inglés no tiene equivalente en español. No se ha inventado."
   }
  ]
 }

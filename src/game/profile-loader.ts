@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import type { PrismaClient } from "@prisma/client";
+import { withClientReplacement } from "../domain/awakenings";
 import { createAbilityParser, numbersIn, spanishBaseStatValues, type AbilityNoteCode, type AbilityParser, type Lexicon } from "../domain/ability-text";
 import type { AliasStatus, ReviewStatus, StackingRule } from "../domain/constants";
 import { normalizeTerm } from "../domain/localize";
@@ -118,6 +119,8 @@ export interface IdentityDecision {
   evidenceEs: string;
   sameNinjaAs?: string;
   textAttribution?: { status: "REVIEW"; note: string; noteEs: string };
+  /** The client confirmed that the other names the ability text uses (textNames) are this ninja. */
+  textNamesConfirmed?: boolean;
 }
 export interface IdentityFile {
   entries: Record<string, IdentityDecision>;
@@ -265,7 +268,7 @@ export interface PlanOptions {
   partialReleaseSlugs?: ReadonlySet<string>;
 }
 
-const asset = (p: string) => (p.startsWith(HANDOFF_PREFIX_M3) ? p : HANDOFF_PREFIX + p);
+const asset = (p: string) => (p.startsWith(HANDOFF_PREFIX_M3) || p.startsWith("data/") ? p : HANDOFF_PREFIX + p);
 const lettersOnly = (s: string) => s.toLowerCase().replace(/[^\p{L}\p{N}]+/gu, "");
 const joinCodes = (...codes: (string | false | null | undefined)[]) => [...new Set(codes.flatMap((c) => (c ? c.split(";") : [])))].join(";") || undefined;
 const sameNumbers = (a: string, b: string) => [...numbersIn(a)].sort().join("|") === [...numbersIn(b)].sort().join("|");
@@ -508,7 +511,8 @@ export function planProfiles(data: ProfileData, options: PlanOptions = {}): Prof
       for (const textName of m.entry.textNames ?? []) {
         // The ability text is headed with another spelling of the name; kept as a name to be confirmed, never as a proven equivalence.
         if (normalizeTerm(textName) !== normalizeTerm(name)) {
-          aliases.set(`SOURCE_NAME:${normalizeTerm(textName)}`, { alias: textName, kind: "SOURCE_NAME", locale: "en", status: m.decision.status === "ALIAS_CONFIRMED" ? "VERIFIED" : "REVIEWED", note: "El encabezado del texto de habilidades usa este nombre; se asoció por el número de orden y el nombre del manifiesto." });
+          const confirmed = m.decision.status === "ALIAS_CONFIRMED" || m.decision.textNamesConfirmed === true;
+          aliases.set(`SOURCE_NAME:${normalizeTerm(textName)}`, { alias: textName, kind: "SOURCE_NAME", locale: "en", status: confirmed ? "VERIFIED" : "REVIEWED", note: m.decision.textNamesConfirmed ? "Confirmado por el cliente: este nombre del encabezado es el mismo personaje." : "El encabezado del texto de habilidades usa este nombre; se asoció por el número de orden y el nombre del manifiesto." });
         }
       }
       if (m.decision.status === "ALIAS_REVIEWED") rows.get(m.entry.sourceId)!.flags.push("IDENTITY_REVIEWED");
@@ -707,7 +711,7 @@ export function planProfiles(data: ProfileData, options: PlanOptions = {}): Prof
       const statusNotes = abilities.filter((x) => x.a.slot === "status_note");
       if (skillAwakenings.length) {
         if (skills.length !== 1) throw new Error(`${primary.entry.sourceId}: ${skillAwakenings.length} skill awakening(s) but ${skills.length} base skills to attach them to`);
-        skills[0]!.awakenings = skillAwakenings.map(toAwakening);
+        skills[0]!.awakenings = withClientReplacement(skillAwakenings.map(toAwakening));
       }
       for (const [i, x] of statusNotes.entries()) {
         const description = x.a.en.lines.map((l) => l.text).join("\n");
@@ -778,7 +782,7 @@ export function planProfiles(data: ProfileData, options: PlanOptions = {}): Prof
       }
       if (talentAwakenings.length) {
         if (options.length !== 1) throw new Error(`${primary.entry.sourceId}: ${talentAwakenings.length} talent awakening(s) but ${options.length} talents to attach them to`);
-        options[0]!.awakenings = talentAwakenings.map(toAwakening);
+        options[0]!.awakenings = withClientReplacement(talentAwakenings.map(toAwakening));
       }
       if (options.length) {
         input.talentGroups = [

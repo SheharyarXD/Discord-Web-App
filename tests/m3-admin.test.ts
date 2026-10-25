@@ -153,12 +153,19 @@ describe("ability editor", () => {
     expect(c.note).toContain("ES_LINE_COUNT_DIFFERS");
     expect(c.effects.every((e) => e.descriptionEs === null)).toBe(true);
   });
-  it("a talent and its awakenings: stacking stays UNKNOWN until a source says otherwise", async () => {
+  it("a talent and its awakenings: awakening 2 replaces awakening 1 (client rule), awakening 1 stays UNKNOWN against the base", async () => {
     const talent = await saveAbilityText(db, { ninjaSlug: slug, kind: "talent", name: "Test Talent", linesEn: ["Increases self agility by 10%."] }, parser);
     await saveAbilityText(db, { ninjaSlug: slug, kind: "talent_awakening", name: "Awakening 1", stage: 1, parentId: talent.id, linesEn: ["Increases self force by 20%."] }, parser);
     await saveAbilityText(db, { ninjaSlug: slug, kind: "talent_awakening", name: "Awakening 2", stage: 2, parentId: talent.id, linesEn: ["Increases self force by 30%."] }, parser);
     const option = (await getNinjaDetail(db, slug, { includeUnpublished: true }))!.talentGroups[0]!.options.find((o) => o.name === "Test Talent")!;
-    expect(option.awakenings.map((a) => [a.stage, a.stackingRule, a.supersedesId])).toEqual([[1, "UNKNOWN", null], [2, "UNKNOWN", null]]);
+    const [first, second] = option.awakenings;
+    expect([first!.stage, first!.stackingRule, first!.supersedesId]).toEqual([1, "UNKNOWN", null]);
+    expect([second!.stage, second!.stackingRule, second!.supersedesId]).toEqual([2, "REPLACES_PRIOR", first!.id]);
+    expect(second!.ruleSourceText).toMatch(/^Client decision/);
+    // An unnumbered awakening is never given a rule it was not given.
+    await saveAbilityText(db, { ninjaSlug: slug, kind: "talent_awakening", name: "Unnumbered", parentId: talent.id, linesEn: ["Increases self force by 5%."] }, parser);
+    const again = (await getNinjaDetail(db, slug, { includeUnpublished: true }))!.talentGroups[0]!.options.find((o) => o.name === "Test Talent")!;
+    expect(again.awakenings.find((x) => x.name === "Unnumbered")!.stackingRule).toBe("UNKNOWN");
     expect(option.effects.map((e) => e.statisticName)).toEqual(["Agility"]);
   });
   it("an awakening needs its parent, and unknown ninjas are rejected", async () => {

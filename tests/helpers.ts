@@ -13,7 +13,7 @@ export const PROFILE_HANDOFF_DIR = path.resolve(__dirname, "../docs/m2-handoff")
 export const M3_HANDOFF_DIR = path.resolve(__dirname, "../docs/m3-handoff");
 /** Absolute path of a staged asset, whichever package it belongs to. */
 export const handoffFile = (asset: string) =>
-  asset.startsWith("m3-handoff/") ? path.resolve(__dirname, "../docs", asset) : asset.startsWith("m2-handoff/") ? path.join(PROFILE_HANDOFF_DIR, asset.slice("m2-handoff/".length)) : path.join(PROFILE_HANDOFF_DIR, asset);
+  asset.startsWith("data/") ? path.resolve(__dirname, "..", asset) : asset.startsWith("m3-handoff/") ? path.resolve(__dirname, "../docs", asset) : asset.startsWith("m2-handoff/") ? path.join(PROFILE_HANDOFF_DIR, asset.slice("m2-handoff/".length)) : path.join(PROFILE_HANDOFF_DIR, asset);
 
 export const testDb = () => new PrismaClient({ datasourceUrl: TEST_DB_URL });
 

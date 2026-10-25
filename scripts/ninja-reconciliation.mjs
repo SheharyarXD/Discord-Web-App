@@ -3,9 +3,9 @@ import { createHash } from "node:crypto";
 
 /**
  * Writes the three data files of the Milestone 3 delivery from ONE source of numbers: scripts/final-audit.mjs.
- *   MILESTONE_3_DATA_RECONCILIATION.csv   one row per ninja in the database
- *   MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv  one row per Supporter card (79)
- *   MILESTONE_3_DATA_METRICS.csv          totals with their counting definitions
+ *   MILESTONE_4_DATABASE_RECONCILIATION.csv   one row per ninja in the database
+ *   (Supporter audit: see verify-supporters.mjs)
+ *   MILESTONE_4_DATA_METRICS.csv          totals with their counting definitions
  * Usage: node scripts/final-audit.mjs && node scripts/ninja-reconciliation.mjs
  * (the import ledger MILESTONE_3_IMPORT_LEDGER.csv comes from: npx tsx prisma/ingest-reference.ts --ledger MILESTONE_3_IMPORT_LEDGER.csv)
  */
@@ -38,7 +38,7 @@ for (const n of per) {
   const flags = [...new Set(sources.flatMap((s) => (s.flags ? s.flags.split(" | ") : [])))];
   rows.push([n.name, n.slug, n.role, n.rating, n.formation, n.type, n.fullCard ? "yes" : "no", n.textBlocks, n.awakeningStages, n.awakeningStated, n.effectRows, n.enText ? "yes" : "no", spanishWord[n.esNinja], n.statusDefs, n.statusDefsWithEs, n.aliases, sources.map((s) => s.source_id).join(" + "), sources.map((s) => s.identity_status).join(" + "), flags.join(" | ")]);
 }
-writeFileSync("MILESTONE_3_DATA_RECONCILIATION.csv", csv(rows));
+writeFileSync("MILESTONE_4_DATABASE_RECONCILIATION.csv", csv(rows));
 
 // ── 2. the 79 Supporter cards ──
 const sha = (file) => (existsSync(file) ? createHash("sha256").update(readFileSync(file)).digest("hex") : "");
@@ -65,7 +65,7 @@ for (const r of ledger.filter((x) => x.channel === "supporters")) {
     r.action === "LOADED" || r.action === "MERGED" ? "LINKED" : "BLOCKED", note.join("; "),
   ]);
 }
-writeFileSync("MILESTONE_3_SUPPORTER_SYNC_AUDIT.csv", csv(audit));
+// the Supporter audit of Milestone 4 is written by scripts/verify-supporters.mjs --csv
 
 // ── 3. metrics with definitions ──
 const m = [["category", "metric", "value", "detail"]];
@@ -95,8 +95,9 @@ add("Supporters", "name matches by judgement (client to confirm)", F.aliases.byS
 add("Awakenings", "awakening stages", F.awakening.stages, `${F.awakening.talent} talent, ${F.awakening.skill} skill, on ${F.awakening.ninjas} ninjas; per-ninja sum ${F.awakening.sumOfPerNinja}`);
 add("Awakenings", "stages with a stated rule", F.awakening.stated, `per-ninja sum ${F.awakening.statedSumOfPerNinja}`);
 for (const rule of ["REPLACES_PRIOR", "CANCELS_PRIOR", "UPGRADES_BASE", "CUMULATIVE"]) add("Awakenings", `rule ${rule}`, F.awakening.byRule[rule].length, F.awakening.byRule[rule].join("; "));
-add("Awakenings", "rule UNKNOWN", F.awakening.byRule.UNKNOWN.length, "the source does not say; shown separately and never added together");
+add("Awakenings", "rule UNKNOWN", F.awakening.byRule.UNKNOWN.length, `first stages ${F.awakening.unknownBreakdown.firstStage} (relation to the base not stated), unnumbered stages ${F.awakening.unknownBreakdown.unnumbered}, later stages ${F.awakening.unknownBreakdown.laterStage}`);
+add("Awakenings", "stages replacing the previous one by the client general rule", F.awakening.clientRuleReplacements, "each new awakening replaces the previous awakening of the same talent or skill");
 for (const [k, v] of Object.entries(F.ratings)) add("Ranks", k, v, v ? "" : "defined, no card uses it yet");
 add("Equipment, jewelry, gems", "equipment pieces / jewelry pieces / gems", `${F.items.equipment} / ${F.items.jewelry} / ${F.items.gems}`, "no source material supplied; nothing invented; gems stay hidden (404)");
-writeFileSync("MILESTONE_3_DATA_METRICS.csv", csv(m));
+writeFileSync("MILESTONE_4_DATA_METRICS.csv", csv(m));
 console.log(`reconciliation ${rows.length - 1} ninjas; audit ${audit.length - 1} cards; metrics ${m.length - 1} rows`);

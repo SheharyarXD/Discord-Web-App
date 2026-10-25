@@ -242,6 +242,7 @@ export const es = {
     },
     supersededBy: "Deja de aplicarse al desbloquear la etapa {stage}.",
     ruleSource: "Según la fuente",
+    clientRule: "Decisión del cliente: cada despertar nuevo sustituye al anterior del mismo talento o habilidad; sus efectos no se suman.",
   },
   glossary: {
     count: "{count} entradas",

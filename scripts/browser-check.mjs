@@ -372,6 +372,34 @@ try {
   await go(M.page, BASE + "/admin/ninjas");
   await shot(M.page, "10-mobile-admin.png");
 
+  // ── 10z. production health endpoint ──
+  const health = await fetch(BASE + "/api/health");
+  check("the health endpoint answers ok without signing in and reveals no data", health.status === 200 && (await health.text()) === '{"status":"ok"}');
+  const anon = await fetch(BASE + "/admin", { redirect: "manual" });
+  check("an anonymous visitor is not served the admin area", anon.status !== 200, String(anon.status));
+
+  // ── 10a. tablet and small laptop widths (Milestone 4: responsive optimization) ──
+  for (const width of [360, 768, 1024, 1280]) {
+    const T = await login(adminMail, adminPw, width);
+    for (const p of ["/", "/ninjas?rating=SSR&formation=center", "/ninjas/natsu-dragneel", "/ninjas/kimono-kurenai", "/search?q=gai", "/equipment", "/jewelry", "/sets", "/effects", "/admin", "/admin/ninjas", "/admin/ninjas/natsu-dragneel", "/admin/users"]) {
+      await go(T.page, BASE + p);
+      const overflow = await T.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+      check(`no horizontal scrolling at ${width} px on ${p}`, overflow <= 0, `${overflow}px`);
+    }
+    if (width === 768) {
+      await go(T.page, BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force");
+      await T.page.addStyleTag({ content: STATIC + " a.group > div:first-child:has(> span[aria-hidden]) { display: none !important; }" }).catch(() => {});
+      await T.page.screenshot({ path: path.join(OUT, "t01-tablet-ninjas.png"), clip: { x: 0, y: 0, width: 768, height: 1100 } });
+    }
+    if (width === 1024) {
+      await go(T.page, BASE + "/ninjas/natsu-dragneel");
+      await T.page.click('button[aria-controls="mobile-nav"]');
+      await T.page.addStyleTag({ content: STATIC + " a.group > div:first-child:has(> span[aria-hidden]) { display: none !important; }" }).catch(() => {});
+      await T.page.screenshot({ path: path.join(OUT, "t02-tablet-menu.png"), clip: { x: 0, y: 0, width: 1024, height: 700 } });
+    }
+    await T.ctx.close();
+  }
+
   // ── 10b. the imported Supporter profiles ──
   const pageText = async (slug) => {
     const r = await page.goto(BASE + "/ninjas/" + slug, { waitUntil: "networkidle" });
@@ -441,6 +469,7 @@ try {
   await around("/ninjas/cursed-tayuya", /Special Tayuya Card Awakening/, "r07-tayuya.png", 1000);
   await around("/ninjas/kimono-kurenai", /Applies the below/, "r08-kimono.png", 900, 40);
   await around("/ninjas/otsutsuki-isshiki", /only one of the following skills/, "r09-isshiki.png", 1000, 40);
+  await around("/ninjas/yamanaka-ino", /Talent Awakening 2/, "r14-ino-replaces.png", 700, 40);
   await top("/ninjas/uchiha-madara-moon-s-eye", "r10-moon-eye.png", 1150);
   await top("/ninjas/uchiha-hikari", "r11-hikari.png", 1150);
   await R.page.goto(BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force", { waitUntil: "networkidle" });

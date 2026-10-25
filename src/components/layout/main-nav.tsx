@@ -11,7 +11,7 @@ function isActive(pathname: string, href: string) {
   return href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(`${href}/`);
 }
 
-/** Desktop: inline links. Below `lg`: a disclosure button that reveals the same links. */
+/** Desktop: inline links. Below `xl`: a disclosure button that reveals the same links. */
 export function MainNav({ items }: { items: NavItem[] }) {
   const t = useT();
   const pathname = usePathname();
@@ -34,12 +34,12 @@ export function MainNav({ items }: { items: NavItem[] }) {
 
   return (
     <>
-      <nav aria-label={t("nav.primary")} className="hidden items-center gap-1 lg:flex">
+      <nav aria-label={t("nav.primary")} className="hidden items-center gap-1 xl:flex">
         {links}
       </nav>
       <button
         type="button"
-        className="grid size-11 place-items-center rounded-lg border border-border lg:hidden"
+        className="grid size-11 place-items-center rounded-lg border border-border xl:hidden"
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? t("nav.closeMenu") : t("nav.menu")}
@@ -53,7 +53,7 @@ export function MainNav({ items }: { items: NavItem[] }) {
         <nav
           id="mobile-nav"
           aria-label={t("nav.primary")}
-          className="absolute inset-x-0 top-full z-30 flex flex-col gap-1 border-b border-border bg-surface p-3 lg:hidden"
+          className="absolute inset-x-0 top-full z-30 flex flex-col gap-1 border-b border-border bg-surface p-3 xl:hidden"
         >
           {links}
         </nav>

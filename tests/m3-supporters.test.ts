@@ -78,10 +78,13 @@ describe("the 63 additional Supporter cards", () => {
     const alternatives = skill.effects!.filter((e) => /, OR /.test(e.sourceText!));
     expect(alternatives).toHaveLength(3);
     expect(alternatives.every((e) => e.kind === "TEXT" && e.structuredStatus === "TEXT_ONLY")).toBe(true);
-    expect(abilityNoteCodes(skill.note)).toEqual(expect.arrayContaining(["ES_LINE_COUNT_DIFFERS", "ES_TEXT_CUT"]));
+    // The client supplied the last Spanish lines after Milestone 3: both languages have 10 lines and nothing is cut any more.
+    expect(abilityNoteCodes(skill.note)).not.toContain("ES_TEXT_CUT");
+    expect(abilityNoteCodes(skill.note)).not.toContain("ES_LINE_COUNT_DIFFERS");
     expect(skill.description!.split("\n")).toHaveLength(10);
-    expect(skill.descriptionEs!.split("\n")).toHaveLength(9);
-    expect(skill.descriptionEs).not.toMatch(/furia propia/i);
+    expect(skill.descriptionEs!.split("\n")).toHaveLength(10);
+    expect(skill.descriptionEs!.split("\n").at(-1)).toBe("Restaura 68 puntos de furia propia y 30 para los aliados.");
+    expect(skill.descriptionEs).toContain("O aumenta las defensas propias en 500% durante 2 rondas.");
   });
 
   it("Christmas Mito and Hyakki Sasori keep a Normal and a Special skill apart", () => {
@@ -90,8 +93,8 @@ describe("the 63 additional Supporter cards", () => {
     }
   });
 
-  it("Yamanaka Ino: both talent awakenings keep an unknown stacking rule", () => {
-    expect(planned("Yamanaka Ino").input.talentGroups![0]!.options[0]!.awakenings!.map((w) => w.stackingRule)).toEqual(["UNKNOWN", "UNKNOWN"]);
+  it("Yamanaka Ino: the second talent awakening replaces the first (client rule); the first stays UNKNOWN against the base", () => {
+    expect(planned("Yamanaka Ino").input.talentGroups![0]!.options[0]!.awakenings!.map((w) => w.stackingRule)).toEqual(["UNKNOWN", "REPLACES_PRIOR"]);
   });
 
   it("a probability above 100% is kept as the printed application rate and never capped", () => {

@@ -2,7 +2,7 @@
 
 Next.js 16 · TypeScript estricto · Prisma 6 + SQLite (portable a PostgreSQL) · Tailwind 4 · i18n propio (español por defecto).
 
-Estado: **Milestone 2** (base de datos del juego y gestión de datos). Ver `MILESTONE_2_IMPLEMENTATION_REPORT.md`.
+Estado: **Milestone 4** (cierre de datos iniciales, optimización responsive, pruebas y preparación del despliegue). Informes: `MILESTONE_4_FINAL_TECHNICAL_REPORT.md` y `MILESTONE_4_FINAL_DELIVERY_VERIFICATION.md`. Despliegue: `DEPLOYMENT.md`. Comprobación de salud: `GET /api/health`.
 No hay integración con Discord de ningún tipo: los datos se transcriben a mano desde el material de referencia entregado.
 
 ## Puesta en marcha

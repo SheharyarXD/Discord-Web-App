@@ -102,7 +102,7 @@ export function AwakeningList({ awakenings, t }: { awakenings: AwakeningData[]; 
                 {a.ruleSourceText && (
                   <span className="text-muted">
                     {" "}
-                    {t("awakening.ruleSource")}: <q lang="en">{a.ruleSourceText}</q>
+                    {a.ruleSourceText.startsWith("Client decision") ? t("awakening.clientRule") : <>{t("awakening.ruleSource")}: <q lang="en">{a.ruleSourceText}</q></>}
                   </span>
                 )}
               </p>

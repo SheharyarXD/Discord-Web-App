@@ -63,7 +63,7 @@ describe("staging files against the supplied material", () => {
         }
       }
     }
-    expect(lines).toBe(2372 + 2230);
+    expect(lines).toBe(2372 + 2231);
   });
 
   withHandoff("an awakening rule quotes wording that is really in the source", () => {
@@ -81,7 +81,7 @@ describe("staging files against the supplied material", () => {
   });
 
   it("a reviewed translation flag points at a line that exists for that entry", () => {
-    expect(data.translationFlags.flags).toHaveLength(13);
+    expect(data.translationFlags.flags).toHaveLength(12);
     for (const flag of data.translationFlags.flags) {
       const entry = data.files.flatMap((f) => f.entries).find((e) => e.sourceId === flag.sourceId)!;
       expect((entry.abilities ?? []).some((a) => a.es !== null && a.en.lines.some((l) => l.text === flag.line)), flag.line).toBe(true);
@@ -394,11 +394,11 @@ describe("ability text", () => {
     const sai = blocks(planned("Sai (Errant Knight)")).flatMap((b) => b.effects).filter((e) => effectNoteCodes(e.note).includes("ES_TEXT_CUT"));
     expect(sai.map((e) => e.descriptionEs)).toEqual(Array(sai.length).fill("Restaura 68 de furia propia, 30 para los [TRUNCATED IN SOURCE]."));
     const conflicts = summarizePlan(plan).spanishConflicts;
-    expect(conflicts).toHaveLength(27);
+    expect(conflicts).toHaveLength(26);
     expect(conflicts).toEqual(expect.arrayContaining([
       "Cursed Seal Sasuke: ES_LINE_COUNT_DIFFERS, ES_WORDING_DIFFERS", "Jiongu Kakuzu: ES_NUMBERS_DIFFER", "Warrior Sakura: ES_LINE_COUNT_DIFFERS", "Sai (Errant Knight): ES_TEXT_CUT",
       "Sasuke (Taka): ES_WORDING_DIFFERS", "Awakened Kawaki: ES_LINE_COUNT_DIFFERS", "Hokage Candidate Danzo: ES_WORDING_DIFFERS", "Shin Uchiha: ES_WORDING_DIFFERS",
-      "Kimono Kurenai: ES_LINE_COUNT_DIFFERS, ES_TEXT_CUT", "Christmas Mito: ES_LINE_COUNT_DIFFERS", "Kyūbi Minato: ES_LINE_COUNT_DIFFERS",
+      "Christmas Mito: ES_LINE_COUNT_DIFFERS", "Kyūbi Minato: ES_LINE_COUNT_DIFFERS",
     ]));
   });
 
@@ -445,15 +445,26 @@ describe("awakenings", () => {
     expect(planned("Jugo Sage").input.abilities![0]!.awakenings![0]).toMatchObject({ stage: 1, conditionText: "Special Jugo Card Awakening", stackingRule: "UNKNOWN" });
   });
 
-  it("every other awakening is UNKNOWN: no stacking rule is assumed", () => {
+  it("every awakening after the first replaces the previous one (client rule); the rest is as the source says", () => {
     expect(awakenings).toHaveLength(120);
-    expect(awakenings.filter((w) => w.stackingRule !== "UNKNOWN").map((w) => [w.ninja, w.stage, w.stackingRule])).toEqual([
+    // Rules that come from the source text or from a specific client decision.
+    const specific = awakenings.filter((w) => w.stackingRule !== "UNKNOWN" && !w.ruleSourceText!.startsWith("Client decision"));
+    expect(specific.map((w) => [w.ninja, w.stage, w.stackingRule])).toEqual([
       ["Jugo Sage", 3, "UPGRADES_BASE"], ["Hinata (Soccer Star)", 2, "REPLACES_PRIOR"], ["First Hokage", 3, "CANCELS_PRIOR"], ["Kusanagi Kyo", 2, "REPLACES_PRIOR"],
       ["Cursed Tayuya", 3, "UPGRADES_BASE"], ["Natsu Dragneel", 1, "UPGRADES_BASE"], ["Natsu Dragneel", 2, "REPLACES_PRIOR"],
     ]);
+    // The general client rule: a numbered stage with an earlier stage in the same talent or skill replaces it.
+    const general = awakenings.filter((w) => w.ruleSourceText?.startsWith("Client decision"));
+    expect(general.length).toBeGreaterThan(5);
+    for (const w of general) expect([w.stackingRule, w.supersedesStage != null, (w.stage ?? 0) > 1], `${w.ninja} stage ${w.stage}`).toEqual(["REPLACES_PRIOR", true, true]);
+    // What stays UNKNOWN: a first stage (its relation to the base is not stated) or a stage the source does not number.
+    for (const w of awakenings.filter((x) => x.stackingRule === "UNKNOWN")) {
+      expect(w.stage == null || w.stage === 1 || w.stage > 1, `${w.ninja}`).toBe(true);
+      expect(w.ruleSourceText).toBeFalsy();
+    }
     expect(awakenings.every((w) => (w.stackingRule === "UNKNOWN") === (w.ruleSourceText == null))).toBe(true);
-    // Several stages of one talent stay separate entries.
-    expect(talentOf("Uzumaki Boruto").awakenings!.map((w) => [w.stage, w.stackingRule])).toEqual([[1, "UNKNOWN"], [2, "UNKNOWN"]]);
+    // Several stages of one talent stay separate entries; the second replaces the first.
+    expect(talentOf("Uzumaki Boruto").awakenings!.map((w) => [w.stage, w.stackingRule])).toEqual([[1, "UNKNOWN"], [2, "REPLACES_PRIOR"]]);
   });
 
   it("Kusanagi Kyo: level 2 replaces level 1, as the supplied note says in both languages", () => {
@@ -471,10 +482,10 @@ describe("awakenings", () => {
     const hokage = planned("First Hokage");
     expect(hokage.sourceIds).toEqual(["assaulters:44"]);
     const awakeningList = talentOf("First Hokage").awakenings!;
-    expect(awakeningList.map((w) => [w.stage, w.stackingRule, w.supersedesStage])).toEqual([[1, "UNKNOWN", null], [2, "UNKNOWN", null], [3, "CANCELS_PRIOR", 2]]);
+    expect(awakeningList.map((w) => [w.stage, w.stackingRule, w.supersedesStage])).toEqual([[1, "UNKNOWN", null], [2, "REPLACES_PRIOR", 1], [3, "CANCELS_PRIOR", 2]]);
     expect(awakeningList[2]).toMatchObject({ ruleSourceText: "Cancels Talent Awakening 2." });
-    // The heading is stored as a reviewed name, not as a proven equivalence.
-    expect(hokage.input.aliases).toEqual([expect.objectContaining({ alias: "Shodai Hokage", kind: "SOURCE_NAME", status: "REVIEWED" })]);
+    // The client confirmed (25 October 2026) that Shodai Hokage is the First Hokage: one ninja, the heading is a verified name.
+    expect(hokage.input.aliases).toEqual([expect.objectContaining({ alias: "Shodai Hokage", kind: "SOURCE_NAME", status: "VERIFIED" })]);
     expect(data.rules.rules.find((r) => r.sourceId === "assaulters:44")).toMatchObject({ identityNote: expect.stringContaining("Shodai is the Japanese word for First") });
     // The placeholders [Talent] and [Skill] are not turned into names: the card's names are used and flagged.
     const hokageCard = data.files.flatMap((f) => f.entries).find((e) => e.sourceId === "assaulters:44")!.card!;

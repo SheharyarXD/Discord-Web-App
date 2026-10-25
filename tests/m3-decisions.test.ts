@@ -142,7 +142,7 @@ describe("awakening rules stated in the brief", () => {
     expect(skill.awakenings![0]!.effects![0]).toMatchObject({ kind: "ATTACK", sourceText: "Attacks one random enemy with 550% growth rate." });
     expect(skill.effects!.length).toBeGreaterThan(5);
     const tayuya = plan.ninjas.find((n) => n.name === "Cursed Tayuya")!;
-    expect(tayuya.input.talentGroups![0]!.options[0]!.awakenings!.map((w) => [w.stage, w.stackingRule])).toEqual([[1, "UNKNOWN"], [2, "UNKNOWN"], [3, "UPGRADES_BASE"]]);
+    expect(tayuya.input.talentGroups![0]!.options[0]!.awakenings!.map((w) => [w.stage, w.stackingRule])).toEqual([[1, "UNKNOWN"], [2, "REPLACES_PRIOR"], [3, "UPGRADES_BASE"]]);
     const stage3 = tayuya.input.talentGroups![0]!.options[0]!.awakenings![2]!;
     expect(stage3.conditionText).toBe("Special Tayuya Card Awakening");
     expect(stage3.effects!.find((e) => e.statisticKey === "speed")).toMatchObject({ value: "92", replacesValue: "88" });

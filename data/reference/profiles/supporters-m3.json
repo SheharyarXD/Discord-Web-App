@@ -5308,7 +5308,7 @@
       ]
      },
      "es": {
-      "asset": "m3-handoff/M3_FINAL_SUPPORTER_SYNC_HANDOFF/02_SUPPORTER_SOURCE/NEW_63_EN_ES_TRANSCRIPT_RECOVERY/47_kimono-kurenai_EN_ES.md",
+      "asset": "data/reference/client-supplied/kimono-kurenai-skill-es.md",
       "heading": "Matar con Atadura Mágica",
       "name": "Matar con Atadura Mágica",
       "lines": [
@@ -5339,15 +5339,18 @@
         "sub": true
        },
        {
-        "text": "Disminuye las defensas del vanguardia enemigo en 100%, O aumenta las defensas propias en 500%.",
+        "text": "Disminuye las defensas del vanguardia enemigo en 100%, O aumenta las defensas propias en 500% durante 2 rondas.",
         "sub": true
+       },
+       {
+        "text": "Restaura 68 puntos de furia propia y 30 para los aliados."
        }
       ]
      }
     }
    ],
    "sourceNotes": [
-    "The Spanish text supplied for this skill ends after alternative 3. The English skill has one more line (fury restoration) with no Spanish counterpart. Not invented."
+    "The final Spanish lines of this skill were supplied by the client after Milestone 3 (data/reference/client-supplied/kimono-kurenai-skill-es.md). The Spanish is now complete; the three alternatives stay mutually exclusive."
    ],
    "alignment": []
   },

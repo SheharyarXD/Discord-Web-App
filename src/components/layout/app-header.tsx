@@ -18,7 +18,7 @@ export async function AppHeader({ user }: { user: SessionUser }) {
           <Image src="/logo.png" alt={t("app.logoAlt")} width={72} height={39} priority className="h-8 w-auto" />
           <span className="hidden text-sm font-bold tracking-wide sm:inline">{t("app.name")}</span>
         </Link>
-        <div className="flex flex-1 items-center justify-end gap-2 lg:justify-between lg:pl-4">
+        <div className="flex flex-1 items-center justify-end gap-2 xl:justify-between xl:pl-4">
           <MainNav items={visibleNav(FEATURES, can(user, "admin:access"))} />
           <div className="flex items-center gap-2">
             <span className="hidden max-w-48 truncate text-xs text-muted md:inline" title={user.email}>
