@@ -5,7 +5,7 @@ import { ValidationError } from "../src/game/db";
 import { getNinjaDetail, listNinjas, upsertNinja, vocabulary } from "../src/game/ninjas";
 import { itemVocabulary, upsertEquipmentSet, upsertJewelrySet } from "../src/game/items";
 import { ForbiddenError } from "../src/server/auth/permissions";
-import { seedTestVocabulary, testDb } from "./helpers";
+import { IS_PG, seedTestVocabulary, testDb } from "./helpers";
 
 const db = testDb();
 const P = "t3-"; // every fixture slug starts with this and is removed afterwards
@@ -291,7 +291,7 @@ describe("administration: save and delete", () => {
     const id = (await db.ninja.findUniqueOrThrow({ where: { slug: `${P}doomed` } })).id;
     expect(await deletions.ninja(db, `${P}doomed`)).toBe(true);
     expect(await Promise.all([db.ability.count({ where: { ninjaId: id } }), db.ninjaBaseStat.count({ where: { ninjaId: id } }), db.ninjaAlias.count({ where: { ninjaId: id } }), db.talentGroup.count({ where: { ninjaId: id } })])).toEqual([0, 0, 0, 0]);
-    expect(await db.$queryRawUnsafe("PRAGMA foreign_key_check")).toEqual([]);
+    if (!IS_PG) expect(await db.$queryRawUnsafe("PRAGMA foreign_key_check")).toEqual([]); // PostgreSQL enforces foreign keys at all times
   });
 });
 

@@ -8,6 +8,7 @@ import { inTransaction, parseInput, UnknownReferenceError, type Db } from "./db"
 import { effectsArgs, replaceEffects, toEffectView } from "./effects";
 import { getEquipmentSet, getJewelrySet, type EquipmentSetDetail, type JewelrySetDetail } from "./items";
 import { listNinjas, type Page } from "./ninjas";
+import { CI } from "../server/search-mode";
 import {
   equipmentInput,
   gemInput,
@@ -69,8 +70,8 @@ function itemWhere(p: ReturnType<typeof itemListParams.parse>): Prisma.Equipment
   if (p.query) {
     const q = p.query;
     const slugQuery = slugify(q);
-    const or: Record<string, unknown>[] = [{ name: { contains: q } }];
-    if (p.kind !== "gem") or.push({ nameEs: { contains: q } }, { set: { OR: [{ name: { contains: q } }, { nameEs: { contains: q } }] } });
+    const or: Record<string, unknown>[] = [{ name: { contains: q, ...CI } }];
+    if (p.kind !== "gem") or.push({ nameEs: { contains: q, ...CI } }, { set: { OR: [{ name: { contains: q, ...CI } }, { nameEs: { contains: q, ...CI } }] } });
     if (slugQuery) or.push({ slug: { contains: slugQuery } });
     and.push({ OR: or } as Prisma.EquipmentWhereInput);
   }
@@ -267,17 +268,17 @@ export async function searchAll(db: Db, query: string, options: { includeGems?: 
   const norm = normalizeTerm(q);
   const slugQuery = slugify(q);
   const published = options.includeUnpublished ? {} : { status: CONTENT_STATUSES.PUBLISHED };
-  const byName = (extra: object[] = []) => ({ OR: [{ name: { contains: q } }, { nameEs: { contains: q } }, ...(slugQuery ? [{ slug: { contains: slugQuery } }] : []), ...extra] });
+  const byName = (extra: object[] = []) => ({ OR: [{ name: { contains: q, ...CI } }, { nameEs: { contains: q, ...CI } }, ...(slugQuery ? [{ slug: { contains: slugQuery } }] : []), ...extra] });
 
   const [ninjas, equipment, jewelry, gems, eqSets, jwSets, statuses] = await Promise.all([
     listNinjas(db, { query: q, pageSize: limit, includeUnpublished: options.includeUnpublished }),
     db.equipment.findMany({ where: { ...published, ...byName() }, take: limit, orderBy: { name: "asc" }, select: { slug: true, name: true, nameEs: true } }),
     db.jewelry.findMany({ where: { ...published, ...byName() }, take: limit, orderBy: { name: "asc" }, select: { slug: true, name: true, nameEs: true } }),
-    options.includeGems ? db.gem.findMany({ where: { ...published, OR: [{ name: { contains: q } }, ...(slugQuery ? [{ slug: { contains: slugQuery } }] : [])] }, take: limit, orderBy: { name: "asc" }, select: { slug: true, name: true } }) : Promise.resolve([]),
+    options.includeGems ? db.gem.findMany({ where: { ...published, OR: [{ name: { contains: q, ...CI } }, ...(slugQuery ? [{ slug: { contains: slugQuery } }] : [])] }, take: limit, orderBy: { name: "asc" }, select: { slug: true, name: true } }) : Promise.resolve([]),
     db.equipmentSet.findMany({ where: byName(), take: limit, orderBy: { name: "asc" }, select: { slug: true, name: true, nameEs: true } }),
     db.jewelrySet.findMany({ where: byName(), take: limit, orderBy: { name: "asc" }, select: { slug: true, name: true, nameEs: true } }),
     db.statusEffect.findMany({
-      where: { OR: [{ name: { contains: q } }, { nameEs: { contains: q } }, { aliases: { some: { normalized: { contains: norm } } } }] },
+      where: { OR: [{ name: { contains: q, ...CI } }, { nameEs: { contains: q, ...CI } }, { aliases: { some: { normalized: { contains: norm } } } }] },
       take: limit, orderBy: { name: "asc" }, select: { key: true, name: true, nameEs: true },
     }),
   ]);

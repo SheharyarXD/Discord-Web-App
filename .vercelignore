@@ -1,0 +1,13 @@
+# Never uploaded by `vercel deploy`: private client material, backups, local databases, reports.
+docs
+prisma/backups
+prisma/*.db
+*.db
+.local-pg
+*.zip
+*.pdf
+scratch-out
+legacy-prototype
+tests
+CLAUDE_CODE_*.md
+M3_CLIENT_CHANGES_TO_APPLY_FINAL.md

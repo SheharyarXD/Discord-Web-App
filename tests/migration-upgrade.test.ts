@@ -4,7 +4,7 @@ import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { PrismaClient } from "@prisma/client";
 import { getNinjaDetail, upsertNinja } from "../src/game/ninjas";
-import { dbRejects, TRIGGER_REJECTION } from "./helpers";
+import { IS_PG, dbRejects, TRIGGER_REJECTION } from "./helpers";
 
 /**
  * 17. Upgrade path: build a database with ONLY the Milestone 1 migration, fill it the way
@@ -37,7 +37,8 @@ afterAll(async () => {
   rmSync(WORK, { recursive: true, force: true });
 });
 
-describe("17. upgrading a Milestone 1 database", () => {
+// The upgrade path M1 to M2 is the SQLite history; PostgreSQL starts from one baseline migration.
+describe.skipIf(IS_PG)("17. upgrading a Milestone 1 database", () => {
   it("starts as a real M1 database (no M2 tables yet) and accepts M1-shaped rows", async () => {
     const m1 = new PrismaClient({ datasourceUrl: URL });
     try {

@@ -4,7 +4,8 @@ import { seedVocabulary } from "../prisma/vocabulary";
 import { vocabulary } from "../src/game/ninjas";
 import { ensureStatusCategory } from "../src/game/status-effects";
 
-export const TEST_DB_URL = `file:${path.resolve(__dirname, ".tmp/test.db").replace(/\\/g, "/")}`;
+export const IS_PG = process.env.TEST_DB === "postgres";
+export const TEST_DB_URL = IS_PG ? process.env.TEST_PG_URL! : `file:${path.resolve(__dirname, ".tmp/test.db").replace(/\\/g, "/")}`;
 export const REFERENCE_DIR = path.resolve(__dirname, "../data/reference");
 export const HANDOFF_DIR = path.resolve(__dirname, "../docs/milestone-2-handoff");
 /** The second handoff (cards and ability texts). Staging paths under data/reference/profiles are relative to it. */
@@ -59,7 +60,8 @@ export async function failure(run: () => Promise<unknown>): Promise<string> {
  * drops the trigger's own message. Tests that expect it are built so that no real foreign key
  * is involved; the trigger texts themselves are checked through raw SQL in m2-platform.test.ts.
  */
-export const TRIGGER_REJECTION = "P2003";
+// On PostgreSQL a trigger's RAISE EXCEPTION reaches Prisma as an unknown request error; the message is checked through raw SQL.
+export const TRIGGER_REJECTION = IS_PG ? "UNKNOWN" : "P2003";
 
 /** The Prisma error code a write is rejected with, or "" when it goes through. */
 export async function dbRejects(run: () => Promise<unknown>): Promise<string> {

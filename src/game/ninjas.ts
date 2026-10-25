@@ -20,6 +20,7 @@ import { slugify } from "../domain/slug";
 import { inTransaction, parseInput, UnknownReferenceError, type Db } from "./db";
 import { effectsArgs, replaceEffects, toEffectView } from "./effects";
 import { ninjaInput, ninjaListParams, type NinjaInput, type NinjaListParams } from "./schemas";
+import { CI } from "../server/search-mode";
 
 type ParsedNinja = ReturnType<typeof ninjaInput.parse>;
 type ParsedAbility = NonNullable<ParsedNinja["abilities"]>[number];
@@ -493,13 +494,13 @@ async function ninjaWhere(db: Db, p: ReturnType<typeof ninjaListParams.parse>): 
       ],
     });
   }
-  if (p.nameContains) and.push({ OR: [{ name: { contains: p.nameContains } }, { nameEs: { contains: p.nameContains } }] });
+  if (p.nameContains) and.push({ OR: [{ name: { contains: p.nameContains, ...CI } }, { nameEs: { contains: p.nameContains, ...CI } }] });
   if (p.query) {
     const slugQuery = slugify(p.query);
     and.push({
       OR: [
-        { name: { contains: p.query } },
-        { nameEs: { contains: p.query } },
+        { name: { contains: p.query, ...CI } },
+        { nameEs: { contains: p.query, ...CI } },
         ...(slugQuery ? [{ slug: { contains: slugQuery } }] : []),
         { aliases: { some: { normalized: { contains: normalizeTerm(p.query) } } } },
       ],

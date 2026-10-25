@@ -1,10 +1,10 @@
-import path from "node:path";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 import { PrismaClient } from "@prisma/client";
+import { TEST_DB_URL } from "./helpers";
 import { seedVocabulary } from "../prisma/vocabulary";
 import { assertSingleEffectOwner, groupConditions, isConditional, type ConditionView } from "../src/domain/effects";
 
-const url = `file:${path.resolve(__dirname, ".tmp/test.db").replace(/\\/g, "/")}`;
+const url = TEST_DB_URL;
 const db = new PrismaClient({ datasourceUrl: url });
 
 beforeAll(async () => {

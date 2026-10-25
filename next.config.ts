@@ -2,6 +2,8 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  // The administration reads the parser vocabulary from disk at run time; serverless tracing would leave it out.
+  outputFileTracingIncludes: { "/admin/**/*": ["./data/reference/lexicon.json"], "/admin": ["./data/reference/lexicon.json"] },
   /**
    * While the Gems section is switched off its address answers 404 straight away. The pages also refuse
    * on their own, but those run inside a streaming boundary and would answer 200 with an empty not-found view.

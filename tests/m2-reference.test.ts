@@ -6,7 +6,7 @@ import { resolveEffectUsage } from "../src/domain/effects";
 import { getNinjaDetail, listNinjas } from "../src/game/ninjas";
 import { analyzeReleaseList, loadReferenceData, readReferenceFile, type ReferenceInventory, type ReleaseFile, type StagedEvidenceFile } from "../src/game/reference-loader";
 import { findStatusEffectsByTerm, getStatusEffect, listStatusEffects } from "../src/game/status-effects";
-import { HANDOFF_DIR, REFERENCE_DIR, testDb } from "./helpers";
+import { IS_PG, HANDOFF_DIR, REFERENCE_DIR, testDb } from "./helpers";
 
 const db = testDb();
 let first: ReferenceInventory;
@@ -337,7 +337,7 @@ describe("loaded ninja profiles", () => {
   });
 
   it("every stored row satisfies the database rules", async () => {
-    expect(await db.$queryRawUnsafe("PRAGMA foreign_key_check")).toEqual([]);
+    if (!IS_PG) expect(await db.$queryRawUnsafe("PRAGMA foreign_key_check")).toEqual([]); // PostgreSQL enforces foreign keys at all times
     expect(await db.effect.count({ where: { rateValue: { not: null }, rateKind: null } })).toBe(0);
     expect(await db.effect.count({ where: { magnitudeOverride: { not: null }, statusEffectId: null } })).toBe(0);
     expect(await db.ability.count({ where: { abilityType: { key: { in: ["talent_awakening", "skill_awakening"] } }, parentAbilityId: null, talentOptionId: null } })).toBe(0);

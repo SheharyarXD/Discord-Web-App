@@ -10,7 +10,7 @@ import { recordEvidence, registerAsset } from "../src/game/provenance";
 import { getStatusEffect, upsertStatusEffect } from "../src/game/status-effects";
 import { createTranslator, DEFAULT_LOCALE } from "../src/i18n";
 import { ForbiddenError } from "../src/server/auth/permissions";
-import { dbRejects, failure, seedTestVocabulary, testDb, TRIGGER_REJECTION } from "./helpers";
+import { IS_PG, dbRejects, failure, seedTestVocabulary, testDb, TRIGGER_REJECTION } from "./helpers";
 
 const db = testDb();
 const ROOT = path.resolve(__dirname, "..");
@@ -163,7 +163,16 @@ describe("provenance", () => {
 });
 
 describe("integrity triggers", () => {
-  it("every trigger declared in prisma/constraints.sql exists after migrating", async () => {
+  it.skipIf(!IS_PG)("PostgreSQL: every trigger declared in prisma/postgres/constraints.sql exists after migrating", async () => {
+    const declared = [...readFileSync(path.join(ROOT, "prisma/postgres/constraints.sql"), "utf8").matchAll(/CREATE TRIGGER "([^"]+)"/g)].map((m) => m[1]!).sort();
+    const present = (await db.$queryRawUnsafe<{ tgname: string }[]>("SELECT tgname FROM pg_trigger WHERE NOT tgisinternal ORDER BY tgname")).map((r) => r.tgname);
+    expect(declared.length).toBe(16);
+    expect(present).toEqual(declared);
+    const sql = readFileSync(path.join(ROOT, "prisma/postgres/migrations/20261026000000_postgres_baseline/migration.sql"), "utf8").replace(/\r\n/g, "\n");
+    expect(sql.endsWith(readFileSync(path.join(ROOT, "prisma/postgres/constraints.sql"), "utf8").replace(/\r\n/g, "\n"))).toBe(true);
+  });
+
+  it.skipIf(IS_PG)("every trigger declared in prisma/constraints.sql exists after migrating", async () => {
     const declared = [...readFileSync(path.join(ROOT, "prisma/constraints.sql"), "utf8").matchAll(/CREATE TRIGGER "([^"]+)"/g)].map((m) => m[1]!).sort();
     const present = (await db.$queryRawUnsafe<{ name: string }[]>("SELECT name FROM sqlite_master WHERE type = 'trigger' ORDER BY name")).map((r) => r.name);
     expect(declared.length).toBe(30);
@@ -180,7 +189,7 @@ describe("integrity triggers", () => {
     expect(await db.ninja.count({ where: { slug: { startsWith: "raw-" } } })).toBe(0);
   });
 
-  it("the migration carries the same trigger statements as the reference file", () => {
+  it.skipIf(IS_PG)("the migration carries the same trigger statements as the reference file", () => {
     const migrations = path.join(ROOT, "prisma/migrations");
     // The latest migration that rebuilds tables re-creates every trigger, so it is the one that must match.
     const m2 = readdirSync(migrations).find((d) => d.endsWith("_m2_ninja_profiles"))!;
