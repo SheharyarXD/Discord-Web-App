@@ -31,7 +31,7 @@ Next.js 16, React 19, TypeScript, Prisma 6, Tailwind 4. SQLite for local develop
 Pushes to `milestone-4` create **Preview** deployments (Preview database). Vercel's production branch is still `main`: release with `vercel deploy --prod` from the tested branch, or change the production branch in the dashboard, or merge into `main`. Database changes: edit `prisma/schema.prisma`, run `npm run db:pg:schema`, add a PostgreSQL migration, and apply it with `node scripts/with-vercel-env.mjs production -- npx prisma migrate deploy --schema prisma/postgres/schema.prisma` after a backup.
 
 ## Production configuration
-Variables (set in Vercel, never in Git): `DATABASE_URL` (pooled), `DIRECT_URL` (direct, migrations), `SESSION_DAYS`, `FEATURE_GEMS`. Build command `npm run vercel-build`, Node 22.x, production branch `milestone-4`.
+Variables (set in Vercel, never in Git): `DATABASE_URL` (pooled), `DIRECT_URL` (direct, migrations), `SESSION_DAYS`, `FEATURE_GEMS`. Build command `npm run vercel-build`, Node 22.x. Vercel production branch: `main` (see "Releasing a new version"); the live release was made from `milestone-4`.
 
 ## Changing the data after launch
 Use the administration for content. Bulk reference data lives in `data/reference/` and is loaded with `npm run db:ingest` against the target database (it is repeatable and never duplicates). Take a Neon restore point first.
