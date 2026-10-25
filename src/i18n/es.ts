@@ -35,6 +35,23 @@ export const es = {
     roleAdmin: "Administrador",
     roleUser: "Usuario",
   },
+  setup: {
+    title: "Crear el administrador",
+    intro: "Primer acceso. Elige tu correo y tu contraseña; nadie más los conoce. Esta página se desactiva en cuanto exista la cuenta.",
+    password: "Contraseña nueva",
+    passwordHint: "Mínimo 12 caracteres.",
+    confirm: "Repite la contraseña",
+    submit: "Crear administrador",
+    submitting: "Creando…",
+    error: {
+      disabled: "La configuración inicial no está activada.",
+      invalidToken: "El enlace no es válido.",
+      alreadyInitialized: "Ya existe una cuenta. Esta página está desactivada.",
+      invalidInput: "Revisa el correo electrónico.",
+      weakPassword: "La contraseña debe tener al menos 12 caracteres.",
+      mismatch: "Las dos contraseñas no coinciden.",
+    },
+  },
   home: {
     title: "Panel principal",
     welcome: "Bienvenido a la base de datos",

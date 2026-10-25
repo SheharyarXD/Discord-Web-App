@@ -29,3 +29,7 @@ scripts/.audit-figures.json
 .agents/
 .claude/
 skills-lock.json
+
+# one-time first-administrator links (private)
+.setup-link-*.txt
+.setup-token-*.tmp
