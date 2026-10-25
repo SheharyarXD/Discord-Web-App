@@ -21,3 +21,11 @@ M3_CLIENT_CHANGES_TO_APPLY_FINAL.md
 scripts/.audit-figures.json
 .local-pg/
 .vercel
+
+.vercel
+.env*
+
+# local tooling added by integrations
+.agents/
+.claude/
+skills-lock.json
