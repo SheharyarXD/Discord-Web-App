@@ -115,7 +115,7 @@ describe("16. authorization", () => {
 
   it("every mutation of the API is covered by the write guard", () => {
     const api = gameApi(db, user) as unknown as Record<string, (...args: unknown[]) => unknown>;
-    const readers = new Set(["listNinjas", "getNinja", "listStatusEffects", "getStatusEffect", "findStatusEffectsByTerm", "listSets", "getEquipmentSet", "getJewelrySet", "selectTalent", "listItems", "listItemFacets", "listNinjaFacets", "listStatistics", "listItemChoices", "getItemDetail", "searchAll"]);
+    const readers = new Set(["listNinjas", "getNinja", "listStatusEffects", "getStatusEffect", "findStatusEffectsByTerm", "listSets", "getEquipmentSet", "getJewelrySet", "selectTalent", "listItems", "listItemFacets", "listNinjaFacets", "listEffectSuggestions", "listStatistics", "listItemChoices", "getItemDetail", "searchAll"]);
     const mutations = Object.keys(api).filter((k) => !readers.has(k));
     expect(mutations.length).toBeGreaterThanOrEqual(15);
     for (const name of mutations) expect(() => api[name]!({}), name).toThrow(ForbiddenError);

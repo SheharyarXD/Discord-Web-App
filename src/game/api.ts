@@ -2,6 +2,7 @@ import type { PrismaClient } from "@prisma/client";
 import { assertCan, type Action, type Actor } from "../server/auth/permissions";
 import { abilityParser, deleteAbility, saveAbilityText } from "./ability-editor";
 import { deleteSetTier, deleteStatus, deletions, getItemDetail, listItemChoices, listItemFacets, listItems, listNinjaFacets, listStatistics, saveEquipment, saveGem, saveJewelry, saveSetTier, searchAll, updateEquipmentSetBasics, updateJewelrySetBasics, updateStatusBasics } from "./catalog";
+import { effectSuggestions } from "./effect-search";
 import { getEquipmentSet, getJewelrySet, itemVocabulary, listSets, upsertEquipmentSet, upsertJewelrySet } from "./items";
 import { getNinjaDetail, listNinjas, upsertNinja, vocabulary } from "./ninjas";
 import { recordEvidence, registerAsset } from "./provenance";
@@ -47,6 +48,7 @@ export function gameApi(db: PrismaClient, actor: Actor) {
     listItems: read(listItems),
     listItemFacets: read(listItemFacets),
     listNinjaFacets: read(listNinjaFacets),
+    listEffectSuggestions: read(effectSuggestions),
     listStatistics: read(listStatistics),
     listItemChoices: read(listItemChoices),
     getItemDetail: read(getItemDetail),

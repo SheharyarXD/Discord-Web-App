@@ -429,6 +429,8 @@ export const ninjaListParams = z.object({
   statFilters: z.array(statFilter).max(8).optional(),
   /** Ninjas whose abilities, talents or awakenings have an effect on one of these statistics. */
   effectStatisticKeys: z.array(key).optional(),
+  /** Effect search terms («aturdir», «inmunidad a sellar»...): ninjas with a stored effect matching ANY term. */
+  effectTerms: z.array(z.string().trim().min(1).max(80)).max(6).optional(),
   /** Default: newest release first. «stat» and «growth» sort by one base statistic, ninjas without it last. */
   sort: z
     .object({ by: z.enum(["release", "name", "stat", "growth"]).default("release"), statisticKey: key.nullish(), direction: z.enum(SORT_DIRECTIONS).default("desc") })

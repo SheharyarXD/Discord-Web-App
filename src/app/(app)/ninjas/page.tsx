@@ -2,10 +2,10 @@ import { formatReleasePeriod } from "@/domain/ninja";
 import { getT } from "@/i18n/server";
 import { getGameApi } from "@/server/game-api";
 import { requireUser } from "@/server/auth/guards";
-import { hrefWith, parseNinjaParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
+import { effectTerms, hrefWith, parseNinjaParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
 import { EmptyState, PageHeader, Pagination, Tag } from "@/components/ui/primitives";
 import { ItemCard } from "@/components/game/item-card";
-import { CheckGroup, countActive, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "@/components/game/list-controls";
+import { CheckGroup, countActive, EffectSearch, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "@/components/game/list-controls";
 
 export const dynamic = "force-dynamic";
 export const metadata = { title: "Ninjas" };
@@ -22,7 +22,8 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
   const raw = await searchParams;
   const api = await getGameApi();
   const params = parseNinjaParams(raw);
-  const [facets, result] = await Promise.all([api.listNinjaFacets(), api.listNinjas(params)]);
+  const [facets, result, effectSuggestions] = await Promise.all([api.listNinjaFacets(), api.listNinjas(params), api.listEffectSuggestions()]);
+  const fxTerms = effectTerms(raw);
   const statName = (key: string | null | undefined) => facets.statistics.find((s) => s.key === key)?.name ?? key ?? "";
   const sortValue = rawOne(raw.sort) ?? "";
   const active = countActive(raw);
@@ -45,6 +46,12 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
       <PageHeader title={t("sections.ninjas.title")} description={t("sections.ninjas.description")} />
       <FilterPanel action="/ninjas" count={active} t={t} clearHref="/ninjas">
         <SearchBox value={rawOne(raw.q)} placeholder={t("filters.searchPlaceholder")} label={t("filters.search")} />
+        <EffectSearch
+          terms={fxTerms}
+          suggestions={effectSuggestions.map((s) => s.value)}
+          removeHref={(term) => hrefWith("/ninjas", raw, { fx: fxTerms.filter((x) => x !== term), page: undefined })}
+          t={t}
+        />
         <CheckGroup name="rating" legend={t("filters.rating")} options={facets.ratings.map((r) => ({ value: r.key, label: r.name }))} selected={rawAll(raw.rating)} />
         <CheckGroup
           name="formation"
@@ -69,7 +76,10 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
       </FilterPanel>
 
       {result.total === 0 ? (
-        <EmptyState title={t("filters.noResults")} hint={active > 0 ? t("filters.noResultsHint") : t("common.emptyHint")} />
+        <EmptyState
+          title={fxTerms.length > 0 ? t("filters.effectNoResults", { terms: fxTerms.join("», «") }) : t("filters.noResults")}
+          hint={fxTerms.length > 0 ? t("filters.effectNoResultsHint") : active > 0 ? t("filters.noResultsHint") : t("common.emptyHint")}
+        />
       ) : (
         <>
           <ResultSummary total={t("filters.results", { count: result.total })}>

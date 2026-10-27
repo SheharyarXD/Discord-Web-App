@@ -55,6 +55,42 @@ export function SearchBox({ name = "q", value, placeholder, label }: { name?: st
   );
 }
 
+/**
+ * «Buscar por efecto»: a text field with suggestions. Terms already chosen are chips with a link that removes
+ * them and hidden fields that keep them when the form is sent again; a newly typed term is added to them.
+ */
+export function EffectSearch({ terms, suggestions, removeHref, t }: { terms: string[]; suggestions: string[]; removeHref: (term: string) => string; t: Translate }) {
+  return (
+    <div className="flex flex-col gap-1.5" data-effect-search>
+      <label htmlFor="fx" className="text-sm font-medium">
+        {t("filters.effectSearch")}
+      </label>
+      {terms.length > 0 && (
+        <ul className="flex flex-wrap gap-2" aria-label={t("filters.effectChips")}>
+          {terms.map((term) => (
+            <li key={term} className="inline-flex min-h-9 items-center gap-1 rounded-full border border-accent bg-accent/10 py-0.5 pl-3 pr-1 text-sm">
+              <input type="hidden" name="fx" value={term} />
+              <span>{term}</span>
+              <Link href={removeHref(term)} aria-label={t("filters.effectChipRemove", { term })} className="inline-flex size-8 items-center justify-center rounded-full hover:bg-accent/20">
+                <span aria-hidden>×</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      )}
+      <input id="fx" type="search" name="fx" list="fx-suggestions" autoComplete="off" maxLength={80} placeholder={terms.length ? t("filters.effectSearchAdd") : t("filters.effectSearchPlaceholder")} className={inputClass} aria-describedby="fx-hint" />
+      <datalist id="fx-suggestions">
+        {suggestions.map((s) => (
+          <option key={s} value={s} />
+        ))}
+      </datalist>
+      <p id="fx-hint" className="text-xs text-muted">
+        {t("filters.effectSearchHint")}
+      </p>
+    </div>
+  );
+}
+
 export function CheckGroup({ name, legend, options, selected }: { name: string; legend: string; options: Option[]; selected: string[] }) {
   if (options.length === 0) return null;
   return (

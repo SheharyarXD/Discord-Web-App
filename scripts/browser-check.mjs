@@ -437,6 +437,81 @@ try {
   check("rating filter SR lists the new SR Supporters", (await total("/ninjas?rating=SR")) >= 12);
   await go(page, BASE + "/ninjas?formation=support");
   await shot(page, "16-supporters-list.png", { full: true });
+  // ── 10b. search by effect (Buscar por efecto) ──
+  const owners = async (where) => {
+    const rows = await db.effect.findMany({ where, select: { ability: { select: { ninjaId: true } }, talentOption: { select: { group: { select: { ninjaId: true } } } } } });
+    return new Set(rows.map((r) => r.ability?.ninjaId ?? r.talentOption?.group.ninjaId).filter(Boolean));
+  };
+  const published = (await db.ninja.findMany({ where: { status: "PUBLISHED" }, select: { id: true } })).map((n) => n.id);
+  const inList = (s) => [...s].filter((id) => published.includes(id)).length;
+  const stunStructured = await owners({ kind: "STATUS", statusEffect: { key: "stun" } });
+  const stunAny = new Set(stunStructured);
+  for (const r of await db.effect.findMany({ where: { OR: [{ kind: "TEXT" }, { structuredStatus: { not: "STRUCTURED" } }] }, select: { sourceText: true, descriptionEs: true, ability: { select: { ninjaId: true } }, talentOption: { select: { group: { select: { ninjaId: true } } } } } })) {
+    if (/stun|aturd/i.test(`${r.sourceText ?? ""} ${r.descriptionEs ?? ""}`)) stunAny.add(r.ability?.ninjaId ?? r.talentOption?.group.ninjaId);
+  }
+  const fxAturdir = await total("/ninjas?fx=aturdir");
+  check("effect search «aturdir» covers every structured Stun ninja and only ninjas with Stun evidence", fxAturdir >= inList(stunStructured) && fxAturdir <= inList(stunAny) && fxAturdir > 5, `shown=${fxAturdir} structured=${inList(stunStructured)} evidence=${inList(stunAny)}`);
+  check("English, Spanish, case and accents give the same result", (await total("/ninjas?fx=stun")) === fxAturdir && (await total("/ninjas?fx=ATURDIR")) === fxAturdir && (await total("/ninjas?fx=aturd%C3%ADr")) === fxAturdir);
+  const sellar = await total("/ninjas?fx=sellar");
+  const multi = await total("/ninjas?fx=aturdir&fx=sellar");
+  check("several effects mean ANY of them (union, no duplicates)", multi >= Math.max(fxAturdir, sellar) && multi <= fxAturdir + sellar && sellar > 0, `aturdir=${fxAturdir} sellar=${sellar} both=${multi}`);
+  const immune = await total("/ninjas?fx=inmunidad+a+aturdir");
+  const immuneDb = inList(await owners({ kind: "IMMUNITY", statusEffect: { key: "stun" } }));
+  check("immunity to Stun is kept apart from applying Stun and matches the stored immunity effects", immune === immuneDb && immune > 0, `${immune} vs ${immuneDb}`);
+  const heal = await total("/ninjas?fx=curaci%C3%B3n");
+  check("«curación» finds the ninjas with a Heal effect (not the statistic of the same name)", heal >= inList(await owners({ kind: "HEAL" })) && heal > 0, `${heal}`);
+  const healHp = await total("/ninjas?fx=curaci%C3%B3n&stat1=hp&min1=100000");
+  check("effect search combines with a statistic range and a rating (AND)", healHp <= heal && (await total("/ninjas?fx=aturdir&rating=SSR")) <= fxAturdir && (await total("/ninjas?fx=aturdir&rating=SSR&formation=center")) <= (await total("/ninjas?fx=aturdir&rating=SSR")), `heal=${heal} withHp=${healHp}`);
+  check("effect search combines with the statistic-effect select", (await total("/ninjas?fx=aturdir&effect=speed")) <= fxAturdir);
+  // pagination: every page, no repeated ninja, count equals the total
+  const seen = [];
+  for (let n = 1; n <= Math.ceil(multi / 24) + 1; n++) {
+    await go(page, BASE + `/ninjas?fx=aturdir&fx=sellar&page=${n}`);
+    seen.push(...(await page.locator("ul li a[href^='/ninjas/']").evaluateAll((els) => els.map((e) => e.getAttribute("href")))));
+  }
+  check("paging through effect results shows each ninja once", seen.length === multi && new Set(seen).size === seen.length, `${seen.length} links, ${new Set(seen).size} distinct, total ${multi}`);
+  // sorting still works with the effect filter
+  await go(page, BASE + "/ninjas?fx=aturdir&sort=name:asc");
+  check("sorting works together with the effect filter", (await page.locator("[data-result-count]").first().innerText()).includes(String(fxAturdir)) && (await page.locator("ul li a[href^='/ninjas/']").count()) > 0);
+  // empty result
+  await go(page, BASE + "/ninjas?fx=zzzxxyy");
+  check("an effect nobody has gives a helpful Spanish message", /Ningún ninja tiene registrado el efecto «zzzxxyy»/.test(await page.locator("main").innerText()));
+  // controls: label, placeholder, suggestions, chips, clear
+  await go(page, BASE + "/ninjas?fx=aturdir");
+  check("the control is labelled «Buscar por efecto» and has at least 20 suggestions", (await page.locator("label[for=fx]").innerText()) === "Buscar por efecto" && (await page.locator("#fx-suggestions option").count()) >= 20);
+  const chip = page.locator("[data-effect-search] ul li", { hasText: "aturdir" });
+  check("the chosen effect shows as a chip with a remove link", (await chip.count()) === 1 && (await chip.locator("a").getAttribute("aria-label")) === "Quitar el efecto aturdir");
+  await shot(page, "17-effect-search-desktop.png", { full: false });
+  await Promise.all([page.waitForURL((u) => !u.search.includes("fx="), { timeout: 15000 }).catch(() => null), chip.locator("a").click()]);
+  await page.waitForLoadState("networkidle");
+  check("removing the chip clears the effect and keeps other filters", !page.url().includes("fx=") && Number(((await page.locator("[data-result-count]").first().innerText()).match(/\d+/) ?? [0])[0]) === all);
+  await go(page, BASE + "/ninjas?fx=aturdir&rating=SSR");
+  await Promise.all([page.waitForURL((u) => u.search === "", { timeout: 15000 }).catch(() => null), page.getByRole("link", { name: /Limpiar|Borrar|Quitar filtros/ }).first().click().catch(() => {})]);
+  await page.waitForLoadState("networkidle");
+  check("clear filters resets the effect search too", !page.url().includes("fx=") && !page.url().includes("rating="), page.url());
+  // keyboard: type an effect and press Enter, then add a second one: both stay as chips
+  await go(page, BASE + "/ninjas");
+  await page.locator("[data-filter-panel] summary").first().click().catch(() => {});
+  await page.locator("input#fx").focus();
+  await page.keyboard.type("curación");
+  await Promise.all([page.waitForURL((u) => u.search.includes("fx="), { timeout: 15000 }).catch(() => null), page.keyboard.press("Enter")]);
+  await page.waitForLoadState("networkidle");
+  check("typing an effect and pressing Enter filters by it (URL keeps the term)", /fx=cura/.test(decodeURIComponent(page.url())), page.url());
+  await page.locator("input#fx").focus();
+  await page.keyboard.type("velocidad");
+  await Promise.all([page.waitForURL((u) => u.search.includes("velocidad"), { timeout: 15000 }).catch(() => null), page.keyboard.press("Enter")]);
+  await page.waitForLoadState("networkidle");
+  check("a second effect is added next to the first", (await page.locator("[data-effect-search] ul li").count()) === 2, decodeURIComponent(page.url()));
+  // mobile 390 px
+  const MB = await login(adminMail, adminPw, 390);
+  await go(MB.page, BASE + "/ninjas?fx=aturdir");
+  const overflow = await MB.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  const box = await MB.page.locator("input#fx").boundingBox();
+  check("390 px: no horizontal scroll and the effect field fits the screen", overflow <= 1 && box && box.x >= 0 && box.x + box.width <= 390, `overflow=${overflow} box=${JSON.stringify(box)}`);
+  check("390 px: the chip remove target is at least 32 px", ((await MB.page.locator("[data-effect-search] ul li a").first().boundingBox())?.width ?? 0) >= 32);
+  await shot(MB.page, "18-effect-search-mobile.png", { full: false });
+  await MB.ctx?.close?.();
+
   const gem = await page.goto(BASE + "/gems");
   check("gems stay hidden after the import (404)", gem.status() === 404);
   const M2 = await login(adminMail, adminPw, 390);

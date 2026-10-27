@@ -22,6 +22,15 @@ function statRanges(p: RawParams) {
   return out;
 }
 
+/** «fx=aturdir&fx=velocidad»: up to six distinct effect terms, case-insensitively unique. */
+export function effectTerms(p: RawParams): string[] {
+  const seen = new Set<string>();
+  return all(p.fx)
+    .map((t) => t.slice(0, 80))
+    .filter((t) => (seen.has(t.toLowerCase()) ? false : (seen.add(t.toLowerCase()), true)))
+    .slice(0, 6);
+}
+
 /** «stat:desc:force», «growth:asc:hp», «name:asc», «release:desc». Anything else means the default order. */
 function sortOf(raw: string | undefined, kind: "ninja" | "item") {
   if (!raw) return undefined;
@@ -50,6 +59,7 @@ export function parseNinjaParams(p: RawParams, options: { includeUnpublished?: b
     ...(classes.length ? { combatClasses: classes } : {}),
     ...(statRanges(p).length ? { statFilters: statRanges(p) } : {}),
     ...(all(p.effect).length ? { effectStatisticKeys: all(p.effect) } : {}),
+    ...(effectTerms(p).length ? { effectTerms: effectTerms(p) } : {}),
     ...(sort ? { sort: sort as NonNullable<NinjaListParams["sort"]> } : {}),
     ...(options.includeUnpublished ? { includeUnpublished: true } : {}),
   };

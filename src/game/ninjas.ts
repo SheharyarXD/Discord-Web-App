@@ -19,6 +19,7 @@ import { resolveFormation, ruleFormation, type FormationOrigin, type ReleasePeri
 import { slugify } from "../domain/slug";
 import { inTransaction, parseInput, UnknownReferenceError, type Db } from "./db";
 import { effectsArgs, replaceEffects, toEffectView } from "./effects";
+import { ninjaIdsWithEffects } from "./effect-search";
 import { ninjaInput, ninjaListParams, type NinjaInput, type NinjaListParams } from "./schemas";
 import { CI } from "../server/search-mode";
 
@@ -517,6 +518,10 @@ async function ninjaWhere(db: Db, p: ReturnType<typeof ninjaListParams.parse>): 
         { talentGroups: { some: { options: { some: { OR: [onStat, { awakenings: { some: onStat } }] } } } } },
       ],
     });
+  }
+  if (p.effectTerms?.length) {
+    const ids = await ninjaIdsWithEffects(db, p.effectTerms);
+    if (ids) and.push({ id: { in: ids } });
   }
   if (p.releasedFrom) and.push(periodAtLeast(p.releasedFrom));
   if (p.releasedTo) and.push(periodAtMost(p.releasedTo));
