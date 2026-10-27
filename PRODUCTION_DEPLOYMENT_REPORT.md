@@ -1,6 +1,6 @@
 # Production deployment report
 
-**Status: LIVE AND VERIFIED** at **https://furia-ninja.vercel.app** (alias https://furia-ninja-furia-ninja.vercel.app). Date: 26 October 2026. Milestone 4 is not accepted and not closed. The first administrator is created by the client on a private one-time page (section 7); no account exists yet.
+**Status: LIVE AND VERIFIED** at **https://furia-ninja.vercel.app** (alias https://furia-ninja-furia-ninja.vercel.app). Date: 27 October 2026 (first release 26 October). Milestone 4 is not accepted and not closed. The client has created the first administrator (section 7) and the setup token is removed. Section 9 records the release of the effect search.
 
 ## 1. Where it runs
 
@@ -64,6 +64,17 @@ A private one-time page replaces the old script-based bootstrap, so the client c
 - **After the client has created the account:** remove the variable (`vercel env rm SETUP_TOKEN production --scope furia-ninja`), redeploy or leave it (the page is already closed by the existing account), and delete the local link file.
 
 ## 8. Owner actions that remain
-1. Send the private setup link to the client (section 7); afterwards remove `SETUP_TOKEN`.
+1. Done: the client created the account and `SETUP_TOKEN` was removed.
 2. Set the production branch tracking to `milestone-4` in the dashboard (section 4) or keep releasing with `vercel deploy --prod`.
 3. Review and accept Milestone 4.
+
+## 9. Release of 27 October 2026: search by effect
+| Item | Value |
+| --- | --- |
+| Commit | `e81230342c2372721d59a1dbec5c1b1a1c7323b7` on `milestone-4` (clean tree, read from the deployment metadata) |
+| Order followed | production backup (verified), push to `milestone-4`, Preview deployment, 183 of 183 browser checks on the Preview database, Preview logs checked, temporary test secret revoked, then `vercel deploy --prod` |
+| Production deployment | `dpl_CSnAR1vmy8i9pieVHWcRKVfX8Eg5` (`furia-ninja-gf0atkyrw-furia-ninja.vercel.app`), target Production, holds the aliases. A repeated command created a second identical deployment of the same commit (`dpl_FzgvrfLLsg7mbwp28zhLQeHFXpmB`); no effect |
+| Production branch | still `main` in the dashboard; Ignored Build Step unchanged and confirmed, so `main` cannot replace the live app |
+| Database | no schema change and no migration. Backup `production-20261027-pre-effect-search` (41 tables, 9,077 rows) verified after the release: all 41 tables match by count and content checksum |
+| First administrator | exists (1 ADMIN); `SETUP_TOKEN` removed from Production and Preview; `/setup` 404 |
+| Live checks | 47 of 47 (`PRODUCTION_SMOKE_TEST_RESULTS.md`); production error log empty |

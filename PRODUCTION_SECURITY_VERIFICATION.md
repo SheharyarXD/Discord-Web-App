@@ -34,5 +34,6 @@
 - Live smoke test again 37 of 37; no error in the production logs.
 - Production users: 0. No default, debug or test account remains.
 
-## Still to do by the owner
-- Send the private setup link to the client and remove `SETUP_TOKEN` afterwards.
+## Update of 27 October 2026
+- The client created the first administrator. `SETUP_TOKEN` was removed from Production and Preview, the local setup link and token files were deleted, and `/setup` answers 404 with or without a token. Production users: 1 administrator.
+- After the effect search release the live test again showed: anonymous visitors redirected to login, regular user 404 on `/admin`, administrator access, Secure and HttpOnly session cookie, Gems hidden (47 of 47 live checks). The new filter adds no endpoint and no write: it is a read-only query on the existing list page.

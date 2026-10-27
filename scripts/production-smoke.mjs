@@ -122,6 +122,37 @@ try {
   for (let i = 0; i < 6; i++) { const r = await A.page.goto(BASE + "/ninjas?page=" + (i + 1), { waitUntil: "domcontentloaded" }); allOk &&= r.status() === 200 && !/\/login/.test(A.page.url()); }
   check("the session persists across repeated requests", allOk);
 
+  // search by effect, read-only: result sets are compared with independent queries on the stored effects
+  const owners = async (where) => {
+    const rows = await db.effect.findMany({ where, select: { ability: { select: { ninjaId: true } }, talentOption: { select: { group: { select: { ninjaId: true } } } } } });
+    return new Set(rows.map((r) => r.ability?.ninjaId ?? r.talentOption?.group.ninjaId).filter(Boolean));
+  };
+  const stunStructured = await owners({ kind: "STATUS", statusEffect: { key: "stun" } });
+  const stunAny = new Set(stunStructured);
+  for (const r of await db.effect.findMany({ where: { OR: [{ kind: "TEXT" }, { structuredStatus: { not: "STRUCTURED" } }] }, select: { sourceText: true, descriptionEs: true, ability: { select: { ninjaId: true } }, talentOption: { select: { group: { select: { ninjaId: true } } } } } })) {
+    if (/stun|aturd/i.test(`${r.sourceText ?? ""} ${r.descriptionEs ?? ""}`)) stunAny.add(r.ability?.ninjaId ?? r.talentOption?.group.ninjaId);
+  }
+  const fxStun = await total(A.page, "/ninjas?fx=aturdir");
+  check("live effect search «aturdir» returns every structured Stun ninja and only ninjas with evidence", fxStun >= stunStructured.size && fxStun <= stunAny.size && fxStun > 5, `shown=${fxStun} structured=${stunStructured.size} evidence=${stunAny.size}`);
+  check("live: English «stun», capitals and accents give the same result", (await total(A.page, "/ninjas?fx=stun")) === fxStun && (await total(A.page, "/ninjas?fx=ATURD%C3%8DR")) === fxStun);
+  const immuneLive = await total(A.page, "/ninjas?fx=inmunidad+a+aturdir");
+  check("live: immunity to Stun equals the stored immunity effects and differs from applying Stun", immuneLive === (await owners({ kind: "IMMUNITY", statusEffect: { key: "stun" } })).size && immuneLive !== fxStun, `${immuneLive}`);
+  const healLive = await total(A.page, "/ninjas?fx=curaci%C3%B3n");
+  check("live: «curación» covers every ninja with a Heal effect", healLive >= (await owners({ kind: "HEAL" })).size && healLive > 0, `${healLive}`);
+  const speedLive = await total(A.page, "/ninjas?fx=aumento+de+velocidad");
+  const speedHp = await total(A.page, "/ninjas?fx=aumento+de+velocidad&stat1=hp&min1=100000");
+  const speedSsr = await total(A.page, "/ninjas?fx=aumento+de+velocidad&rating=SSR&formation=center");
+  check("live: effect + statistic range + rank + formation combine (AND)", speedLive > 0 && speedHp <= speedLive && speedSsr <= speedLive, `effect=${speedLive} withHp=${speedHp} withSsrCenter=${speedSsr}`);
+  const unionLive = await total(A.page, "/ninjas?fx=aturdir&fx=sellar");
+  check("live: several effects mean ANY (union)", unionLive >= fxStun && unionLive <= fxStun + (await total(A.page, "/ninjas?fx=sellar")), `${unionLive}`);
+  const links = [];
+  for (let n = 1; n <= Math.ceil(unionLive / 24) + 1; n++) { await go(A.page, BASE + `/ninjas?fx=aturdir&fx=sellar&page=${n}`); links.push(...(await A.page.locator("ul li a[href^='/ninjas/']").evaluateAll((els) => els.map((e) => e.getAttribute("href"))))); }
+  check("live: paging through effect results shows each ninja once", links.length === unionLive && new Set(links).size === links.length, `${links.length}/${unionLive}`);
+  await go(A.page, BASE + "/ninjas?fx=zzzxxyy");
+  check("live: an effect nobody has gives the Spanish empty message", /Ningún ninja tiene registrado el efecto «zzzxxyy»/.test(await A.page.locator("main").innerText()));
+  await go(A.page, BASE + "/ninjas?fx=aturdir");
+  check("live: the control is labelled «Buscar por efecto» with suggestions and a chip", (await A.page.locator("label[for=fx]").innerText()) === "Buscar por efecto" && (await A.page.locator("#fx-suggestions option").count()) >= 20 && (await A.page.locator("[data-effect-search] ul li").count()) === 1);
+
   // screenshots (real, from the live site)
   await go(A.page, BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force");
   await shot(A.page, "p01-live-results.png", { x: 0, y: 0, width: 1600, height: 1500 });
@@ -139,6 +170,24 @@ try {
   await go(R.page, BASE + "/ninjas?formation=support");
   const y = await R.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
   await shot(R.page, "p09-live-supporters.png", { x: 0, y: Math.max(0, y - 40), width: 960, height: 950 });
+  // live screenshots of the effect search (desktop 960 px)
+  const region = async (page, url, name, locator) => {
+    await go(page, BASE + url);
+    await page.addStyleTag({ content: HIDE }).catch(() => {});
+    await page.evaluate(() => document.querySelectorAll("details").forEach((d) => (d.open = true)));
+    await page.locator(locator).first().screenshot({ path: path.join(OUT, name) });
+  };
+  const below = async (page, url, name, height) => {
+    await go(page, BASE + url);
+    const y = await page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
+    await shot(page, name, { x: 0, y: Math.max(0, y - 20), width: 960, height }, true);
+  };
+  await region(R.page, "/ninjas?fx=aturdir", "p12-live-effect-control.png", "[data-effect-search]");
+  await below(R.page, "/ninjas?fx=aturdir", "p13-live-effect-results.png", 760);
+  await region(R.page, "/ninjas?fx=inmunidad+a+aturdir", "p14-live-effect-immunity-control.png", "[data-effect-search]");
+  await below(R.page, "/ninjas?fx=inmunidad+a+aturdir", "p15-live-effect-immunity-results.png", 560);
+  await region(R.page, "/ninjas?fx=aumento+de+velocidad&stat1=hp&min1=100000&rating=SSR", "p16-live-combined-filters.png", "[data-filter-panel] form");
+  await below(R.page, "/ninjas?fx=aumento+de+velocidad&stat1=hp&min1=100000&rating=SSR", "p17-live-combined-results.png", 700);
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
   await R.ctx.close();
@@ -148,6 +197,14 @@ try {
     const overflow = await M.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
     check(`no horizontal scrolling at 390 px on ${p}`, overflow <= 0, `${overflow}px`);
   }
+  await go(M.page, BASE + "/ninjas?fx=aturdir");
+  const ovf = await M.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  const fxBox = await M.page.locator("input#fx").boundingBox();
+  check("live 390 px: effect search has no horizontal scroll and its field fits", ovf <= 0 && fxBox && fxBox.x >= 0 && fxBox.x + fxBox.width <= 390, `${ovf}px ${JSON.stringify(fxBox)}`);
+  await M.page.addStyleTag({ content: HIDE }).catch(() => {});
+  await M.page.locator("[data-effect-search]").first().screenshot({ path: path.join(OUT, "p18-live-effect-mobile.png") });
+  const yM = await M.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
+  await shot(M.page, "p19-live-effect-mobile-results.png", { x: 0, y: Math.max(0, yM - 20), width: 390, height: 700 }, true);
   await go(M.page, BASE + "/ninjas/natsu-dragneel");
   await shot(M.page, "p11-live-mobile.png", { x: 0, y: 0, width: 390, height: 900 }, false);
   await M.ctx.close();

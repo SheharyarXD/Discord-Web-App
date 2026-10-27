@@ -33,3 +33,22 @@ SQLite suite 267 passed, 1 skipped, 0 failed (268 tests); PostgreSQL suite 261 p
 
 ## Logs
 Production runtime logs: no error after the data was loaded. The only errors in the log are two requests to `/` at 01:54 local time, made before the production database had its tables (see `PRODUCTION_DEPLOYMENT_REPORT.md`, section 4).
+
+## Round of 27 October 2026: search by effect (commit `e812303`)
+Run against https://furia-ninja.vercel.app with `scripts/production-smoke.mjs` (read-only; two throw-away accounts, deleted at the end). **47 of 47 checks passed**: the 37 earlier checks plus 10 for the effect search.
+
+| Check | Result |
+| --- | --- |
+| «aturdir» | 20 ninjas: every ninja with a structured Stun effect (11) plus ninjas whose stored wording says stun; none without evidence |
+| English, capitals, accents | «stun», «ATURDÍR» give the same 20 |
+| «inmunidad a aturdir» | 25 ninjas, equal to the stored immunity effects, different from applying Stun |
+| «curación» | 64 ninjas, covers every Heal effect |
+| «aumento de velocidad» | 165; with HP at least 100000: 132; with rank SSR and Center: 9 |
+| «aturdir» + «sellar» | 30 ninjas (any of them), two pages, each ninja once |
+| Unknown effect | Spanish empty message naming the effect |
+| Control | labelled «Buscar por efecto», about 150 suggestions, chip with remove link |
+| 390 px | no horizontal scrolling, field fits the screen |
+| Data | 177 ninjas, 316 abilities, 4,395 effects before and after; 1 administrator account unchanged |
+| Other | 41 of 41 tables identical to the pre-release backup; `/setup` 404; production error log empty |
+
+Before production: Preview deployment of the same commit, 183 of 183 browser checks on the Preview database. Local suites: SQLite 290 passed and 1 skipped, PostgreSQL 281 passed and 10 skipped, `tsc` and `eslint` clean.
