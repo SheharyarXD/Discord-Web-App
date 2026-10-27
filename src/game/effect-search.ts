@@ -112,7 +112,15 @@ const STAT_ES: Record<string, { label: string; terms: string[] }> = {
   "counter-rate": { label: "tasa de contraataque", terms: ["tasa de contraataque", "contraataque"] },
   "physical-defense": { label: "defensa física", terms: ["defensa fisica"] },
   "strategy-defense": { label: "defensa de estrategia", terms: ["defensa de estrategia"] },
-  "strategy-attack": { label: "ataque de estrategia", terms: ["ataque de estrategia"] },
+  "strategy-attack": { label: "ataque estratégico", terms: ["ataque estrategico", "ataque de estrategia"] },
+  "avoid-injury": { label: "evasión de daño", terms: ["evasion de dano", "avoid injury"] },
+  "punch-rate": { label: "tasa de golpe", terms: ["tasa de golpe", "punch rate"] },
+  "s-attack": { label: "s.attack", terms: ["s attack", "s.attack", "ataque s"] },
+  "s-crit": { label: "s.crit", terms: ["s crit", "s.crit"] },
+  "s-block": { label: "s.bloqueo", terms: ["s bloqueo", "s.bloqueo", "s block"] },
+  "resistance-to-ignore-defense": { label: "resistencia a ignorar defensa", terms: ["resistencia a ignorar defensa"] },
+  "crit-damage-resistance": { label: "resistencia al daño crítico", terms: ["resistencia al dano critico"] },
+  "total-damage-received": { label: "daño total recibido", terms: ["dano total recibido"] },
   "ignore-defense": { label: "ignorar defensa", terms: ["ignorar defensa", "ignora defensa", "ignorar defensas"] },
   "final-damage": { label: "daño final", terms: ["dano final"] },
   "final-damage-dealt": { label: "daño final infligido", terms: ["dano final infligido"] },
@@ -237,7 +245,7 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
     key: s.key,
     names: [...new Set([n(s.name), ...(s.nameEs ? [n(s.nameEs)] : []), ...s.aliases.map((a) => n(a.alias)), ...(STATUS_ES[s.key]?.terms ?? [])])].filter((x) => x.length >= 3),
   }));
-  const statDefs = statistics.map((s) => ({
+  const statDefs = statistics.filter((s) => s.key !== "fury").map((s) => ({
     key: s.key,
     names: [...new Set([n(s.name), ...(s.nameEs ? [n(s.nameEs)] : []), s.key.replace(/-/g, " "), ...(STAT_ES[s.key]?.terms ?? [])])].filter((x) => x.length >= 3),
   }));
@@ -334,7 +342,8 @@ function resolve(index: EffectIndex, term: string): Resolved {
   // 2. Statuses (applied or immunity).
   // The longest term of an entry that the wording contains or starts; an entry whose name merely CONTAINS the wording
   // does not match («curación» is not the statistic «tasa de curación»).
-  const score = (names: string[]) => Math.max(0, ...names.map((raw) => clean(raw.replace(FILLER, " "))).map((x) => (x === r ? 1000 : x.length >= 4 && wordIn(r, x) ? x.length : r.length >= 4 && x.startsWith(r) ? 10 : 0)));
+  const flat = (x: string) => clean(x.replace(/[^a-z0-9\-\s']/g, " "));
+  const score = (names: string[]) => Math.max(0, ...names.map((raw) => clean(flat(raw).replace(FILLER, " "))).map((x) => (x === r ? 1000 : x.length >= 4 && wordIn(r, x) ? x.length : r.length >= 4 && x.startsWith(r) ? 10 : 0)));
   const best = <T extends { names: string[] }>(defs: T[]) => {
     const scored = defs.map((d) => [d, score(d.names)] as const).filter(([, v]) => v > 0);
     const top = Math.max(0, ...scored.map(([, v]) => v));
