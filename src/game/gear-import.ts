@@ -181,11 +181,11 @@ export interface ImportResult {
 }
 
 /** Writes the plan. Only adds or updates rows keyed by the plan's own slugs; nothing else in the database is touched. */
-export async function importGear(db: Db, plan: PlannedFamily[], ledger: ImageLedger): Promise<ImportResult> {
+export async function importGear(db: Db, plan: PlannedFamily[], ledger: ImageLedger, concurrency = 1, skip: (slug: string) => boolean = () => false): Promise<ImportResult> {
   await ensureReference(db);
   const hashes = new Map(ledger.images.map((i) => [i.path, i]));
   const result: ImportResult = { families: 0, equipmentSets: 0, jewelrySets: 0, pieces: 0, bonuses: 0, effects: 0, assets: 0, evidence: 0 };
-  for (const f of plan) {
+  const importFamily = async (f: PlannedFamily) => {
     const metadata = JSON.parse(JSON.stringify(f.costs.length ? { upgradeCosts: f.costs, notes: f.notes, reviews: f.reviews } : { notes: f.notes, reviews: f.reviews }));
     const family = await db.gearFamily.upsert({
       where: { slug: f.slug },
@@ -233,7 +233,26 @@ export async function importGear(db: Db, plan: PlannedFamily[], ledger: ImageLed
       result.evidence++;
       result.effects += v.clauses.structured + v.clauses.textOnly;
     }
-  }
+  };
+  // Families are independent, so a few run at once: a remote database answers one statement at a time per connection.
+  const queue = plan.filter((f) => !skip(f.slug));
+  await Promise.all(
+    Array.from({ length: Math.min(concurrency, queue.length) }, async () => {
+      for (let f = queue.shift(); f; f = queue.shift()) {
+        // A dropped connection to a remote database is retried; the import of a family is idempotent, so a retry cannot duplicate.
+        for (let attempt = 1; ; attempt++) {
+          try {
+            await importFamily(f);
+            break;
+          } catch (e) {
+            const transient = /Can't reach database server|Connection (reset|closed)|Timed out|ECONNRESET|Transaction (API error|already closed)/i.test(String(e));
+            if (!transient || attempt >= 8) throw e;
+            await new Promise((r) => setTimeout(r, 3000 * attempt));
+          }
+        }
+      }
+    }),
+  );
   return result;
 }
 

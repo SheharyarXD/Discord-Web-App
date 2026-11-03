@@ -36,7 +36,8 @@ export function parseInput<S extends z.ZodType>(schema: S, input: unknown, what:
 
 /** Runs `fn` atomically. Re-uses the transaction when already inside one. */
 export function inTransaction<T>(db: Db, fn: (tx: Prisma.TransactionClient) => Promise<T>): Promise<T> {
-  return "$transaction" in db ? db.$transaction(fn) : fn(db);
+  // Interactive transactions on a remote database need more than Prisma's default 5 seconds (a set with many effect rows).
+  return "$transaction" in db ? db.$transaction(fn, { maxWait: 15_000, timeout: 120_000 }) : fn(db);
 }
 
 export const toNumber = (d: Prisma.Decimal | null | undefined): number | null => (d == null ? null : d.toNumber());
