@@ -579,6 +579,7 @@ try {
   check("Sand Burial shows its base equipment, base jewelry and the R1 jewelry as separate cards", /Sand Burial R1/.test(sbText) && (await page.locator("[data-gear-card]").count()) === 3, sbText.replace(/\s+/g, " ").slice(0, 160));
   await go(page, BASE + "/sets?q=warlord");
   const wText = await page.locator("[data-gear-results]").innerText();
+  check("a version with no printed statistics of its own does not claim zero pieces", !/0 piezas/.test(wText));
   check("Warlord shows Base, SSR5, R1 and R2 as four cards and no invented labels", /Warlord SSR5/.test(wText) && /Warlord R1/.test(wText) && /Warlord R2/.test(wText) && (await page.locator("[data-gear-card]").count()) === 4);
   await go(page, BASE + "/sets?q=sange");
   const sangeText = await page.locator("[data-gear-results]").innerText();

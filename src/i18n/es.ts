@@ -324,6 +324,7 @@ export const es = {
     noResultsEffectsAny: "alguno",
     noResultsEffectsAll: "todos",
     pieces: "{count} piezas",
+    noOwnStats: "La fuente no imprime estadísticas propias para esta versión: ve la versión base.",
     categories: "{count} categorías",
     sortNameAsc: "Nombre: de la A a la Z",
     sortNameDesc: "Nombre: de la Z a la A",

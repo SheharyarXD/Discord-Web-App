@@ -133,7 +133,7 @@ function GearCard({ s, t, statName }: { s: GearSetSummary; t: Translate; statNam
             {gearTitle(s, t)}
           </Link>
         </h2>
-        <p className="mt-1 text-sm text-muted">{s.kind === "equipment" ? t("gear.pieces", { count: s.pieceCount }) : t("gear.categories", { count: s.pieceCount })}</p>
+        <p className="mt-1 text-sm text-muted">{s.pieceCount === 0 ? t("gear.noOwnStats") : s.kind === "equipment" ? t("gear.pieces", { count: s.pieceCount }) : t("gear.categories", { count: s.pieceCount })}</p>
         {s.thresholds.length > 0 && (
           <p className="mt-2 flex flex-wrap items-center gap-1.5 text-xs text-muted">
             {s.thresholds.map((n) => (

@@ -1,0 +1,112 @@
+{
+ "title": "Equipment and jewelry data reconciliation",
+ "date": "2026-11-04",
+ "plan": {
+  "namedSets": 71,
+  "sourcedSets": 68,
+  "nameOnlySets": [
+   "Legendary",
+   "Fate",
+   "Totsuka"
+  ],
+  "sourceImages": 143,
+  "equipmentVersions": 78,
+  "jewelryVersions": 63,
+  "equipmentPieces": 462,
+  "jewelryCategories": 252,
+  "effectRowsStructured": 1328,
+  "effectRowsTextOnly": 239
+ },
+ "databases": {
+  "localDevelopmentCopy": {
+   "families": 71,
+   "equipmentSetVersions": 78,
+   "jewelrySetVersions": 63,
+   "equipmentPieces": 462,
+   "jewelryCategories": 252,
+   "gearEffects": 2281
+  },
+  "preview": {
+   "families": 71,
+   "nameOnlyFamilies": 3,
+   "equipmentSetVersions": 78,
+   "jewelrySetVersions": 63,
+   "equipmentPieces": 462,
+   "jewelryCategories": 252,
+   "equipmentBonuses": 234,
+   "jewelryBonuses": 307,
+   "gearEffects": 2281,
+   "textOnlyGearEffects": 239,
+   "sourceAssets": 143,
+   "sourceRecords": 144,
+   "note": "Neon furia-preview. Imported twice in full: the second run changed nothing."
+  },
+  "production": {
+   "families": 71,
+   "nameOnlyFamilies": 3,
+   "equipmentSetVersions": 78,
+   "jewelrySetVersions": 63,
+   "equipmentPieces": 462,
+   "jewelryCategories": 252,
+   "equipmentBonuses": 234,
+   "jewelryBonuses": 307,
+   "gearEffects": 2281,
+   "textOnlyGearEffects": 239,
+   "sourceAssets": 143,
+   "sourceRecords": 144,
+   "note": "Neon neon-indigo-blanket. Backup taken and verified first. Imported twice in full: the second run changed nothing."
+  }
+ },
+ "matches": {
+  "planEqualsPreviewEqualsProduction": true,
+  "equipmentVersions": [
+   78,
+   78
+  ],
+  "jewelryVersions": [
+   63,
+   63
+  ],
+  "pieces": [
+   462,
+   462
+  ],
+  "categories": [
+   252,
+   252
+  ],
+  "sourceAssets": [
+   143,
+   143
+  ],
+  "effectRows": [
+   1567,
+   2281
+  ]
+ },
+ "unchangedByTheImport": {
+  "before": {
+   "ninjas": 177,
+   "abilities": 316,
+   "ninjaEffects": 4395,
+   "users": 4,
+   "ninjaSourceAssets": 394
+  },
+  "after": {
+   "ninjas": 177,
+   "abilities": 316,
+   "ninjaEffects": 4395,
+   "users": 4,
+   "ninjaSourceAssets": 394
+  },
+  "backup": "production-20261103-pre-gear (41 tables, 9,084 rows, verified, kept in the git-ignored prisma/backups folder)",
+  "preExistingRowCheck": "scripts/gear-preexisting-check.mjs: every row of the backup is still present and unchanged in all 41 tables; 13 tables only gained rows (Statistic +3, EquipmentSlot, JewelryType, EquipmentSet, JewelrySet, Equipment, Jewelry, EquipmentSetBonus, JewelrySetBonus, JewelryGroup, Effect, SourceAsset, SourceRecord)"
+ },
+ "idempotency": "Full import run twice on Preview and twice on production; every count identical after the second run (families 71, set versions 141, pieces 714, bonuses 541, effects 2,281 for gear).",
+ "setVersions": {
+  "equipmentBySet": 68,
+  "extraEquipmentVersions": 10,
+  "jewelryBySet": 52,
+  "extraJewelryVersions": 11
+ }
+}

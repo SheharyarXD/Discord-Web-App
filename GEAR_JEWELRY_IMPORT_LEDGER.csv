@@ -1,0 +1,147 @@
+set_index,set_name,role,source_path,original_upload_filename,sha256,bytes,imported_as,read_status,human_review
+1,Akatsuki,gear,sources/01_akatsuki/01_gear.png,image(20261029-204226).png,45ee1de4578b78b7a2bf7a0ac5344a4998a37b4ed16e7027fb539e0f0e5802f4,271983,equipment:akatsuki,READ_TWICE_NO_DIFFERENCE,PENDING
+1,Akatsuki,jewelry,sources/01_akatsuki/02_jewelry.png,image(20261029-204238).png,bad5570710edabaebc53aabedba9e658db7689057fa8aea36ac6d8c26f44dbd2,151654,jewelry:akatsuki,READ_TWICE_NO_DIFFERENCE,PENDING
+2,Angel,gear,sources/02_angel/01_gear.png,image(20261029-204328).png,8a86f2a0bccb5c90fc300701acf393416a4e3bd2ba5b2f328dbf38a7a9064281,324019,equipment:angel,READ_TWICE_NO_DIFFERENCE,PENDING
+3,Ice,gear,sources/03_ice/01_gear.png,image(20261029-204415).png,417cfe91aab915513190b88729753241452ad77b7e7dee92d9d4de17c798c8ad,343835,equipment:ice,READ_TWICE_NO_DIFFERENCE,PENDING
+4,Abyss,gear,sources/04_abyss/01_gear.png,image(20261029-204508).png,6c07fd57150839351b2c38dacb19bf76dbe05f8d65da81f369be0051f019acf0,323850,equipment:abyss,READ_TWICE_NO_DIFFERENCE,PENDING
+4,Abyss,jewelry,sources/04_abyss/02_jewelry.png,image(20261029-204517).png,64e08545887bb9502f0d26027c798c9619c60a1bf1094eedef8c360a1068591e,150125,jewelry:abyss,READ_TWICE_NO_DIFFERENCE,PENDING
+5,Sage,gear,sources/05_sage/01_gear.png,image(20261029-204557).png,a7a005e36fceacf53cd4dfe6ab70117635176b476044f3dd818abd1bfc34c1be,317780,equipment:sage,READ_TWICE_NO_DIFFERENCE,PENDING
+6,Christmas,gear,sources/06_christmas/01_gear.png,image(20261029-204630).png,c84ff5778ffed212da6633e13f3316c5df7cf5b1226e8adc985c43f1cb3cbddf,338352,equipment:christmas,READ_TWICE_NO_DIFFERENCE,PENDING
+7,Ryujin,gear,sources/07_ryujin/01_gear.png,image(20261029-204710).png,8c7c1a7d9ff22b322e33c891902ff962eed83587082ef41ceb85f9f453065a3c,329531,equipment:ryujin,READ_TWICE_NO_DIFFERENCE,PENDING
+8,Flame,gear,sources/08_flame/01_gear.png,image(20261029-204748).png,1af0ebb789cccdb5499dee01e4461d8822b602a748650d890afa88cd9080a36f,207547,equipment:flame,READ_TWICE_NO_DIFFERENCE,PENDING
+9,Crimson,gear,sources/09_crimson/01_gear.png,image(20261029-204834).png,fc415ddd424d8a87c125b07ad059567b185231756e876f77a0728e1afd1ce9d6,374393,equipment:crimson,READ_TWICE_NO_DIFFERENCE,PENDING
+10,Divine Break,gear,sources/10_divine-break/01_gear.png,image(20261029-204921).png,d56786fdd28d276bf93d9f9a0ad814991b62d440b8d94981281afee293504df2,356852,equipment:divine-break,READ_TWICE_NO_DIFFERENCE,PENDING
+11,Netherwind,gear,sources/11_netherwind/01_gear.png,image(20261029-205003).png,3345e65e600b55ef6c9d886787f8364046677837d2db8a1ff671f6ed9490e380,349652,equipment:netherwind,READ_TWICE_NO_DIFFERENCE,PENDING
+12,Frost Fire,gear,sources/12_frost-fire/01_gear.png,image(20261029-205046).png,1fc73309cd9f610a174abfa9b15cd474e830d047c8ba75f426a70c0503eeecb0,367513,equipment:frost-fire,READ_TWICE_NO_DIFFERENCE,PENDING
+13,Stormrage,gear,sources/13_stormrage/01_gear.png,image(20261029-205122).png,03d015ab620583f952ddd7265badbcb4b1d36bd12d9f5d34afa68ca5e6d089a0,249649,equipment:stormrage,READ_ONCE,PENDING
+14,Oblivion,gear,sources/14_oblivion/01_gear.png,image(20261029-205155).png,861b0041325961261d0bb08097de01bca6b0d25a06998250e5607657d05b1327,269920,equipment:oblivion,READ_ONCE,PENDING
+15,Corruptor,gear,sources/15_corruptor/01_gear.png,image(20261029-205232).png,fd895e74766bb87dc58319edbdfea8e321e3c2b3822e69391f70f387eb251968,269075,equipment:corruptor,READ_ONCE,PENDING
+15,Corruptor,jewelry,sources/15_corruptor/02_jewelry.png,image(20261029-205243).png,c8922590b3ee903ce0608982a08e85d42fb3abbd4d4d09d7d9a79ab4a880b13f,161294,jewelry:corruptor,READ_ONCE,PENDING
+16,Deatbone,gear,sources/16_deatbone/01_gear.png,image(20261029-205343).png,471c02d4dcc54723645b16dba8b42e9d931ed0699686cc72e7ba905f2f6d55f5,250752,equipment:deatbone,READ_ONCE,PENDING
+17,Darkmantle,gear,sources/17_darkmantle/01_gear.png,image(20261029-205430).png,80f5a1d58ac24771d0c9b0cf95dcb8c42407168a1bbfc8f954ed7212e5c19f46,272103,equipment:darkmantle,READ_ONCE,PENDING
+18,Skyshatter,gear,sources/18_skyshatter/01_gear.png,image(20261029-205537).png,a03357815c9551f0d6ef64141ac7f696346b5ad87af896bd92b52914d6857db7,256070,equipment:skyshatter,READ_ONCE,PENDING
+19,Hallowed,gear,sources/19_hallowed/01_gear.png,image(20261029-205619).png,661d82525cf1c0d3169bd610674db786c484b8290ce40a7186f9f7694b4f3836,255616,equipment:hallowed,READ_ONCE,PENDING
+20,Devout,gear,sources/20_devout/01_gear.png,image(20261029-205658).png,0ee98a4d8387f9c00b2b6c8899aaa742c9ac2419988ed9ca632fd6791d222166,265693,equipment:devout,READ_ONCE,PENDING
+20,Devout,jewelry,sources/20_devout/02_jewelry.png,image(20261029-205709).png,d3ce6bc3b5c00b2632f72f7b8a25fd3c107a3909fd0f3d22ac46021b86e61031,156315,jewelry:devout,READ_ONCE,PENDING
+21,Heroism,gear,sources/21_heroism/01_gear.png,image(20261029-205754).png,fae7867e34a3eb61d736537b0ac0e484eeee523368bbaaaab3d264b535ff02c5,255266,equipment:heroism,READ_ONCE,PENDING
+21,Heroism,jewelry,sources/21_heroism/02_jewelry.png,image(20261029-205804).png,36793e7b6418885726d804f4ac4482f810ce5fcbfde79b4c48ad17237462f3fc,169682,jewelry:heroism,READ_ONCE,PENDING
+22,Otsutsuki,gear,sources/22_otsutsuki/01_gear.png,image(20261029-205920).png,c651703f886ddaf6df83f168bab3537e1eab0697e27a80ca87d0c98aa4c41c56,226959,equipment:otsutsuki,READ_ONCE,PENDING
+22,Otsutsuki,jewelry,sources/22_otsutsuki/02_jewelry.png,image(20261029-205930).png,79922d8c3ebb3734ea6c38ff56c4405fdd5cf3416b4e416e5242abb74a3b95d7,159688,jewelry:otsutsuki,READ_ONCE,PENDING
+23,Bloodfang,gear,sources/23_bloodfang/01_gear.png,image(20261029-212210).png,060848de0520628c4db88c4071c383ff5afd0348a3a3974f8b5230bd87c57c7c,241569,equipment:bloodfang,READ_ONCE,PENDING
+23,Bloodfang,jewelry,sources/23_bloodfang/02_jewelry.png,image(20261029-212220).png,1c8ec93193afd1e4e53c148bdb54da964d0570c35b7a18d579e1d47f1c036e26,159750,jewelry:bloodfang,READ_ONCE,PENDING
+24,Indora,gear,sources/24_indora/01_gear.png,image(20261029-212300).png,8349b7d2f22426b21f13c69dab27b935399a7015359b8fa029e6511a3795abc1,279979,equipment:indora,READ_ONCE,PENDING
+24,Indora,jewelry,sources/24_indora/02_jewelry.png,image(20261029-212311).png,89c5f947245e74b42466fbd6e4925357ad7e715132b2ae12b4a315ad4857cd57,190489,jewelry:indora,READ_ONCE,PENDING
+25,Ashura,gear,sources/25_ashura/01_gear.png,image(20261029-212356).png,cba97cbcb5b16202ed92d99f54fe3eb9e54415e1d82dbb29c81f74c5bdfaebfe,260985,equipment:ashura,READ_ONCE,PENDING
+25,Ashura,jewelry,sources/25_ashura/02_jewelry.png,image(20261029-212408).png,6b2d9f07c19d1069137928cdd70c26c60bffcef8fdb5dba9cc640fdeb5d7f755,220044,jewelry:ashura,READ_ONCE,PENDING
+26,Senju,gear,sources/26_senju/01_gear.png,image(20261029-212516).png,b7c6114b240ca635f11175cae215503085a957ed817ee68f0c82e84522b55b1c,280720,equipment:senju,READ_ONCE,PENDING
+26,Senju,jewelry,sources/26_senju/02_jewelry.png,image(20261029-212527).png,ae10302020f7aae399aa878f5c8d2bbc2b5df8afe90a173cdd5b880de82ab3b6,209889,jewelry:senju,READ_ONCE,PENDING
+27,Saint,gear,sources/27_saint/01_gear.png,image(20261029-212608).png,cdf9c7da989f7df1d1b890675c3ae78b3e3621cb8785845a6fd7b341b71cbb19,278043,equipment:saint,READ_ONCE,PENDING
+27,Saint,jewelry,sources/27_saint/02_jewelry.png,image(20261029-212619).png,43e77922a66fdd2386533131d7521519fb57c7f690a9d58c7d5a7a04907debea,158903,jewelry:saint,READ_ONCE,PENDING
+28,Uchiha,gear,sources/28_uchiha/01_gear.png,image(20261029-212704).png,dade7d9a8d906967dc9007a9b3e8d1d83e55c3d4e27fe8a00118d92465b9c3d9,280397,equipment:uchiha,READ_ONCE,PENDING
+28,Uchiha,jewelry,sources/28_uchiha/02_jewelry.png,image(20261029-212721).png,a2b32186f90df948f56dbf45e91d0228251722417fc1ead0ec74d92d4c35280e,228324,jewelry:uchiha,READ_ONCE,PENDING
+29,Hyuga,gear,sources/29_hyuga/01_gear.png,image(20261029-212817).png,ec491a4e302414d37ba8254b1e3243bc5dc0e5ae69e607a2500770b7e63dda08,259944,equipment:hyuga,READ_ONCE,PENDING
+29,Hyuga,jewelry,sources/29_hyuga/02_jewelry.png,image(20261029-212830).png,51855289b2ca91e8567416e71f64d5473779169906da1fafafe55df0a291a862,205915,jewelry:hyuga,READ_ONCE,PENDING
+30,Uzumaki,gear,sources/30_uzumaki/01_gear.png,image(20261029-212907).png,99ae539efb73855a8a65c559726a5f09770a4c0852a76ab482fa2daf1d0c1a40,281718,equipment:uzumaki,READ_ONCE,PENDING
+30,Uzumaki,jewelry,sources/30_uzumaki/02_jewelry.png,image(20261029-212918).png,1e21e5a6f288eb0cd704ff19792ea6b91b252091e6b9aae028b62f10058f4afa,249699,jewelry:uzumaki,READ_ONCE,PENDING
+31,Sarutobi,gear,sources/31_sarutobi/01_gear.png,image(20261029-213002).png,9dd7a7bfd9ccecc4abbeaf83e3b704f8ae6bd8c40476d1168de946e21d35bbd5,277608,equipment:sarutobi,READ_ONCE,PENDING
+31,Sarutobi,jewelry_variant_unlabeled_A,sources/31_sarutobi/02_jewelry_variant_unlabeled_A.png,image(20261029-213014).png,9ac44b2f7ee065b2d6adde912fc8067f96824ea963a9a79834977aa0e60127c3,215929,jewelry:sarutobi-seq-a,READ_ONCE,PENDING
+31,Sarutobi,jewelry_variant_unlabeled_B,sources/31_sarutobi/03_jewelry_variant_unlabeled_B.png,image(20261029-213026).png,28cf2cbb0cd7b58842cc358c37856d17055aa7bc381a66716c7938718a6f3298,236432,jewelry:sarutobi-seq-b,READ_ONCE,PENDING
+32,Cursed,gear,sources/32_cursed/01_gear.png,image(20261029-213116).png,e478d9831872cc95fbcbbf1a8b07049f8cbba2daea0fafc73cc5c28d91f506c1,274113,equipment:cursed,READ_ONCE,PENDING
+32,Cursed,jewelry,sources/32_cursed/02_jewelry.png,image(20261029-213130).png,1ac061d3f83fa9659f7ff01e6e4c89504ca1da3bc6f9fecc9612d42162bfdd43,255643,jewelry:cursed,READ_ONCE,PENDING
+33,Kirigakure,gear,sources/33_kirigakure/01_gear.png,image(20261029-213218).png,0eea7c855c2e133ad7736b9dc1e736f560bd68738d70dc5b02526a2f31b772fd,282022,equipment:kirigakure,READ_ONCE,PENDING
+33,Kirigakure,jewelry,sources/33_kirigakure/02_jewelry.png,image(20261029-213230).png,39c129fffa51b25061edf31db72c339e8a848aedca6ee21de9ec831c32ebd74f,262090,jewelry:kirigakure,READ_ONCE,PENDING
+34,Kumogakure,gear,sources/34_kumogakure/01_gear.png,image(20261029-213315).png,8353497701eb295c2c7eaadf8c45e9874a5c07592edb481cf4bf360f456c0b1e,269023,equipment:kumogakure,READ_ONCE,PENDING
+34,Kumogakure,jewelry_variant_unlabeled_A,sources/34_kumogakure/02_jewelry_variant_unlabeled_A.png,image(20261029-213325).png,e1979913f29d3e0646359ee9655d0a9cb23cd4730817813737cfc84a5e4e8ca3,239534,jewelry:kumogakure-seq-a,READ_ONCE,PENDING
+34,Kumogakure,jewelry_variant_unlabeled_B,sources/34_kumogakure/03_jewelry_variant_unlabeled_B.png,image(20261029-213338).png,70e28bece6ae308cdbe1852a65205d990ca6420591b40a797d30f381818121ec,238695,jewelry:kumogakure-seq-b,READ_ONCE,PENDING
+35,Longen,gear,sources/35_longen/01_gear.png,image(20261029-213422).png,15a04aadb3001c65fa060b71d3838eb8fb8549cf38f744b44b3a9e686559d106,291199,equipment:longen,READ_ONCE,PENDING
+35,Longen,jewelry,sources/35_longen/02_jewelry.png,image(20261029-213438).png,a91c28f5ff2cb114022505c0add7f9922c1ab516fd896b3620491231a01d2ed8,210734,jewelry:longen,READ_ONCE,PENDING
+36,Amegakure,gear,sources/36_amegakure/01_gear.png,image(20261029-213526).png,266867eb3147b25e06b6d95e559e2694f78de10797704d850c88e0b54a8da622,298925,equipment:amegakure,READ_ONCE,PENDING
+36,Amegakure,jewelry,sources/36_amegakure/02_jewelry.png,image(20261029-213539).png,c4ee84e53e2e5d6860bcfedf1557bdaddbcb8ad865beb6111e79b821ece60f0b,309822,jewelry:amegakure,READ_ONCE,PENDING
+37,Sakura,gear,sources/37_sakura/01_gear.png,image(20261029-213632).png,f566b7625d1f0ad557c70a437240a35b60d94908a13546f858798d1c5d562d46,159349,equipment:sakura,READ_ONCE,PENDING
+37,Sakura,jewelry,sources/37_sakura/02_jewelry.png,image(20261029-213640).png,56e1df09fcc1ed9ce11b4c3591bcb4776cb6f3ecab3128eee23834c4aa589a5a,265876,jewelry:sakura,READ_ONCE,PENDING
+38,Sunagakure,gear,sources/38_sunagakure/01_gear.png,image(20261030-211427).png,275db5f766f328de3a6f87db7df768073f57ef91d1c62fe82bdcad3122b88385,300685,equipment:sunagakure,READ_ONCE,PENDING
+38,Sunagakure,jewelry,sources/38_sunagakure/02_jewelry.png,image(20261030-211452).png,3c92ae7facf38fbc1956b82205b20dc667d744f6e08b69ade5992539331b2084,195733,jewelry:sunagakure,READ_ONCE,PENDING
+39,Reanimated,gear,sources/39_reanimated/01_gear.png,image(20261030-211527).png,272d58f380d5c2cbc0e686d36554b81ff83e46090f24c17e82254d3079c22878,274980,equipment:reanimated,READ_ONCE,PENDING
+39,Reanimated,jewelry,sources/39_reanimated/02_jewelry.png,image(20261030-211537).png,26be603c15a360514963d30393bbb5180f704589c502e6980fe1ac3863153db4,305088,jewelry:reanimated,READ_ONCE,PENDING
+40,Amenonuhoko,gear,sources/40_amenonuhoko/01_gear.png,image(20261030-211623).png,a4471a695ac08e87b70d56aba6ee544baf57d70c122f1f1876ef40c87180072f,314672,equipment:amenonuhoko,READ_ONCE,PENDING
+40,Amenonuhoko,jewelry,sources/40_amenonuhoko/02_jewelry.png,image(20261030-211633).png,598753d934d12d6ecd3338ad58d8d5a3a27f7fb818dbbe2f8c82789cc7d775f7,225390,jewelry:amenonuhoko,READ_ONCE,PENDING
+41,Pain,gear,sources/41_pain/01_gear.png,image(20261030-211850).png,57a0ce3e398ab784f4a36eb92fcb906f31c003fad4f8369df03e8d48b129488c,301024,equipment:pain,READ_ONCE,PENDING
+41,Pain,jewelry,sources/41_pain/02_jewelry.png,image(20261030-211900).png,0d5976c296f3d5908394497d9287f3aa98f7aacc3fe094eeb1843f472407d8c5,86825,jewelry:pain,READ_ONCE,PENDING
+42,Guard,gear,sources/42_guard/01_gear.png,image(20261030-211941).png,38287d444458a2af872532e9800febda233e5dfa688df350bfc9d8bf3fd5d58d,299768,equipment:guard,READ_ONCE,PENDING
+42,Guard,jewelry,sources/42_guard/02_jewelry.png,image(20261030-211952).png,8240dab22e01e3ffc840421419dc2188376bf599a431b37b5299c5b3e0c6c6fd,304253,jewelry:guard,READ_ONCE,PENDING
+43,Guren,gear,sources/43_guren/01_gear.png,image(20261030-212037).png,645534db93d47f3d95135822ab8f8c56c1931c2045df3dec9a22fb5c4f3324c3,324861,equipment:guren,READ_ONCE,PENDING
+43,Guren,jewelry,sources/43_guren/02_jewelry.png,image(20261030-212114).png,262eac2fd92dc57d42f66ffbdb99fc32f52fdd518b5734005235d6cdea7d8ebf,313556,jewelry:guren,READ_ONCE,PENDING
+44,Sunfire,gear,sources/44_sunfire/01_gear.png,image(20261030-212213).png,3257cbe0676ee933b6c463d0f3340112f9c67d50a3e0802d1f2ed224b29748d7,315346,equipment:sunfire,READ_ONCE,PENDING
+44,Sunfire,jewelry,sources/44_sunfire/02_jewelry.png,image(20261030-212224).png,0391507edf1e62a6e26510de0ae3d14cfd3183de3bee0156d544149caa61b3d5,209348,jewelry:sunfire,READ_ONCE,PENDING
+45,Yaksa,gear,sources/45_yaksa/01_gear.png,image(20261030-212310).png,859e4f86aadc8b9d2d9aad7f7aeefc99b9528c4e1e592be8159b86ae5d21a201,144620,equipment:yaksa,READ_ONCE,PENDING
+45,Yaksa,jewelry,sources/45_yaksa/02_jewelry.png,image(20261030-212322).png,b3301b4bc6aadf187a4e8ed8484474ecb73eff91858c988ed6f84d6857952643,197392,jewelry:yaksa,READ_ONCE,PENDING
+46,Moonlit,gear,sources/46_moonlit/01_gear.png,image(20261030-212409).png,83184432049541b7079868fe29eab2e68af0b1895ce381d2a907dfcf0e6cf146,256842,equipment:moonlit,READ_ONCE,PENDING
+46,Moonlit,jewelry,sources/46_moonlit/02_jewelry.png,image(20261030-212425).png,78dcdfb70af5485b6d05c3bfcb8f76aef78cd19801f28595716d0d765bf0edf4,249139,jewelry:moonlit,READ_ONCE,PENDING
+47,Vylon,gear,sources/47_vylon/01_gear.png,image(20261030-212509).png,0f8cc70872067ea786fb6801990ab6cd0db3c9c701e6339c63178fc7af70e040,272333,equipment:vylon,READ_ONCE,PENDING
+47,Vylon,jewelry,sources/47_vylon/02_jewelry.png,image(20261030-212522).png,c85e8be950410807a968870b6baf192941b44b9eea7ada30ac166606f7a08104,212164,jewelry:vylon,READ_ONCE,PENDING
+48,Infernity,gear,sources/48_infernity/01_gear.png,image(20261030-212743).png,e39ed8b344876af5fc4ca6c4a5e215021ff55b60000da98592ffe3b331095383,296354,equipment:infernity,READ_ONCE,PENDING
+48,Infernity,jewelry,sources/48_infernity/02_jewelry.png,image(20261030-212801).png,9bff3b24b1eb96e4ae651679ebaaa4edd8696d278114e7a4eef7d26057aa1bfa,83262,jewelry:infernity,READ_ONCE,PENDING
+49,Butterfly,gear,sources/49_butterfly/01_gear.png,image(20261030-213051).png,9e031eaaf45fc3e84239756b3760db8d7cf6cb0364bab47cd4168781190b3b45,294493,equipment:butterfly,READ_ONCE,PENDING
+49,Butterfly,jewelry,sources/49_butterfly/02_jewelry.png,image(20261030-213103).png,bb7e7395bc6924251f2602b87d48d8bfdf4d8ca9b1b4c92a33975eb2c0ed2531,107296,jewelry:butterfly,READ_ONCE,PENDING
+50,Arcane,gear,sources/50_arcane/01_gear.png,image(20261030-213151).png,f9ee85fe987259681e2c01a99a3a338624a10375b5f9dc87359f4fc0a0f363bb,288458,equipment:arcane,READ_ONCE,PENDING
+50,Arcane,jewelry,sources/50_arcane/02_jewelry.png,image(20261030-213203).png,f20fd54bf81357409051593ec4f53224d8b4d81225db18db79fc43defd152977,90829,jewelry:arcane,READ_ONCE,PENDING
+51,Mekansm,gear,sources/51_mekansm/01_gear.png,image(20261030-213316).png,c2c5b8a9b21871b069ea6e346f4d517228bbd8912986f4abfee258c00a54bc59,283822,equipment:mekansm,READ_ONCE,PENDING
+51,Mekansm,jewelry,sources/51_mekansm/02_jewelry.png,image(20261030-213329).png,6ef9cb18eec7ff1bfac205081a78f4a10f53b2d59051bb6be2380edb031eb3da,242778,jewelry:mekansm,READ_ONCE,PENDING
+52,Flamvell,gear,sources/52_flamvell/01_gear.png,image(20261030-213427).png,cc28c743042f1de3da653117e7e7102aab77e9da9241e66c91e61dc0abd3226b,328439,equipment:flamvell,READ_ONCE,PENDING
+52,Flamvell,jewelry,sources/52_flamvell/02_jewelry.png,image(20261030-213438).png,6ef4768882245af6cdf9cf73aa06641658e4ed5e303236640cb6acb9bef2a5dc,211285,jewelry:flamvell,READ_ONCE,PENDING
+53,Radiance,gear,sources/53_radiance/01_gear.png,image(20261030-213518).png,24264db1afbf62a01581e9e7b75a62b63d4e9ca09db09c8ecdbc31d7b4c895ab,342467,equipment:radiance,READ_ONCE,PENDING
+53,Radiance,jewelry,sources/53_radiance/02_jewelry.png,image(20261030-213532).png,d9e49138aecc4eb58d853cdb3b76ae188548d087d63e0bb92aad92b09ad11bb2,206572,jewelry:radiance,READ_ONCE,PENDING
+54,Black Feather,gear,sources/54_black-feather/01_gear.png,image(20261030-213609).png,1029b91f8ba9ba806431c374c5210298dd5ae959ded1e7528603732a6542991c,345214,equipment:black-feather,READ_ONCE,PENDING
+54,Black Feather,jewelry,sources/54_black-feather/02_jewelry.png,image(20261030-213622).png,f7353bb951f621f6bf39ab70de2d81a26463d55c60b3077dfa582607f6440192,210557,jewelry:black-feather,READ_ONCE,PENDING
+55,Branded,gear,sources/55_branded/01_gear.png,image(20261030-213701).png,b66784d2f8a52e9b483db634e4a86d4f361bd216015a10b649ebab7c8d8ec2ee,317062,equipment:branded,READ_ONCE,PENDING
+55,Branded,jewelry,sources/55_branded/02_jewelry.png,image(20261030-213713).png,b63699dced99b258a4cb4bb803969fb288c55504d3e619b522000184b08f6eec,255172,jewelry:branded,READ_ONCE,PENDING
+56,Defiance,gear,sources/56_defiance/01_gear.png,image(20261030-214139).png,b3bbb6817a2dc4c3915ec2db260acc109fd7c6e4913c6e4a4aa488a73021b0db,358663,equipment:defiance,READ_ONCE,PENDING
+56,Defiance,jewelry,sources/56_defiance/02_jewelry.png,image(20261030-214145).png,758fc404cbaa440db02eda39d6d4ae2c8cc5344c7274aa57ca7efd09021435db,232723,jewelry:defiance,READ_ONCE,PENDING
+57,Tarrasque,gear,sources/57_tarrasque/01_gear.png,image(20261030-214607).png,5da0cf911a3db394b0b9f3efef5e535a72514a814238c69aa2bf462d465d5ada,229054,equipment:tarrasque,READ_ONCE,PENDING
+57,Tarrasque,jewelry,sources/57_tarrasque/02_jewelry.png,image(20261030-214619).png,9c1c4ce8147c0948645f92e8fb97c1831247e8a94e4bb871a064577c62f84ca2,247088,jewelry:tarrasque,READ_ONCE,PENDING
+58,Baryon,gear,sources/58_baryon/01_gear.png,image(20261102-205232).png,1bfc3f87de6301a7579075fcaf74bcad16d5194fd712fd28b808fc40a30c7bc7,366758,equipment:baryon,READ_ONCE,PENDING
+58,Baryon,jewelry,sources/58_baryon/02_jewelry.png,image(20261102-205240).png,5fcf1c3ee68d19553aafb817ff157c0fd8af307b1caf872092aa1158b586f770,253429,jewelry:baryon,READ_ONCE,PENDING
+59,Sand Burial,gear,sources/59_sand-burial/01_gear.png,image(20261102-205317).png,c054a7f90575c722fd545da495ef45235f8effb089bec82dfb86d79e1115d16f,351236,equipment:sand-burial,READ_ONCE,PENDING
+59,Sand Burial,jewelry_base,sources/59_sand-burial/02_jewelry_base.png,image(20261102-205326).png,bd8735f667167ac1c95bf0cd9bef4e5122445906e97ef576202516ec0443160d,244480,jewelry:sand-burial,READ_TWICE_NO_DIFFERENCE,PENDING
+59,Sand Burial,jewelry_R1,sources/59_sand-burial/03_jewelry_R1.png,image(20261102-205458).png,62acdee502e807492e46fc1e8e1499bef55c37c537a826cf67f6e171297aaec2,244708,jewelry:sand-burial-r1,READ_ONCE,PENDING
+60,Warlord,gear_base_and_SSR5_comparison,sources/60_warlord/01_gear_base_and_SSR5_comparison.png,image(20261102-205557).png,7371aa7dffa55a020d3d963828363ab4637ff23b2ce15b551ec6ee73b87734c5,208657,equipment:warlord-ssr5,READ_ONCE,PENDING
+60,Warlord,gear_upgrade_costs,sources/60_warlord/02_gear_upgrade_costs.png,image(20261102-205610).png,a56190c98b4994ec8b92069749c77480edb2c3d3ba07e3b2bd6e553409651e60,1039662,family upgrade-cost schedule (not a combat bonus),READ_ONCE,PENDING
+60,Warlord,jewelry_R1,sources/60_warlord/03_jewelry_R1.png,image(20261102-205619).png,26c8c83512a16426045a66fd358a05d8cacad25e46d8a5ee71dac8ba3dfa7e8b,389834,jewelry:warlord-r1,READ_ONCE,PENDING
+60,Warlord,jewelry_R1_upgrade_costs,sources/60_warlord/04_jewelry_R1_upgrade_costs.png,image(20261102-205630).png,d41d726287ed47b74051ad50b2e6d79405522aee703916ce31df73639e56652d,988167,family upgrade-cost schedule (not a combat bonus),READ_ONCE,PENDING
+60,Warlord,jewelry_R2,sources/60_warlord/05_jewelry_R2.png,image(20261102-205643).png,6bb32f9619779ba922df15478de0d513407cb4ee2dfe0e68583709ababc57a00,372320,jewelry:warlord-r2,READ_ONCE,PENDING
+60,Warlord,jewelry_R2_upgrade_costs,sources/60_warlord/06_jewelry_R2_upgrade_costs.png,image(20261102-205655).png,c56b61f470a0df95040a20c62674b30cbbf5abbb6ac4fa1ac49018461842b605,982257,family upgrade-cost schedule (not a combat bonus),READ_ONCE,PENDING
+61,Sange,gear_variant_A,sources/61_sange/01_gear_variant_A.png,image(20261102-205746).png,3e458731664a552a91979a856256c9ae6fa95b86a294a9adfa821262003a9bfe,213518,equipment:sange-seq-a,READ_ONCE,PENDING
+61,Sange,gear_variant_B_unlabeled,sources/61_sange/02_gear_variant_B_unlabeled.png,image(20261102-205757).png,d34dab2e8fe2eecb7a3e791babb1907cca5ccd7062dc7481cb4aa78855887575,214028,equipment:sange-seq-b,READ_ONCE,PENDING
+61,Sange,jewelry_variant_A,sources/61_sange/03_jewelry_variant_A.png,image(20261102-205808).png,34ad7fb566817e4efeb42169c3c20514116a3955e904a41bd02b5721bad299c1,235227,jewelry:sange-seq-a,READ_ONCE,PENDING
+61,Sange,jewelry_variant_B_unlabeled,sources/61_sange/04_jewelry_variant_B_unlabeled.png,image(20261102-205820).png,5a425d4dabf2dbe5a6a3b07b91da0d762e1fb1b3593e01e9388432dfc36fd21a,234523,jewelry:sange-seq-b,READ_ONCE,PENDING
+62,Iron Will,gear_variant_A,sources/62_iron-will/01_gear_variant_A.png,image(20261102-210020).png,97ac27dc79d511beebe58b1ac40a31e4868f2b35c28f6e0d0dd8009024304989,286232,equipment:iron-will-seq-a,READ_ONCE,PENDING
+62,Iron Will,gear_variant_B_unlabeled,sources/62_iron-will/02_gear_variant_B_unlabeled.png,image(20261102-210030).png,bedb1e3da477e8080c9428192f388769ff8eef752bc14ff9b65803b0410e06b2,288378,equipment:iron-will-seq-b,READ_ONCE,PENDING
+62,Iron Will,jewelry_variant_A,sources/62_iron-will/03_jewelry_variant_A.png,image(20261102-210040).png,2a03204c6e2017ab2c2ebae780a7517a8fa46cddf29975f7abadfebc640cc11c,230736,jewelry:iron-will-seq-a,READ_ONCE,PENDING
+62,Iron Will,jewelry_variant_B_unlabeled,sources/62_iron-will/04_jewelry_variant_B_unlabeled.png,image(20261102-210051).png,3a80c26122a3bd58d249d18dbb4068a0383808c2a6398f28c2a06c442755484d,222426,jewelry:iron-will-seq-b,READ_ONCE,PENDING
+63,Crystalys,gear_variant_A,sources/63_crystalys/01_gear_variant_A.png,image(20261102-210144).png,402a0cff860c5ea20b1a45d13040f139cfd4df550d96cd79df8cf63614c00d4f,251332,equipment:crystalys-seq-a,READ_ONCE,PENDING
+63,Crystalys,gear_variant_B_unlabeled,sources/63_crystalys/02_gear_variant_B_unlabeled.png,image(20261102-210232).png,eb4656887d9abdaa4639cc418be54e76e3d64b3c8a7e747c177a706a5a7471e3,252727,equipment:crystalys-seq-b,READ_ONCE,PENDING
+63,Crystalys,jewelry_variant_A,sources/63_crystalys/03_jewelry_variant_A.png,image(20261102-210248).png,d2263f6e676ccd7cbe427d991528ac335247988256bcbe0638c88a532a262f9f,215034,jewelry:crystalys-seq-a,READ_ONCE,PENDING
+63,Crystalys,jewelry_variant_B_unlabeled,sources/63_crystalys/04_jewelry_variant_B_unlabeled.png,image(20261102-210259).png,bebb5fd014ad41fff5b0439bf4a1c2bffc1de3031daa5631a2a6b798e966ceb5,215222,jewelry:crystalys-seq-b,READ_ONCE,PENDING
+64,Susanoo,gear_variant_A,sources/64_susanoo/01_gear_variant_A.png,image(20261102-210339).png,ac8a92d748cbc4290f88b4485e01b19a29569a2891194e864048f66e930d1eb8,284300,equipment:susanoo-seq-a,READ_ONCE,PENDING
+64,Susanoo,gear_variant_B_unlabeled,sources/64_susanoo/02_gear_variant_B_unlabeled.png,image(20261102-210404).png,f28842a6bf4bb9c306d502d87cd10e490d0ef3bd5fb478b3085b954fda84ac59,285185,equipment:susanoo-seq-b,READ_ONCE,PENDING
+64,Susanoo,jewelry_variant_A,sources/64_susanoo/03_jewelry_variant_A.png,image(20261102-210417).png,4796df8d77e9d212142124c3870abe0e4b1dfd383c3fabdcce94a9472b7c5fe3,234805,jewelry:susanoo-seq-a,READ_ONCE,PENDING
+64,Susanoo,jewelry_variant_B_unlabeled,sources/64_susanoo/04_jewelry_variant_B_unlabeled.png,image(20261102-210428).png,f4f478c4075294a0df5aa6d255c1f3b24e5b4d55b6f8edc3c079c0a2ed97e3b6,235277,jewelry:susanoo-seq-b,READ_ONCE,PENDING
+65,Izanami,gear_variant_A,sources/65_izanami/01_gear_variant_A.png,image(20261102-210526).png,395663e0753afd0e765b137660eff5e38558df4fd68327b9fadf3cc510c3e7d3,249055,equipment:izanami-seq-a,READ_ONCE,PENDING
+65,Izanami,gear_variant_B_unlabeled,sources/65_izanami/02_gear_variant_B_unlabeled.png,image(20261102-210558).png,86da96a86247c60932c74a9e384122c2e8bc24b9dbcf3215a31f91cea537df75,249478,equipment:izanami-seq-b,READ_ONCE,PENDING
+65,Izanami,gear_variant_C_unlabeled,sources/65_izanami/03_gear_variant_C_unlabeled.png,image(20261102-210610).png,a31def6c2d27949e6198b25d30ddf991ad3cf93692f538eef4643601b0c922cf,249833,equipment:izanami-seq-c,READ_ONCE,PENDING
+65,Izanami,jewelry_variant_A,sources/65_izanami/04_jewelry_variant_A.png,image(20261102-210629).png,05eff226cfcd1ef8daf883740428621ecf2806723e7808e5d3f8d6ccc5195145,233863,jewelry:izanami-seq-a,READ_ONCE,PENDING
+65,Izanami,jewelry_variant_B_unlabeled,sources/65_izanami/05_jewelry_variant_B_unlabeled.png,image(20261102-210641).png,c611e87df65b3478deefdcee76ffb17157219d2986070fe1a538191cad405277,233965,jewelry:izanami-seq-b,READ_ONCE,PENDING
+66,Truth-Seeking,gear_variant_A,sources/66_truth-seeking/01_gear_variant_A.png,image(20261102-210819).png,ff18b0445c4f57aeb3724de23d8059cc35ec5fde9a28a6d7e05d0de8f09582a3,192131,equipment:truth-seeking-seq-a,READ_ONCE,PENDING
+66,Truth-Seeking,gear_variant_B_unlabeled,sources/66_truth-seeking/02_gear_variant_B_unlabeled.png,image(20261102-210830).png,3b267889869828e869355424ae2c77c129cba0050c6ae2c1baa2f699ecda1465,192350,equipment:truth-seeking-seq-b,READ_ONCE,PENDING
+66,Truth-Seeking,jewelry_variant_A,sources/66_truth-seeking/03_jewelry_variant_A.png,image(20261102-210843).png,4138fe2a2a079aa86deb25f9aa6c42207456d633bfd13ecc1d27d094bc8c19af,227094,jewelry:truth-seeking-seq-a,READ_ONCE,PENDING
+66,Truth-Seeking,jewelry_variant_B_unlabeled,sources/66_truth-seeking/04_jewelry_variant_B_unlabeled.png,image(20261102-210855).png,d9ecc73a54b24420c7be5ff543694833999d3419c4062749796bd457c256ba00,226597,jewelry:truth-seeking-seq-b,READ_ONCE,PENDING
+67,Summoning,gear_variant_A,sources/67_summoning/01_gear_variant_A.png,image(20261102-210935).png,f7da30bdac669143bc5527c1b5f4f868842807c2bb7d0deac28920949be36918,297033,equipment:summoning-seq-a,READ_ONCE,PENDING
+67,Summoning,gear_variant_B_unlabeled,sources/67_summoning/02_gear_variant_B_unlabeled.png,image(20261102-210947).png,bf80d97cfaecf6ff1855c57cc894b99b7b0f04e974cf2fb3089cf32ffe8c4084,298094,equipment:summoning-seq-b,READ_ONCE,PENDING
+67,Summoning,jewelry,sources/67_summoning/03_jewelry.png,image(20261102-210958).png,050605e6e8ba3ca1550c5cf299be09e130620d91daa5f0d09a373d22dc419106,202374,jewelry:summoning,READ_ONCE,PENDING
+68,Yin-Yang,gear_variant_A,sources/68_yin-yang/01_gear_variant_A.png,image(20261102-211050).png,5c88c51357eb115c5b29fda20cf11addde2630cab750c3db00bcfadadde861d2,187074,equipment:yin-yang-seq-a,READ_ONCE,PENDING
+68,Yin-Yang,gear_variant_B_unlabeled,sources/68_yin-yang/02_gear_variant_B_unlabeled.png,image(20261102-211131).png,e5691c119153a34bf43f6f379719e518b9484bc207b87fd157c96cfb1d997f6a,187369,equipment:yin-yang-seq-b,READ_ONCE,PENDING
+68,Yin-Yang,jewelry_variant_A,sources/68_yin-yang/03_jewelry_variant_A.png,image(20261102-211142).png,cfb4d2f9c5691ac69713668f3db26423cf9e4a2793beb3fb745caf44919f7690,235526,jewelry:yin-yang-seq-a,READ_ONCE,PENDING
+68,Yin-Yang,jewelry_variant_B_unlabeled,sources/68_yin-yang/04_jewelry_variant_B_unlabeled.png,image(20261102-211155).png,f7ce04101185c4381eac6a7307bfbc97233fbbed1aae52dd24a63e1f3055cbc9,235347,jewelry:yin-yang-seq-b,READ_ONCE,PENDING
+69,Legendary,name only,,,,,no record created,NO_SOURCE,n/a
+70,Fate,name only,,,,,no record created,NO_SOURCE,n/a
+71,Totsuka,name only,,,,,no record created,NO_SOURCE,n/a
