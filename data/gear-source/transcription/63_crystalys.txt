@@ -1,0 +1,33 @@
+SET 63 | Crystalys
+REVIEW Two gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A and B; no R1/R2 name is justified by the larger numbers. Client decision needed.
+GEAR sources/63_crystalys/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 76000 | 2
+SLOT Physical Defense | 76000 | 2
+SLOT Strategy Attack | 76000 | 1
+SLOT Strategy Defense | 76000 | 1
+SLOT Speed | 76000 | 1
+SLOT Power | 760000 | 1
+BONUS 2 | Agility +25000, Attack +20%, Damage Rate +15%
+BONUS 4 | Attack +20%, Final DMG +15% // After releases skill, Put ally Supports into Strong State(10%) for 2 rounds
+BONUS 6 | Agility +35000, Attack +5%, Damage Rate +15%, Weaken enemy's ATK +25% // After releases skill, puts all enemies Assaulters into Chaotic Storm(10%) for 2 rounds // Strong State: increases avoid injury rate and final damage reduction.
+GEAR sources/63_crystalys/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 84000 | 2
+SLOT Physical Defense | 84000 | 2
+SLOT Strategy Attack | 84000 | 1
+SLOT Strategy Defense | 84000 | 1
+SLOT Speed | 84000 | 1
+SLOT Power | 840000 | 1
+BONUS 2 | Agility +25000, Attack +20%, Damage Rate +20%
+BONUS 4 | Attack +20%, Final DMG +20% // After releases skill, Put ally Supports into Strong State(10%) for 2 rounds
+BONUS 6 | Agility +35000, Attack +5%, Damage Rate +15%, Weaken enemy's ATK +30% // After releases skill, puts all enemies Assaulters into Chaotic Storm(10%) for 2 rounds // Strong State: increases avoid injury rate and final damage reduction.
+JEWEL sources/63_crystalys/03_jewelry_variant_A.png | seq:A | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 67000 | 2 | Increase CC Rate +30% // HP +40% // Avoid injury rate +10% | Increase CC Rate +7% // Avoid injury rate +10% // Agility +27000 // Power +25000
+CAT Chakra | 67000 | 2 | Increase CC Rate +30% // Agility +30000 // Avoid injury rate +5% | Increase CC Rate +7% // Avoid injury rate +10% // Agility +27000 // Power +25000
+CAT Agility | 67000 | 2 | Increase CC Rate +25% // Agility +30000 // Final DMG Reduction +17% | Increase CC Rate +7% // Avoid injury rate +10% // Agility +27000 // Power +25000
+CAT Power | 670000 | 2 | Increase CC Rate +25% // Weaken enemy's ATK +17% // Avoid injury rate +10% | Increase CC Rate +7% // Avoid injury rate +10% // Agility +27000 // Power +25000
+JEWEL sources/63_crystalys/04_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 68500 | 2 | Increase CC Rate +30% // HP +45% // Avoid injury rate +10% | Increase CC Rate +10% // Avoid injury rate +10% // Agility +27000 // Power +25000
+CAT Chakra | 68500 | 2 | Increase CC Rate +30% // Agility +30000 // Avoid injury rate +10% | Increase CC Rate +10% // Avoid injury rate +10% // Agility +27000 // Power +25000
+CAT Agility | 68500 | 2 | Increase CC Rate +25% // Agility +30000 // Final DMG Reduction +20% | Increase CC Rate +10% // Avoid injury rate +10% // Agility +27000 // Power +25000
+CAT Power | 685000 | 2 | Increase CC Rate +25% // Weaken enemy's ATK +20% // Avoid injury rate +10% | Increase CC Rate +10% // Avoid injury rate +10% // Agility +27000 // Power +25000

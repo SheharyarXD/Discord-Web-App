@@ -1,0 +1,11 @@
+SET 10 | Divine Break
+GEAR sources/10_divine-break/01_gear.png | - | DIVINE BREAK
+SLOT Physical Attack | 16000 | 2
+SLOT Physical Defense | 15000 | 2
+SLOT Strategy Attack | 16000 | 1
+SLOT Strategy Defense | 18000 | 1
+SLOT Speed | 16000 | 1
+SLOT Power | 200000 | 1
+BONUS 2 | Force +8000, Chakra +8000, Avoid Injury Rate +30%
+BONUS 4 | Agility +8000, Aid Rate +10%, Weaken Enemy's ATK +30%
+BONUS 6 | Power +15000, Damage Rate +40%, Punch Rate +15%

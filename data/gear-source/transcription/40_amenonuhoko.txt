@@ -1,0 +1,16 @@
+SET 40 | Amenonuhoko
+GEAR sources/40_amenonuhoko/01_gear.png | - | AMENONUHOKO
+SLOT Physical Attack | 63000 | 2
+SLOT Physical Defense | 63000 | 2
+SLOT Strategy Attack | 63000 | 1
+SLOT Strategy Defense | 63000 | 1
+SLOT Speed | 63000 | 1
+SLOT Power | 630000 | 1
+BONUS 2 | Attack +25%, Avoid-Injury Rate +30%, After releasing skill 80% chance to make random enemy enter Wind Bound State for 2 rounds.
+BONUS 4 | Agility +30000, Damage Rate +40%, After release skill increase ally Assaulter SPD by 30% for 2 rounds
+BONUS 6 | Agility +30000, Weaken enemy ATK +30%, After releasing skill make random ally ninja enter Bond State for 2 rounds
+JEWEL sources/40_amenonuhoko/02_jewelry.png | - | -
+CAT Force | 56000 | 2 | Increase CC Rate +32% // After release a skill, makes all enemies enter Burst state(50%) for 2 rounds | Attack +30% // After release a skill, makes 1 random enemy enter Poisonous Wind state for 2 rounds
+CAT Chakra | 56000 | 2 | Attack +30% // After release a skill, makes all enemies enter Scorching Flame state(50%) for 2 rounds | Attack +30% // After release a skill, makes 1 random enemy enter Poisonous Wind state for 2 rounds
+CAT Agility | 56000 | 2 | Decrease CC Rate +32% // After release a skill, makes all enemies enter Safeguard state(50%) for 2 rounds | Attack +30% // After release a skill, makes 1 random enemy enter Poisonous Wind state for 2 rounds
+CAT Power | 560000 | 2 | Weaken enemies ATK +25% // After release a skill, makes all enemies enter Unification state(50%) for 2 rounds | Attack +30% // After release a skill, makes 1 random enemy enter Poisonous Wind state for 2 rounds

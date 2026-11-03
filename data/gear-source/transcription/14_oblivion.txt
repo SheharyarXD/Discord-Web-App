@@ -1,0 +1,11 @@
+SET 14 | Oblivion
+GEAR sources/14_oblivion/01_gear.png | - | OBLIVION
+SLOT Physical Attack | 24000 | 2
+SLOT Physical Defense | 22000 | 2
+SLOT Strategy Attack | 24000 | 1
+SLOT Strategy Defense | 26000 | 1
+SLOT Speed | 24000 | 1
+SLOT Power | 280000 | 1
+BONUS 2 | Damage Rate +30%, Force +8000, Agility +8000, Chakra +8000, Power +8000
+BONUS 4 | Agility +10000, Decrease enemy CC rate +30%, Bonus Damage after attack +30%
+BONUS 6 | Agility +15000, Avoid-Injury Rate +50%, After attack increase Support Speed by 15% for 1 round

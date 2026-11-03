@@ -1,0 +1,16 @@
+SET 22 | Otsutsuki
+GEAR sources/22_otsutsuki/01_gear.png | - | OTSUTSUKI
+SLOT Physical Attack | 40000 | 2
+SLOT Physical Defense | 38000 | 2
+SLOT Strategy Attack | 40000 | 1
+SLOT Strategy Defense | 38000 | 1
+SLOT Speed | 40000 | 1
+SLOT Power | 400000 | 1
+BONUS 2 | Punch Rate +20%, Attack +20%
+BONUS 4 | Agility +18000, HP +30%, Defense +30%
+BONUS 6 | Agility +26000, Damage Rate +40%, Decrease enemy CC rate +40%
+JEWEL sources/22_otsutsuki/02_jewelry.png | - | -
+CAT Force | 42000 | 2 | Avoid-Injury Rate +22% // After receiving attack, increase SPD by 20% for 1 round
+CAT Chakra | 42000 | 2 | Agility +22000 // Attack +20%
+CAT Agility | 42000 | 2 | Power +50000 // Weaken enemy DEF +20%
+CAT Power | 420000 | 2 | Damage Rate +25% // Decrease enemy CC Success Rate +20%

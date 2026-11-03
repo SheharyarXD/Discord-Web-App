@@ -1,0 +1,16 @@
+SET 57 | Tarrasque
+GEAR sources/57_tarrasque/01_gear.png | - | TARRASQUE
+SLOT Physical Attack | 73500 | 2
+SLOT Physical Defense | 73500 | 2
+SLOT Strategy Attack | 73500 | 1
+SLOT Strategy Defense | 73500 | 1
+SLOT Speed | 73500 | 1
+SLOT Power | 735000 | 1
+BONUS 2 | Damage rate +40% // After released a skill, decrease all enemies avoid injury rate by 30% for 2 rounds
+BONUS 4 | Agility +25000 , Attack +30% // After released a skill, makes 1 random enemy enter upwind state for 2 rounds
+BONUS 6 | Agility +30000 , Weaken enemy's ATK +30%, Weaken enemy's DEF +35% // After released a skill, has 60% chances to make ally assaulter enter 15% acceleration(cannot be dispelled) for 2 rounds
+JEWEL sources/57_tarrasque/02_jewelry.png | - | -
+CAT Force | 64500 | 2 | Damage rate +30% // Weaken enemy's DEF +30% | Damage rate +25% // Bonus damage after attack +25% // Weaken enemy's ATK +25%
+CAT Chakra | 64500 | 2 | Attack +30% // Weaken enemy's DEF +25% | Damage rate +25% // Bonus damage after attack +25% // Weaken enemy's ATK +25%
+CAT Agility | 64500 | 2 | Bonus damage after attack +30% // Weaken enemy's DEF +30% | Damage rate +25% // Bonus damage after attack +25% // Weaken enemy's ATK +25%
+CAT Power | 645000 | 2 | Attack +30% // Weaken enemy's DEF +25% | Damage rate +25% // Bonus damage after attack +25% // Weaken enemy's ATK +25%

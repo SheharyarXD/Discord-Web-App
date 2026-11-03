@@ -1,0 +1,11 @@
+SET 16 | Deatbone
+GEAR sources/16_deatbone/01_gear.png | - | DEATBONE
+SLOT Physical Attack | 28000 | 2
+SLOT Physical Defense | 26000 | 2
+SLOT Strategy Attack | 28000 | 1
+SLOT Strategy Defense | 30000 | 1
+SLOT Speed | 28000 | 1
+SLOT Power | 320000 | 1
+BONUS 2 | Avoid-Injury Rate +30%, Damage Rate +30%
+BONUS 4 | Agility +15000, Avoid Injury Rate +40%, Defense +20%
+BONUS 6 | Agility +20000, Damage Rate +40%, After attack Poison (100% DOT) enemy for 2 rounds

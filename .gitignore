@@ -33,3 +33,8 @@ skills-lock.json
 # one-time first-administrator links (private)
 .setup-link-*.txt
 .setup-token-*.tmp
+
+# Gear and jewelry source package (private client images)
+FURIA_NINJA_GEAR_IMAGES_PART_*.zip
+docs/gear-handoff/
+CLAUDE_CODE_GEAR_JEWELRY_MILESTONE_PROMPT.md

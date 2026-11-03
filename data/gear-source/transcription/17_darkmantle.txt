@@ -1,0 +1,11 @@
+SET 17 | Darkmantle
+GEAR sources/17_darkmantle/01_gear.png | - | DARKMANTLE
+SLOT Physical Attack | 30000 | 2
+SLOT Physical Defense | 28000 | 2
+SLOT Strategy Attack | 30000 | 1
+SLOT Strategy Defense | 30000 | 1
+SLOT Speed | 30000 | 1
+SLOT Power | 340000 | 1
+BONUS 2 | Agility +12000, Avoid-Injury Rate +30%
+BONUS 4 | Agility +16000, HP +30%, After recieving attack 40% chance to clear own Debuffs
+BONUS 6 | Agility +22000, For every 10% missing HP, increase Damage Rate by 6% and Avoid-Injury Rate by 6% After attack clear Debuffs of 2 random allies

@@ -1,0 +1,16 @@
+SET 36 | Amegakure
+GEAR sources/36_amegakure/01_gear.png | - | AME GAKURE
+SLOT Physical Attack | 59000 | 2
+SLOT Physical Defense | 59000 | 2
+SLOT Strategy Attack | 59000 | 1
+SLOT Strategy Defense | 59000 | 1
+SLOT Speed | 59000 | 1
+SLOT Power | 590000 | 1
+BONUS 2 | Attack +25%, Damage Rate +20%, Punch Rate +30%
+BONUS 4 | Damage Rate +20%, Increase the success rate of control skills +40%, // After release skill, has 80% chance to make 2 random enemies enter Frozen for 2 rounds
+BONUS 6 | Agility +50000, Weaken enemies ATK +30%, After release skill, dispel 2 random allies debuff
+JEWEL sources/36_amegakure/02_jewelry.png | - | -
+CAT Force | 54000 | 2 | Phy/Str. DEF +20% // After be attacked, there has 30% chance to disperse ally Support debuff | Weaken enemies ATK +20% // After be attacked there has 40% chance to make a random enemy enter Weak State for 2 rounds
+CAT Chakra | 54000 | 2 | Avoid-Injury Rate +20% // After be attacked, recover ally support HP rate by 30% | Weaken enemies ATK +20% // After be attacked there has 40% chance to make a random enemy enter Weak State for 2 rounds
+CAT Agility | 54000 | 2 | Phy/Str. DEF +20% // After be attacked, there has 30% chance to disperse ally Assault and Vanguard debuff | Weaken enemies ATK +20% // After be attacked there has 40% chance to make a random enemy enter Weak State for 2 rounds
+CAT Power | 540000 | 2 | HP +20% // After be attacked, recover Assault and Vanguard HP rate by 30% | Weaken enemies ATK +20% // After be attacked there has 40% chance to make a random enemy enter Weak State for 2 rounds

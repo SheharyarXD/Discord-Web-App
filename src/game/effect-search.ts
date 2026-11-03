@@ -19,21 +19,31 @@ export interface EffectSuggestion {
   value: string;
 }
 
+export type EffectOwner = "ninja" | "equipment" | "jewelry";
+export type EffectMode = "any" | "all";
+
 interface IndexedEffect {
-  ninjaId: string;
+  owner: EffectOwner;
+  /** The ninja, or the equipment/jewelry set version the effect belongs to. */
+  ownerId: string;
+  /** Set tier ("2 pieces") and jewelry category the effect is stored under; null for ninjas and pieces. */
+  pieces: number | null;
+  group: string | null;
   concepts: Set<string>;
   side: Side | null;
   kind: string;
   /** Accent-free lower-case source wording (English and Spanish). */
   text: string;
+  /** The wording as stored, for showing which effect matched. */
+  raw: string;
 }
 
 interface EffectIndex {
   effects: IndexedEffect[];
   statuses: { key: string; names: string[] }[];
   statistics: { key: string; names: string[] }[];
-  /** Concepts that exist in the data, for the suggestions. */
-  present: Set<string>;
+  /** Concepts that exist in the data, for the suggestions, per kind of owner. */
+  present: Record<EffectOwner, Set<string>>;
 }
 
 const n = normalizeTerm;
@@ -173,7 +183,7 @@ const FIXED_PHRASES: { id: string; label: string; terms: string[] }[] = [
   { id: "damage-reduction", label: "Reducción de daño", terms: ["reduccion de dano", "reducir dano", "damage reduction", "reduce damage", "dano recibido", "damage received"] },
 ];
 
-const DAMAGE_REDUCTION_CONCEPTS = ["up:final-damage-reduction", "down:final-damage-received", "down:total-damage-received"];
+const DAMAGE_REDUCTION_CONCEPTS = ["up:final-damage-reduction", "up:damage-taken-reduction", "down:final-damage-received", "down:total-damage-received"];
 
 function classify(
   e: { kind: string; value: number | null; description: string | null; statKey: string | null; statusKey: string | null; text: string; textOnly: boolean },
@@ -200,7 +210,8 @@ function classify(
     // Source wording only: classify it by the same vocabulary, ignoring negated and immunity phrases.
     const t = e.text;
     if (/\b(heals?|healing|cura)\b/.test(t) && occursAffirmatively(t, /\b(heals?|healing|cura)\b/)) c.add("heal");
-    if (/\bdispel\w*\b[^.]*\bdebuffs?\b|\bremov\w*\b[^.]*\bdebuffs?\b|\bcleans\w*\b/.test(t)) c.add("dispel-debuffs");
+    if (/\b(recover|restore)s?\b[^.]*\bhp\b/.test(t) && !/\bfury\b/.test(t)) c.add("heal");
+    if (/\bdispel\w*\b[^.]*\bdebuffs?\b|\bremov\w*\b[^.]*\bdebuffs?\b|\bcleans\w*\b|\bclears?\b[^.]*\bdebuffs?\b/.test(t)) c.add("dispel-debuffs");
     if (/\bdispel\w*\b[^.]*\bbuffs?\b/.test(t) && !/\bdispel\w*\b[^.]*\bdebuffs?\b/.test(t)) c.add("dispel-buffs");
     if (/\b(restores?|gains?|recover\w*)\b[^.]*\bfury\b/.test(t)) c.add("fury-up");
     if (/\b(decreas\w*|reduc\w*|drain\w*)\b[^.]*\bfury\b/.test(t)) c.add("fury-down");
@@ -234,8 +245,13 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
         target: { select: { key: true } },
         statistic: { select: { key: true } },
         statusEffect: { select: { key: true } },
+        note: true,
         ability: { select: { ninjaId: true } },
         talentOption: { select: { group: { select: { ninjaId: true } } } },
+        equipment: { select: { setId: true } },
+        equipmentSetBonus: { select: { setId: true, requiredPieces: true } },
+        jewelry: { select: { setId: true, group: { select: { key: true } } } },
+        jewelrySetBonus: { select: { setId: true, requiredPieces: true, group: { select: { key: true } } } },
       },
     }),
     db.statusEffect.findMany({ select: { key: true, name: true, nameEs: true, aliases: { select: { alias: true } } } }),
@@ -262,10 +278,25 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
   }
 
   const effects: IndexedEffect[] = [];
-  const present = new Set<string>();
+  const present: Record<EffectOwner, Set<string>> = { ninja: new Set(), equipment: new Set(), jewelry: new Set() };
   for (const r of rows) {
-    const ninjaId = r.ability?.ninjaId ?? r.talentOption?.group.ninjaId;
-    if (!ninjaId) continue;
+    // The printed main statistic of a piece (Physical Attack: 4000) is a statistic, not an effect: stat filters use it, effect search does not.
+    if (r.note === "PRINTED_MAIN_STAT") continue;
+    let owner: EffectOwner = "ninja";
+    let ownerId: string | null | undefined = r.ability?.ninjaId ?? r.talentOption?.group.ninjaId;
+    let pieces: number | null = null;
+    let group: string | null = null;
+    if (!ownerId && (r.equipmentSetBonus || r.equipment)) {
+      owner = "equipment";
+      ownerId = r.equipmentSetBonus?.setId ?? r.equipment?.setId;
+      pieces = r.equipmentSetBonus?.requiredPieces ?? null;
+    } else if (!ownerId && (r.jewelrySetBonus || r.jewelry)) {
+      owner = "jewelry";
+      ownerId = r.jewelrySetBonus?.setId ?? r.jewelry?.setId;
+      pieces = r.jewelrySetBonus?.requiredPieces ?? null;
+      group = r.jewelrySetBonus?.group?.key ?? r.jewelry?.group?.key ?? null;
+    }
+    if (!ownerId) continue;
     const text = n([r.sourceText, r.descriptionEs, r.description].filter(Boolean).join(" . "));
     const textOnly = r.structuredStatus === "TEXT_ONLY" || r.kind === "TEXT";
     const concepts = classify(
@@ -274,8 +305,8 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
       statRe,
     );
     const side = (r.target?.key as Side | undefined) && ["self", "ally", "enemy"].includes(r.target!.key) ? (r.target!.key as Side) : sideOfText(text);
-    for (const k of concepts) present.add(k);
-    effects.push({ ninjaId, concepts, side, kind: r.kind, text });
+    for (const k of concepts) present[owner].add(k);
+    effects.push({ owner, ownerId, pieces, group, concepts, side, kind: r.kind, text, raw: r.sourceText ?? r.descriptionEs ?? r.description ?? "" });
   }
   return { effects, statuses: statusDefs, statistics: statDefs, present };
 }
@@ -387,17 +418,70 @@ function effectMatches(e: IndexedEffect, rs: Resolved): boolean {
   return false;
 }
 
-/** Ids of the ninjas with at least one stored effect matching ANY of the terms; null when no term is usable (no filter). */
-export async function ninjaIdsWithEffects(db: Db, terms: string[]): Promise<string[] | null> {
-  const usable = terms.map((t) => t.trim()).filter((t) => n(t).length >= 2);
-  if (usable.length === 0) return null;
-  const index = await indexOf(db);
-  const resolved = usable.map((t) => resolve(index, t));
-  const ids = new Set<string>();
-  for (const e of index.effects) {
-    if (resolved.some((rs) => effectMatches(e, rs))) ids.add(e.ninjaId);
+/** Two typed terms that resolve to the same concept, side and wording are one selected effect. */
+const termKey = (rs: Resolved) => `${[...rs.concepts].sort().join(",")}|${rs.text ?? ""}|${rs.side ?? ""}|${rs.immunity ? "i" : ""}`;
+
+/** Resolves the typed terms and drops duplicates, so a duplicated selection never changes an ALL result. */
+function distinctTerms(index: EffectIndex, terms: string[]): Resolved[] {
+  const seen = new Set<string>();
+  const out: Resolved[] = [];
+  for (const t of terms.map((x) => x.trim()).filter((x) => n(x).length >= 2)) {
+    const rs = resolve(index, t);
+    const key = termKey(rs);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    out.push(rs);
   }
-  return [...ids];
+  return out;
+}
+
+export interface EffectEvidence {
+  pieces: number | null;
+  group: string | null;
+  /** The source wording of one matching effect. */
+  text: string;
+}
+
+/**
+ * Ids of the owners (ninjas, equipment set versions or jewelry set versions) whose stored effects match the typed terms.
+ * ANY: at least one term is found. ALL: every distinct term is found, each possibly in a different effect row, tier or category.
+ * Null when no term is usable (no filter). With `evidence`, the matching effect wording per owner is returned as well.
+ */
+export async function idsWithEffects(
+  db: Db,
+  owner: EffectOwner,
+  terms: string[],
+  mode: EffectMode = "any",
+): Promise<{ ids: string[]; evidence: Map<string, EffectEvidence[]>; distinct: number } | null> {
+  const index = await indexOf(db);
+  const resolved = distinctTerms(index, terms);
+  if (resolved.length === 0) return null;
+  const perTerm: Map<string, EffectEvidence[]>[] = resolved.map(() => new Map());
+  for (const e of index.effects) {
+    if (e.owner !== owner) continue;
+    resolved.forEach((rs, i) => {
+      if (!effectMatches(e, rs)) return;
+      const list = perTerm[i]!.get(e.ownerId) ?? [];
+      if (list.length < 3) list.push({ pieces: e.pieces, group: e.group, text: e.raw });
+      perTerm[i]!.set(e.ownerId, list);
+    });
+  }
+  const evidence = new Map<string, EffectEvidence[]>();
+  const ids: string[] = [];
+  const candidates = new Set(perTerm.flatMap((m) => [...m.keys()]));
+  for (const id of candidates) {
+    const hits = perTerm.map((m) => m.get(id));
+    if (mode === "all" ? hits.every(Boolean) : hits.some(Boolean)) {
+      ids.push(id);
+      evidence.set(id, hits.flatMap((h) => h ?? []));
+    }
+  }
+  return { ids, evidence, distinct: resolved.length };
+}
+
+/** Ids of the ninjas with a stored effect matching ANY of the terms (ALL with mode "all"); null when no term is usable. */
+export async function ninjaIdsWithEffects(db: Db, terms: string[], mode: EffectMode = "any"): Promise<string[] | null> {
+  return (await idsWithEffects(db, "ninja", terms, mode))?.ids ?? null;
 }
 
 /** How a typed term was understood, for tests and the interface. */
@@ -407,10 +491,10 @@ export async function explainEffectTerm(db: Db, term: string): Promise<{ concept
 }
 
 /** Spanish suggestions, only for effects that exist in the data and only wording that resolves back to the same concept. */
-export async function effectSuggestions(db: Db): Promise<EffectSuggestion[]> {
+export async function effectSuggestions(db: Db, owner: EffectOwner = "ninja"): Promise<EffectSuggestion[]> {
   const index = await indexOf(db);
   const out = new Map<string, string>();
-  const has = (c: string) => index.present.has(c);
+  const has = (c: string) => index.present[owner].has(c);
   const add = (label: string, concept: string) => {
     if (has(concept) && resolve(index, label).concepts.includes(concept)) out.set(label, concept);
   };
@@ -419,7 +503,8 @@ export async function effectSuggestions(db: Db): Promise<EffectSuggestion[]> {
   add("Reducir furia", "fury-down");
   add("Eliminar debuffs", "dispel-debuffs");
   add("Disipar buffs enemigos", "dispel-buffs");
-  add("Reducción de daño", "up:final-damage-reduction");
+  const reduction = DAMAGE_REDUCTION_CONCEPTS.find(has);
+  if (reduction) add("Reducción de daño", reduction);
   add("Inmunidad", "immune:*");
   for (const s of index.statuses) {
     const label = STATUS_ES[s.key]?.label ?? s.names[0];

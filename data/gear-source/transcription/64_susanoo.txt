@@ -1,0 +1,32 @@
+SET 64 | Susanoo
+REVIEW Two gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A and B; no R1/R2 name is justified by the larger numbers. Client decision needed.
+GEAR sources/64_susanoo/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 76500 | 2
+SLOT Physical Defense | 76500 | 2
+SLOT Strategy Attack | 76500 | 1
+SLOT Strategy Defense | 76500 | 1
+SLOT Speed | 76500 | 1
+SLOT Power | 765000 | 1
+BONUS 2 | HP +35%, Punch Rate +30%, Strat/Phys Defense +30%
+BONUS 4 | Agility +30000, Increase CC Rate +40%, Avoid injury rate +30% // After releases skill, a random enemy enter Forbidden Heal state for 2 rounds
+BONUS 6 | Agility +40000, Increase CC Rate +15%, Weaken enemy's ATK +33%, Final DMG reduction +35% // After releasing skill, ally Supporters enter Shatter Storm state (10%) for 2 rounds and recover 40% HP
+GEAR sources/64_susanoo/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 84500 | 2
+SLOT Physical Defense | 84500 | 2
+SLOT Strategy Attack | 84500 | 1
+SLOT Strategy Defense | 84500 | 1
+SLOT Speed | 84500 | 1
+SLOT Power | 845000 | 1
+BONUS 2 | HP +35%, Punch Rate +30%, Strat/Phys Defense +35%
+BONUS 4 | Agility +30000, Increase CC Rate +40%, Avoid injury rate +33% // After releases skill, a random enemy enter Forbidden Heal state for 2 rounds
+BONUS 6 | Agility +40000, Increase CC Rate +18%, Weaken enemy's ATK +37%, Final DMG reduction +35% // After releasing skill, ally Supporters enter Shatter Storm state (10%) for 2 rounds and recover 40% HP
+JEWEL sources/64_susanoo/03_jewelry_variant_A.png | seq:A | -
+CAT Force | 67500 | 2 | Damage rate +35% // Final DMG +20% | Weaken enemy's DEF +40% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+CAT Chakra | 67500 | 2 | Attack +30% // Damage Rate +25% | Weaken enemy's DEF +40% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+CAT Agility | 67500 | 2 | Final DMG +35% // After releasing skill, ally with the highest damage rate enter Strong state(15%) for 2 rounds | Weaken enemy's DEF +40% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+CAT Power | 675000 | 2 | Attack +20% // Damage Rate +25% // Decrease enemy CC rate +20% | Weaken enemy's DEF +40% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+JEWEL sources/64_susanoo/04_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 69000 | 2 | Damage rate +35% // Final DMG +25% | Weaken enemy's DEF +60% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+CAT Chakra | 69000 | 2 | Attack +30% // Damage Rate +30% | Weaken enemy's DEF +60% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+CAT Agility | 69000 | 2 | Final DMG +40% // After releasing skill, ally with the highest damage rate enter Strong state(15%) for 2 rounds | Weaken enemy's DEF +60% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP
+CAT Power | 690000 | 2 | Attack +20% // Damage Rate +30% // Decrease enemy CC rate +20% | Weaken enemy's DEF +60% // Weaken enemy's ATK +25% // Strategy Attack +15% // After releasing skill, deal 55% Pierce DMG(S.ATK) to the enemy with the lowest HP

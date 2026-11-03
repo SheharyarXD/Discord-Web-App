@@ -1,0 +1,16 @@
+SET 53 | Radiance
+GEAR sources/53_radiance/01_gear.png | - | RADIANCE
+SLOT Physical Attack | 71500 | 2
+SLOT Physical Defense | 71500 | 2
+SLOT Strategy Attack | 71500 | 1
+SLOT Strategy Defense | 71500 | 1
+SLOT Speed | 71500 | 1
+SLOT Power | 715000 | 1
+BONUS 2 | Bonus damage after attack +30%, Attack +10%, Damage Rate +15%
+BONUS 4 | Agility +24000 , Attack +10%, Damage Rate +15% // After released a skill, has 50% chance to put 1 random ally into S-super dodge state for 2 rounds
+BONUS 6 | Agility +35000 , Attack +10%, Damage Rate +20%, Weaken ATK +30% // After released a skill, put 1 random ally into Super Armor state for 2 rounds
+JEWEL sources/53_radiance/02_jewelry.png | - | -
+CAT Force | 62500 | 2 | Damage Rate +35% // Bonus damage after attack +20% | Weaken enemy's DEF +60% // Weaken enemy's ATK +15% // After released a skill, deals 240% strategy attack to the enemy who has the lowest health
+CAT Chakra | 62500 | 2 | Attack +30% // Bonus damage after attack +20% | Weaken enemy's DEF +60% // Weaken enemy's ATK +15% // After released a skill, deals 240% strategy attack to the enemy who has the lowest health
+CAT Agility | 62500 | 2 | Damage Rate +35% // Bonus damage after attack +20% | Weaken enemy's DEF +60% // Weaken enemy's ATK +15% // After released a skill, deals 240% strategy attack to the enemy who has the lowest health
+CAT Power | 625000 | 2 | Attack +20% // Bonus damage after attack +20% // Decrease the success rate of enemy's control skills +15% | Weaken enemy's DEF +60% // Weaken enemy's ATK +15% // After released a skill, deals 240% strategy attack to the enemy who has the lowest health

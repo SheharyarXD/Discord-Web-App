@@ -1,0 +1,11 @@
+SET 13 | Stormrage
+GEAR sources/13_stormrage/01_gear.png | - | STORMRAGE
+SLOT Physical Attack | 22000 | 2
+SLOT Physical Defense | 20000 | 2
+SLOT Strategy Attack | 22000 | 1
+SLOT Strategy Defense | 24000 | 1
+SLOT Speed | 22000 | 1
+SLOT Power | 260000 | 1
+BONUS 2 | Agility +6000, Avoid-Injury Rate +40%
+BONUS 4 | Agility +10000, Weaken Enemy DEF +20%, Damage taken Reduction +30%
+BONUS 6 | Agility +15000, Damage Rate +50%, After Skill, enter Super Flash for 1 round

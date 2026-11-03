@@ -1,0 +1,11 @@
+SET 8 | Flame
+GEAR sources/08_flame/01_gear.png | - | FLAME
+SLOT Physical Attack | 12000 | 2
+SLOT Physical Defense | 9000 | 2
+SLOT Strategy Attack | 12000 | 1
+SLOT Strategy Defense | 12000 | 1
+SLOT Speed | 12000 | 1
+SLOT Power | 100000 | 1
+BONUS 2 | Agility +4000, Damage Rate +30%
+BONUS 4 | Agility +5000, Avoid Injury Rate +30%
+BONUS 6 | Agility +8000, Increases Crit. Damage +50%

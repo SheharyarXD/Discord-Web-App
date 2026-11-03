@@ -1,0 +1,11 @@
+SET 3 | Ice
+GEAR sources/03_ice/01_gear.png | - | ICE
+SLOT Physical Attack | 5000 | 2
+SLOT Physical Defense | 2000 | 2
+SLOT Strategy Attack | 5000 | 1
+SLOT Strategy Defense | 4000 | 1
+SLOT Speed | 5000 | 1
+SLOT Power | 15000 | 1
+BONUS 2 | Agility +2000, Damage Rate +10%
+BONUS 4 | Weaken enemy's DEF +20%, HP +5000
+BONUS 6 | Increase Crit. Damage +20%, Avoid Injury Rate +15%

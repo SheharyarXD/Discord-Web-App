@@ -1,0 +1,17 @@
+# CAT lines may carry a 5th field: the "8 effect" text printed inside that category cell.
+SET 24 | Indora
+GEAR sources/24_indora/01_gear.png | - | INDORA
+SLOT Physical Attack | 44000 | 2
+SLOT Physical Defense | 42000 | 2
+SLOT Strategy Attack | 44000 | 1
+SLOT Strategy Defense | 42000 | 1
+SLOT Speed | 44000 | 1
+SLOT Power | 440000 | 1
+BONUS 2 | Avoid-Injury Rate +30%, HP +20%
+BONUS 4 | Agility +18000, Damage Rate +40%, Attack +30%
+BONUS 6 | Agility +30000, Increase CC Rate +40%, After attack Poison (80% DOT) enemy for 2 rounds
+JEWEL sources/24_indora/02_jewelry.png | - | -
+CAT Force | 43000 | 2 | Avoid-Injury Rate +25% // Attack +20% | Decrease enemy CC Success Rate+40%
+CAT Chakra | 43000 | 2 | Damage Rate +25% // Phy/Str. DEF +20% | Decrease enemy CC Success Rate+40%
+CAT Agility | 45000 | 2 | Damage Rate +20% // HP +20% | Decrease enemy CC Success Rate+40%
+CAT Power | 450000 | 2 | Avoid-Injury Rate +20% // Weaken enemy ATK+20% | Decrease enemy CC Success Rate+40%

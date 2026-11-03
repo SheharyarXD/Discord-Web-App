@@ -1,0 +1,16 @@
+SET 48 | Infernity
+GEAR sources/48_infernity/01_gear.png | - | INFERNITY
+SLOT Physical Attack | 69000 | 2
+SLOT Physical Defense | 69000 | 2
+SLOT Strategy Attack | 69000 | 1
+SLOT Strategy Defense | 69000 | 1
+SLOT Speed | 69000 | 1
+SLOT Power | 690000 | 1
+BONUS 2 | HP +20%, Punch Rate +30%, Avoid Injury Rate +30%
+BONUS 4 | Agility +25000, Increase CC Rate +40%, HP +30% // After release skill, has 90% chance to make 1 random enemy enter Forbid Fury State for 2 rounds
+BONUS 6 | Agility +35000, Increase CC Rate +10%, Weaken enemy's ATK +33%, Avoid Injury Rate +40%, // After release skill, 30% chance to make ally support enter Position Interchange State for 2 rounds
+JEWEL sources/48_infernity/02_jewelry.png | - | -
+CAT Force | 60000 | 2 | Increase The Success rate of control skills +35% // HP +30% | HP +30% // Avoid injury rate +30%
+CAT Chakra | 60000 | 2 | Attack +30% // After released a skill, makes 1 random ally ninja enter Pyroblast state for 2 rounds | HP +30% // Avoid injury rate +30%
+CAT Agility | 60000 | 2 | Increase The Success rate of control skills +25% // Damage taken reduction +20% | HP +30% // Avoid injury rate +30%
+CAT Power | 600000 | 2 | Increase The Success rate of control skills +30% // Weaken enemy's ATK +15% | HP +30% // Avoid injury rate +30%

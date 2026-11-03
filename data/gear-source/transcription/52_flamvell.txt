@@ -1,0 +1,17 @@
+SET 52 | Flamvell
+GEAR sources/52_flamvell/01_gear.png | - | FLAMVELL
+SLOT Physical Attack | 71000 | 2
+SLOT Physical Defense | 71000 | 2
+SLOT Strategy Attack | 71000 | 1
+SLOT Strategy Defense | 71000 | 1
+SLOT Speed | 71000 | 1
+SLOT Power | 710000 | 1
+BONUS 2 | Agility +20000 , Force +20000 , Attack +20%, Avoid injury rate +20%
+BONUS 4 | Agility +33000 , Force +35000 , Damage taken reduction +25%, Weaken enemy's ATK +30%
+BONUS 6 | Attack +20%, Decrease the success rate of enemy's control skills +25%, Damage Rate +25% // Deals 50% [P.ATK] Pierce damage to all enemies after released a skill
+JEWEL sources/52_flamvell/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 62000 | 2 | Immune Weaken DEF +25% // Strat/Phys Defense +25% // Avoid injury rate +25% | Weaken enemy's ATK +5% // After be attacked, has 35% chances to put ally assaulter into Shatter Storm state for 2 rounds
+CAT Chakra | 62000 | 2 | Immune Weaken DEF +25% // Strat/Phys Defense +25% // Damage taken reduction +25% | Weaken enemy's ATK +5% // After be attacked, has 35% chances to put ally assaulter into Shatter Storm state for 2 rounds
+CAT Agility | 62000 | 2 | Immune Weaken DEF +25% // Strat/Phys Defense +25% // HP +50% | Weaken enemy's ATK +5% // After be attacked, has 35% chances to put ally assaulter into Shatter Storm state for 2 rounds
+CAT Power | 620000 | 2 | Immune Weaken DEF +25% // Strat/Phys Defense +25% // Weaken enemy's ATK +20% | Weaken enemy's ATK +5% // After be attacked, has 35% chances to put ally assaulter into Shatter Storm state for 2 rounds

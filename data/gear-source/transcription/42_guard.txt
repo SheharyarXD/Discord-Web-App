@@ -1,0 +1,17 @@
+SET 42 | Guard
+GEAR sources/42_guard/01_gear.png | - | GUARD
+NOTE The sheet is rendered in bright red.
+SLOT Physical Attack | 64000 | 2
+SLOT Physical Defense | 64000 | 2
+SLOT Strategy Attack | 64000 | 1
+SLOT Strategy Defense | 64000 | 1
+SLOT Speed | 64000 | 1
+SLOT Power | 640000 | 1
+BONUS 2 | Agility +10000, Power +20000,Strategy/Physical DEF+30%, Avoid-Injury Rate +40%
+BONUS 4 | Agility +20000, Power +40000, HP +30%, Decrease enemy CC rate +20%
+BONUS 6 | Agility +25000, Power +80000, Weaken enemy ATK +30%, After being attacked make 2 random ninjas enter Wind Release State (rate 8%) for 2 rounds
+JEWEL sources/42_guard/02_jewelry.png | - | -
+CAT Force | 57000 | 2 | Decrease enemy CC Rate +30% // After being attacked, increase all allies Avoid-Injury Rate +30% for 2 rounds | Weaken enemy's ATK +25% // After being attacked, 70% chance to make attacker enter Expel State for 2 rounds
+CAT Chakra | 57000 | 2 | HP +30% // After being attacked, increase all allies Final Damage decrease +20% for 2 rounds. | Weaken enemy's ATK +25% // After being attacked, 70% chance to make attacker enter Expel State for 2 rounds
+CAT Agility | 57000 | 2 | Decrease enemy CC Rate +30% // After being attacked, increase all allies Success Rate of Immune Control +25% for 2 rounds | Weaken enemy's ATK +25% // After being attacked, 70% chance to make attacker enter Expel State for 2 rounds
+CAT Power | 570000 | 2 | Decrease enemy CC Rate +30% // After being attacked, increase all allies Defence +40% for 2 rounds | Weaken enemy's ATK +25% // After being attacked, 70% chance to make attacker enter Expel State for 2 rounds

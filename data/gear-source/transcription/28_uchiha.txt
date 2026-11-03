@@ -1,0 +1,16 @@
+SET 28 | Uchiha
+GEAR sources/28_uchiha/01_gear.png | - | UCHIHA
+SLOT Physical Attack | 51000 | 2
+SLOT Physical Defense | 50000 | 2
+SLOT Strategy Attack | 51000 | 1
+SLOT Strategy Defense | 50000 | 1
+SLOT Speed | 51000 | 1
+SLOT Power | 520000 | 1
+BONUS 2 | Avoid-Injury Rate +30%, HP +30%
+BONUS 4 | Agility +20000, Damager Rate +40%, Reduce Final Damage Taken +30%
+BONUS 6 | Agility +28000, Weaken enemy ATK +20%, // After being attacked, 35% chance to enter S-Super Dodge for 1 round
+JEWEL sources/28_uchiha/02_jewelry.png | - | -
+CAT Force | 47000 | 2 | Phy/Str. DEF +25% // After attack 50% Split (DOT) enemy for 1 round | Damage Rate +30% // Weaken enemy ATK +25%
+CAT Chakra | 47000 | 2 | Avoid-Injury Rate +30% // After attack 50% Vein Damage (DOT) enemy for 1 round | Damage Rate +30% // Weaken enemy ATK +25%
+CAT Agility | 49000 | 2 | Phy/Str. DEF +25%, // After attack inflict Poison (DOT) 50% for 1 round | Damage Rate +30% // Weaken enemy ATK +25%
+CAT Power | 480000 | 2 | Avoid-Injury Rate +30%, // After attack 50% Bleed (DOT) enemy for 1 round | Damage Rate +30% // Weaken enemy ATK +25%

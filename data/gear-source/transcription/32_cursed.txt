@@ -1,0 +1,16 @@
+SET 32 | Cursed
+GEAR sources/32_cursed/01_gear.png | - | CURSED
+SLOT Physical Attack | 55000 | 2
+SLOT Physical Defense | 54000 | 2
+SLOT Strategy Attack | 55000 | 1
+SLOT Strategy Defense | 54000 | 1
+SLOT Speed | 55000 | 1
+SLOT Power | 560000 | 1
+BONUS 2 | Damage Rate +30%, Agility +22000
+BONUS 4 | Damage Rate +30%,Agility +28000, Weaken enemy ATK 35%
+BONUS 6 | Avoid-Injury Rate +30%, HP +20%, After using skill recovers himself 40% HP
+JEWEL sources/32_cursed/02_jewelry.png | - | -
+CAT Force | 50000 | 2 | Decrease the success rate of enemy's control skills +30% // When attacked, increase SPD of ally support by 10% for 1 round | Decrease the success rate of enemy's control skills +20% // Weaken enemy's ATK +15%
+CAT Chakra | 50000 | 2 | Avoid-Injury Rate +30% // After skill increase vanguard's SPD by 40% | Decrease the success rate of enemy's control skills +20% // Weaken enemy's ATK +15%
+CAT Agility | 52000 | 2 | Immune to S. Block +15% // After skill increase assaulter's SPD  by 40% | Decrease the success rate of enemy's control skills +20% // Weaken enemy's ATK +15%
+CAT Power | 510000 | 2 | Immune to S. Block +10% // Attack +20% | Decrease the success rate of enemy's control skills +20% // Weaken enemy's ATK +15%

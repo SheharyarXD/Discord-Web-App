@@ -1,0 +1,16 @@
+SET 55 | Branded
+GEAR sources/55_branded/01_gear.png | - | BRANDED
+SLOT Physical Attack | 72500 | 2
+SLOT Physical Defense | 72500 | 2
+SLOT Strategy Attack | 72500 | 1
+SLOT Strategy Defense | 72500 | 1
+SLOT Speed | 72500 | 1
+SLOT Power | 725000 | 1
+BONUS 2 | Agility +25000 , Force +25000 , Attack +15%, HP +35%
+BONUS 4 | Agility +35000 , Force +35000 , Bonus damage after attack +30%, Weaken enemy's ATK +30%
+BONUS 6 | Attack +20%, Decrease CC Rate +25%, Immune Weaken DEF +35% // After released a skill, put self into Super Armor state for 2 rounds
+JEWEL sources/55_branded/02_jewelry.png | - | -
+CAT Force | 63500 | 2 | Attack +30% // After released a skill, makes 1 random enemy enter Upwind state for 2 rounds | HP +40% // Avoid Injury rate +30%
+CAT Chakra | 63500 | 2 | Bonus damage after attack +35% // After released a skill, makes 1 random ally enter Pyroblast state for 2 rounds | HP +40% // Avoid Injury rate +30%
+CAT Agility | 63500 | 2 | Damage Rate +35% // After released a skill, makes 1 random ally enter Super Armor state for 2 rounds | HP +40% // Avoid Injury rate +30%
+CAT Power | 635000 | 2 | Weaken enemy's ATK +25% // After released a skill, makes 1 random enemy enter Corrosion state for 2 rounds | HP +40% // Avoid Injury rate +30%

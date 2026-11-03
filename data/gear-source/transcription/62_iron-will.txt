@@ -1,0 +1,32 @@
+SET 62 | Iron Will
+REVIEW Two gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A and B; no R1/R2 name is justified by the larger numbers. Client decision needed.
+GEAR sources/62_iron-will/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 75500 | 2
+SLOT Physical Defense | 75500 | 2
+SLOT Strategy Attack | 75500 | 1
+SLOT Strategy Defense | 75500 | 1
+SLOT Speed | 75500 | 1
+SLOT Power | 755000 | 1
+BONUS 2 | Agility +25000, Force +25000, HP +30%, Attack +10%, Crit DMG +15%
+BONUS 4 | Agility +35000, Force +35000, Damage rate +23%, Weaken enemy's ATK +30%, Crit +20%
+BONUS 6 | Power +60000, Attack +18%, Avoid injury rate +30%, Decrease CC rate +25% // After release a skill, puts 1 random ally into Strong State(20%) for 2 rounds // Strong State: increases avoid injury rate and final damage reduction.
+GEAR sources/62_iron-will/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 83500 | 2
+SLOT Physical Defense | 83500 | 2
+SLOT Strategy Attack | 83500 | 1
+SLOT Strategy Defense | 83500 | 1
+SLOT Speed | 83500 | 1
+SLOT Power | 835000 | 1
+BONUS 2 | Agility +25000, Force +25000, HP +35%, Attack +10%, Crit DMG +20%
+BONUS 4 | Agility +35000, Force +35000, Damage rate +27%, Weaken enemy's ATK +33%, Crit +20%
+BONUS 6 | Power +60000, Attack +23%, Avoid injury rate +40%, Decrease CC rate +25% // After release a skill, puts 1 random ally into Strong State(20%) for 2 rounds // Strong State: increases avoid injury rate and final damage reduction.
+JEWEL sources/62_iron-will/03_jewelry_variant_A.png | seq:A | -
+CAT Force | 66500 | 2 | Decrease enemy CC Rate +30% // HP +20% // After released a skill, puts 2 random allies into Bond State(10%) for 2 rounds | Weaken enemy's ATK +3% // After released a skill, dispels self debuffs
+CAT Chakra | 66500 | 2 | Decrease enemy CC Rate +30% // Strat Def +20% // Phys Def +20% // After released a skill, puts 2 random allies into Strong State(10%) for 2 rounds | Weaken enemy's ATK +3% // After released a skill, dispels self debuffs
+CAT Agility | 66500 | 2 | Decrease enemy CC Rate +30% // Avoid injury rate +17% // After released a skill, puts 2 random allies into Final DMG Reduction(20%) for 2 rounds | Weaken enemy's ATK +3% // After released a skill, dispels self debuffs
+CAT Power | 665000 | 2 | Decrease enemy CC Rate +30% // Final DMG Reduction +17% // Weaken enemy's ATK +20% | Weaken enemy's ATK +3% // After released a skill, dispels self debuffs
+JEWEL sources/62_iron-will/04_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 68000 | 2 | Decrease enemy CC Rate +30% // HP +25% // After released a skill, puts 2 random allies into Bond State(10%) for 2 rounds | Weaken enemy's ATK +5% // After released a skill, dispels self debuffs
+CAT Chakra | 68000 | 2 | Decrease enemy CC Rate +30% // Strat Def +25% // Phys Def +20% // After released a skill, puts 2 random allies into Strong State(10%) for 2 rounds | Weaken enemy's ATK +5% // After released a skill, dispels self debuffs
+CAT Agility | 68000 | 2 | Decrease enemy CC Rate +30% // Avoid injury rate +20% // After released a skill, puts 2 random allies into Final DMG Reduction(20%) for 2 rounds | Weaken enemy's ATK +5% // After released a skill, dispels self debuffs
+CAT Power | 680000 | 2 | Decrease enemy CC Rate +30% // Final DMG Reduction +20% // Weaken enemy's ATK +20% | Weaken enemy's ATK +5% // After released a skill, dispels self debuffs

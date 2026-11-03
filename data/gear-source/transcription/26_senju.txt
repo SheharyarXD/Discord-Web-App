@@ -1,0 +1,16 @@
+SET 26 | Senju
+GEAR sources/26_senju/01_gear.png | - | SENJU
+SLOT Physical Attack | 47000 | 2
+SLOT Physical Defense | 46000 | 2
+SLOT Strategy Attack | 47000 | 1
+SLOT Strategy Defense | 46000 | 1
+SLOT Speed | 47000 | 1
+SLOT Power | 480000 | 1
+BONUS 2 | Avoid-Injury Rate +30%, CC Resistance +15%
+BONUS 4 | Force +20000, HP +30%, Strategy/Physical DEF +30%
+BONUS 6 | Force +40000, Weaken enemy ATK +35%, S.Block +20%(After blocking attack, deduct 20% attackers current HP)
+JEWEL sources/26_senju/02_jewelry.png | - | -
+CAT Force | 46000 | 2 | Block Rate +25% (can surpass limit) // CC resistance+30% | Damage Rate +40% // Avoid-Injury Rate +40%
+CAT Chakra | 46000 | 2 | Block Rate +25% (can surpass limit) // Attack +20% | Damage Rate +40% // Avoid-Injury Rate +40%
+CAT Agility | 48000 | 2 | Crit Rate +25% (can surpass limit) // CC resistance +30% | Damage Rate +40% // Avoid-Injury Rate +40%
+CAT Power | 470000 | 2 | Crit Rate +25% (can surpass limit) // HP +30% | Damage Rate +40% // Avoid-Injury Rate +40%

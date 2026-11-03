@@ -2,7 +2,7 @@ import { formatReleasePeriod } from "@/domain/ninja";
 import { getT } from "@/i18n/server";
 import { getGameApi } from "@/server/game-api";
 import { requireUser } from "@/server/auth/guards";
-import { effectTerms, hrefWith, parseNinjaParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
+import { effectModeOf, effectTerms, hrefWith, parseNinjaParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
 import { EmptyState, PageHeader, Pagination, Tag } from "@/components/ui/primitives";
 import { ItemCard } from "@/components/game/item-card";
 import { CheckGroup, countActive, EffectSearch, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "@/components/game/list-controls";
@@ -44,10 +44,11 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
   return (
     <>
       <PageHeader title={t("sections.ninjas.title")} description={t("sections.ninjas.description")} />
-      <FilterPanel action="/ninjas" count={active} t={t} clearHref="/ninjas">
+      <FilterPanel action="/ninjas" count={active} t={t} clearHref={effectModeOf(raw) === "all" ? "/ninjas?fxm=all" : "/ninjas"}>
         <SearchBox value={rawOne(raw.q)} placeholder={t("filters.searchPlaceholder")} label={t("filters.search")} />
         <EffectSearch
           terms={fxTerms}
+          mode={effectModeOf(raw)}
           suggestions={effectSuggestions.map((s) => s.value)}
           removeHref={(term) => hrefWith("/ninjas", raw, { fx: fxTerms.filter((x) => x !== term), page: undefined })}
           t={t}

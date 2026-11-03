@@ -1,0 +1,22 @@
+SET 34 | Kumogakure
+GEAR sources/34_kumogakure/01_gear.png | - | KUMO GAKURE
+SLOT Physical Attack | 57000 | 2
+SLOT Physical Defense | 57000 | 2
+SLOT Strategy Attack | 57000 | 1
+SLOT Strategy Defense | 57000 | 1
+SLOT Speed | 57000 | 1
+SLOT Power | 570000 | 1
+BONUS 2 | Agility +24000, Damage Rate +40%, Weaken enemy's DEF +10%
+BONUS 4 | Agility +34000, Weaken enemy's DEF +20%, S. Attack +50%
+BONUS 6 | Attack +20%, Weaken enemy's DEF +30%, Weaken enemy's ATK+25%
+JEWEL sources/34_kumogakure/02_jewelry_variant_unlabeled_A.png | seq:A | -
+CAT Force | 52500 | 2 | Attack +20% // After released skill, make self enter Super Dodge State for 2 rounds | Immune S.Block +30% // Damage Rate +30%
+CAT Chakra | 52500 | 2 | Damage Rate +25% // After released skill, make a second blow to the lowest HP enemy with 200% (Strategy ATK rate) | Immune S.Block +30% // Damage Rate +30%
+CAT Agility | 54000 | 2 | Damage Rate +25% // After release skill, make a second blow to the highest HP enemy with 300% (Strategy ATK rate) | Immune S.Block +30% // Damage Rate +30%
+CAT Power | 530000 | 2 | Attack +20% // Immune S. Block +20% | Immune S.Block +30% // Damage Rate +30%
+JEWEL sources/34_kumogakure/03_jewelry_variant_unlabeled_B.png | seq:B | -
+REVIEW Variant B differs from variant A only in the second-blow rate type: "Physical ATK rate" instead of "Strategy ATK rate" (Chakra and Agility cells). No label printed; not named R1 or R2.
+CAT Force | 52500 | 2 | Attack +20% // After released skill, make self enter Super Dodge State for 2 rounds | Immune S.Block +30% // Damage Rate +30%
+CAT Chakra | 52500 | 2 | Damage Rate +25% // After released skill, make a second blow to the lowest HP enemy with 200% (Physical ATK rate) | Immune S.Block +30% // Damage Rate +30%
+CAT Agility | 54000 | 2 | Damage Rate +25% // After release skill, make a second blow to the highest HP enemy with 300% (Physical ATK rate) | Immune S.Block +30% // Damage Rate +30%
+CAT Power | 530000 | 2 | Attack +20% // Immune S. Block +20% | Immune S.Block +30% // Damage Rate +30%

@@ -1,0 +1,16 @@
+SET 58 | Baryon
+GEAR sources/58_baryon/01_gear.png | - | BARYON
+SLOT Physical Attack | 74000 | 2
+SLOT Physical Defense | 74000 | 2
+SLOT Strategy Attack | 74000 | 1
+SLOT Strategy Defense | 74000 | 1
+SLOT Speed | 74000 | 1
+SLOT Power | 740000 | 1
+BONUS 2 | Agility +25000 , Force +25000 , Attack +20%, Damage rate +20%
+BONUS 4 | Agility +35000 , Force +35000 , Bonus damage after attack +20%, Weaken enemy's ATK +30% // After released a skill, has 50% chance to make 1 random ally enter super armor state for 2 rounds
+BONUS 6 | Attack +20%, Decrease CC Rate +25%, Damage rate +10%, Bonus damage after attack +10% // After released a skill, has 75% chances to make 2 random enemies enter Chaotic Storm state for 2 rounds
+JEWEL sources/58_baryon/02_jewelry.png | - | -
+CAT Force | 65000 | 2 | Decrease the success rate of enemy's control skills +30% // Damage rate +40% | Weaken enemy's ATK +25% // Bonus damage after attack +30% // After released a skill, makes 3 random enemies enter painful will state for 2 rounds
+CAT Chakra | 65000 | 2 | Decrease the success rate of enemy's control skills +30% // Attack +30% | Weaken enemy's ATK +25% // Bonus damage after attack +30% // After released a skill, makes 3 random enemies enter painful will state for 2 rounds
+CAT Agility | 65000 | 2 | Decrease the success rate of enemy's control skills +30% // Weaken enemy's DEF +45% // Attack +10% | Weaken enemy's ATK +25% // Bonus damage after attack +30% // After released a skill, makes 3 random enemies enter painful will state for 2 rounds
+CAT Power | 650000 | 2 | Decrease the success rate of enemy's control skills +20% // Damage rate +50% | Weaken enemy's ATK +25% // Bonus damage after attack +30% // After released a skill, makes 3 random enemies enter painful will state for 2 rounds

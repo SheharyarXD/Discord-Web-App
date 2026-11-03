@@ -1,0 +1,16 @@
+SET 25 | Ashura
+GEAR sources/25_ashura/01_gear.png | - | ASHURA
+SLOT Physical Attack | 45000 | 2
+SLOT Physical Defense | 44000 | 2
+SLOT Strategy Attack | 45000 | 1
+SLOT Strategy Defense | 44000 | 1
+SLOT Speed | 45000 | 1
+SLOT Power | 460000 | 1
+BONUS 2 | Agility +10000, Strategy/Physical DEF +30%
+BONUS 4 | Agility +18000, Avoid-Injury Rate +30%, Reduce CC Rate +30%
+BONUS 6 | Agility +24000, Avoid-Injury Rate +40%, After receiving attack, restore own HP by 40%
+JEWEL sources/25_ashura/02_jewelry.png | - | -
+CAT Force | 45000 | 2 | Physical Attack +15% // Reduce enemy CC success rate +40% | After being hit, 30% chance to trigger S-Super Flash for 1 round
+CAT Chakra | 45000 | 2 | Physical Attack +15% // HP +30% | After being hit, 30% chance to trigger S-Super Flash for 1 round
+CAT Agility | 47000 | 2 | Physical Attack +15% // Avoid-Injury Rate +30% | After being hit, 30% chance to trigger S-Super Flash for 1 round
+CAT Power | 460000 | 2 | Physical Attack +15% // After skill, clear all supports debuff | After being hit, 30% chance to trigger S-Super Flash for 1 round

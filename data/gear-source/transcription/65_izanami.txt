@@ -1,0 +1,42 @@
+SET 65 | Izanami
+REVIEW Three gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A, B and C (gear) and A and B (jewelry). Variants B and C share the main stats (82000) and differ in the bonus numbers. Whether the jewelry variants pair with particular gear variants is not stated. No R1/R2 names are invented.
+GEAR sources/65_izanami/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 77000 | 2
+SLOT Physical Defense | 77000 | 2
+SLOT Strategy Attack | 77000 | 1
+SLOT Strategy Defense | 77000 | 1
+SLOT Speed | 77000 | 1
+SLOT Power | 770000 | 1
+BONUS 2 | Agility +25000, Force +25000, Attack +20%, Avoid injury rate +20%
+BONUS 4 | Agility +35000, Force +35000, Avoid injury rate +15%, Weaken enemy's DEF +30%, Weaken enemy's ATK +30%, Decrease CC rate +15%
+BONUS 6 | Power +60000, Immune Weaken DEF +35%, Attack +22%, Damage rate 35%, Decrease CC rate +17% // Deals 50%(Phys.ATK) Pierce dmg to all enemies after released a skill
+GEAR sources/65_izanami/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 82000 | 2
+SLOT Physical Defense | 82000 | 2
+SLOT Strategy Attack | 82000 | 1
+SLOT Strategy Defense | 82000 | 1
+SLOT Speed | 82000 | 1
+SLOT Power | 820000 | 1
+BONUS 2 | Agility +25000, Force +25000, Attack +20%, Avoid injury rate +25%
+BONUS 4 | Agility +35000, Force +35000, Avoid injury rate +15%, Weaken enemy's DEF +30%, Weaken enemy's ATK +31%, Decrease CC rate +15%
+BONUS 6 | Power +60000, Immune Weaken DEF +35%, Attack +21%, Damage rate 35%, Decrease CC rate +20% // Deals 50%(Phys.ATK) Pierce dmg to all enemies after released a skill
+GEAR sources/65_izanami/03_gear_variant_C_unlabeled.png | seq:C | -
+SLOT Physical Attack | 82000 | 2
+SLOT Physical Defense | 82000 | 2
+SLOT Strategy Attack | 82000 | 1
+SLOT Strategy Defense | 82000 | 1
+SLOT Speed | 82000 | 1
+SLOT Power | 820000 | 1
+BONUS 2 | Agility +25000, Force +25000, Attack +20%, Avoid injury rate +30%
+BONUS 4 | Agility +35000, Force +35000, Avoid injury rate +15%, Weaken enemy's DEF +30%, Weaken enemy's ATK +33%, Decrease CC rate +15%
+BONUS 6 | Power +60000, Immune Weaken DEF +35%, Attack +22%, Damage rate 35%, Decrease CC rate+20% // Deals 50%(Phys.ATK) Pierce dmg to all enemies after released a skill
+JEWEL sources/65_izanami/04_jewelry_variant_A.png | seq:A | -
+CAT Force | 68000 | 2 | Decrease the success rate of enemy's control skills+30% // HP+25% // After a skill, has a 40% chance to makes all allies enter Bond state(20%) for 2 rounds | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+CAT Chakra | 68000 | 2 | Decrease the success rate of enemy's control skills+30% // Strategy Defense+25% // Physical Defense+25% // After a skill, has a 40% chance to makes all allies enter Strong state(20%) for 2 rounds | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+CAT Agility | 68000 | 2 | Decrease the success rate of enemy's control skills+30% // Avoid injury rate+20% // After a skill, self enter Position Interchange state for 2 rounds | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+CAT Power | 680000 | 2 | Decrease the success rate of enemy's control skills+30% // Damage taken reduction+20% // Weaken enemy's ATK +20% | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+JEWEL sources/65_izanami/05_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 68000 | 2 | Decrease the success rate of enemy's control skills+30% // HP+30% // After a skill, has a 40% chance to makes all allies enter Bond state(20%) for 2 rounds | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+CAT Chakra | 68000 | 2 | Decrease the success rate of enemy's control skills+30% // Strategy Defense+30% // Physical Defense+30% // After a skill, has a 40% chance to makes all allies enter Strong state(20%) for 2 rounds | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+CAT Agility | 68000 | 2 | Decrease the success rate of enemy's control skills+30% // Avoid injury rate+25% // After a skill, self enter Position Interchange state for 2 rounds | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds
+CAT Power | 680000 | 2 | Decrease the success rate of enemy's control skills+30% // Damage taken reduction+25% // Weaken enemy's ATK +20% | Decrease the success rate of enemy's control skills+5% // Weaken enemy's ATK+5% // After a skill, makes enemies Assaulters enter Chaotic Storm state(20%) for 2 rounds

@@ -1,0 +1,16 @@
+SET 41 | Pain
+GEAR sources/41_pain/01_gear.png | - | PAIN
+SLOT Physical Attack | 64000 | 2
+SLOT Physical Defense | 64000 | 2
+SLOT Strategy Attack | 64000 | 1
+SLOT Strategy Defense | 64000 | 1
+SLOT Speed | 64000 | 1
+SLOT Power | 640000 | 1
+BONUS 2 | Immune weaken DEF +15%, Strategy/Physical DEF +40%, HP +20%
+BONUS 4 | Immune weaken DEF +15%, Strategy/Physical DEF +50%, HP +30%, Damage Rate +30%, Agility +25000
+BONUS 6 | Immune weaken DEF +20%, Strategy/Physical DEF +60%, Agility +32000, Weaken enemy's ATK +30%, Avoid-Injury Rate +40%
+JEWEL sources/41_pain/02_jewelry.png | - | -
+CAT Force | 56500 | 2 | Force +30000 // Agility +30000 // Attack +30% | Damage Rate +50% // Avoid-Injury Rate +40%
+CAT Chakra | 56500 | 2 | Chakra +30000 // Agility +30000 // Increase Success rate of CC + 25% | Damage Rate +50% // Avoid-Injury Rate +40%
+CAT Agility | 56500 | 2 | Decrease enemy CC +30%, // Resistant and weaken enemy DEF +20% | Damage Rate +50% // Avoid-Injury Rate +40%
+CAT Power | 565000 | 2 | Weaken enemy's ATK +25% // Resistant and weaken enemy DEF +20% | Damage Rate +50% // Avoid-Injury Rate +40%

@@ -13,13 +13,14 @@ import { CheckGroup, countActive, FilterPanel, RangeRows, ResultSummary, SearchB
 const number = new Intl.NumberFormat("es", { maximumFractionDigits: 2 });
 
 /** The list of equipment, jewelry or gems: search, category / set / statistic-range filters and statistic sorting. */
-export async function ItemListPage({ kind, searchParams }: { kind: ItemKind; searchParams: Promise<RawParams> }) {
+export async function ItemListPage({ kind, searchParams, basePath }: { kind: ItemKind; searchParams: Promise<RawParams>; basePath?: string }) {
   if (kind === "gem" && !FEATURES.gems) notFound(); // hidden while the Gems section is off
   await requireUser();
   const t = await getT();
   const raw = await searchParams;
   const api = await getGameApi();
-  const base = kind === "gem" ? "/gems" : `/${kind}`;
+  const base = basePath ?? (kind === "gem" ? "/gems" : `/${kind}`);
+  const itemBase = kind === "gem" ? "/gems" : `/${kind}`;
   const params = parseItemParams(kind, raw);
   const [facets, result] = await Promise.all([api.listItemFacets(kind), api.listItems(params)]);
   const statName = (key: string) => facets.statistics.find((s) => s.key === key)?.name ?? key;
@@ -63,7 +64,7 @@ export async function ItemListPage({ kind, searchParams }: { kind: ItemKind; sea
             {result.items.map((i) => (
               <li key={i.slug}>
                 <ItemCard
-                  href={`${base}/${i.slug}`}
+                  href={`${itemBase}/${i.slug}`}
                   title={i.nameEs ?? i.name}
                   subtitle={[i.categoryName, i.setName].filter(Boolean).join(" · ") || null}
                   footer={

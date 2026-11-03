@@ -1,0 +1,1366 @@
+{
+ "package": "Furia Ninja Equipment and Jewelry Source Package",
+ "packageVersion": "2026-11-03",
+ "counts": {
+  "batches": 8,
+  "named_sets": 71,
+  "sets_with_images": 68,
+  "sets_without_source": 3,
+  "source_images": 143
+ },
+ "images": [
+  {
+   "set": 1,
+   "setName": "Akatsuki",
+   "role": "gear",
+   "path": "sources/01_akatsuki/01_gear.png",
+   "originalUploadFilename": "image(20261029-204226).png",
+   "sha256": "45ee1de4578b78b7a2bf7a0ac5344a4998a37b4ed16e7027fb539e0f0e5802f4",
+   "bytes": 271983
+  },
+  {
+   "set": 1,
+   "setName": "Akatsuki",
+   "role": "jewelry",
+   "path": "sources/01_akatsuki/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-204238).png",
+   "sha256": "bad5570710edabaebc53aabedba9e658db7689057fa8aea36ac6d8c26f44dbd2",
+   "bytes": 151654
+  },
+  {
+   "set": 2,
+   "setName": "Angel",
+   "role": "gear",
+   "path": "sources/02_angel/01_gear.png",
+   "originalUploadFilename": "image(20261029-204328).png",
+   "sha256": "8a86f2a0bccb5c90fc300701acf393416a4e3bd2ba5b2f328dbf38a7a9064281",
+   "bytes": 324019
+  },
+  {
+   "set": 3,
+   "setName": "Ice",
+   "role": "gear",
+   "path": "sources/03_ice/01_gear.png",
+   "originalUploadFilename": "image(20261029-204415).png",
+   "sha256": "417cfe91aab915513190b88729753241452ad77b7e7dee92d9d4de17c798c8ad",
+   "bytes": 343835
+  },
+  {
+   "set": 4,
+   "setName": "Abyss",
+   "role": "gear",
+   "path": "sources/04_abyss/01_gear.png",
+   "originalUploadFilename": "image(20261029-204508).png",
+   "sha256": "6c07fd57150839351b2c38dacb19bf76dbe05f8d65da81f369be0051f019acf0",
+   "bytes": 323850
+  },
+  {
+   "set": 4,
+   "setName": "Abyss",
+   "role": "jewelry",
+   "path": "sources/04_abyss/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-204517).png",
+   "sha256": "64e08545887bb9502f0d26027c798c9619c60a1bf1094eedef8c360a1068591e",
+   "bytes": 150125
+  },
+  {
+   "set": 5,
+   "setName": "Sage",
+   "role": "gear",
+   "path": "sources/05_sage/01_gear.png",
+   "originalUploadFilename": "image(20261029-204557).png",
+   "sha256": "a7a005e36fceacf53cd4dfe6ab70117635176b476044f3dd818abd1bfc34c1be",
+   "bytes": 317780
+  },
+  {
+   "set": 6,
+   "setName": "Christmas",
+   "role": "gear",
+   "path": "sources/06_christmas/01_gear.png",
+   "originalUploadFilename": "image(20261029-204630).png",
+   "sha256": "c84ff5778ffed212da6633e13f3316c5df7cf5b1226e8adc985c43f1cb3cbddf",
+   "bytes": 338352
+  },
+  {
+   "set": 7,
+   "setName": "Ryujin",
+   "role": "gear",
+   "path": "sources/07_ryujin/01_gear.png",
+   "originalUploadFilename": "image(20261029-204710).png",
+   "sha256": "8c7c1a7d9ff22b322e33c891902ff962eed83587082ef41ceb85f9f453065a3c",
+   "bytes": 329531
+  },
+  {
+   "set": 8,
+   "setName": "Flame",
+   "role": "gear",
+   "path": "sources/08_flame/01_gear.png",
+   "originalUploadFilename": "image(20261029-204748).png",
+   "sha256": "1af0ebb789cccdb5499dee01e4461d8822b602a748650d890afa88cd9080a36f",
+   "bytes": 207547
+  },
+  {
+   "set": 9,
+   "setName": "Crimson",
+   "role": "gear",
+   "path": "sources/09_crimson/01_gear.png",
+   "originalUploadFilename": "image(20261029-204834).png",
+   "sha256": "fc415ddd424d8a87c125b07ad059567b185231756e876f77a0728e1afd1ce9d6",
+   "bytes": 374393
+  },
+  {
+   "set": 10,
+   "setName": "Divine Break",
+   "role": "gear",
+   "path": "sources/10_divine-break/01_gear.png",
+   "originalUploadFilename": "image(20261029-204921).png",
+   "sha256": "d56786fdd28d276bf93d9f9a0ad814991b62d440b8d94981281afee293504df2",
+   "bytes": 356852
+  },
+  {
+   "set": 11,
+   "setName": "Netherwind",
+   "role": "gear",
+   "path": "sources/11_netherwind/01_gear.png",
+   "originalUploadFilename": "image(20261029-205003).png",
+   "sha256": "3345e65e600b55ef6c9d886787f8364046677837d2db8a1ff671f6ed9490e380",
+   "bytes": 349652
+  },
+  {
+   "set": 12,
+   "setName": "Frost Fire",
+   "role": "gear",
+   "path": "sources/12_frost-fire/01_gear.png",
+   "originalUploadFilename": "image(20261029-205046).png",
+   "sha256": "1fc73309cd9f610a174abfa9b15cd474e830d047c8ba75f426a70c0503eeecb0",
+   "bytes": 367513
+  },
+  {
+   "set": 13,
+   "setName": "Stormrage",
+   "role": "gear",
+   "path": "sources/13_stormrage/01_gear.png",
+   "originalUploadFilename": "image(20261029-205122).png",
+   "sha256": "03d015ab620583f952ddd7265badbcb4b1d36bd12d9f5d34afa68ca5e6d089a0",
+   "bytes": 249649
+  },
+  {
+   "set": 14,
+   "setName": "Oblivion",
+   "role": "gear",
+   "path": "sources/14_oblivion/01_gear.png",
+   "originalUploadFilename": "image(20261029-205155).png",
+   "sha256": "861b0041325961261d0bb08097de01bca6b0d25a06998250e5607657d05b1327",
+   "bytes": 269920
+  },
+  {
+   "set": 15,
+   "setName": "Corruptor",
+   "role": "gear",
+   "path": "sources/15_corruptor/01_gear.png",
+   "originalUploadFilename": "image(20261029-205232).png",
+   "sha256": "fd895e74766bb87dc58319edbdfea8e321e3c2b3822e69391f70f387eb251968",
+   "bytes": 269075
+  },
+  {
+   "set": 15,
+   "setName": "Corruptor",
+   "role": "jewelry",
+   "path": "sources/15_corruptor/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-205243).png",
+   "sha256": "c8922590b3ee903ce0608982a08e85d42fb3abbd4d4d09d7d9a79ab4a880b13f",
+   "bytes": 161294
+  },
+  {
+   "set": 16,
+   "setName": "Deatbone",
+   "role": "gear",
+   "path": "sources/16_deatbone/01_gear.png",
+   "originalUploadFilename": "image(20261029-205343).png",
+   "sha256": "471c02d4dcc54723645b16dba8b42e9d931ed0699686cc72e7ba905f2f6d55f5",
+   "bytes": 250752
+  },
+  {
+   "set": 17,
+   "setName": "Darkmantle",
+   "role": "gear",
+   "path": "sources/17_darkmantle/01_gear.png",
+   "originalUploadFilename": "image(20261029-205430).png",
+   "sha256": "80f5a1d58ac24771d0c9b0cf95dcb8c42407168a1bbfc8f954ed7212e5c19f46",
+   "bytes": 272103
+  },
+  {
+   "set": 18,
+   "setName": "Skyshatter",
+   "role": "gear",
+   "path": "sources/18_skyshatter/01_gear.png",
+   "originalUploadFilename": "image(20261029-205537).png",
+   "sha256": "a03357815c9551f0d6ef64141ac7f696346b5ad87af896bd92b52914d6857db7",
+   "bytes": 256070
+  },
+  {
+   "set": 19,
+   "setName": "Hallowed",
+   "role": "gear",
+   "path": "sources/19_hallowed/01_gear.png",
+   "originalUploadFilename": "image(20261029-205619).png",
+   "sha256": "661d82525cf1c0d3169bd610674db786c484b8290ce40a7186f9f7694b4f3836",
+   "bytes": 255616
+  },
+  {
+   "set": 20,
+   "setName": "Devout",
+   "role": "gear",
+   "path": "sources/20_devout/01_gear.png",
+   "originalUploadFilename": "image(20261029-205658).png",
+   "sha256": "0ee98a4d8387f9c00b2b6c8899aaa742c9ac2419988ed9ca632fd6791d222166",
+   "bytes": 265693
+  },
+  {
+   "set": 20,
+   "setName": "Devout",
+   "role": "jewelry",
+   "path": "sources/20_devout/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-205709).png",
+   "sha256": "d3ce6bc3b5c00b2632f72f7b8a25fd3c107a3909fd0f3d22ac46021b86e61031",
+   "bytes": 156315
+  },
+  {
+   "set": 21,
+   "setName": "Heroism",
+   "role": "gear",
+   "path": "sources/21_heroism/01_gear.png",
+   "originalUploadFilename": "image(20261029-205754).png",
+   "sha256": "fae7867e34a3eb61d736537b0ac0e484eeee523368bbaaaab3d264b535ff02c5",
+   "bytes": 255266
+  },
+  {
+   "set": 21,
+   "setName": "Heroism",
+   "role": "jewelry",
+   "path": "sources/21_heroism/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-205804).png",
+   "sha256": "36793e7b6418885726d804f4ac4482f810ce5fcbfde79b4c48ad17237462f3fc",
+   "bytes": 169682
+  },
+  {
+   "set": 22,
+   "setName": "Otsutsuki",
+   "role": "gear",
+   "path": "sources/22_otsutsuki/01_gear.png",
+   "originalUploadFilename": "image(20261029-205920).png",
+   "sha256": "c651703f886ddaf6df83f168bab3537e1eab0697e27a80ca87d0c98aa4c41c56",
+   "bytes": 226959
+  },
+  {
+   "set": 22,
+   "setName": "Otsutsuki",
+   "role": "jewelry",
+   "path": "sources/22_otsutsuki/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-205930).png",
+   "sha256": "79922d8c3ebb3734ea6c38ff56c4405fdd5cf3416b4e416e5242abb74a3b95d7",
+   "bytes": 159688
+  },
+  {
+   "set": 23,
+   "setName": "Bloodfang",
+   "role": "gear",
+   "path": "sources/23_bloodfang/01_gear.png",
+   "originalUploadFilename": "image(20261029-212210).png",
+   "sha256": "060848de0520628c4db88c4071c383ff5afd0348a3a3974f8b5230bd87c57c7c",
+   "bytes": 241569
+  },
+  {
+   "set": 23,
+   "setName": "Bloodfang",
+   "role": "jewelry",
+   "path": "sources/23_bloodfang/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212220).png",
+   "sha256": "1c8ec93193afd1e4e53c148bdb54da964d0570c35b7a18d579e1d47f1c036e26",
+   "bytes": 159750
+  },
+  {
+   "set": 24,
+   "setName": "Indora",
+   "role": "gear",
+   "path": "sources/24_indora/01_gear.png",
+   "originalUploadFilename": "image(20261029-212300).png",
+   "sha256": "8349b7d2f22426b21f13c69dab27b935399a7015359b8fa029e6511a3795abc1",
+   "bytes": 279979
+  },
+  {
+   "set": 24,
+   "setName": "Indora",
+   "role": "jewelry",
+   "path": "sources/24_indora/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212311).png",
+   "sha256": "89c5f947245e74b42466fbd6e4925357ad7e715132b2ae12b4a315ad4857cd57",
+   "bytes": 190489
+  },
+  {
+   "set": 25,
+   "setName": "Ashura",
+   "role": "gear",
+   "path": "sources/25_ashura/01_gear.png",
+   "originalUploadFilename": "image(20261029-212356).png",
+   "sha256": "cba97cbcb5b16202ed92d99f54fe3eb9e54415e1d82dbb29c81f74c5bdfaebfe",
+   "bytes": 260985
+  },
+  {
+   "set": 25,
+   "setName": "Ashura",
+   "role": "jewelry",
+   "path": "sources/25_ashura/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212408).png",
+   "sha256": "6b2d9f07c19d1069137928cdd70c26c60bffcef8fdb5dba9cc640fdeb5d7f755",
+   "bytes": 220044
+  },
+  {
+   "set": 26,
+   "setName": "Senju",
+   "role": "gear",
+   "path": "sources/26_senju/01_gear.png",
+   "originalUploadFilename": "image(20261029-212516).png",
+   "sha256": "b7c6114b240ca635f11175cae215503085a957ed817ee68f0c82e84522b55b1c",
+   "bytes": 280720
+  },
+  {
+   "set": 26,
+   "setName": "Senju",
+   "role": "jewelry",
+   "path": "sources/26_senju/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212527).png",
+   "sha256": "ae10302020f7aae399aa878f5c8d2bbc2b5df8afe90a173cdd5b880de82ab3b6",
+   "bytes": 209889
+  },
+  {
+   "set": 27,
+   "setName": "Saint",
+   "role": "gear",
+   "path": "sources/27_saint/01_gear.png",
+   "originalUploadFilename": "image(20261029-212608).png",
+   "sha256": "cdf9c7da989f7df1d1b890675c3ae78b3e3621cb8785845a6fd7b341b71cbb19",
+   "bytes": 278043
+  },
+  {
+   "set": 27,
+   "setName": "Saint",
+   "role": "jewelry",
+   "path": "sources/27_saint/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212619).png",
+   "sha256": "43e77922a66fdd2386533131d7521519fb57c7f690a9d58c7d5a7a04907debea",
+   "bytes": 158903
+  },
+  {
+   "set": 28,
+   "setName": "Uchiha",
+   "role": "gear",
+   "path": "sources/28_uchiha/01_gear.png",
+   "originalUploadFilename": "image(20261029-212704).png",
+   "sha256": "dade7d9a8d906967dc9007a9b3e8d1d83e55c3d4e27fe8a00118d92465b9c3d9",
+   "bytes": 280397
+  },
+  {
+   "set": 28,
+   "setName": "Uchiha",
+   "role": "jewelry",
+   "path": "sources/28_uchiha/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212721).png",
+   "sha256": "a2b32186f90df948f56dbf45e91d0228251722417fc1ead0ec74d92d4c35280e",
+   "bytes": 228324
+  },
+  {
+   "set": 29,
+   "setName": "Hyuga",
+   "role": "gear",
+   "path": "sources/29_hyuga/01_gear.png",
+   "originalUploadFilename": "image(20261029-212817).png",
+   "sha256": "ec491a4e302414d37ba8254b1e3243bc5dc0e5ae69e607a2500770b7e63dda08",
+   "bytes": 259944
+  },
+  {
+   "set": 29,
+   "setName": "Hyuga",
+   "role": "jewelry",
+   "path": "sources/29_hyuga/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212830).png",
+   "sha256": "51855289b2ca91e8567416e71f64d5473779169906da1fafafe55df0a291a862",
+   "bytes": 205915
+  },
+  {
+   "set": 30,
+   "setName": "Uzumaki",
+   "role": "gear",
+   "path": "sources/30_uzumaki/01_gear.png",
+   "originalUploadFilename": "image(20261029-212907).png",
+   "sha256": "99ae539efb73855a8a65c559726a5f09770a4c0852a76ab482fa2daf1d0c1a40",
+   "bytes": 281718
+  },
+  {
+   "set": 30,
+   "setName": "Uzumaki",
+   "role": "jewelry",
+   "path": "sources/30_uzumaki/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-212918).png",
+   "sha256": "1e21e5a6f288eb0cd704ff19792ea6b91b252091e6b9aae028b62f10058f4afa",
+   "bytes": 249699
+  },
+  {
+   "set": 31,
+   "setName": "Sarutobi",
+   "role": "gear",
+   "path": "sources/31_sarutobi/01_gear.png",
+   "originalUploadFilename": "image(20261029-213002).png",
+   "sha256": "9dd7a7bfd9ccecc4abbeaf83e3b704f8ae6bd8c40476d1168de946e21d35bbd5",
+   "bytes": 277608
+  },
+  {
+   "set": 31,
+   "setName": "Sarutobi",
+   "role": "jewelry_variant_unlabeled_A",
+   "path": "sources/31_sarutobi/02_jewelry_variant_unlabeled_A.png",
+   "originalUploadFilename": "image(20261029-213014).png",
+   "sha256": "9ac44b2f7ee065b2d6adde912fc8067f96824ea963a9a79834977aa0e60127c3",
+   "bytes": 215929
+  },
+  {
+   "set": 31,
+   "setName": "Sarutobi",
+   "role": "jewelry_variant_unlabeled_B",
+   "path": "sources/31_sarutobi/03_jewelry_variant_unlabeled_B.png",
+   "originalUploadFilename": "image(20261029-213026).png",
+   "sha256": "28cf2cbb0cd7b58842cc358c37856d17055aa7bc381a66716c7938718a6f3298",
+   "bytes": 236432
+  },
+  {
+   "set": 32,
+   "setName": "Cursed",
+   "role": "gear",
+   "path": "sources/32_cursed/01_gear.png",
+   "originalUploadFilename": "image(20261029-213116).png",
+   "sha256": "e478d9831872cc95fbcbbf1a8b07049f8cbba2daea0fafc73cc5c28d91f506c1",
+   "bytes": 274113
+  },
+  {
+   "set": 32,
+   "setName": "Cursed",
+   "role": "jewelry",
+   "path": "sources/32_cursed/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-213130).png",
+   "sha256": "1ac061d3f83fa9659f7ff01e6e4c89504ca1da3bc6f9fecc9612d42162bfdd43",
+   "bytes": 255643
+  },
+  {
+   "set": 33,
+   "setName": "Kirigakure",
+   "role": "gear",
+   "path": "sources/33_kirigakure/01_gear.png",
+   "originalUploadFilename": "image(20261029-213218).png",
+   "sha256": "0eea7c855c2e133ad7736b9dc1e736f560bd68738d70dc5b02526a2f31b772fd",
+   "bytes": 282022
+  },
+  {
+   "set": 33,
+   "setName": "Kirigakure",
+   "role": "jewelry",
+   "path": "sources/33_kirigakure/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-213230).png",
+   "sha256": "39c129fffa51b25061edf31db72c339e8a848aedca6ee21de9ec831c32ebd74f",
+   "bytes": 262090
+  },
+  {
+   "set": 34,
+   "setName": "Kumogakure",
+   "role": "gear",
+   "path": "sources/34_kumogakure/01_gear.png",
+   "originalUploadFilename": "image(20261029-213315).png",
+   "sha256": "8353497701eb295c2c7eaadf8c45e9874a5c07592edb481cf4bf360f456c0b1e",
+   "bytes": 269023
+  },
+  {
+   "set": 34,
+   "setName": "Kumogakure",
+   "role": "jewelry_variant_unlabeled_A",
+   "path": "sources/34_kumogakure/02_jewelry_variant_unlabeled_A.png",
+   "originalUploadFilename": "image(20261029-213325).png",
+   "sha256": "e1979913f29d3e0646359ee9655d0a9cb23cd4730817813737cfc84a5e4e8ca3",
+   "bytes": 239534
+  },
+  {
+   "set": 34,
+   "setName": "Kumogakure",
+   "role": "jewelry_variant_unlabeled_B",
+   "path": "sources/34_kumogakure/03_jewelry_variant_unlabeled_B.png",
+   "originalUploadFilename": "image(20261029-213338).png",
+   "sha256": "70e28bece6ae308cdbe1852a65205d990ca6420591b40a797d30f381818121ec",
+   "bytes": 238695
+  },
+  {
+   "set": 35,
+   "setName": "Longen",
+   "role": "gear",
+   "path": "sources/35_longen/01_gear.png",
+   "originalUploadFilename": "image(20261029-213422).png",
+   "sha256": "15a04aadb3001c65fa060b71d3838eb8fb8549cf38f744b44b3a9e686559d106",
+   "bytes": 291199
+  },
+  {
+   "set": 35,
+   "setName": "Longen",
+   "role": "jewelry",
+   "path": "sources/35_longen/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-213438).png",
+   "sha256": "a91c28f5ff2cb114022505c0add7f9922c1ab516fd896b3620491231a01d2ed8",
+   "bytes": 210734
+  },
+  {
+   "set": 36,
+   "setName": "Amegakure",
+   "role": "gear",
+   "path": "sources/36_amegakure/01_gear.png",
+   "originalUploadFilename": "image(20261029-213526).png",
+   "sha256": "266867eb3147b25e06b6d95e559e2694f78de10797704d850c88e0b54a8da622",
+   "bytes": 298925
+  },
+  {
+   "set": 36,
+   "setName": "Amegakure",
+   "role": "jewelry",
+   "path": "sources/36_amegakure/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-213539).png",
+   "sha256": "c4ee84e53e2e5d6860bcfedf1557bdaddbcb8ad865beb6111e79b821ece60f0b",
+   "bytes": 309822
+  },
+  {
+   "set": 37,
+   "setName": "Sakura",
+   "role": "gear",
+   "path": "sources/37_sakura/01_gear.png",
+   "originalUploadFilename": "image(20261029-213632).png",
+   "sha256": "f566b7625d1f0ad557c70a437240a35b60d94908a13546f858798d1c5d562d46",
+   "bytes": 159349
+  },
+  {
+   "set": 37,
+   "setName": "Sakura",
+   "role": "jewelry",
+   "path": "sources/37_sakura/02_jewelry.png",
+   "originalUploadFilename": "image(20261029-213640).png",
+   "sha256": "56e1df09fcc1ed9ce11b4c3591bcb4776cb6f3ecab3128eee23834c4aa589a5a",
+   "bytes": 265876
+  },
+  {
+   "set": 38,
+   "setName": "Sunagakure",
+   "role": "gear",
+   "path": "sources/38_sunagakure/01_gear.png",
+   "originalUploadFilename": "image(20261030-211427).png",
+   "sha256": "275db5f766f328de3a6f87db7df768073f57ef91d1c62fe82bdcad3122b88385",
+   "bytes": 300685
+  },
+  {
+   "set": 38,
+   "setName": "Sunagakure",
+   "role": "jewelry",
+   "path": "sources/38_sunagakure/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-211452).png",
+   "sha256": "3c92ae7facf38fbc1956b82205b20dc667d744f6e08b69ade5992539331b2084",
+   "bytes": 195733
+  },
+  {
+   "set": 39,
+   "setName": "Reanimated",
+   "role": "gear",
+   "path": "sources/39_reanimated/01_gear.png",
+   "originalUploadFilename": "image(20261030-211527).png",
+   "sha256": "272d58f380d5c2cbc0e686d36554b81ff83e46090f24c17e82254d3079c22878",
+   "bytes": 274980
+  },
+  {
+   "set": 39,
+   "setName": "Reanimated",
+   "role": "jewelry",
+   "path": "sources/39_reanimated/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-211537).png",
+   "sha256": "26be603c15a360514963d30393bbb5180f704589c502e6980fe1ac3863153db4",
+   "bytes": 305088
+  },
+  {
+   "set": 40,
+   "setName": "Amenonuhoko",
+   "role": "gear",
+   "path": "sources/40_amenonuhoko/01_gear.png",
+   "originalUploadFilename": "image(20261030-211623).png",
+   "sha256": "a4471a695ac08e87b70d56aba6ee544baf57d70c122f1f1876ef40c87180072f",
+   "bytes": 314672
+  },
+  {
+   "set": 40,
+   "setName": "Amenonuhoko",
+   "role": "jewelry",
+   "path": "sources/40_amenonuhoko/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-211633).png",
+   "sha256": "598753d934d12d6ecd3338ad58d8d5a3a27f7fb818dbbe2f8c82789cc7d775f7",
+   "bytes": 225390
+  },
+  {
+   "set": 41,
+   "setName": "Pain",
+   "role": "gear",
+   "path": "sources/41_pain/01_gear.png",
+   "originalUploadFilename": "image(20261030-211850).png",
+   "sha256": "57a0ce3e398ab784f4a36eb92fcb906f31c003fad4f8369df03e8d48b129488c",
+   "bytes": 301024
+  },
+  {
+   "set": 41,
+   "setName": "Pain",
+   "role": "jewelry",
+   "path": "sources/41_pain/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-211900).png",
+   "sha256": "0d5976c296f3d5908394497d9287f3aa98f7aacc3fe094eeb1843f472407d8c5",
+   "bytes": 86825
+  },
+  {
+   "set": 42,
+   "setName": "Guard",
+   "role": "gear",
+   "path": "sources/42_guard/01_gear.png",
+   "originalUploadFilename": "image(20261030-211941).png",
+   "sha256": "38287d444458a2af872532e9800febda233e5dfa688df350bfc9d8bf3fd5d58d",
+   "bytes": 299768
+  },
+  {
+   "set": 42,
+   "setName": "Guard",
+   "role": "jewelry",
+   "path": "sources/42_guard/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-211952).png",
+   "sha256": "8240dab22e01e3ffc840421419dc2188376bf599a431b37b5299c5b3e0c6c6fd",
+   "bytes": 304253
+  },
+  {
+   "set": 43,
+   "setName": "Guren",
+   "role": "gear",
+   "path": "sources/43_guren/01_gear.png",
+   "originalUploadFilename": "image(20261030-212037).png",
+   "sha256": "645534db93d47f3d95135822ab8f8c56c1931c2045df3dec9a22fb5c4f3324c3",
+   "bytes": 324861
+  },
+  {
+   "set": 43,
+   "setName": "Guren",
+   "role": "jewelry",
+   "path": "sources/43_guren/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-212114).png",
+   "sha256": "262eac2fd92dc57d42f66ffbdb99fc32f52fdd518b5734005235d6cdea7d8ebf",
+   "bytes": 313556
+  },
+  {
+   "set": 44,
+   "setName": "Sunfire",
+   "role": "gear",
+   "path": "sources/44_sunfire/01_gear.png",
+   "originalUploadFilename": "image(20261030-212213).png",
+   "sha256": "3257cbe0676ee933b6c463d0f3340112f9c67d50a3e0802d1f2ed224b29748d7",
+   "bytes": 315346
+  },
+  {
+   "set": 44,
+   "setName": "Sunfire",
+   "role": "jewelry",
+   "path": "sources/44_sunfire/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-212224).png",
+   "sha256": "0391507edf1e62a6e26510de0ae3d14cfd3183de3bee0156d544149caa61b3d5",
+   "bytes": 209348
+  },
+  {
+   "set": 45,
+   "setName": "Yaksa",
+   "role": "gear",
+   "path": "sources/45_yaksa/01_gear.png",
+   "originalUploadFilename": "image(20261030-212310).png",
+   "sha256": "859e4f86aadc8b9d2d9aad7f7aeefc99b9528c4e1e592be8159b86ae5d21a201",
+   "bytes": 144620
+  },
+  {
+   "set": 45,
+   "setName": "Yaksa",
+   "role": "jewelry",
+   "path": "sources/45_yaksa/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-212322).png",
+   "sha256": "b3301b4bc6aadf187a4e8ed8484474ecb73eff91858c988ed6f84d6857952643",
+   "bytes": 197392
+  },
+  {
+   "set": 46,
+   "setName": "Moonlit",
+   "role": "gear",
+   "path": "sources/46_moonlit/01_gear.png",
+   "originalUploadFilename": "image(20261030-212409).png",
+   "sha256": "83184432049541b7079868fe29eab2e68af0b1895ce381d2a907dfcf0e6cf146",
+   "bytes": 256842
+  },
+  {
+   "set": 46,
+   "setName": "Moonlit",
+   "role": "jewelry",
+   "path": "sources/46_moonlit/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-212425).png",
+   "sha256": "78dcdfb70af5485b6d05c3bfcb8f76aef78cd19801f28595716d0d765bf0edf4",
+   "bytes": 249139
+  },
+  {
+   "set": 47,
+   "setName": "Vylon",
+   "role": "gear",
+   "path": "sources/47_vylon/01_gear.png",
+   "originalUploadFilename": "image(20261030-212509).png",
+   "sha256": "0f8cc70872067ea786fb6801990ab6cd0db3c9c701e6339c63178fc7af70e040",
+   "bytes": 272333
+  },
+  {
+   "set": 47,
+   "setName": "Vylon",
+   "role": "jewelry",
+   "path": "sources/47_vylon/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-212522).png",
+   "sha256": "c85e8be950410807a968870b6baf192941b44b9eea7ada30ac166606f7a08104",
+   "bytes": 212164
+  },
+  {
+   "set": 48,
+   "setName": "Infernity",
+   "role": "gear",
+   "path": "sources/48_infernity/01_gear.png",
+   "originalUploadFilename": "image(20261030-212743).png",
+   "sha256": "e39ed8b344876af5fc4ca6c4a5e215021ff55b60000da98592ffe3b331095383",
+   "bytes": 296354
+  },
+  {
+   "set": 48,
+   "setName": "Infernity",
+   "role": "jewelry",
+   "path": "sources/48_infernity/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-212801).png",
+   "sha256": "9bff3b24b1eb96e4ae651679ebaaa4edd8696d278114e7a4eef7d26057aa1bfa",
+   "bytes": 83262
+  },
+  {
+   "set": 49,
+   "setName": "Butterfly",
+   "role": "gear",
+   "path": "sources/49_butterfly/01_gear.png",
+   "originalUploadFilename": "image(20261030-213051).png",
+   "sha256": "9e031eaaf45fc3e84239756b3760db8d7cf6cb0364bab47cd4168781190b3b45",
+   "bytes": 294493
+  },
+  {
+   "set": 49,
+   "setName": "Butterfly",
+   "role": "jewelry",
+   "path": "sources/49_butterfly/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213103).png",
+   "sha256": "bb7e7395bc6924251f2602b87d48d8bfdf4d8ca9b1b4c92a33975eb2c0ed2531",
+   "bytes": 107296
+  },
+  {
+   "set": 50,
+   "setName": "Arcane",
+   "role": "gear",
+   "path": "sources/50_arcane/01_gear.png",
+   "originalUploadFilename": "image(20261030-213151).png",
+   "sha256": "f9ee85fe987259681e2c01a99a3a338624a10375b5f9dc87359f4fc0a0f363bb",
+   "bytes": 288458
+  },
+  {
+   "set": 50,
+   "setName": "Arcane",
+   "role": "jewelry",
+   "path": "sources/50_arcane/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213203).png",
+   "sha256": "f20fd54bf81357409051593ec4f53224d8b4d81225db18db79fc43defd152977",
+   "bytes": 90829
+  },
+  {
+   "set": 51,
+   "setName": "Mekansm",
+   "role": "gear",
+   "path": "sources/51_mekansm/01_gear.png",
+   "originalUploadFilename": "image(20261030-213316).png",
+   "sha256": "c2c5b8a9b21871b069ea6e346f4d517228bbd8912986f4abfee258c00a54bc59",
+   "bytes": 283822
+  },
+  {
+   "set": 51,
+   "setName": "Mekansm",
+   "role": "jewelry",
+   "path": "sources/51_mekansm/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213329).png",
+   "sha256": "6ef9cb18eec7ff1bfac205081a78f4a10f53b2d59051bb6be2380edb031eb3da",
+   "bytes": 242778
+  },
+  {
+   "set": 52,
+   "setName": "Flamvell",
+   "role": "gear",
+   "path": "sources/52_flamvell/01_gear.png",
+   "originalUploadFilename": "image(20261030-213427).png",
+   "sha256": "cc28c743042f1de3da653117e7e7102aab77e9da9241e66c91e61dc0abd3226b",
+   "bytes": 328439
+  },
+  {
+   "set": 52,
+   "setName": "Flamvell",
+   "role": "jewelry",
+   "path": "sources/52_flamvell/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213438).png",
+   "sha256": "6ef4768882245af6cdf9cf73aa06641658e4ed5e303236640cb6acb9bef2a5dc",
+   "bytes": 211285
+  },
+  {
+   "set": 53,
+   "setName": "Radiance",
+   "role": "gear",
+   "path": "sources/53_radiance/01_gear.png",
+   "originalUploadFilename": "image(20261030-213518).png",
+   "sha256": "24264db1afbf62a01581e9e7b75a62b63d4e9ca09db09c8ecdbc31d7b4c895ab",
+   "bytes": 342467
+  },
+  {
+   "set": 53,
+   "setName": "Radiance",
+   "role": "jewelry",
+   "path": "sources/53_radiance/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213532).png",
+   "sha256": "d9e49138aecc4eb58d853cdb3b76ae188548d087d63e0bb92aad92b09ad11bb2",
+   "bytes": 206572
+  },
+  {
+   "set": 54,
+   "setName": "Black Feather",
+   "role": "gear",
+   "path": "sources/54_black-feather/01_gear.png",
+   "originalUploadFilename": "image(20261030-213609).png",
+   "sha256": "1029b91f8ba9ba806431c374c5210298dd5ae959ded1e7528603732a6542991c",
+   "bytes": 345214
+  },
+  {
+   "set": 54,
+   "setName": "Black Feather",
+   "role": "jewelry",
+   "path": "sources/54_black-feather/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213622).png",
+   "sha256": "f7353bb951f621f6bf39ab70de2d81a26463d55c60b3077dfa582607f6440192",
+   "bytes": 210557
+  },
+  {
+   "set": 55,
+   "setName": "Branded",
+   "role": "gear",
+   "path": "sources/55_branded/01_gear.png",
+   "originalUploadFilename": "image(20261030-213701).png",
+   "sha256": "b66784d2f8a52e9b483db634e4a86d4f361bd216015a10b649ebab7c8d8ec2ee",
+   "bytes": 317062
+  },
+  {
+   "set": 55,
+   "setName": "Branded",
+   "role": "jewelry",
+   "path": "sources/55_branded/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-213713).png",
+   "sha256": "b63699dced99b258a4cb4bb803969fb288c55504d3e619b522000184b08f6eec",
+   "bytes": 255172
+  },
+  {
+   "set": 56,
+   "setName": "Defiance",
+   "role": "gear",
+   "path": "sources/56_defiance/01_gear.png",
+   "originalUploadFilename": "image(20261030-214139).png",
+   "sha256": "b3bbb6817a2dc4c3915ec2db260acc109fd7c6e4913c6e4a4aa488a73021b0db",
+   "bytes": 358663
+  },
+  {
+   "set": 56,
+   "setName": "Defiance",
+   "role": "jewelry",
+   "path": "sources/56_defiance/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-214145).png",
+   "sha256": "758fc404cbaa440db02eda39d6d4ae2c8cc5344c7274aa57ca7efd09021435db",
+   "bytes": 232723
+  },
+  {
+   "set": 57,
+   "setName": "Tarrasque",
+   "role": "gear",
+   "path": "sources/57_tarrasque/01_gear.png",
+   "originalUploadFilename": "image(20261030-214607).png",
+   "sha256": "5da0cf911a3db394b0b9f3efef5e535a72514a814238c69aa2bf462d465d5ada",
+   "bytes": 229054
+  },
+  {
+   "set": 57,
+   "setName": "Tarrasque",
+   "role": "jewelry",
+   "path": "sources/57_tarrasque/02_jewelry.png",
+   "originalUploadFilename": "image(20261030-214619).png",
+   "sha256": "9c1c4ce8147c0948645f92e8fb97c1831247e8a94e4bb871a064577c62f84ca2",
+   "bytes": 247088
+  },
+  {
+   "set": 58,
+   "setName": "Baryon",
+   "role": "gear",
+   "path": "sources/58_baryon/01_gear.png",
+   "originalUploadFilename": "image(20261102-205232).png",
+   "sha256": "1bfc3f87de6301a7579075fcaf74bcad16d5194fd712fd28b808fc40a30c7bc7",
+   "bytes": 366758
+  },
+  {
+   "set": 58,
+   "setName": "Baryon",
+   "role": "jewelry",
+   "path": "sources/58_baryon/02_jewelry.png",
+   "originalUploadFilename": "image(20261102-205240).png",
+   "sha256": "5fcf1c3ee68d19553aafb817ff157c0fd8af307b1caf872092aa1158b586f770",
+   "bytes": 253429
+  },
+  {
+   "set": 59,
+   "setName": "Sand Burial",
+   "role": "gear",
+   "path": "sources/59_sand-burial/01_gear.png",
+   "originalUploadFilename": "image(20261102-205317).png",
+   "sha256": "c054a7f90575c722fd545da495ef45235f8effb089bec82dfb86d79e1115d16f",
+   "bytes": 351236
+  },
+  {
+   "set": 59,
+   "setName": "Sand Burial",
+   "role": "jewelry_base",
+   "path": "sources/59_sand-burial/02_jewelry_base.png",
+   "originalUploadFilename": "image(20261102-205326).png",
+   "sha256": "bd8735f667167ac1c95bf0cd9bef4e5122445906e97ef576202516ec0443160d",
+   "bytes": 244480
+  },
+  {
+   "set": 59,
+   "setName": "Sand Burial",
+   "role": "jewelry_R1",
+   "path": "sources/59_sand-burial/03_jewelry_R1.png",
+   "originalUploadFilename": "image(20261102-205458).png",
+   "sha256": "62acdee502e807492e46fc1e8e1499bef55c37c537a826cf67f6e171297aaec2",
+   "bytes": 244708
+  },
+  {
+   "set": 60,
+   "setName": "Warlord",
+   "role": "gear_base_and_SSR5_comparison",
+   "path": "sources/60_warlord/01_gear_base_and_SSR5_comparison.png",
+   "originalUploadFilename": "image(20261102-205557).png",
+   "sha256": "7371aa7dffa55a020d3d963828363ab4637ff23b2ce15b551ec6ee73b87734c5",
+   "bytes": 208657
+  },
+  {
+   "set": 60,
+   "setName": "Warlord",
+   "role": "gear_upgrade_costs",
+   "path": "sources/60_warlord/02_gear_upgrade_costs.png",
+   "originalUploadFilename": "image(20261102-205610).png",
+   "sha256": "a56190c98b4994ec8b92069749c77480edb2c3d3ba07e3b2bd6e553409651e60",
+   "bytes": 1039662
+  },
+  {
+   "set": 60,
+   "setName": "Warlord",
+   "role": "jewelry_R1",
+   "path": "sources/60_warlord/03_jewelry_R1.png",
+   "originalUploadFilename": "image(20261102-205619).png",
+   "sha256": "26c8c83512a16426045a66fd358a05d8cacad25e46d8a5ee71dac8ba3dfa7e8b",
+   "bytes": 389834
+  },
+  {
+   "set": 60,
+   "setName": "Warlord",
+   "role": "jewelry_R1_upgrade_costs",
+   "path": "sources/60_warlord/04_jewelry_R1_upgrade_costs.png",
+   "originalUploadFilename": "image(20261102-205630).png",
+   "sha256": "d41d726287ed47b74051ad50b2e6d79405522aee703916ce31df73639e56652d",
+   "bytes": 988167
+  },
+  {
+   "set": 60,
+   "setName": "Warlord",
+   "role": "jewelry_R2",
+   "path": "sources/60_warlord/05_jewelry_R2.png",
+   "originalUploadFilename": "image(20261102-205643).png",
+   "sha256": "6bb32f9619779ba922df15478de0d513407cb4ee2dfe0e68583709ababc57a00",
+   "bytes": 372320
+  },
+  {
+   "set": 60,
+   "setName": "Warlord",
+   "role": "jewelry_R2_upgrade_costs",
+   "path": "sources/60_warlord/06_jewelry_R2_upgrade_costs.png",
+   "originalUploadFilename": "image(20261102-205655).png",
+   "sha256": "c56b61f470a0df95040a20c62674b30cbbf5abbb6ac4fa1ac49018461842b605",
+   "bytes": 982257
+  },
+  {
+   "set": 61,
+   "setName": "Sange",
+   "role": "gear_variant_A",
+   "path": "sources/61_sange/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-205746).png",
+   "sha256": "3e458731664a552a91979a856256c9ae6fa95b86a294a9adfa821262003a9bfe",
+   "bytes": 213518
+  },
+  {
+   "set": 61,
+   "setName": "Sange",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/61_sange/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-205757).png",
+   "sha256": "d34dab2e8fe2eecb7a3e791babb1907cca5ccd7062dc7481cb4aa78855887575",
+   "bytes": 214028
+  },
+  {
+   "set": 61,
+   "setName": "Sange",
+   "role": "jewelry_variant_A",
+   "path": "sources/61_sange/03_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-205808).png",
+   "sha256": "34ad7fb566817e4efeb42169c3c20514116a3955e904a41bd02b5721bad299c1",
+   "bytes": 235227
+  },
+  {
+   "set": 61,
+   "setName": "Sange",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/61_sange/04_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-205820).png",
+   "sha256": "5a425d4dabf2dbe5a6a3b07b91da0d762e1fb1b3593e01e9388432dfc36fd21a",
+   "bytes": 234523
+  },
+  {
+   "set": 62,
+   "setName": "Iron Will",
+   "role": "gear_variant_A",
+   "path": "sources/62_iron-will/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-210020).png",
+   "sha256": "97ac27dc79d511beebe58b1ac40a31e4868f2b35c28f6e0d0dd8009024304989",
+   "bytes": 286232
+  },
+  {
+   "set": 62,
+   "setName": "Iron Will",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/62_iron-will/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210030).png",
+   "sha256": "bedb1e3da477e8080c9428192f388769ff8eef752bc14ff9b65803b0410e06b2",
+   "bytes": 288378
+  },
+  {
+   "set": 62,
+   "setName": "Iron Will",
+   "role": "jewelry_variant_A",
+   "path": "sources/62_iron-will/03_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-210040).png",
+   "sha256": "2a03204c6e2017ab2c2ebae780a7517a8fa46cddf29975f7abadfebc640cc11c",
+   "bytes": 230736
+  },
+  {
+   "set": 62,
+   "setName": "Iron Will",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/62_iron-will/04_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210051).png",
+   "sha256": "3a80c26122a3bd58d249d18dbb4068a0383808c2a6398f28c2a06c442755484d",
+   "bytes": 222426
+  },
+  {
+   "set": 63,
+   "setName": "Crystalys",
+   "role": "gear_variant_A",
+   "path": "sources/63_crystalys/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-210144).png",
+   "sha256": "402a0cff860c5ea20b1a45d13040f139cfd4df550d96cd79df8cf63614c00d4f",
+   "bytes": 251332
+  },
+  {
+   "set": 63,
+   "setName": "Crystalys",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/63_crystalys/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210232).png",
+   "sha256": "eb4656887d9abdaa4639cc418be54e76e3d64b3c8a7e747c177a706a5a7471e3",
+   "bytes": 252727
+  },
+  {
+   "set": 63,
+   "setName": "Crystalys",
+   "role": "jewelry_variant_A",
+   "path": "sources/63_crystalys/03_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-210248).png",
+   "sha256": "d2263f6e676ccd7cbe427d991528ac335247988256bcbe0638c88a532a262f9f",
+   "bytes": 215034
+  },
+  {
+   "set": 63,
+   "setName": "Crystalys",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/63_crystalys/04_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210259).png",
+   "sha256": "bebb5fd014ad41fff5b0439bf4a1c2bffc1de3031daa5631a2a6b798e966ceb5",
+   "bytes": 215222
+  },
+  {
+   "set": 64,
+   "setName": "Susanoo",
+   "role": "gear_variant_A",
+   "path": "sources/64_susanoo/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-210339).png",
+   "sha256": "ac8a92d748cbc4290f88b4485e01b19a29569a2891194e864048f66e930d1eb8",
+   "bytes": 284300
+  },
+  {
+   "set": 64,
+   "setName": "Susanoo",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/64_susanoo/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210404).png",
+   "sha256": "f28842a6bf4bb9c306d502d87cd10e490d0ef3bd5fb478b3085b954fda84ac59",
+   "bytes": 285185
+  },
+  {
+   "set": 64,
+   "setName": "Susanoo",
+   "role": "jewelry_variant_A",
+   "path": "sources/64_susanoo/03_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-210417).png",
+   "sha256": "4796df8d77e9d212142124c3870abe0e4b1dfd383c3fabdcce94a9472b7c5fe3",
+   "bytes": 234805
+  },
+  {
+   "set": 64,
+   "setName": "Susanoo",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/64_susanoo/04_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210428).png",
+   "sha256": "f4f478c4075294a0df5aa6d255c1f3b24e5b4d55b6f8edc3c079c0a2ed97e3b6",
+   "bytes": 235277
+  },
+  {
+   "set": 65,
+   "setName": "Izanami",
+   "role": "gear_variant_A",
+   "path": "sources/65_izanami/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-210526).png",
+   "sha256": "395663e0753afd0e765b137660eff5e38558df4fd68327b9fadf3cc510c3e7d3",
+   "bytes": 249055
+  },
+  {
+   "set": 65,
+   "setName": "Izanami",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/65_izanami/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210558).png",
+   "sha256": "86da96a86247c60932c74a9e384122c2e8bc24b9dbcf3215a31f91cea537df75",
+   "bytes": 249478
+  },
+  {
+   "set": 65,
+   "setName": "Izanami",
+   "role": "gear_variant_C_unlabeled",
+   "path": "sources/65_izanami/03_gear_variant_C_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210610).png",
+   "sha256": "a31def6c2d27949e6198b25d30ddf991ad3cf93692f538eef4643601b0c922cf",
+   "bytes": 249833
+  },
+  {
+   "set": 65,
+   "setName": "Izanami",
+   "role": "jewelry_variant_A",
+   "path": "sources/65_izanami/04_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-210629).png",
+   "sha256": "05eff226cfcd1ef8daf883740428621ecf2806723e7808e5d3f8d6ccc5195145",
+   "bytes": 233863
+  },
+  {
+   "set": 65,
+   "setName": "Izanami",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/65_izanami/05_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210641).png",
+   "sha256": "c611e87df65b3478deefdcee76ffb17157219d2986070fe1a538191cad405277",
+   "bytes": 233965
+  },
+  {
+   "set": 66,
+   "setName": "Truth-Seeking",
+   "role": "gear_variant_A",
+   "path": "sources/66_truth-seeking/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-210819).png",
+   "sha256": "ff18b0445c4f57aeb3724de23d8059cc35ec5fde9a28a6d7e05d0de8f09582a3",
+   "bytes": 192131
+  },
+  {
+   "set": 66,
+   "setName": "Truth-Seeking",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/66_truth-seeking/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210830).png",
+   "sha256": "3b267889869828e869355424ae2c77c129cba0050c6ae2c1baa2f699ecda1465",
+   "bytes": 192350
+  },
+  {
+   "set": 66,
+   "setName": "Truth-Seeking",
+   "role": "jewelry_variant_A",
+   "path": "sources/66_truth-seeking/03_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-210843).png",
+   "sha256": "4138fe2a2a079aa86deb25f9aa6c42207456d633bfd13ecc1d27d094bc8c19af",
+   "bytes": 227094
+  },
+  {
+   "set": 66,
+   "setName": "Truth-Seeking",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/66_truth-seeking/04_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210855).png",
+   "sha256": "d9ecc73a54b24420c7be5ff543694833999d3419c4062749796bd457c256ba00",
+   "bytes": 226597
+  },
+  {
+   "set": 67,
+   "setName": "Summoning",
+   "role": "gear_variant_A",
+   "path": "sources/67_summoning/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-210935).png",
+   "sha256": "f7da30bdac669143bc5527c1b5f4f868842807c2bb7d0deac28920949be36918",
+   "bytes": 297033
+  },
+  {
+   "set": 67,
+   "setName": "Summoning",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/67_summoning/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-210947).png",
+   "sha256": "bf80d97cfaecf6ff1855c57cc894b99b7b0f04e974cf2fb3089cf32ffe8c4084",
+   "bytes": 298094
+  },
+  {
+   "set": 67,
+   "setName": "Summoning",
+   "role": "jewelry",
+   "path": "sources/67_summoning/03_jewelry.png",
+   "originalUploadFilename": "image(20261102-210958).png",
+   "sha256": "050605e6e8ba3ca1550c5cf299be09e130620d91daa5f0d09a373d22dc419106",
+   "bytes": 202374
+  },
+  {
+   "set": 68,
+   "setName": "Yin-Yang",
+   "role": "gear_variant_A",
+   "path": "sources/68_yin-yang/01_gear_variant_A.png",
+   "originalUploadFilename": "image(20261102-211050).png",
+   "sha256": "5c88c51357eb115c5b29fda20cf11addde2630cab750c3db00bcfadadde861d2",
+   "bytes": 187074
+  },
+  {
+   "set": 68,
+   "setName": "Yin-Yang",
+   "role": "gear_variant_B_unlabeled",
+   "path": "sources/68_yin-yang/02_gear_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-211131).png",
+   "sha256": "e5691c119153a34bf43f6f379719e518b9484bc207b87fd157c96cfb1d997f6a",
+   "bytes": 187369
+  },
+  {
+   "set": 68,
+   "setName": "Yin-Yang",
+   "role": "jewelry_variant_A",
+   "path": "sources/68_yin-yang/03_jewelry_variant_A.png",
+   "originalUploadFilename": "image(20261102-211142).png",
+   "sha256": "cfb4d2f9c5691ac69713668f3db26423cf9e4a2793beb3fb745caf44919f7690",
+   "bytes": 235526
+  },
+  {
+   "set": 68,
+   "setName": "Yin-Yang",
+   "role": "jewelry_variant_B_unlabeled",
+   "path": "sources/68_yin-yang/04_jewelry_variant_B_unlabeled.png",
+   "originalUploadFilename": "image(20261102-211155).png",
+   "sha256": "f7ce04101185c4381eac6a7307bfbc97233fbbed1aae52dd24a63e1f3055cbc9",
+   "bytes": 235347
+  }
+ ],
+ "reviewFlags": [
+  {
+   "set": "Mekansm",
+   "issue": "Uploader names this set Mekansm; image title appears MEKA. Confirm canonical name; preserve both original source and uploader mapping."
+  },
+  {
+   "set": "Warlord",
+   "issue": "Source contains equipment Base/SSR5 bonuses, gear upgrade costs, accessory R1/R2 effects and costs; do not conflate SSR5 with R2 or invent base jewelry."
+  },
+  {
+   "set": "Izanami",
+   "issue": "Three gear sheets and two jewelry sheets, not all explicitly labeled; preserve variants without inventing R1/R2 labels."
+  },
+  {
+   "set": "Sarutobi",
+   "issue": "Two jewelry sheets for one gear sheet; review whether legitimate variants and their labels."
+  },
+  {
+   "set": "Kumogakure",
+   "issue": "Two jewelry sheets for one gear sheet; source variation may affect attack type. Preserve both."
+  },
+  {
+   "set": "Sand Burial",
+   "issue": "Jewelry R1 is explicitly supported; gear upgrade not provided in this package."
+  },
+  {
+   "set": "Sange",
+   "issue": "Variant B appears higher-stat but no explicit label; do not assume R1."
+  },
+  {
+   "set": "Iron Will",
+   "issue": "Variant B appears higher-stat but no explicit label; do not assume R1."
+  },
+  {
+   "set": "Crystalys",
+   "issue": "Multiple variants not all explicitly labeled; retain for source review."
+  },
+  {
+   "set": "Susanoo",
+   "issue": "Multiple variants not all explicitly labeled; retain for source review."
+  },
+  {
+   "set": "Truth-Seeking",
+   "issue": "Multiple variants not all explicitly labeled; retain for source review."
+  },
+  {
+   "set": "Summoning",
+   "issue": "Two equipment variants, only one jewelry sheet in source."
+  },
+  {
+   "set": "Yin-Yang",
+   "issue": "Two equipment and two jewelry sheets with stat changes; no explicit suffix visible. Flag upgrade labels for confirmation."
+  },
+  {
+   "set": "Legendary",
+   "issue": "Name only, no image/text; do not invent or publish fabricated data."
+  },
+  {
+   "set": "Fate",
+   "issue": "Name only, no image/text; do not invent or publish fabricated data."
+  },
+  {
+   "set": "Totsuka",
+   "issue": "Name only, no image/text; do not invent or publish fabricated data."
+  }
+ ]
+}

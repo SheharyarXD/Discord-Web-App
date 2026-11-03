@@ -1,0 +1,4 @@
+# Name-only sets: the owner gave the names but no image, stats, effects or text. Nothing is created for them.
+NAMEONLY 69 | Legendary
+NAMEONLY 70 | Fate
+NAMEONLY 71 | Totsuka

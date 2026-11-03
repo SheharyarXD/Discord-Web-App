@@ -1,0 +1,18 @@
+SET 49 | Butterfly
+GEAR sources/49_butterfly/01_gear.png | - | BUTTERFLY
+SLOT Physical Attack | 69500 | 2
+SLOT Physical Defense | 69500 | 2
+SLOT Strategy Attack | 69500 | 1
+SLOT Strategy Defense | 69500 | 1
+SLOT Speed | 69500 | 1
+SLOT Power | 695000 | 1
+BONUS 2 | Final Damage Increase +20%, Attack +13, Damage Rate +20%
+BONUS 4 | Agility +23000, Attack +15%, Damage Rate +20% // After release a skill, make 2 random enemies enter 50% heal reduction(cannot be dispelled)
+BONUS 6 | Agility +35000, Attack +15%, Damage Rate +30%, Weaken enemy's ATK +30% // After release a skill, has 80% chance to make 2 random ninjas enter Upwind state for 2 rounds
+REVIEW The 2-piece text prints "Attack +13" without a percent sign (the 4 and 6 piece texts print +15%); kept exactly as printed, unit to be confirmed.
+JEWEL sources/49_butterfly/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 60500 | 2 | Decrease enemy CC Rate +35% // Avoid injury rate +30% // After be attacked, decrease all allies 90% assistance rate for 2 rounds | Attack +45% // HP +60%
+CAT Chakra | 60500 | 2 | Increase Success rate of CC+30% // After released a skill, makes 2 random allies recover 30 fury | Attack +45% // HP +60%
+CAT Agility | 60500 | 2 | Damage Rate +40% // After released a skill, makes 1 random enemy enter heal forbidden state for 2 rounds | Attack +45% // HP +60%
+CAT Power | 605000 | 2 | Weaken enemy's ATK +25% // After be attacked, has 40% chances to dispel attacker's buff | Attack +45% // HP +60%

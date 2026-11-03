@@ -1,0 +1,18 @@
+SET 51 | Mekansm
+REVIEW NAME DISCREPANCY: the uploader names this set Mekansm; the title printed on both source sheets reads MEKA. The set is stored under the uploader name "Mekansm" with the source title "MEKA" recorded as a source alias. Canonical name to be confirmed by the client.
+GEAR sources/51_mekansm/01_gear.png | - | MEKA
+SLOT Physical Attack | 70500 | 2
+SLOT Physical Defense | 70500 | 2
+SLOT Strategy Attack | 70500 | 1
+SLOT Strategy Defense | 70500 | 1
+SLOT Speed | 70500 | 1
+SLOT Power | 705000 | 1
+BONUS 2 | Power +40000, Avoid Injury Rate +30%, Immune Weaken DEF +40%
+BONUS 4 | Agility +25000, Power +70000, Defense +30%, Avoid Injury Rate +30%, // Immune Weaken State+100% (Only immune skill weak, not passive weak)
+BONUS 6 | Agility +35000,  Power +90000,  Defense +30%, HP +50%, // Weaken enemy's ATK+30%, Decrease CC Rate +20%
+JEWEL sources/51_mekansm/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 61500 | 2 | Decrease enemy CC rate +30% // Damage rate +30% // Avoid injury rate +15% | Weaken enemy's ATK +25% // Attack +15% // After released the skill, make random 1 enemy enter weakend state for 2 rounds
+CAT Chakra | 61500 | 2 | Decrease enemy CC rate +30% // Attack +25% // Avoid injury rate +15% | Weaken enemy's ATK +25% // Attack +15% // After released the skill, make random 1 enemy enter weakend state for 2 rounds
+CAT Agility | 61500 | 2 | Decrease enemy CC rate +30% // Damage rate +30% // HP +15% | Weaken enemy's ATK +25% // Attack +15% // After released the skill, make random 1 enemy enter weakend state for 2 rounds
+CAT Power | 615000 | 2 | Decrease enemy CC rate +20% // Bonus damage after attack +20% // HP +15% | Weaken enemy's ATK +25% // Attack +15% // After released the skill, make random 1 enemy enter weakend state for 2 rounds

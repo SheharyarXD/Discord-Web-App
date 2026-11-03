@@ -1,0 +1,11 @@
+SET 9 | Crimson
+GEAR sources/09_crimson/01_gear.png | - | CRIMSON
+SLOT Physical Attack | 14000 | 2
+SLOT Physical Defense | 12000 | 2
+SLOT Strategy Attack | 14000 | 1
+SLOT Strategy Defense | 15000 | 1
+SLOT Speed | 14000 | 1
+SLOT Power | 150000 | 1
+BONUS 2 | Agility +5000, Chakra +5000, Power +5000, Force +5000
+BONUS 4 | Agility +6000, Damage Rate +40%, Weaken Enemy's DEF +30%
+BONUS 6 | Agility +10000, Avoid Injury Rate +40%, Weaken Enemy's ATK +40%

@@ -520,7 +520,7 @@ async function ninjaWhere(db: Db, p: ReturnType<typeof ninjaListParams.parse>): 
     });
   }
   if (p.effectTerms?.length) {
-    const ids = await ninjaIdsWithEffects(db, p.effectTerms);
+    const ids = await ninjaIdsWithEffects(db, p.effectTerms, p.effectMode);
     if (ids) and.push({ id: { in: ids } });
   }
   if (p.releasedFrom) and.push(periodAtLeast(p.releasedFrom));

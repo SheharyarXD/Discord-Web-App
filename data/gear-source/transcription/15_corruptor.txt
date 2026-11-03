@@ -1,0 +1,16 @@
+SET 15 | Corruptor
+GEAR sources/15_corruptor/01_gear.png | - | CORRUPTOR
+SLOT Physical Attack | 26000 | 2
+SLOT Physical Defense | 24000 | 2
+SLOT Strategy Attack | 26000 | 1
+SLOT Strategy Defense | 28000 | 1
+SLOT Speed | 26000 | 1
+SLOT Power | 300000 | 1
+BONUS 2 | Agility +10000, Damage Rate +30%
+BONUS 4 | Agility +12000, Increase CC Rate +30%, After attack stop enemy from adding Buff's for 2 rounds
+BONUS 6 | Agility +15000, Avoid-Injury Rate +50%, Crit Damage +50%, After recieving attack 50% chance to Stun enemy for 1 round
+JEWEL sources/15_corruptor/02_jewelry.png | - | -
+CAT Force | 38000 | 2 | Agility +10000 // Phy/Str. DEF +20%
+CAT Chakra | 38000 | 2 | Damage Rate +20% // HP +20%
+CAT Agility | 40000 | 2 | Avoid-Injury Rate +20% // Attack +20%
+CAT Power | 400000 | 2 | Avoid-Injury Rate +20% // After receiving attack, small chance (40%) to clear debuffs

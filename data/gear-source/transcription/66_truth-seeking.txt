@@ -1,0 +1,32 @@
+SET 66 | Truth-Seeking
+REVIEW Two gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A and B; no R1/R2 name is justified by the larger numbers. Client decision needed.
+GEAR sources/66_truth-seeking/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 77500 | 2
+SLOT Physical Defense | 77500 | 2
+SLOT Strategy Attack | 77500 | 1
+SLOT Strategy Defense | 77500 | 1
+SLOT Speed | 77500 | 1
+SLOT Power | 775000 | 1
+BONUS 2 | Agility +15000, Attack +15%, Final DMG +15%, Damage Rate +20%
+BONUS 4 | Agility +20000, Attack +20%, Punch Rate +20%, Weaken enemy's DEF +25%
+BONUS 6 | Agility +25000, Attack +15%, Weaken enemy's ATK +30%, Damage Rate +30% // Deals 50%(Phys.ATK) Pierce dmg to all enemies after released a skill
+GEAR sources/66_truth-seeking/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 85500 | 2
+SLOT Physical Defense | 85500 | 2
+SLOT Strategy Attack | 85500 | 1
+SLOT Strategy Defense | 85500 | 1
+SLOT Speed | 85500 | 1
+SLOT Power | 855000 | 1
+BONUS 2 | Agility +15000, Attack +15%, Final DMG +25%, Damage Rate +20%
+BONUS 4 | Agility +20000, Attack +20%, Punch Rate +30%, Weaken enemy's DEF +25%
+BONUS 6 | Agility +25000, Attack +15%, Weaken enemy's ATK +35%, Damage Rate +30% // Deals 50%(Phys.ATK) Pierce dmg to all enemies after released a skill
+JEWEL sources/66_truth-seeking/03_jewelry_variant_A.png | seq:A | -
+CAT Force | 68000 | 2 | Final DMG +30% // Weaken enemy's DEF +30% | Final DMG +30% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+CAT Chakra | 68000 | 2 | Attack +30% // Weaken enemy's DEF +25% | Final DMG +30% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+CAT Agility | 68000 | 2 | Damage Rate +30% // Weaken enemy's DEF +30% | Final DMG +30% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+CAT Power | 680000 | 2 | Attack +20% // Damage Rate +30% // Punch Rate +15% | Final DMG +30% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+JEWEL sources/66_truth-seeking/04_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 69500 | 2 | Final DMG +35% // Weaken enemy's DEF +30% | Final DMG +40% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+CAT Chakra | 69500 | 2 | Attack +30% // Weaken enemy's DEF +30% | Final DMG +40% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+CAT Agility | 69500 | 2 | Damage Rate +35% // Weaken enemy's DEF +30% | Final DMG +40% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate
+CAT Power | 695000 | 2 | Attack +20% // Damage Rate +35% // Punch Rate +15% | Final DMG +40% // Weaken enemy's ATK +25% // Physical Attack +15% // After a skill, deals Physical DMG(60%) to the enemy with the lowest Avoid Injury Rate

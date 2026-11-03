@@ -1,0 +1,19 @@
+# Version field: "-" = single sheet, "label:<x>" = a label printed on the source, "seq:<x>" = image order only (no label printed).
+SET 30 | Uzumaki
+GEAR sources/30_uzumaki/01_gear.png | - | UZUMAKI
+SLOT Physical Attack | 53000 | 2
+SLOT Physical Defense | 52000 | 2
+SLOT Strategy Attack | 53000 | 1
+SLOT Strategy Defense | 52000 | 1
+SLOT Speed | 53000 | 1
+SLOT Power | 540000 | 1
+BONUS 2 | Aid Rate +20%, Damage Rate +30%, Avoid-Injury Rate +30%
+BONUS 4 | Agility +24000, HP +20%, CC Resistance +15%
+BONUS 6 | Agility +26000, Weaken enemy ATK +30%, After attacked, 40% chance to enter CC-Free state for 2 rounds
+JEWEL sources/30_uzumaki/02_jewelry.png | - | -
+REVIEW The 8 effect prints "Punch Rate −40%" with a minus sign next to a Weaken enemy's ATK +5% bonus; kept exactly as printed, sign and intent to be confirmed.
+REVIEW Two 2-piece effects print a 110% chance (Agility: Silence, Power: Chaos); kept exactly as printed.
+CAT Force | 49000 | 2 | HP +25% // After using skill, 90% chance to make 1 random enemy to enter Wind Bound for 1 round | Weaken enemy's ATK +5% // Punch Rate −40%
+CAT Chakra | 49000 | 2 | Damage Rate +25% // After using skill, 90% chance to make 1 random enemy to enter Imprison for 1 round | Weaken enemy's ATK +5% // Punch Rate −40%
+CAT Agility | 51000 | 2 | Attack +25% // After using skill, 110% chance to make 1 random enemy to enter Silence for 1 round | Weaken enemy's ATK +5% // Punch Rate −40%
+CAT Power | 500000 | 2 | Weaken enemy's ATK +25% // After using skill, 110% chance to make 1 random enemy to enter Chaos for 1 round | Weaken enemy's ATK +5% // Punch Rate −40%

@@ -1,3 +1,4 @@
+import type { GearListParams } from "@/game/gear";
 import type { ItemKind, ItemListParams, NinjaListParams } from "@/game/schemas";
 
 /** Raw Next.js search params. */
@@ -31,6 +32,9 @@ export function effectTerms(p: RawParams): string[] {
     .slice(0, 6);
 }
 
+/** «fxm=all»: the selected effects must ALL be present. Anything else means ANY (the default). */
+export const effectModeOf = (p: RawParams): "any" | "all" => (one(p.fxm) === "all" ? "all" : "any");
+
 /** «stat:desc:force», «growth:asc:hp», «name:asc», «release:desc». Anything else means the default order. */
 function sortOf(raw: string | undefined, kind: "ninja" | "item") {
   if (!raw) return undefined;
@@ -60,8 +64,31 @@ export function parseNinjaParams(p: RawParams, options: { includeUnpublished?: b
     ...(statRanges(p).length ? { statFilters: statRanges(p) } : {}),
     ...(all(p.effect).length ? { effectStatisticKeys: all(p.effect) } : {}),
     ...(effectTerms(p).length ? { effectTerms: effectTerms(p) } : {}),
+    ...(effectModeOf(p) === "all" ? { effectMode: "all" as const } : {}),
     ...(sort ? { sort: sort as NonNullable<NinjaListParams["sort"]> } : {}),
     ...(options.includeUnpublished ? { includeUnpublished: true } : {}),
+  };
+}
+
+/** The set catalogue: «kind=equipment&version=labelled&tier=4&stat1=speed&min1=70000&fx=aturdir&fxm=all». */
+export function parseGearParams(p: RawParams): GearListParams {
+  const kinds = all(p.kind).filter((k): k is "equipment" | "jewelry" => k === "equipment" || k === "jewelry");
+  const versions = all(p.version).filter((v): v is "base" | "labelled" | "variant" => v === "base" || v === "labelled" || v === "variant");
+  const tiers = all(p.tier).map((t) => Number.parseInt(t, 10)).filter((t) => Number.isInteger(t) && t > 0 && t < 21);
+  const sortRaw = one(p.sort);
+  const [by, direction, statisticKey] = (sortRaw ?? "").split(":");
+  const dir = direction === "asc" || direction === "desc" ? direction : undefined;
+  const gearSort: GearListParams["sort"] = by === "name" && dir ? { by: "name" as const, direction: dir } : by === "stat" && statisticKey && dir ? { by: "stat" as const, direction: dir, statisticKey } : undefined;
+  return {
+    page: intOr1(one(p.page)),
+    ...(one(p.q) ? { query: one(p.q) } : {}),
+    ...(kinds.length ? { kinds } : {}),
+    ...(versions.length ? { versions } : {}),
+    ...(tiers.length ? { tiers } : {}),
+    ...(statRanges(p).length ? { statFilters: statRanges(p) } : {}),
+    ...(effectTerms(p).length ? { effectTerms: effectTerms(p) } : {}),
+    ...(effectModeOf(p) === "all" ? { effectMode: "all" as const } : {}),
+    ...(gearSort ? { sort: gearSort } : {}),
   };
 }
 

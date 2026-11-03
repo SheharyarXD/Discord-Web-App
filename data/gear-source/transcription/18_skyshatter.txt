@@ -1,0 +1,11 @@
+SET 18 | Skyshatter
+GEAR sources/18_skyshatter/01_gear.png | - | SKYSHATTER
+SLOT Physical Attack | 32000 | 2
+SLOT Physical Defense | 30000 | 2
+SLOT Strategy Attack | 32000 | 1
+SLOT Strategy Defense | 32000 | 1
+SLOT Speed | 32000 | 1
+SLOT Power | 350000 | 1
+BONUS 2 | Punch Rate +20%, Damage Rate +30%
+BONUS 4 | Agility +18000, Attack +20%, Damage taken reduction +30%
+BONUS 6 | Agility +25000, Avoid-Injury Rate +40% // After recieving attack 40% chance to gain Super Dodge for 1 round

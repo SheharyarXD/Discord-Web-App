@@ -1,0 +1,18 @@
+SET 37 | Sakura
+GEAR sources/37_sakura/01_gear.png | - | SAKURA
+NOTE The sheet is rendered in pink instead of the usual red/grey, and is a smaller image (640 px wide). Values read at full resolution.
+SLOT Physical Attack | 60000 | 2
+SLOT Physical Defense | 60000 | 2
+SLOT Strategy Attack | 60000 | 1
+SLOT Strategy Defense | 60000 | 1
+SLOT Speed | 60000 | 1
+SLOT Power | 600000 | 1
+BONUS 2 | Damage Rate +40%, Agility +22000, After releasing skill give 2 random ally Fury Shield 2 rounds.
+BONUS 4 | Attack +20%, After releasing skill Incinerate 2 random enemies (dot—120%) 2 rounds and increase 2 random ally Crit +40% (break limit)
+BONUS 6 | Agility +30000, Weaken enemy attack +25%, After releasing skill Make 2 random enemy enter Pain Will (can't add buffs) 2 rounds and have 50% chance to make self enter Shielding State (ignore enemy damage can't be dispelled) 2 rounds
+REVIEW The 4-piece text prints "(dot—120%)" with a long dash; kept exactly as printed.
+JEWEL sources/37_sakura/02_jewelry.png | - | -
+CAT Force | 53500 | 2 | Avoid-Injury Rate +20% // After getting hit, reduce enemy Control success rate +25% 2 rounds | Weaken enemy ATK +20% // After getting hit, 50% chance to enter Control-Free State 2 rounds
+CAT Chakra | 53500 | 2 | HP +25% // After getting hit, reduce enemy ATK −25% 2 rounds | Weaken enemy ATK +20% // After getting hit, 50% chance to enter Control-Free State 2 rounds
+CAT Agility | 55000 | 2 | Avoid-Injury Rate +20% // After getting hit, reduce enemy Damage Rate +20% 2 rounds | Weaken enemy ATK +20% // After getting hit, 50% chance to enter Control-Free State 2 rounds
+CAT Power | 540000 | 2 | HP +25% // After getting hit, reduce enemy Final Damage reduction −25% | Weaken enemy ATK +20% // After getting hit, 50% chance to enter Control-Free State 2 rounds

@@ -1,0 +1,33 @@
+SET 68 | Yin-Yang
+REVIEW Two gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A and B; no R1/R2 name is justified by the larger numbers. Client decision needed.
+GEAR sources/68_yin-yang/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 78500 | 2
+SLOT Physical Defense | 78500 | 2
+SLOT Strategy Attack | 78500 | 1
+SLOT Strategy Defense | 78500 | 1
+SLOT Speed | 78500 | 1
+SLOT Power | 785000 | 1
+BONUS 2 | Agility +25000, Attack +20%, Damage rate +20%
+BONUS 4 | Strategy Attack +15%, Final DMG +10% // After a skill, decreases enemy Assaulters Damage Rate by 30%, makes all allies except SELF enter Wind Release state (10%) for 2 rounds
+BONUS 6 | Agility +35000, Attack +20%, Damage rate +15%, Weaken enemy's ATK +30% // After a skill, makes SELF enter Position Interchange state for 2 rounds, makes 3 random enemies enter Armor Break (30%) for 2 rounds
+GEAR sources/68_yin-yang/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 86500 | 2
+SLOT Physical Defense | 86500 | 2
+SLOT Strategy Attack | 86500 | 1
+SLOT Strategy Defense | 86500 | 1
+SLOT Speed | 86500 | 1
+SLOT Power | 865000 | 1
+BONUS 2 | Agility +25000, Attack +20%, Damage rate +30%
+BONUS 4 | Strategy Attack +15%, Final DMG +20% // After a skill, decreases enemy Assaulters Damage Rate by 30%, makes all allies except SELF enter Wind Release state (10%) for 2 rounds
+BONUS 6 | Agility +35000, Attack +20%, Damage rate +20%, Weaken enemy's ATK +30% // After a skill, makes SELF enter Position Interchange state for 2 rounds, makes 3 random enemies enter Armor Break (30%) for 2 rounds
+JEWEL sources/68_yin-yang/03_jewelry_variant_A.png | seq:A | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 68000 | 2 | HP +40% // After being attacked, makes 2 random allies enter Strong State (20%) for 2 rounds | Weaken enemy's ATK +32%
+CAT Chakra | 68000 | 2 | Final DMG Reduction +40% // After being attacked, makes 2 random allies enter Super Defense state (20%) for 2 rounds | Weaken enemy's ATK +32%
+CAT Agility | 68000 | 2 | Avoid Injury rate +50% // After being attacked, has a 35% chance to dispel buffs from 3 random enemies | Weaken enemy's ATK +32%
+CAT Power | 680000 | 2 | Phys/Strat Defense +50% // After being attacked, decreases enemy Assaulters Crit rate by 30% for 2 rounds. (Cannot be dispelled) | Weaken enemy's ATK +32%
+JEWEL sources/68_yin-yang/04_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 69500 | 2 | HP +50% // After being attacked, makes 2 random allies enter Strong State (20%) for 2 rounds | Weaken enemy's ATK +35%
+CAT Chakra | 69500 | 2 | Final DMG Reduction +45% // After being attacked, makes 2 random allies enter Super Defense state (20%) for 2 rounds | Weaken enemy's ATK +35%
+CAT Agility | 69500 | 2 | Avoid Injury rate +55% // After being attacked, has a 35% chance to dispel buffs from 3 random enemies | Weaken enemy's ATK +35%
+CAT Power | 695000 | 2 | Phys/Strat Defense +60% // After being attacked, decreases enemy Assaulters Crit rate by 30% for 2 rounds. (Cannot be dispelled) | Weaken enemy's ATK +35%

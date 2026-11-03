@@ -1,0 +1,11 @@
+SET 5 | Sage
+GEAR sources/05_sage/01_gear.png | - | SAGE
+SLOT Physical Attack | 7000 | 2
+SLOT Physical Defense | 3500 | 2
+SLOT Strategy Attack | 7000 | 1
+SLOT Strategy Defense | 6000 | 1
+SLOT Speed | 6500 | 1
+SLOT Power | 40000 | 1
+BONUS 2 | Force +4000, Chakra +4000
+BONUS 4 | Power +6000, Damage Rate +20%
+BONUS 6 | Agility +8000, Avoid Injury Rate +40%

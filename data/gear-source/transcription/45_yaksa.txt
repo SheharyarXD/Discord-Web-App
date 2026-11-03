@@ -1,0 +1,18 @@
+SET 45 | Yaksa
+GEAR sources/45_yaksa/01_gear.png | - | YAKSA
+NOTE The gear sheet is a smaller image (640 px wide).
+SLOT Physical Attack | 67500 | 2
+SLOT Physical Defense | 67500 | 2
+SLOT Strategy Attack | 67500 | 1
+SLOT Strategy Defense | 67500 | 1
+SLOT Speed | 67500 | 1
+SLOT Power | 675000 | 1
+BONUS 2 | Agility +10000, HP +30%, Bonus Damage after attack +20%.
+BONUS 4 | Agility +23000, Attack +30%, Avoid-Injury Rate +40%, After release skill - make a random ninja enter Corrosion State for 2 rounds.
+BONUS 6 | Agility +25000, Damage Rate +40%, Weaken enemy ATK +30%, After release skill, decrease 2 random ninjas 40% Recovery Rate for 2 rounds (can not be dispel)
+JEWEL sources/45_yaksa/02_jewelry.png | - | -
+REVIEW Chakra prints "HP +90%", Agility "Avoid-Injury Rate +65%", Power "Phy/Str. DEF +99%" and Force "Decrease enemy CC Rate +46%"; values are unusually high and are kept exactly as printed.
+CAT Force | 58500 | 2 | Decrease enemy CC Rate +46% | Damage taken reduction +30% // Weaken enemy ATK +25%
+CAT Chakra | 58500 | 2 | HP +90% | Damage taken reduction +30% // Weaken enemy ATK +25%
+CAT Agility | 58500 | 2 | Avoid-Injury Rate +65% | Damage taken reduction +30% // Weaken enemy ATK +25%
+CAT Power | 585000 | 2 | Phy/Str. DEF +99% | Damage taken reduction +30% // Weaken enemy ATK +25%

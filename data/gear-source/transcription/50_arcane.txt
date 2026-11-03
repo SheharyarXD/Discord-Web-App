@@ -1,0 +1,17 @@
+SET 50 | Arcane
+GEAR sources/50_arcane/01_gear.png | - | ARCANE
+SLOT Physical Attack | 70000 | 2
+SLOT Physical Defense | 70000 | 2
+SLOT Strategy Attack | 70000 | 1
+SLOT Strategy Defense | 70000 | 1
+SLOT Speed | 70000 | 1
+SLOT Power | 700000 | 1
+BONUS 2 | Agility +10000, S Attack Rate +35%, Damage Rate +30%
+BONUS 4 | Agility +15000, Crit Rate +20%, Attack +40%, Damage Rate +40% // (Crit and S.ATK Rate can be break limit)
+BONUS 6 | Agility +35000, Final Damage Increase +25%, Weaken enemy's ATK +30% // After released a skill, has 50% chance to make 1 random enemy enter Charm  State for 2 rounds
+JEWEL sources/50_arcane/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 61000 | 2 | Decrease enemy CC rate +35% // Avoid injury rate +40% // HP +10% | HP +40% // Avoid-Injury Rate +30%
+CAT Chakra | 61000 | 2 | Decrease enemy CC rate +30% // Damage taken reduction +30% // HP +10% | HP +40% // Avoid-Injury Rate +30%
+CAT Agility | 61000 | 2 | Decrease enemy CC rate +30% // Phy/Str. DEF +50% // HP +10% | HP +40% // Avoid-Injury Rate +30%
+CAT Power | 610000 | 2 | Decrease enemy CC rate +20% // Weaken enemy ATK +20% // HP +10% | HP +40% // Avoid-Injury Rate +30%

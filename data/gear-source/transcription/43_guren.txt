@@ -1,0 +1,16 @@
+SET 43 | Guren
+GEAR sources/43_guren/01_gear.png | - | GUREN
+SLOT Physical Attack | 64000 | 2
+SLOT Physical Defense | 64000 | 2
+SLOT Strategy Attack | 64000 | 1
+SLOT Strategy Defense | 64000 | 1
+SLOT Speed | 64000 | 1
+SLOT Power | 640000 | 1
+BONUS 2 | Agility +10000, Decrease enemy CC success rate +20%, Damage Rate +20%
+BONUS 4 | Agility +22000, Attack+20%, Damage Rate +20%, Avoid-Injury Rate +20%, Immune Weaken State +99% > Only affects skill weakening, not on hit passive weakening
+BONUS 6 | Agility +25000, HP +30%, Weaken enemy ATK +30%, After being attacked make ally Water Chakra ninjas enter Shatter Storm State for 2 rounds
+JEWEL sources/43_guren/02_jewelry.png | - | -
+CAT Force | 57500 | 2 | Decrease enemy CC Rate +30% // After release skill, 40% chance to make all water ninjas enter immune Control State 2 rounds // After been attacked, 30% chance to make ally water ninjas enter Bond State 2 rounds. | Weaken enemy ATK +30% // Avoid-Injury Rate +40%
+CAT Chakra | 57500 | 2 | Attack +30% // After release skill, 50% chance to make enemies enter Upwind state 2 rounds // After been attacked, 30% chance to make ally water ninjas enter Wind Release 8% 2 rounds. | Weaken enemy ATK +30% // Avoid-Injury Rate +40%
+CAT Agility | 57500 | 2 | Decrease enemy CC Rate +30% // After release skill, 50% chance to dispel all enemy buffs. // After be attacked, increase ally water ninjas Defence +40% 2 rounds. | Weaken enemy ATK +30% // Avoid-Injury Rate +40%
+CAT Power | 575000 | 2 | HP +30% // After release skill, make ally water ninjas enter Fury Shield 2 rounds. // After be attacked, increase ally water ninjas Damage Rate +50% 2 rounds. | Weaken enemy ATK +30% // Avoid-Injury Rate +40%

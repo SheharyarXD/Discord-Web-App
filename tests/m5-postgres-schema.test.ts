@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { describe, expect, it } from "vitest";
 // @ts-expect-error plain JavaScript helper
@@ -20,8 +20,13 @@ describe("PostgreSQL production schema", () => {
     expect(schema).not.toMatch(/postgres(ql)?:\/\//);
   });
 
-  it("the PostgreSQL baseline migration creates every model and carries the 16 integrity triggers", () => {
-    const sql = read("prisma/postgres/migrations/20261026000000_postgres_baseline/migration.sql");
+  it("the PostgreSQL migrations (baseline plus the additive ones) create every model and carry exactly the 16 integrity triggers", () => {
+    const dir = path.join(ROOT, "prisma/postgres/migrations");
+    const folders = readdirSync(dir, { withFileTypes: true }).filter((d) => d.isDirectory()).map((d) => d.name).sort();
+    expect(folders[0]).toBe("20261026000000_postgres_baseline");
+    const sql = folders.map((f) => read(`prisma/postgres/migrations/${f}/migration.sql`)).join(String.fromCharCode(10));
+    // A migration is plain SQL: a generator warning pasted into the file would fail the deployment.
+    for (const f of folders) expect(read(`prisma/postgres/migrations/${f}/migration.sql`).trimStart().startsWith("--"), f).toBe(true);
     const models = [...read("prisma/schema.prisma").matchAll(/^model (\w+) \{/gm)].map((m) => m[1]!);
     for (const model of models) expect(sql, model).toContain(`CREATE TABLE "${model}"`);
     expect((sql.match(/CREATE TRIGGER/g) ?? []).length).toBe(16);

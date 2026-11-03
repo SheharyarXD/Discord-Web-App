@@ -1,0 +1,22 @@
+SET 31 | Sarutobi
+GEAR sources/31_sarutobi/01_gear.png | - | SARUTOBI
+SLOT Physical Attack | 55000 | 2
+SLOT Physical Defense | 54000 | 2
+SLOT Strategy Attack | 55000 | 1
+SLOT Strategy Defense | 54000 | 1
+SLOT Speed | 55000 | 1
+SLOT Power | 560000 | 1
+BONUS 2 | Damage Rate +30%, Force +20000, Chakra +20000, Agility +20000
+BONUS 4 | Force +22000, Chakra +22000, Attack +25%, HP +30%
+BONUS 6 | Damage Rate +30%, Avoid-Injury Rate +30%, Every 10% HP loss will ignore 6% enemy attack power
+JEWEL sources/31_sarutobi/02_jewelry_variant_unlabeled_A.png | seq:A | -
+NOTE Icons carry small Chinese corner labels printed in the source image; not game text, not imported.
+CAT Force | 50000 | 2 | Damage Rate +25% // For every 15% HP loss, increase own Damage Rate by 6% | Weaken enemy's ATK +30%
+CAT Chakra | 50000 | 2 | Attack +25% // For every 15% HP loss, increase own Avoid-Injury Rate by 6% | Weaken enemy's ATK +30%
+CAT Agility | 52000 | 2 | Decrease the success rate of enemy's control skills +35% // For every 15% HP loss, increase own Attack by 6% | Weaken enemy's ATK +30%
+CAT Power | 510000 | 2 | HP +25% // For every 15% HP loss, increase own Defense by 6% | Weaken enemy's ATK +30%
+JEWEL sources/31_sarutobi/03_jewelry_variant_unlabeled_B.png | seq:B | -
+CAT Force | 50000 | 2 | Decrease the success rate of enemy control skills +30% // For every 15% HP loss, S.Block+ dmg taken is reduced by 8% | Weaken enemy's ATK +30%
+CAT Chakra | 50000 | 2 | Attack +20% // For every 15% HP loss, S.Crit+ dmg reduction is increased by 8% | Weaken enemy's ATK +30%
+CAT Agility | 52000 | 2 | Decrease the success rate of enemy control skills +25% // For every 15% HP loss, penetration damage received reduced by 8% | Weaken enemy's ATK +30%
+CAT Power | 510000 | 2 | HP +30% // For every 15% HP loss, Final Damage received is reduced by 8% | Weaken enemy's ATK +30%

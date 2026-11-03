@@ -1,0 +1,17 @@
+SET 27 | Saint
+GEAR sources/27_saint/01_gear.png | - | SAINT
+SLOT Physical Attack | 49000 | 2
+SLOT Physical Defense | 48000 | 2
+SLOT Strategy Attack | 49000 | 1
+SLOT Strategy Defense | 48000 | 1
+SLOT Speed | 49000 | 1
+SLOT Power | 500000 | 1
+BONUS 2 | Punch Rate +25%, Attack +20%, HP +20%
+BONUS 4 | Agility +20000, Damage Rate +30%, After Skill, recover 120% HP
+BONUS 6 | Agility +30000, Reduce enemy DEF +40%, After Skill, remove all debuff from Support and give them immunity to CC for 1 round
+JEWEL sources/27_saint/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small Russian label "1 штук" (1 piece) printed in the source image; it is not game text and is not imported.
+CAT Force | 40000 | 2 | Damage Rate +20% // Decrease enemy CC Success Rate +20%
+CAT Chakra | 40000 | 2 | Avoid-Injury Rate +20% // Agility +20000
+CAT Agility | 40000 | 2 | Damage Rate +20% // Weaken enemy DEF +20%
+CAT Power | 400000 | 2 | Avoid-Injury Rate +20% // Aid Rate +20%

@@ -1,0 +1,28 @@
+SET 67 | Summoning
+REVIEW Two gear sheets (unlabeled A and B) and only ONE jewelry sheet. The jewelry sheet is stored once, with no gear pairing assumed. No upgraded jewelry is invented. No R1/R2 name is justified by the larger gear numbers. Client decision needed.
+GEAR sources/67_summoning/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 78000 | 2
+SLOT Physical Defense | 78000 | 2
+SLOT Strategy Attack | 78000 | 1
+SLOT Strategy Defense | 78000 | 1
+SLOT Speed | 78000 | 1
+SLOT Power | 780000 | 1
+BONUS 2 | Agility +25000, Chakra +25000, HP +25%, Avoid injury rate +20%
+BONUS 4 | Agility +35000, Chakra +35000, Decrease CC Rate +15%, Avoid injury rate +20% // After a skill, decreases enemy Assaulters Damage rate by 25% for 2 rounds // (cannot be dispelled)
+BONUS 6 | Power +80000, Weaken enemy's ATK +30%, Decrease CC Rate +20% // After a skill, makes all allies enter Wind Release state(10%) for 2 rounds // (cannot be dispelled)
+GEAR sources/67_summoning/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 86000 | 2
+SLOT Physical Defense | 86000 | 2
+SLOT Strategy Attack | 86000 | 1
+SLOT Strategy Defense | 86000 | 1
+SLOT Speed | 86000 | 1
+SLOT Power | 860000 | 1
+BONUS 2 | Agility +25000, Chakra +25000, HP +35%, Avoid injury rate +20%
+BONUS 4 | Agility +35000, Chakra +35000, Decrease CC Rate +20%, Avoid injury rate +20% // After a skill, decreases enemy Assaulters Damage rate by 25% for 2 rounds // (cannot be dispelled)
+BONUS 6 | Power +80000, Weaken enemy's ATK +30%, Decrease CC Rate +25% // After a skill, makes all allies enter Wind Release state(10%) for 2 rounds // (cannot be dispelled)
+JEWEL sources/67_summoning/03_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 68000 | 2 | Decrease CC Rate +30% // Attack +30% // Avoid injury rate +10% | Decrease CC Rate +10% // Weaken enemy's ATK +20% // Attack +5% // Avoid injury rate +15% // After being attacked, cleanses self debuffs
+CAT Chakra | 68000 | 2 | Decrease CC Rate +30% // Strat/Phys Defense +30% // Damage Rate +25% | Decrease CC Rate +10% // Weaken enemy's ATK +20% // Attack +5% // Avoid injury rate +15% // After being attacked, cleanses self debuffs
+CAT Agility | 68000 | 2 | Decrease CC Rate +30% // Final DMG +35% // HP +30% | Decrease CC Rate +10% // Weaken enemy's ATK +20% // Attack +5% // Avoid injury rate +15% // After being attacked, cleanses self debuffs
+CAT Power | 680000 | 2 | Decrease CC Rate +30% // Final DMG Reduction +25% // Avoid injury rate +20% | Decrease CC Rate +10% // Weaken enemy's ATK +20% // Attack +5% // Avoid injury rate +15% // After being attacked, cleanses self debuffs

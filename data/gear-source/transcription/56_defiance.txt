@@ -1,0 +1,17 @@
+SET 56 | Defiance
+GEAR sources/56_defiance/01_gear.png | - | DEFIANCE
+SLOT Physical Attack | 73000 | 2
+SLOT Physical Defense | 73000 | 2
+SLOT Strategy Attack | 73000 | 1
+SLOT Strategy Defense | 73000 | 1
+SLOT Speed | 73000 | 1
+SLOT Power | 730000 | 1
+BONUS 2 | Chakra +25000 , Agility +25000 , Avoid injury rate +30%, HP +30%
+BONUS 4 | Chakra +35000 , Agility +35000 , Power +35000 , Damage taken reduction +30%, Weaken enemy's ATK +30%
+BONUS 6 | Power +45000 , HP +30%, Dodge Rate +30%, Decrease CC Rate +25% // After released a skill, put self into Position Interchange state for 2 rounds and has 35% chances to put 1 random ally into Position Interchange state for 2 rounds
+JEWEL sources/56_defiance/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 64000 | 2 | Decrease the success rate of enemy's control skills +30% // Damage taken reduction +20% // HP +25% | Weaken enemy's ATK +30%
+CAT Chakra | 64000 | 2 | Decrease the success rate of enemy's control skills +30% // Damage taken reduction +20% // HP +25% | Weaken enemy's ATK +30%
+CAT Agility | 64000 | 2 | Decrease the success rate of enemy's control skills +30% // Damage taken reduction +20% // Avoid injury rate +20% | Weaken enemy's ATK +30%
+CAT Power | 640000 | 2 | Decrease the success rate of enemy's control skills +30% // Damage taken reduction +20% // Avoid injury rate +20% | Weaken enemy's ATK +30%

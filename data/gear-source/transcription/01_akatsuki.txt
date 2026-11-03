@@ -1,0 +1,20 @@
+# Transcribed by reading the full-resolution source image. One line per printed row. Text is verbatim (whitespace normalised).
+# GEAR/JEWEL <image path> | <version label printed on the sheet or -> | <title printed on the sheet or ->
+# SLOT <printed stat> | <printed value> | <icons in the cell>      BONUS <pieces> | <printed text>
+# CAT <printed category> | <printed value> | <icons> | <printed 2-piece text>      FULL <pieces> | <printed text>
+SET 1 | Akatsuki
+GEAR sources/01_akatsuki/01_gear.png | - | Akatsuki
+SLOT Physical Attack | 4000 | 2
+SLOT Physical Defense | 1300 | 2
+SLOT Strategy Attack | 4000 | 1
+SLOT Strategy Defense | 2600 | 1
+SLOT Speed | 4000 | 1
+SLOT Power | 10000 | 1
+BONUS 2 | Damage Rate+8%
+BONUS 4 | Avoid Injury Rate +6%, Agility +1000
+BONUS 6 | Punch Rate+8%
+JEWEL sources/01_akatsuki/02_jewelry.png | - | -
+CAT Force | 2500 | 2 | Hit Rate +20%
+CAT Chakra | 2500 | 2 | Avoid-Injury Rate +5%
+CAT Agility | 2500 | 2 | Damage Rate +5%
+CAT Power | 12000 | 2 | Aid Rate +15%

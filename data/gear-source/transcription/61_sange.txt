@@ -1,0 +1,32 @@
+SET 61 | Sange
+REVIEW Two gear sheets and two jewelry sheets, none with a printed version label. Stored as sequence variants A and B; no R1/R2 name is justified by the larger numbers. Client decision needed.
+GEAR sources/61_sange/01_gear_variant_A.png | seq:A | -
+SLOT Physical Attack | 75000 | 2
+SLOT Physical Defense | 75000 | 2
+SLOT Strategy Attack | 75000 | 1
+SLOT Strategy Defense | 75000 | 1
+SLOT Speed | 75000 | 1
+SLOT Power | 750000 | 1
+BONUS 2 | Chakra +40000, Avoid injury rate +30%, HP +40%
+BONUS 4 | Agility +40000, Strat/Phys Defense +25%, Final DMG reduction +36% // After be attacked, has 30% chances to makes enemy's water ninja enter Chaotic Storm (8%) for 2 rounds
+BONUS 6 | Power +80000, Strat/Phys Defense +25%, Avoid injury rate +15%, Weaken enemy's ATK +33% // After be attacked, has 60% chances to makes ally's earth ninja enter Shatter Storm(10%) for 2 rounds
+GEAR sources/61_sange/02_gear_variant_B_unlabeled.png | seq:B | -
+SLOT Physical Attack | 83000 | 2
+SLOT Physical Defense | 83000 | 2
+SLOT Strategy Attack | 83000 | 1
+SLOT Strategy Defense | 83000 | 1
+SLOT Speed | 83000 | 1
+SLOT Power | 830000 | 1
+BONUS 2 | Chakra +40000, Avoid injury rate +30%, HP +50%
+BONUS 4 | Agility +40000, Strat/Phys Defense +25%, Final DMG reduction +40% // After be attacked, has 30% chances to makes enemy's water ninja enter Chaotic Storm (8%) for 2 rounds
+BONUS 6 | Power +80000, Strat/Phys Defense +25%, Avoid injury rate +20%, Weaken enemy's ATK +35% // After be attacked, has 60% chances to makes ally's earth ninja enter Shatter Storm(10%) for 2 rounds
+JEWEL sources/61_sange/03_jewelry_variant_A.png | seq:A | -
+CAT Force | 66000 | 2 | Decrease enemy CC Rate +30% // Attack +22% // Damage Rate +10% | Decrease enemy CC Rate +2% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +10%
+CAT Chakra | 66000 | 2 | Decrease enemy CC Rate +30% // Attack +10% // Damage Rate +25% | Decrease enemy CC Rate +2% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +10%
+CAT Agility | 66000 | 2 | Decrease enemy CC Rate +30% // Final DMG +30% // Avoid injury rate +12% | Decrease enemy CC Rate +2% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +10%
+CAT Power | 660000 | 2 | Decrease enemy CC Rate +30% // Final DMG reduction +20% // HP +20% | Decrease enemy CC Rate +2% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +10%
+JEWEL sources/61_sange/04_jewelry_variant_B_unlabeled.png | seq:B | -
+CAT Force | 67500 | 2 | Decrease enemy CC Rate +30% // Attack +25% // Damage Rate +10% | Decrease enemy CC Rate +5% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +15%
+CAT Chakra | 67500 | 2 | Decrease enemy CC Rate +30% // Attack +10% // Damage Rate +30% | Decrease enemy CC Rate +5% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +15%
+CAT Agility | 67500 | 2 | Decrease enemy CC Rate +30% // Final DMG +30% // Avoid injury rate +15% | Decrease enemy CC Rate +5% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +15%
+CAT Power | 675000 | 2 | Decrease enemy CC Rate +30% // Final DMG reduction +20% // HP +30% | Decrease enemy CC Rate +5% // Weaken enemy's ATK +25% // Final DMG reduction +10% // Avoid injury rate +15%

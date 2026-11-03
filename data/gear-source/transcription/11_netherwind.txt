@@ -1,0 +1,11 @@
+SET 11 | Netherwind
+GEAR sources/11_netherwind/01_gear.png | - | NETHERWIND
+SLOT Physical Attack | 18000 | 2
+SLOT Physical Defense | 16000 | 2
+SLOT Strategy Attack | 18000 | 1
+SLOT Strategy Defense | 20000 | 1
+SLOT Speed | 18000 | 1
+SLOT Power | 220000 | 1
+BONUS 2 | Avoid Injury Rate +25%, Damage Rate +15%
+BONUS 4 | Agility +20000, Weaken enemy's DEF +30%
+BONUS 6 | Damage Rate +35%, DOT with 70% Growth for 1 round

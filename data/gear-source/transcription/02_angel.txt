@@ -1,0 +1,11 @@
+SET 2 | Angel
+GEAR sources/02_angel/01_gear.png | - | Angel
+SLOT Physical Attack | 4500 | 2
+SLOT Physical Defense | 1500 | 2
+SLOT Strategy Attack | 4500 | 1
+SLOT Strategy Defense | 3000 | 1
+SLOT Speed | 4500 | 1
+SLOT Power | 11000 | 1
+BONUS 2 | Avoid Injury Rate +15%
+BONUS 4 | Damage Rate +10%, Agility +2000
+BONUS 6 | Punch Rate +10%, HP +5000

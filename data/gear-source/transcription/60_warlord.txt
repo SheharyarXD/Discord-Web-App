@@ -1,0 +1,39 @@
+# Extra line types used by this set:
+# COST <image path> | <what it upgrades> | <stage label as printed> | <materials, verbatim>     (upgrade resource cost: NOT a combat bonus)
+SET 60 | Warlord
+REVIEW Equipment stages printed on the cost sheet are R1, R2, R3, SSR4 and SSR5. The equipment bonus sheet prints only two bonus blocks: "Warlord Base" and "SSR5 Warlord". Bonus blocks for R1, R2, R3 and SSR4 are not in the source and are not invented. SSR5 is not relabelled R2.
+REVIEW The accessories carry two separate version series, R1 and R2 (printed on the icons and on the cost sheets). No base accessory sheet is in the source and none is assumed.
+GEAR sources/60_warlord/01_gear_base_and_SSR5_comparison.png | label:Base | Warlord Base
+SLOT Physical Attack | 71000 | 2
+SLOT Physical Defense | 71000 | 2
+SLOT Strategy Attack | 71000 | 1
+SLOT Strategy Defense | 71000 | 1
+SLOT Speed | 71000 | 1
+SLOT Power | 710000 | 1
+BONUS 2 | Aid Rate +20%, Force +8000, Agility +8000, Chakra +8000, Power +8000
+BONUS 4 | Weaken enemy's DEF +30%, Weaken enemy's ATK +50%, Agility +12000
+BONUS 6 | Damage Rate +60%, Avoid-Injury Rate +50%, Agility +15000, Power +30000
+GEAR sources/60_warlord/01_gear_base_and_SSR5_comparison.png | label:SSR5 | SSR5 Warlord
+REVIEW The single printed main-stat block (71000 / Power 710000) is shown once above the Base and SSR5 bonus blocks; it is stored on the Base version only. Whether SSR5 changes the main stats is not shown in the source.
+BONUS 2 | Aid Rate +25%,Force +18000, Agility +18000, Chakra +18000, Power +35000, Punch Rate +30%
+BONUS 4 | Weaken enemy's DEF +45%, Weaken enemy's ATK +50%, Agility +23000, HP +30%, CC Rate +5%, CC Resist +5%
+BONUS 6 | Damage Rate +75%, Avoid-Injury Rate +50%, Agility +20000, Power +120000, Attack +35%, CC Rate +8%, CC Resist +8%
+COST sources/60_warlord/02_gear_upgrade_costs.png | gear, price for 1 piece | R1 | Hermit Diamond - 450; Hermit Jade - 150; Equipment Stone - 20
+COST sources/60_warlord/02_gear_upgrade_costs.png | gear, price for 1 piece | R2 | Hermit Diamond - 450; Hermit Jade - 150; Equipment Stone - 25
+COST sources/60_warlord/02_gear_upgrade_costs.png | gear, price for 1 piece | R3 | Hermit Diamond - 450; Hermit Jade - 150; Equipment Stone - 40
+COST sources/60_warlord/02_gear_upgrade_costs.png | gear, price for 1 piece | SSR4 | Hermit Diamond - 100; Equipment Stone - 25; Warlord myth - 50
+COST sources/60_warlord/02_gear_upgrade_costs.png | gear, price for 1 piece | SSR5 | Hermit Diamond - 50; Equipment Stone - 30; Warlord myth - 170
+JEWEL sources/60_warlord/03_jewelry_R1.png | label:R1 | -
+CAT Force | 60000 | 2 | Force +40000 // Attack +25% // CC resistance 40% // Avoid-Injury Rate +5% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +25% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +5%
+CAT Chakra | 60000 | 2 | Chakra +40000 // Attack +25% // Damage Rate +30% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +25% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +5%
+CAT Agility | 60000 | 2 | Agility +40000 // Attack +25% // Avoid-Injury rate  +25% // Control skill success rate +10% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +25% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +5%
+CAT Power | 600000 | 2 | Power +90000 // HP +30% // Control skill success rate +30% // Damage taken reduction  +5% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +25% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +5%
+COST sources/60_warlord/04_jewelry_R1_upgrade_costs.png | accessories R1, price for 1 piece, Force/Chakra/Power | R1 | Hermit Spar - 120; Accessories Stone - 20; Warlord myth - 51
+COST sources/60_warlord/04_jewelry_R1_upgrade_costs.png | accessories R1, price for 1 piece, Agility | R1 | Hermit Spar - 120; Accessories Stone - 20; Warlord myth - 85
+JEWEL sources/60_warlord/05_jewelry_R2.png | label:R2 | -
+CAT Force | 65000 | 2 | Force +55000 // Attack +25% // CC resistance 40% // Avoid-Injury Rate +5% // Bonus damage after ATK +5% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +30% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +10% // Attack +10%
+CAT Chakra | 65000 | 2 | Chakra +55000 // Attack +25% // Damage Rate +30% // Damage taken reduction +5% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +30% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +10% // Attack +10%
+CAT Agility | 65000 | 2 | Agility +55000 // Attack +15% // Avoid-Injury Rate  +30% // Bonus damage after ATK +5% // Control skill success rate +25% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +30% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +10% // Attack +10%
+CAT Power | 650000 | 2 | Power +105000 // HP +30% // Control skill success rate +30% // Damage taken reduction  +5% // Damage rate +5% | Weaken enemy ATK +30% // Weaken enemy DEF +30% // Avoid-Injury Rate +30% // Damage Rate +25% // CC resistance +30% // Bonus damage after ATK +5% // HP +10% // Attack +10%
+COST sources/60_warlord/06_jewelry_R2_upgrade_costs.png | accessories R2, price for 1 piece, Force/Chakra/Power | R2 | Hermit Spar - 120; Accessories Stone - 40; Warlord myth - 119
+COST sources/60_warlord/06_jewelry_R2_upgrade_costs.png | accessories R2, price for 1 piece, Agility | R2 | Hermit Spar - 120; Accessories Stone - 40; Warlord myth - 170

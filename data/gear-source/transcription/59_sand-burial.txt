@@ -1,0 +1,23 @@
+SET 59 | Sand Burial
+GEAR sources/59_sand-burial/01_gear.png | - | SAND BURIAL
+SLOT Physical Attack | 74500 | 2
+SLOT Physical Defense | 74500 | 2
+SLOT Strategy Attack | 74500 | 1
+SLOT Strategy Defense | 74500 | 1
+SLOT Speed | 74500 | 1
+SLOT Power | 745000 | 1
+BONUS 2 | Agility +25000 , Attack +15%, Damage Rate +35%, HP +15%
+BONUS 4 | Attack +23%, Punch Rate +20%, Weaken Enemy DEF +20%, HP +15%
+BONUS 6 | Agility +35000 , Attack +7%, Weaken enemy's ATK +32% // After released a skill, deals second physical strike with 50% rate to enemies with thunder, fire, earth chakra nature, and deals second physical strike with 100% rate to enemies water chakra nature
+JEWEL sources/59_sand-burial/02_jewelry_base.png | base | -
+CAT Force | 65500 | 2 | HP +50% // After be attacked, has 80% chances to makes 2 random allies enter Bond State(10% rate) for 2 rounds | Weaken enemy's ATK +30%
+CAT Chakra | 65500 | 2 | Strat/Phys Defense +50% // After be attacked, has 80% chances to makes 2 random enemies enter Dispirited State(15% rate) for 2 rounds | Weaken enemy's ATK +30%
+CAT Agility | 65500 | 2 | Final Damage Reduction +40% // After be attacked, increases all allies' Final Damage Reduction by 30% for 2 rounds | Weaken enemy's ATK +30%
+CAT Power | 65500 | 2 | Avoid injury rate +48% // After be attacked, increases all allies' Avoid injury rate by 30% for 2 rounds | Weaken enemy's ATK +30%
+JEWEL sources/59_sand-burial/03_jewelry_R1.png | client:R1 | -
+REVIEW The R1 label comes from the owner's upload mapping and the client's statement; the screenshot itself prints no "R1" text. It is applied because the client explicitly named this version. The sheet differs from the base sheet in stat values (67000 against 65500, Power 670000 against 65500), two chances (80% to 90%), and the numbers +43%, +53% and +32%.
+REVIEW In the base sheet the Power category prints its base value as "65500" while the other versions of the pattern print 10 times the value for Power (670000 in R1). Kept exactly as printed; to be confirmed.
+CAT Force | 67000 | 2 | HP +50% // After be attacked, has 90% chances to makes 2 random allies enter Bond State(10% rate) for 2 rounds | Weaken enemy's ATK +32%
+CAT Chakra | 67000 | 2 | Strat/Phys Defense +50% // After be attacked, has 90% chances to makes 2 random enemies enter Dispirited State(15% rate) for 2 rounds | Weaken enemy's ATK +32%
+CAT Agility | 67000 | 2 | Final Damage Reduction +43% // After be attacked, increases all allies' Final Damage Reduction by 30% for 2 rounds | Weaken enemy's ATK +32%
+CAT Power | 670000 | 2 | Avoid injury rate +53% // After be attacked, increases all allies' Avoid injury rate by 30% for 2 rounds | Weaken enemy's ATK +32%

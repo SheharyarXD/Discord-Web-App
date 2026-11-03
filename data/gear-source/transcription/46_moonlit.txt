@@ -1,0 +1,16 @@
+SET 46 | Moonlit
+GEAR sources/46_moonlit/01_gear.png | - | MOONLIT
+SLOT Physical Attack | 68000 | 2
+SLOT Physical Defense | 68000 | 2
+SLOT Strategy Attack | 68000 | 1
+SLOT Strategy Defense | 68000 | 1
+SLOT Speed | 68000 | 1
+SLOT Power | 680000 | 1
+BONUS 2 | Agility +10000, Force +10000, Attack +20%, Damage Rate +30%
+BONUS 4 | Agility +23000, Force +25000, HP +30%, Weaken Enemy's ATK +30%
+BONUS 6 | Agility +25000, Force +40000, Damage Rate +40%, Attack +20% // After release skill, deal 50% P.ATK penetration damage to all enemies
+JEWEL sources/46_moonlit/02_jewelry.png | - | -
+CAT Force | 59000 | 2 | HP +60% // Avoid-Injury Rate +20% | Decrease enemy CC Rate +40% // Avoid-Injury Rate +20%
+CAT Chakra | 59000 | 2 | HP +60% // Final Damage reduction 20% | Decrease enemy CC Rate +40% // Avoid-Injury Rate +20%
+CAT Agility | 59000 | 2 | HP +60% // Phy/Str. DEF +30% | Decrease enemy CC Rate +40% // Avoid-Injury Rate +20%
+CAT Power | 595000 | 2 | HP +60% // Weaken enemy ATK +25% | Decrease enemy CC Rate +40% // Avoid-Injury Rate +20%

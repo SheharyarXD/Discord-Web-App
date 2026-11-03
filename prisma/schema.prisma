@@ -730,6 +730,27 @@ model UserTalentSelection {
 
 // ───────────────────────── Equipment ─────────────────────────
 
+/// A named set as the client calls it. Its equipment and its jewelry are two separate categories linked here,
+/// each with one or more versions (EquipmentSet / JewelrySet rows). Nothing about versions is inferred from stat size.
+model GearFamily {
+  id            String         @id @default(cuid())
+  slug          String         @unique
+  /// The name used in the application (the uploader's name when the printed title differs).
+  name          String
+  nameEs        String?
+  /// Title printed on the source sheets when it differs from `name` (Mekansm / MEKA).
+  sourceTitle   String?
+  /// SOURCED | NAME_ONLY. Name-only families carry no sets, no stats and no text.
+  sourceStatus  String         @default("SOURCED")
+  reviewStatus  String         @default("NEEDS_REVIEW")
+  /// Family-level facts that are not combat bonuses, e.g. upgrade resource costs.
+  metadata      Json?
+  equipmentSets EquipmentSet[]
+  jewelrySets   JewelrySet[]
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+}
+
 model EquipmentSlot {
   id        String      @id @default(cuid())
   key       String      @unique
@@ -753,6 +774,15 @@ model EquipmentSet {
   tierStacking      String              @default("UNKNOWN") // UNKNOWN | CUMULATIVE | REPLACES
   reviewStatus      String              @default("NEEDS_REVIEW")
   metadata          Json?
+  /// The named set this version belongs to (Sand Burial, Sand Burial R1 ...). Null for sets entered by hand.
+  familyId          String?
+  family            GearFamily?         @relation(fields: [familyId], references: [id], onDelete: SetNull)
+  /// Stable key of the version inside its family ("base", "r1", "seq-a" ...).
+  versionKey        String?
+  /// The label shown after the name ("R1", "SSR5", "variante A"); null for the only / base version.
+  versionLabel      String?
+  /// PRINTED = the source prints the label, CLIENT_STATED = the client named it, SEQUENCE = only the image order is known (no upgrade claimed).
+  versionBasis      String?
   items             Equipment[]
   bonuses           EquipmentSetBonus[]
   sourceRecords     SourceRecord[]
@@ -828,6 +858,11 @@ model JewelrySet {
   tierStacking      String            @default("UNKNOWN")
   reviewStatus      String            @default("NEEDS_REVIEW")
   metadata          Json?
+  familyId          String?
+  family            GearFamily?       @relation(fields: [familyId], references: [id], onDelete: SetNull)
+  versionKey        String?
+  versionLabel      String?
+  versionBasis      String?
   items             Jewelry[]
   groups            JewelryGroup[]
   bonuses           JewelrySetBonus[]

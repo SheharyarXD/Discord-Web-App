@@ -1,0 +1,16 @@
+SET 29 | Hyuga
+GEAR sources/29_hyuga/01_gear.png | - | HYU GA
+SLOT Physical Attack | 53000 | 2
+SLOT Physical Defense | 52000 | 2
+SLOT Strategy Attack | 53000 | 1
+SLOT Strategy Defense | 52000 | 1
+SLOT Speed | 53000 | 1
+SLOT Power | 540000 | 1
+BONUS 2 | Damage Rate +30%, Weaken enemy DEF +30%
+BONUS 4 | Attack +25%, HP +20%
+BONUS 6 | Damage Rate +40%, After skill, deal 40% Penetration Damage to 3 enemies
+JEWEL sources/29_hyuga/02_jewelry.png | - | -
+CAT Force | 48000 | 2 | Increase Success Rate of control skills+25% // Weaken enemy's DEF +20% | Damage Rate +50% // Attack +20%
+CAT Chakra | 48000 | 2 | Attack +20% // Weaken enemy's DEF +20% | Damage Rate +50% // Attack +20%
+CAT Agility | 50000 | 2 | Increase Success Rate of control skills +25% // Weaken enemies DEF +20% | Damage Rate +50% // Attack +20%
+CAT Power | 490000 | 2 | Attack +20% // Punch Rate +20% | Damage Rate +50% // Attack +20%

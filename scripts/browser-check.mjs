@@ -174,10 +174,10 @@ try {
   await form.locator('input[name="effects_value_0"]').fill("12,5");
   await submit(page, form, true);
   check("creating an equipment piece goes to its edit page", page.url().includes("/admin/equipment/prueba-espada"), page.url());
-  await go(page, BASE + "/equipment?q=PRUEBA");
+  await go(page, BASE + "/equipment/pieces?q=PRUEBA");
   check("the new piece is in the public list", (await page.locator("ul li a").allInnerTexts()).some((n) => /PRUEBA Espada/.test(n)));
-  const statMin = await total("/equipment?q=PRUEBA&stat1=attack&min1=10");
-  const statMax = await total("/equipment?q=PRUEBA&stat1=attack&max1=5");
+  const statMin = await total("/equipment/pieces?q=PRUEBA&stat1=attack&min1=10");
+  const statMax = await total("/equipment/pieces?q=PRUEBA&stat1=attack&max1=5");
   check("minimum and maximum filters on an item statistic", statMin === 1 && statMax === 0, `min10=${statMin} max5=${statMax}`);
   await go(page, BASE + "/equipment/prueba-espada");
   const detail = await page.locator("main, body").first().innerText();
@@ -569,13 +569,117 @@ try {
   await top("/admin/users", "r13-admin-users.png", 900);
   await R.ctx.close();
 
+  // ── 10c. equipment and jewelry catalogue, Match Any / Match All ──
+  const gearRows = async (kind) => (kind === "equipment" ? db.equipmentSet : db.jewelrySet).findMany({ where: { familyId: { not: null } }, select: { id: true, slug: true, versionLabel: true } });
+  const eqSets = await gearRows("equipment");
+  const jwSets = await gearRows("jewelry");
+  check("the catalogue lists every imported version: equipment, jewelry and both together", (await total("/equipment")) === eqSets.length && (await total("/jewelry")) === jwSets.length && (await total("/sets")) === eqSets.length + jwSets.length && eqSets.length >= 78, `eq=${eqSets.length} jw=${jwSets.length}`);
+  await go(page, BASE + "/sets?q=sand+burial");
+  const sbText = await page.locator("[data-gear-results]").innerText();
+  check("Sand Burial shows its base equipment, base jewelry and the R1 jewelry as separate cards", /Sand Burial R1/.test(sbText) && (await page.locator("[data-gear-card]").count()) === 3, sbText.replace(/\s+/g, " ").slice(0, 160));
+  await go(page, BASE + "/sets?q=warlord");
+  const wText = await page.locator("[data-gear-results]").innerText();
+  check("Warlord shows Base, SSR5, R1 and R2 as four cards and no invented labels", /Warlord SSR5/.test(wText) && /Warlord R1/.test(wText) && /Warlord R2/.test(wText) && (await page.locator("[data-gear-card]").count()) === 4);
+  await go(page, BASE + "/sets?q=sange");
+  const sangeText = await page.locator("[data-gear-results]").innerText();
+  check("unlabeled variants say variante and are not named R1 or R2", /variante A/.test(sangeText) && !/Sange R[12]/.test(sangeText));
+  await go(page, BASE + "/sets?q=legendary");
+  check("name-only sets create no card", (await page.locator("[data-gear-card]").count()) === 0 && /Ningún conjunto coincide/.test(await page.locator("main").innerText()));
+  const tier8 = await db.jewelrySetBonus.findMany({ where: { requiredPieces: 8, set: { familyId: { not: null } } }, select: { setId: true }, distinct: ["setId"] });
+  check("the tier filter matches the stored 8-piece bonuses", (await total("/jewelry?tier=8")) === tier8.length, `${tier8.length}`);
+  const speedDb = await db.equipmentSet.findMany({ where: { familyId: { not: null }, items: { some: { effects: { some: { note: "PRINTED_MAIN_STAT", statistic: { key: "speed" }, value: { gte: 70000 } } } } } }, select: { id: true } });
+  check("a printed-statistic range matches the stored values", (await total("/equipment?stat1=speed&min1=70000")) === speedDb.length && speedDb.length > 0, `${speedDb.length}`);
+  // effect search: compare with independent counts of the stored wording
+  const gearEffectOwners = async (kind, re) => {
+    const rows = await db.effect.findMany({ where: kind === "equipment" ? { equipmentSetBonusId: { not: null } } : { jewelrySetBonusId: { not: null } }, select: { sourceText: true, equipmentSetBonus: { select: { setId: true } }, jewelrySetBonus: { select: { setId: true } } } });
+    return new Set(rows.filter((r) => re.test(r.sourceText ?? "")).map((r) => r.equipmentSetBonus?.setId ?? r.jewelrySetBonus?.setId));
+  };
+  const stunSets = await gearEffectOwners("equipment", /\bstun/i);
+  const healSets = await gearEffectOwners("equipment", /(recover|restore)s?\b[^.]*\bhp\b|(?<!forbidden )\bheal(?!\s*(reduction|forbid))/i);
+  const fxStunEq = await total("/equipment?fx=aturdir");
+  check("effect search aturdir on equipment equals the sets whose stored tiers say stun", fxStunEq === stunSets.size && fxStunEq > 0, `${fxStunEq} vs ${stunSets.size}`);
+  await go(page, BASE + "/equipment?fx=aturdir");
+  check("an effect result names the tier it sits in and says it does not mean it is equipped", /Bonus de \d+ piezas/.test(await page.locator("[data-effect-evidence]").first().innerText()) && /No significa que la tengas equipada/.test(await page.locator("main").innerText()));
+  const unionEq = new Set([...stunSets, ...healSets]);
+  const interEq = new Set([...stunSets].filter((x) => healSets.has(x)));
+  const anyEq = await total("/equipment?fx=aturdir&fx=curaci%C3%B3n&fxm=any");
+  const allEq = await total("/equipment?fx=aturdir&fx=curaci%C3%B3n&fxm=all");
+  check("Match Any = union and Match All = intersection of the two effects (equipment)", anyEq === unionEq.size && allEq === interEq.size && allEq <= anyEq, `any=${anyEq}/${unionEq.size} all=${allEq}/${interEq.size}`);
+  check("the default mode is Any (no mode in the address)", (await total("/equipment?fx=aturdir&fx=curaci%C3%B3n")) === anyEq);
+  const nA = await total("/ninjas?fx=aturdir");
+  const nB = await total("/ninjas?fx=curaci%C3%B3n");
+  const nAny = await total("/ninjas?fx=aturdir&fx=curaci%C3%B3n&fxm=any");
+  const nAll = await total("/ninjas?fx=aturdir&fx=curaci%C3%B3n&fxm=all");
+  check("ninjas: Match All = A + B - (A or B), and never more than Any", nAll === nA + nB - nAny && nAll <= nAny && nAny >= Math.max(nA, nB), `A=${nA} B=${nB} any=${nAny} all=${nAll}`);
+  const eA = fxStunEq;
+  const eB = await total("/equipment?fx=aumento+de+agilidad");
+  const eAny = await total("/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=any");
+  const eAll = await total("/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=all");
+  check("equipment: Match All (stun and Agility up, in different tiers) = A + B - (A or B) and is not empty", eAll === eA + eB - eAny && eAll > 0 && eAll <= eAny, `A=${eA} B=${eB} any=${eAny} all=${eAll}`);
+  const jA = await total("/jewelry?fx=aturdir");
+  const jB = await total("/jewelry?fx=eliminar+debuffs");
+  const jAny = await total("/jewelry?fx=aturdir&fx=eliminar+debuffs&fxm=any");
+  const jAll = await total("/jewelry?fx=aturdir&fx=eliminar+debuffs&fxm=all");
+  check("jewelry: Match All = A + B - (A or B)", jAll === jA + jB - jAny && jAll <= jAny, `A=${jA} B=${jB} any=${jAny} all=${jAll}`);
+  const sAny = await total("/sets?fx=aturdir&fx=curaci%C3%B3n&fxm=any");
+  check("the combined list is the sum of both categories", sAny === anyEq + (await total("/jewelry?fx=aturdir&fx=curaci%C3%B3n&fxm=any")));
+  check("combined with a printed-statistic range and a tier (AND)", (await total("/equipment?fx=aumento+de+agilidad&stat1=speed&min1=70000&tier=6")) <= (await total("/equipment?fx=aumento+de+agilidad")));
+  // the mode survives paging, sorting, reloads and clearing
+  await go(page, BASE + "/equipment?fx=aumento+de+velocidad&fx=aumento+de+agilidad&fxm=all&sort=name:desc");
+  const pagerHref = await page.locator("nav[aria-label='Paginación'] a").first().getAttribute("href").catch(() => null);
+  check("paging and sorting links keep the effects and the mode", pagerHref === null || (/fxm=all/.test(pagerHref) && /fx=/.test(pagerHref)), String(pagerHref));
+  check("the selected mode is shown and checked", (await page.locator("input[name=fxm][value=all]").isChecked()) && /todos los efectos elegidos/.test(await page.locator("[data-effect-mode-note]").innerText()));
+  await page.reload({ waitUntil: "networkidle" });
+  check("reloading keeps the mode", await page.locator("input[name=fxm][value=all]").isChecked());
+  const clear = page.getByRole("link", { name: /Quitar filtros/ }).first();
+  check("clearing the filters removes the effects but keeps the chosen mode", (await clear.getAttribute("href")) === "/equipment?fxm=all", String(await clear.getAttribute("href")));
+  const gearChip = page.locator("[data-effect-search] ul li a").first();
+  check("a chip removal link keeps the other effects and the mode", /fxm=all/.test((await gearChip.getAttribute("href")) ?? "") && (await page.locator("[data-effect-search] ul li").count()) === 2);
+  // keyboard: choose Match All with the keyboard and apply
+  await go(page, BASE + "/equipment");
+  await page.locator("[data-filter-panel] summary").first().click().catch(() => {});
+  await page.locator("input#fx").focus();
+  await page.keyboard.type("aturdir");
+  await page.locator("input[name=fxm][value=any]").focus();
+  await page.keyboard.press("ArrowRight");
+  await Promise.all([page.waitForURL((u) => u.search.includes("fxm=all"), { timeout: 15000 }).catch(() => null), page.locator("input#fx").press("Enter")]);
+  check("the keyboard can pick Match All and apply it", /fxm=all/.test(page.url()) && /fx=aturdir/.test(page.url()), page.url());
+  // detail pages
+  await go(page, BASE + "/sets/jewelry/sand-burial-r1");
+  const r1 = await page.locator("main").innerText();
+  check("Sand Burial R1 detail: title, client-stated label, sibling versions and tiers", /Sand Burial R1/.test(r1) && /indicada por el cliente/.test(r1) && /Otras versiones/.test(r1) && /8 piezas|2 piezas/.test(r1));
+  await go(page, BASE + "/sets/equipment/warlord");
+  const wl = await page.locator("main").innerText();
+  check("Warlord detail: upgrade costs are shown as costs and not as bonuses", /Costes de mejora/.test(wl) && /Warlord myth - 170/.test(wl) && /No son bonificaciones de combate/.test(wl));
+  await go(page, BASE + "/sets/equipment/sange-seq-b");
+  check("an unlabeled variant says the source does not label it", /no la etiqueta/.test(await page.locator("main").innerText()));
+  await go(page, BASE + "/sets/equipment/mekansm");
+  check("Mekansm shows the source title MEKA", /MEKA/.test(await page.locator("main").innerText()));
+  await shot(page, "19-gear-set-detail.png", { full: false });
+  await go(page, BASE + "/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=all");
+  await shot(page, "20-gear-effect-all.png", { full: false });
+  // 390 px
+  const GM = await login(adminMail, adminPw, 390);
+  for (const url of ["/equipment?fx=aturdir&fxm=all", "/jewelry?tier=8", "/sets?q=warlord", "/sets/jewelry/sand-burial-r1"]) {
+    await go(GM.page, BASE + url);
+    const ov = await GM.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    check(`390 px: no horizontal scrolling on ${url}`, ov <= 0, `${ov}px`);
+  }
+  await go(GM.page, BASE + "/equipment?fx=aturdir&fxm=all");
+  const rb = await GM.page.locator("input[name=fxm][value=all]").boundingBox();
+  const rl = await GM.page.locator("label:has(input[name=fxm][value=all])").boundingBox();
+  check("390 px: the Match All control fits the screen and is large enough to tap", rb && rl && rb.x >= 0 && rl.x + rl.width <= 390 && rl.height >= 32);
+  await shot(GM.page, "21-gear-mobile.png", { full: false });
+  await GM.ctx.close();
+  check("individual pieces are still listed under /equipment/pieces", (await total("/equipment/pieces")) >= 1);
+
   // ── 11. cleanup of the test records and final state ──
   await go(page, BASE + "/admin/equipment/prueba-espada");
   await openAll(page);
   const kEq = page.locator('form:has(input[name="confirm"])').last();
   await kEq.locator('input[name="confirm"]').fill("prueba-espada");
   await submit(page, kEq, true);
-  check("deleting a piece removes it from the public list", (await total("/equipment?q=PRUEBA")) === 0);
+  check("deleting a piece removes it from the public list", (await total("/equipment/pieces?q=PRUEBA")) === 0);
   await go(page, BASE + "/admin/sets/equipment/prueba-conjunto");
   await openAll(page);
   const kSet = page.locator('form:has(input[name="confirm"])').last();

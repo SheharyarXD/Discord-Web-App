@@ -1,0 +1,11 @@
+SET 7 | Ryujin
+GEAR sources/07_ryujin/01_gear.png | - | RYUJIN
+SLOT Physical Attack | 10000 | 2
+SLOT Physical Defense | 7000 | 2
+SLOT Strategy Attack | 10000 | 1
+SLOT Strategy Defense | 10000 | 1
+SLOT Speed | 10000 | 1
+SLOT Power | 80000 | 1
+BONUS 2 | Force +4000, Chakra +4000
+BONUS 4 | Agility +6000, Weaken enemy's ATK +30%
+BONUS 6 | Power +8000, Avoid-Injury Rate +40%

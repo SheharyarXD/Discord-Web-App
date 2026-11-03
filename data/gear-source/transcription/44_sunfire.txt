@@ -1,0 +1,17 @@
+SET 44 | Sunfire
+GEAR sources/44_sunfire/01_gear.png | - | SUNFIRE
+SLOT Physical Attack | 67000 | 2
+SLOT Physical Defense | 67000 | 2
+SLOT Strategy Attack | 67000 | 1
+SLOT Strategy Defense | 67000 | 1
+SLOT Speed | 67000 | 1
+SLOT Power | 670000 | 1
+BONUS 2 | Agility +10000, Attack +20%, Damage Rate +20%
+BONUS 4 | Agility +22000, Damage Rate +30%, Weaken enemy ATK +30% After releasing skill 40% chance to deal a Physical 2nd strike with 200% rate to enemy Lightning and Earth ninjas
+BONUS 6 | Agility +25000, Damage Rate +30%, Attack +20%, After releasing skill 60% chance to deal (physical) Penetrating injury with 80% rate to enemy Water and Fire ninjas
+JEWEL sources/44_sunfire/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("3 Only") printed in the source image; not game text, not imported.
+CAT Force | 58000 | 2 | Damage Rate +25% // Bonus Damage after Attack +20% | Weaken enemy DEF +30% // Damage Rate +25%
+CAT Chakra | 58000 | 2 | Attack +20% // Bonus Damage after Attack +20% | Weaken enemy DEF +30% // Damage Rate +25%
+CAT Agility | 58000 | 2 | Damage Rate +25% // Bonus Damage after Attack +20% | Weaken enemy DEF +30% // Damage Rate +25%
+CAT Power | 580000 | 2 | Attack +20% // Bonus Damage after Attack +20% | Weaken enemy DEF +30% // Damage Rate +25%

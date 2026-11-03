@@ -1,0 +1,16 @@
+SET 21 | Heroism
+GEAR sources/21_heroism/01_gear.png | - | HEROISM
+SLOT Physical Attack | 38000 | 2
+SLOT Physical Defense | 36000 | 2
+SLOT Strategy Attack | 38000 | 1
+SLOT Strategy Defense | 38000 | 1
+SLOT Speed | 38000 | 1
+SLOT Power | 400000 | 1
+BONUS 2 | Agility +12000, Damage Rate +30%
+BONUS 4 | Agility +16000, Increase the success rate of CC +40%, Bonus Damage after attack +30%
+BONUS 6 | Agility +22000, Avoid-Injury Rate +40% // After recieving attack, 50% chance to clear own Debuffs
+JEWEL sources/21_heroism/02_jewelry.png | - | -
+CAT Force | 40000 | 2 | Damage Rate +20% // Attack +25%
+CAT Chakra | 40000 | 2 | Avoid-Injury Rate +20% // After attack, increase 1 random ally Speed by 20% for 1 round
+CAT Agility | 42000 | 2 | Damage Rate +20% // After attack, remove debuffs from 1 random ally
+CAT Power | 420000 | 2 | HP +20% // After attacked has 50% chance to increase Defense by 50% for 1 round

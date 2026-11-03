@@ -1,0 +1,16 @@
+SET 47 | Vylon
+GEAR sources/47_vylon/01_gear.png | - | VYLON
+SLOT Physical Attack | 68500 | 2
+SLOT Physical Defense | 68500 | 2
+SLOT Strategy Attack | 68500 | 1
+SLOT Strategy Defense | 68500 | 1
+SLOT Speed | 68500 | 1
+SLOT Power | 685000 | 1
+BONUS 2 | Agility +11000, HP +30%, Avoid Injury Rate +40%
+BONUS 4 | Agility +23000, Damage Rate +45%, Attack +30%, After release skill, dispell 2 random enemies buff
+BONUS 6 | Agility +25000, Weaken Enemy's ATK +30%, Avoid Injury Rate +30% // After release skill, 70% chance to make ally supports enter Super Armor State
+JEWEL sources/47_vylon/02_jewelry.png | - | -
+CAT Force | 59500 | 2 | Avoid injury rate +15% // Damage taken reduction +30% // Decrease enemy CC rate +15% | Immune Weaken DEF +35% // Weaken enemy's ATK +5%
+CAT Chakra | 59500 | 2 | HP +50% // Decrease enemy CC rate +30% | Immune Weaken DEF +35% // Weaken enemy's ATK +5%
+CAT Agility | 59500 | 2 | Avoid injury rate +35% // Decrease enemy CC rate +30% | Immune Weaken DEF +35% // Weaken enemy's ATK +5%
+CAT Power | 595000 | 2 | Weaken enemy's ATK +25% // Decrease enemy CC rate +15% | Immune Weaken DEF +35% // Weaken enemy's ATK +5%

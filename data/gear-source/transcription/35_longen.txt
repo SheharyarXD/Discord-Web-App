@@ -1,0 +1,17 @@
+SET 35 | Longen
+GEAR sources/35_longen/01_gear.png | - | LONGEN
+SLOT Physical Attack | 58000 | 2
+SLOT Physical Defense | 58000 | 2
+SLOT Strategy Attack | 58000 | 1
+SLOT Strategy Defense | 58000 | 1
+SLOT Speed | 58000 | 1
+SLOT Power | 580000 | 1
+BONUS 2 | Force +10000, Agility +10000 HP +30%, Avoid-Injury Rate +30%
+BONUS 4 | Force +20000, Agility +20000, Damage Rate +40%, After being attacked increase self DEF by 100%
+BONUS 6 | Force +30000, Agility +20000, Weaken enemy ATK +30%, After being attacked increase self SPD by 20% for 2 rounds
+JEWEL sources/35_longen/02_jewelry.png | - | -
+REVIEW The Power cell prints "Reduce enemy ATK −20%" with a minus sign; kept exactly as printed.
+CAT Force | 53000 | 2 | Damage Rate +30% // Control success rate +30% | Attack +35% // Avoid-Injury Rate +40%
+CAT Chakra | 53000 | 2 | Phy/Str. DEF +35% // After being attacked, reduce own fury by 500 | Attack +35% // Avoid-Injury Rate +40%
+CAT Agility | 54500 | 2 | Damage after attack +25% // Control skill success rate +25% | Attack +35% // Avoid-Injury Rate +40%
+CAT Power | 535000 | 2 | Control success rate +20% // Reduce enemy ATK −20% | Attack +35% // Avoid-Injury Rate +40%

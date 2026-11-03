@@ -431,6 +431,8 @@ export const ninjaListParams = z.object({
   effectStatisticKeys: z.array(key).optional(),
   /** Effect search terms («aturdir», «inmunidad a sellar»...): ninjas with a stored effect matching ANY term. */
   effectTerms: z.array(z.string().trim().min(1).max(80)).max(6).optional(),
+  /** any (default): at least one selected effect; all: every distinct selected effect. */
+  effectMode: z.enum(["any", "all"]).default("any"),
   /** Default: newest release first. «stat» and «growth» sort by one base statistic, ninjas without it last. */
   sort: z
     .object({ by: z.enum(["release", "name", "stat", "growth"]).default("release"), statisticKey: key.nullish(), direction: z.enum(SORT_DIRECTIONS).default("desc") })

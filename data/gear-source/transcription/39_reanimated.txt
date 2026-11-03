@@ -1,0 +1,17 @@
+SET 39 | Reanimated
+GEAR sources/39_reanimated/01_gear.png | - | REANIMATED
+SLOT Physical Attack | 62000 | 2
+SLOT Physical Defense | 62000 | 2
+SLOT Strategy Attack | 62000 | 1
+SLOT Strategy Defense | 62000 | 1
+SLOT Speed | 62000 | 1
+SLOT Power | 620000 | 1
+BONUS 2 | HP +25%,Strategy/Physical DEF+25%
+BONUS 4 | Agility +25000, Avoid-Injury Rate+40%, Immune Imprison+80%
+BONUS 6 | Agility +32000, Weaken Enemy ATK+30%, After releasing skill dispel enemy assaulter buffs
+JEWEL sources/39_reanimated/02_jewelry.png | - | -
+NOTE The sheet is rendered in pink instead of the usual red/grey.
+CAT Force | 55500 | 2 | Increase the success rate of CC +20% // After release skill, decrease enemies Immune Control Rate by 25% for 2 rounds | Weaken enemies ATK +25% // After releasing skill make random enemy ninja enter Upwind State for 2 rounds
+CAT Chakra | 55500 | 2 | Attack +25% // After release skill, decrease enemies Final Damage Reduction Rate by 20% for 2 rounds. | Weaken enemies ATK +25% // After releasing skill make random enemy ninja enter Upwind State for 2 rounds
+CAT Agility | 55500 | 2 | Increase the success rate of CC +20% // After release skill, decrease enemies Avoid-Injury Rate by 30% for 2 rounds | Weaken enemies ATK +25% // After releasing skill make random enemy ninja enter Upwind State for 2 rounds
+CAT Power | 555000 | 2 | Attack +25% // After release skill, decrease enemies Defense by 30% for 2 rounds | Weaken enemies ATK +25% // After releasing skill make random enemy ninja enter Upwind State for 2 rounds

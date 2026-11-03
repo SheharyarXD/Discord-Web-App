@@ -1,0 +1,16 @@
+SET 20 | Devout
+GEAR sources/20_devout/01_gear.png | - | DEVOUT
+SLOT Physical Attack | 36000 | 2
+SLOT Physical Defense | 34000 | 2
+SLOT Strategy Attack | 36000 | 1
+SLOT Strategy Defense | 36000 | 1
+SLOT Speed | 36000 | 1
+SLOT Power | 380000 | 1
+BONUS 2 | Avoid-Injury Rate +30%, HP +10%
+BONUS 4 | Agility +18000, Defense +20%, After attack increase Support Attack by 20% for 1 round
+BONUS 6 | Damage taken reduction +30%, Agility +26000, // After receiving attack, 50% chance to Stun enemy for 1 round
+JEWEL sources/20_devout/02_jewelry.png | - | -
+CAT Force | 34000 | 2 | Damage Rate +20% // Decrease enemy CC Rate +20%
+CAT Chakra | 34000 | 2 | Avoid-Injury Rate +20% // Damage taken reduction+20%
+CAT Agility | 38000 | 2 | Punch Rate +20% // Increase ally CC Rate +20%
+CAT Power | 380000 | 2 | Avoid-injury Rate +20% // HP+20%

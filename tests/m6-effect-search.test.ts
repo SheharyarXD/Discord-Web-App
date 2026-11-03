@@ -137,6 +137,66 @@ describe("address and suggestions", () => {
   });
 });
 
+/** Match All / Match Any on ninjas (their own fixtures, so the lists above stay as they are). */
+describe("effect mode ALL and ANY (ninjas)", () => {
+  const P13 = "t13-";
+  const find13 = async (terms: string[], mode: "any" | "all") => {
+    const ids = (await ninjaIdsWithEffects(db, terms, mode)) ?? [];
+    return (await db.ninja.findMany({ where: { id: { in: ids }, slug: { startsWith: P13 } }, select: { name: true } })).map((r) => r.name).sort();
+  };
+  const pub13 = { status: "PUBLISHED" as const, ratingKey: "SSR", baseStats: [{ statisticKey: "force", sourceLabel: "Force", baseValue: "1", growthRate: "1" }] };
+  beforeAll(async () => {
+    await upsertNinja(db, { name: "T13 StunOnly", slug: `${P13}stun-only`, ...pub13, abilities: [{ typeKey: "skill", name: "S", effects: [{ kind: "STATUS", statusKey: "stun", targetKey: "enemy", sourceText: "Stuns enemies." }] }] });
+    await upsertNinja(db, { name: "T13 HealOnly", slug: `${P13}heal-only`, ...pub13, abilities: [{ typeKey: "skill", name: "H", effects: [{ kind: "HEAL", sourceText: "Heals self with 50% rate." }] }] });
+    // Both effects, in different abilities: ALL does not need them in one effect row.
+    await upsertNinja(db, {
+      name: "T13 Both", slug: `${P13}both`, ...pub13,
+      abilities: [
+        { typeKey: "skill", name: "A", effects: [{ kind: "STATUS", statusKey: "stun", targetKey: "enemy", sourceText: "Stuns enemies." }] },
+        { typeKey: "skill", name: "B", effects: [], awakenings: [{ typeKey: "skill_awakening", name: "B2", stage: 1, effects: [{ kind: "HEAL", sourceText: "Heals self with 70% rate." }] }] },
+      ],
+    });
+    await upsertNinja(db, { name: "T13 Immune", slug: `${P13}immune`, ...pub13, abilities: [{ typeKey: "skill", name: "I", effects: [{ kind: "IMMUNITY", statusKey: "stun", targetKey: "self", sourceText: "Immune to stun." }] }] });
+    await upsertNinja(db, { name: "T13 NegatedHeal", slug: `${P13}negated`, ...pub13, abilities: [{ typeKey: "skill", name: "N", effects: [{ kind: "TEXT", structuredStatus: "TEXT_ONLY", sourceText: "Cannot be stunned and cannot be healed." }] }] });
+  }, 120_000);
+  afterAll(async () => {
+    await db.ninja.deleteMany({ where: { slug: { startsWith: P13 } } });
+  });
+
+  it("ANY returns ninjas with at least one of the effects", async () => {
+    expect(await find13(["aturdir", "curación"], "any")).toEqual(["T13 Both", "T13 HealOnly", "T13 StunOnly"]);
+  });
+  it("ALL returns only ninjas with every effect, even when they sit in different abilities and awakenings", async () => {
+    expect(await find13(["aturdir", "curación"], "all")).toEqual(["T13 Both"]);
+    expect(await find13(["stun", "heal"], "all")).toEqual(["T13 Both"]);
+  });
+  it("a single effect, or an empty selection, behaves the same in both modes", async () => {
+    expect(await find13(["aturdir"], "all")).toEqual(await find13(["aturdir"], "any"));
+    expect(await ninjaIdsWithEffects(db, [], "all")).toBeNull();
+    expect(await ninjaIdsWithEffects(db, ["   "], "all")).toBeNull();
+  });
+  it("duplicate and synonymous selections count once; an unknown effect empties ALL but not ANY", async () => {
+    expect(await find13(["aturdir", "Aturdir", "stun"], "all")).toEqual(await find13(["aturdir"], "any"));
+    expect(await find13(["aturdir", "zzzxxyy"], "all")).toEqual([]);
+    expect(await find13(["aturdir", "zzzxxyy"], "any")).toEqual(await find13(["aturdir"], "any"));
+  });
+  it("keeps inflicting and immunity apart in ALL, and does not count negated wording", async () => {
+    expect(await find13(["aturdir", "inmunidad a aturdir"], "all")).toEqual([]);
+    expect(await find13(["curación"], "any")).not.toContain("T13 NegatedHeal");
+    expect(await find13(["aturdir"], "any")).not.toContain("T13 NegatedHeal");
+  });
+  it("lists with the mode, composed with other filters, paging without repeats and exact counts", async () => {
+    const base = { query: "T13", includeUnpublished: true, effectTerms: ["aturdir", "curación"] };
+    expect((await listNinjas(db, { ...base, effectMode: "any" })).total).toBe(3);
+    expect((await listNinjas(db, { ...base, effectMode: "all" })).total).toBe(1);
+    expect((await listNinjas(db, { ...base, effectMode: "all", ratingKeys: ["D"] })).total).toBe(0);
+    expect((await listNinjas(db, { ...base, effectMode: "all", ratingKeys: ["SSR"], statFilters: [{ statisticKey: "force", min: "1" }] })).total).toBe(1);
+    const seen: string[] = [];
+    for (let page = 1; page <= 3; page++) seen.push(...(await listNinjas(db, { ...base, effectMode: "any", pageSize: 1, page })).items.map((n) => n.name));
+    expect(seen.sort()).toEqual(["T13 Both", "T13 HealOnly", "T13 StunOnly"]);
+  });
+});
+
 /** The real catalogue (177 ninjas): result sets are compared with independent queries on the stored effects. */
 import { existsSync } from "node:fs";
 import path from "node:path";
@@ -170,7 +230,8 @@ describe.skipIf(IS_PG || !existsSync(devDb))("real data", () => {
     const page1 = await listNinjas(real, { effectTerms: ["sellar", "inmunidad a sellar"], pageSize: 6 });
     expect(page1.total).toBe(new Set([...applies, ...immune]).size);
   });
-  it("English and Spanish give the same set; combining with a statistic filter narrows it", async () => {
+  // Each call rebuilds the index in tests (no cache), so this loop is slow on the full catalogue.
+  it("English and Spanish give the same set; combining with a statistic filter narrows it", { timeout: 120_000 }, async () => {
     for (const [es, en] of [["curación", "heal"], ["aumento de velocidad", "speed increase"], ["restaurar furia", "fury restoration"], ["eliminar debuffs", "debuff removal"]] as const) {
       expect(await ninjaIdsWithEffects(real, [es]), es).toEqual(await ninjaIdsWithEffects(real, [en]));
     }

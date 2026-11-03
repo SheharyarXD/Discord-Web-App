@@ -1,0 +1,17 @@
+SET 54 | Black Feather
+GEAR sources/54_black-feather/01_gear.png | - | BLACK FEATHER
+SLOT Physical Attack | 72000 | 2
+SLOT Physical Defense | 72000 | 2
+SLOT Strategy Attack | 72000 | 1
+SLOT Strategy Defense | 72000 | 1
+SLOT Speed | 72000 | 1
+SLOT Power | 720000 | 1
+BONUS 2 | HP +30%, Punch Rate +30%, Avoid injury rate +30%
+BONUS 4 | Agility +25000 , Increase The Success rate of control skills +40%, HP +30% // After released a skill, recover all allies health by 40%(P.ATK)
+BONUS 6 | Agility +35000 , Increase CC Rate +15%, Weaken enemy's ATK +33%, Damage taken reduction +40% // After released skill, has 35% chances makes 2 random allies enter position interchange state for 2 rounds
+JEWEL sources/54_black-feather/02_jewelry.png | - | -
+NOTE The jewelry icons carry a small corner label ("1 Only") printed in the source image; not game text, not imported.
+CAT Force | 63000 | 2 | Force +30000 // Increase The Success rate of control skills +30% // HP +35% | Increase The Success rate of control skills +20% // Weaken enemy's ATK +10% // HP +30% // Avoid Injury rate + 20%
+CAT Chakra | 63000 | 2 | Agility +30000 // Increase The Success rate of control skills +30% // Avoid Injury rate +10% | Increase The Success rate of control skills +20% // Weaken enemy's ATK +10% // HP +30% // Avoid Injury rate + 20%
+CAT Agility | 63000 | 2 | Chakra +30000 // Damage taken reduction +35% // After released the skill, make 1 random ally enter Shatter Storm state for 2 rounds | Increase The Success rate of control skills +20% // Weaken enemy's ATK +10% // HP +30% // Avoid Injury rate + 20%
+CAT Power | 630000 | 2 | Power +30000 // Increase The Success rate of control skills +30% // Weaken enemy's ATK +15% | Increase The Success rate of control skills +20% // Weaken enemy's ATK +10% // HP +30% // Avoid Injury rate + 20%

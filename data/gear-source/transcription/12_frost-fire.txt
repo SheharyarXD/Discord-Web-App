@@ -1,0 +1,11 @@
+SET 12 | Frost Fire
+GEAR sources/12_frost-fire/01_gear.png | - | FROST FIRE
+SLOT Physical Attack | 20000 | 2
+SLOT Physical Defense | 18000 | 2
+SLOT Strategy Attack | 20000 | 1
+SLOT Strategy Defense | 22000 | 1
+SLOT Speed | 20000 | 1
+SLOT Power | 240000 | 1
+BONUS 2 | Agility +8000, Damage Rate +30%
+BONUS 4 | Agility +10000, Weaken Enemy DEF +30%, Reduce CC Rate +20%
+BONUS 6 | Agility +15000, Avoid Injury Rate +30%, Bonus Damage after Skill +30%

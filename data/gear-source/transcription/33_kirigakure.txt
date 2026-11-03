@@ -1,0 +1,17 @@
+SET 33 | Kirigakure
+GEAR sources/33_kirigakure/01_gear.png | - | KIRIGAKURE
+SLOT Physical Attack | 57000 | 2
+SLOT Physical Defense | 56000 | 2
+SLOT Strategy Attack | 57000 | 1
+SLOT Strategy Defense | 56000 | 1
+SLOT Speed | 57000 | 1
+SLOT Power | 580000 | 1
+BONUS 2 | Attack +20%, Avoid-injury Rate +30%
+BONUS 4 | Force +25000, Agility +25000, Avoid-injury Rate +30%, control skill success rate +20%
+BONUS 6 | Force +25000, Agility +25000, Damage Rate +30%, When attacked, 80% chance to Disable enemy male ninja for 2 rounds
+JEWEL sources/33_kirigakure/02_jewelry.png | - | -
+REVIEW The 8 effect prints "Weekend enemies' ATK +25%" (probable misspelling of "Weaken"); kept exactly as printed.
+CAT Force | 52000 | 2 | Decrease the success rate of enemies' control skills by 30% // After being attack, has 50% chance to deal 20% Penetration damage to random enemy target | Weekend enemies' ATK +25% // Avoid-Injury Rate +30%
+CAT Chakra | 52000 | 2 | Attack +20% // S. Attack +20% (can break limit) | Weekend enemies' ATK +25% // Avoid-Injury Rate +30%
+CAT Agility | 54000 | 2 | Damage Rate+30% // After being attacked, decrease all enemies' Punch Rate by 30% for 2 rounds | Weekend enemies' ATK +25% // Avoid-Injury Rate +30%
+CAT Power | 530000 | 2 | Decrease the success rate of enemies' control skills by 30% // After being attacked, decrease all enemies' Control Rates by 20% | Weekend enemies' ATK +25% // Avoid-Injury Rate +30%

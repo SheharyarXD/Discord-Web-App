@@ -1,0 +1,16 @@
+SET 23 | Bloodfang
+GEAR sources/23_bloodfang/01_gear.png | - | BLOODFANG
+SLOT Physical Attack | 42000 | 2
+SLOT Physical Defense | 40000 | 2
+SLOT Strategy Attack | 42000 | 1
+SLOT Strategy Defense | 40000 | 1
+SLOT Speed | 42000 | 1
+SLOT Power | 420000 | 1
+BONUS 2 | Damage Rate +30%, Aid Rate +20%
+BONUS 4 | Agility +18000, HP +30%, Weaken Enemy ATK +30%
+BONUS 6 | Agility +28000, Weaken Enemy DEF +30% // After attack, dispel debuffs from 2 random allies
+JEWEL sources/23_bloodfang/02_jewelry.png | - | -
+CAT Force | 43000 | 2 | Agility +12000 // Bonus Damage after Attack +25%
+CAT Chakra | 43000 | 2 | Damage Rate +30% // Bonus Damage after Attack +25%
+CAT Agility | 44000 | 2 | Punch Rate+20% // Bonus Damage after Attack+25%
+CAT Power | 440000 | 2 | Avoid-Injury Rate+30% // Bonus Damage after Attack+25%

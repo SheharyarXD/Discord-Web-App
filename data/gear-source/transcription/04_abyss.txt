@@ -1,0 +1,16 @@
+SET 4 | Abyss
+GEAR sources/04_abyss/01_gear.png | - | ABYSS
+SLOT Physical Attack | 6000 | 2
+SLOT Physical Defense | 3000 | 2
+SLOT Strategy Attack | 6000 | 1
+SLOT Strategy Defense | 5000 | 1
+SLOT Speed | 6000 | 1
+SLOT Power | 30000 | 1
+BONUS 2 | Agility +2000, Avoid Injury Rate +15%
+BONUS 4 | Agility +2000, Weaken enemy's ATK +20%
+BONUS 6 | Agility +3000, Damage Rate +20%
+JEWEL sources/04_abyss/02_jewelry.png | - | -
+CAT Force | 4000 | 2 | Damage Rate +10%
+CAT Chakra | 4000 | 2 | Punch Rate +10%
+CAT Agility | 4000 | 2 | Avoid-Injury Rate +10%
+CAT Power | 18000 | 2 | HP +50000

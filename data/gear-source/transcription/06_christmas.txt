@@ -1,0 +1,11 @@
+SET 6 | Christmas
+GEAR sources/06_christmas/01_gear.png | - | CHRISTMAS
+SLOT Physical Attack | 9000 | 2
+SLOT Physical Defense | 5000 | 2
+SLOT Strategy Attack | 9000 | 1
+SLOT Strategy Defense | 9000 | 1
+SLOT Speed | 9000 | 1
+SLOT Power | 60000 | 1
+BONUS 2 | Agility +3000, Damage Rate +20%
+BONUS 4 | Agility +3000, Avoid Injury Rate +20%
+BONUS 6 | Agility +4000, Weaken enemy's ATK +30%
