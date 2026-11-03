@@ -59,7 +59,7 @@ async function login(email, password, width = 1280) {
   await page.goto(BASE + "/login");
   await page.fill('input[name="email"]', email);
   await page.fill('input[name="password"]', password);
-  await Promise.all([page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: 20000 }).catch(() => null), page.click('button[type="submit"]')]);
+  await Promise.all([page.waitForURL((u) => !u.pathname.startsWith("/login"), { timeout: Number(process.env.CHECK_TIMEOUT_MS ?? 20000) }).catch(() => null), page.click('button[type="submit"]')]);
   return { ctx, page, ok: !new URL(page.url()).pathname.startsWith("/login") };
 }
 const go = (p, url) => p.goto(url, { waitUntil: "networkidle" });
@@ -72,11 +72,11 @@ const submit = async (page, form, expectRedirect = false) => {
   const button = form.locator('button[type="submit"]').first();
   if (expectRedirect) {
     const before = page.url();
-    await Promise.all([page.waitForURL((u) => u.href !== before, { timeout: 20000 }), button.click()]);
+    await Promise.all([page.waitForURL((u) => u.href !== before, { timeout: Number(process.env.CHECK_TIMEOUT_MS ?? 20000) }), button.click()]);
   }
   else {
     await button.click();
-    await page.waitForSelector("[data-form-result]", { timeout: 20000 });
+    await page.waitForSelector("[data-form-result]", { timeout: Number(process.env.CHECK_TIMEOUT_MS ?? 20000) });
   }
 };
 // A delete removes the very row that holds the form, so there is no message to wait for: wait for the refresh instead.

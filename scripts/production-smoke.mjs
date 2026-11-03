@@ -12,7 +12,7 @@ import { chromium } from "playwright-core";
  * Passwords are random, kept in memory and never printed.
  */
 const BASE = process.env.TARGET_BASE_URL?.replace(/\/$/, "");
-if (!BASE?.startsWith("https://")) throw new Error("TARGET_BASE_URL (https) is required");
+if (!BASE || !(BASE.startsWith("https://") || (process.env.ALLOW_LOCAL === "1" && /^http:\/\/127\.0\.0\.1:\d+$/.test(BASE)))) throw new Error("TARGET_BASE_URL (https) is required");
 const OUT = process.argv[2];
 mkdirSync(OUT, { recursive: true });
 const db = new PrismaClient();
@@ -38,6 +38,8 @@ const browser = await chromium.launch({ executablePath: "C:/Program Files (x86)/
 const HIDE = "header, [class*='sticky'], [class*='fixed'] { position: static !important; } a.group > div:first-child:has(> span[aria-hidden]) { display: none !important; }";
 async function login(email, password, width = 1280) {
   const ctx = await browser.newContext({ viewport: { width, height: 900 }, locale: "es", deviceScaleFactor: width < 600 ? 2 : width < 1100 ? 1.75 : 1.25 });
+  ctx.setDefaultTimeout(Number(process.env.CHECK_TIMEOUT_MS ?? 30000));
+  ctx.setDefaultNavigationTimeout(Number(process.env.CHECK_TIMEOUT_MS ?? 30000));
   const page = await ctx.newPage();
   await page.goto(BASE + "/login", { waitUntil: "networkidle" });
   await page.fill('input[name="email"]', email);
@@ -153,6 +155,80 @@ try {
   await go(A.page, BASE + "/ninjas?fx=aturdir");
   check("live: the control is labelled «Buscar por efecto» with suggestions and a chip", (await A.page.locator("label[for=fx]").innerText()) === "Buscar por efecto" && (await A.page.locator("#fx-suggestions option").count()) >= 20 && (await A.page.locator("[data-effect-search] ul li").count()) === 1);
 
+
+  // equipment, jewelry and Match Any / Match All: read-only, compared with independent queries on the stored rows
+  const gearRows = async (kind) => (kind === "equipment" ? db.equipmentSet : db.jewelrySet).findMany({ where: { familyId: { not: null } }, select: { id: true, slug: true } });
+  const eqSets = await gearRows("equipment");
+  const jwSets = await gearRows("jewelry");
+  const gt = (url) => total(A.page, url);
+  check("gear: the catalogue lists every imported version (equipment, jewelry, both)", (await gt("/equipment")) === eqSets.length && (await gt("/jewelry")) === jwSets.length && (await gt("/sets")) === eqSets.length + jwSets.length && eqSets.length >= 78, `eq=${eqSets.length} jw=${jwSets.length}`);
+  await go(A.page, BASE + "/sets?q=sand+burial");
+  const sbText = await A.page.locator("[data-gear-results]").innerText();
+  check("gear: Sand Burial shows base equipment, base jewelry and the R1 jewelry as three cards", /Sand Burial R1/.test(sbText) && (await A.page.locator("[data-gear-card]").count()) === 3);
+  await go(A.page, BASE + "/sets?q=warlord");
+  const wText = await A.page.locator("[data-gear-results]").innerText();
+  check("gear: Warlord shows Base, SSR5, R1 and R2 as four cards", /Warlord SSR5/.test(wText) && /Warlord R1/.test(wText) && /Warlord R2/.test(wText) && (await A.page.locator("[data-gear-card]").count()) === 4);
+  await go(A.page, BASE + "/sets?q=sange");
+  const sangeText = await A.page.locator("[data-gear-results]").innerText();
+  check("gear: unlabeled variants say variante and are never named R1 or R2", /variante A/.test(sangeText) && !/Sange R[12]/.test(sangeText));
+  await go(A.page, BASE + "/sets?q=legendary");
+  check("gear: name-only sets create no card", (await A.page.locator("[data-gear-card]").count()) === 0);
+  const tier8 = await db.jewelrySetBonus.findMany({ where: { requiredPieces: 8, set: { familyId: { not: null } } }, select: { setId: true }, distinct: ["setId"] });
+  check("gear: the tier filter matches the stored 8-piece bonuses", (await gt("/jewelry?tier=8")) === tier8.length, `${tier8.length}`);
+  const speedDb = await db.equipmentSet.findMany({ where: { familyId: { not: null }, items: { some: { effects: { some: { note: "PRINTED_MAIN_STAT", statistic: { key: "speed" }, value: { gte: 70000 } } } } } }, select: { id: true } });
+  check("gear: a printed-statistic range matches the stored values", (await gt("/equipment?stat1=speed&min1=70000")) === speedDb.length && speedDb.length > 0, `${speedDb.length}`);
+  const gearEffectOwners = async (re) => {
+    const rows = await db.effect.findMany({ where: { equipmentSetBonusId: { not: null } }, select: { sourceText: true, equipmentSetBonus: { select: { setId: true } } } });
+    return new Set(rows.filter((r) => re.test(r.sourceText ?? "")).map((r) => r.equipmentSetBonus.setId));
+  };
+  const stunSets = await gearEffectOwners(/\bstun/i);
+  const healSets = await gearEffectOwners(/(recover|restore)s?\b[^.]*\bhp\b|(?<!forbidden )\bheal(?!\s*(reduction|forbid))/i);
+  const eA = await gt("/equipment?fx=aturdir");
+  check("gear: effect search aturdir on equipment equals the sets whose stored tiers say stun", eA === stunSets.size && eA > 0, `${eA} vs ${stunSets.size}`);
+  await go(A.page, BASE + "/equipment?fx=aturdir");
+  check("gear: a result names its tier and says it does not mean it is equipped", /Bonus de \d+ piezas/.test(await A.page.locator("[data-effect-evidence]").first().innerText()) && /No significa que la tengas equipada/.test(await A.page.locator("main").innerText()));
+  const unionEq = new Set([...stunSets, ...healSets]);
+  const anyEq = await gt("/equipment?fx=aturdir&fx=curaci%C3%B3n&fxm=any");
+  const allEq = await gt("/equipment?fx=aturdir&fx=curaci%C3%B3n&fxm=all");
+  check("gear: Match Any = union of the two effects, Match All = intersection (equipment)", anyEq === unionEq.size && allEq === [...stunSets].filter((x) => healSets.has(x)).length && allEq <= anyEq, `any=${anyEq}/${unionEq.size} all=${allEq}`);
+  check("gear: the default mode is Any", (await gt("/equipment?fx=aturdir&fx=curaci%C3%B3n")) === anyEq);
+  const eB = await gt("/equipment?fx=aumento+de+agilidad");
+  const eAny = await gt("/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=any");
+  const eAll = await gt("/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=all");
+  check("gear: Match All (stun and Agility up, different tiers) = A + B - (A or B), not empty", eAll === eA + eB - eAny && eAll > 0 && eAll <= eAny, `A=${eA} B=${eB} any=${eAny} all=${eAll}`);
+  const nA = await gt("/ninjas?fx=aturdir");
+  const nB = await gt("/ninjas?fx=curaci%C3%B3n");
+  const nAny = await gt("/ninjas?fx=aturdir&fx=curaci%C3%B3n&fxm=any");
+  const nAll = await gt("/ninjas?fx=aturdir&fx=curaci%C3%B3n&fxm=all");
+  check("ninjas: Match All = A + B - (A or B), never more than Any", nAll === nA + nB - nAny && nAll <= nAny && nAny >= Math.max(nA, nB), `A=${nA} B=${nB} any=${nAny} all=${nAll}`);
+  const jA = await gt("/jewelry?fx=aturdir");
+  const jB = await gt("/jewelry?fx=eliminar+debuffs");
+  const jAny = await gt("/jewelry?fx=aturdir&fx=eliminar+debuffs&fxm=any");
+  const jAll = await gt("/jewelry?fx=aturdir&fx=eliminar+debuffs&fxm=all");
+  check("jewelry: Match All = A + B - (A or B)", jAll === jA + jB - jAny && jAll <= jAny, `A=${jA} B=${jB} any=${jAny} all=${jAll}`);
+  check("gear: duplicate and synonymous selections count once", (await gt("/equipment?fx=aturdir&fx=stun&fx=ATURDIR&fxm=all")) === eA);
+  check("gear: combined with a statistic range and a tier (AND)", (await gt("/equipment?fx=aumento+de+agilidad&stat1=speed&min1=70000&tier=6")) <= eB);
+  await go(A.page, BASE + "/equipment?fx=aumento+de+velocidad&fx=aumento+de+agilidad&fxm=all&sort=name:desc");
+  const pagerHref = await A.page.locator("nav[aria-label='Paginación'] a").first().getAttribute("href").catch(() => null);
+  check("gear: paging links keep the effects and the mode", pagerHref === null || (/fxm=all/.test(pagerHref) && /fx=/.test(pagerHref)), String(pagerHref));
+  check("gear: the selected mode is shown and checked, and survives a reload", (await A.page.locator("input[name=fxm][value=all]").isChecked()) && /todos los efectos elegidos/.test(await A.page.locator("[data-effect-mode-note]").innerText()));
+  await A.page.reload({ waitUntil: "networkidle" });
+  check("gear: reloading keeps the mode", await A.page.locator("input[name=fxm][value=all]").isChecked());
+  const clearLink = A.page.getByRole("link", { name: /Quitar filtros/ }).first();
+  check("gear: clearing the filters keeps the chosen mode", (await clearLink.getAttribute("href")) === "/equipment?fxm=all", String(await clearLink.getAttribute("href")));
+  await go(A.page, BASE + "/sets/jewelry/sand-burial-r1");
+  const r1 = await A.page.locator("main").innerText();
+  check("gear: Sand Burial R1 detail shows title, client-stated label, sibling versions and tiers", /Sand Burial R1/.test(r1) && /indicada por el cliente/.test(r1) && /Otras versiones/.test(r1) && /8 piezas|2 piezas/.test(r1));
+  await go(A.page, BASE + "/sets/equipment/warlord");
+  const wl = await A.page.locator("main").innerText();
+  check("gear: Warlord detail shows upgrade costs as costs, not bonuses", /Costes de mejora/.test(wl) && /Warlord myth - 170/.test(wl) && /No son bonificaciones de combate/.test(wl));
+  await go(A.page, BASE + "/sets/equipment/mekansm");
+  check("gear: Mekansm shows the source title MEKA", /MEKA/.test(await A.page.locator("main").innerText()));
+  const allowedPrefixes = await db.sourceAsset.count({ where: { path: { startsWith: "gear-source/" } } });
+  check("gear: 143 source sheets are registered as private provenance", allowedPrefixes === 143, `${allowedPrefixes}`);
+  const leak = await fetch(BASE + "/gear-source/sources/01_akatsuki/01_gear.png", { redirect: "manual" });
+  check("gear: source sheets are not served publicly", leak.status !== 200, String(leak.status));
+
   // screenshots (real, from the live site)
   await go(A.page, BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force");
   await shot(A.page, "p01-live-results.png", { x: 0, y: 0, width: 1600, height: 1500 });
@@ -188,6 +264,17 @@ try {
   await below(R.page, "/ninjas?fx=inmunidad+a+aturdir", "p15-live-effect-immunity-results.png", 560);
   await region(R.page, "/ninjas?fx=aumento+de+velocidad&stat1=hp&min1=100000&rating=SSR", "p16-live-combined-filters.png", "[data-filter-panel] form");
   await below(R.page, "/ninjas?fx=aumento+de+velocidad&stat1=hp&min1=100000&rating=SSR", "p17-live-combined-results.png", 700);
+  // gear screenshots (desktop 960 px and 390 px)
+  await region(R.page, "/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=all", "p20-live-gear-effect-control.png", "[data-effect-search]");
+  await below(R.page, "/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=all", "p21-live-gear-all-results.png", 520);
+  await below(R.page, "/equipment?fx=aturdir&fx=aumento+de+agilidad&fxm=any", "p22-live-gear-any-results.png", 700);
+  await below(R.page, "/sets?q=warlord", "p23-live-gear-warlord.png", 560);
+  await below(R.page, "/sets?q=sand+burial", "p24-live-gear-sand-burial.png", 560);
+  await go(R.page, BASE + "/sets/jewelry/sand-burial-r1");
+  await shot(R.page, "p25-live-gear-detail-r1.png", { x: 0, y: 0, width: 960, height: 1250 });
+  await go(R.page, BASE + "/sets/equipment/warlord");
+  await shot(R.page, "p26-live-gear-detail-warlord.png", { x: 0, y: 0, width: 960, height: 1300 });
+  await below(R.page, "/sets?q=sange", "p27-live-gear-variants.png", 640);
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
   await R.ctx.close();
@@ -207,6 +294,13 @@ try {
   await shot(M.page, "p19-live-effect-mobile-results.png", { x: 0, y: Math.max(0, yM - 20), width: 390, height: 700 }, true);
   await go(M.page, BASE + "/ninjas/natsu-dragneel");
   await shot(M.page, "p11-live-mobile.png", { x: 0, y: 0, width: 390, height: 900 }, false);
+  await go(M.page, BASE + "/equipment?fx=aturdir&fxm=all");
+  const gm = await M.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  check("gear 390 px: the effect search with Match All has no horizontal scrolling", gm <= 0, `${gm}px`);
+  await M.page.addStyleTag({ content: HIDE }).catch(() => {});
+  await M.page.locator("[data-effect-search]").first().screenshot({ path: path.join(OUT, "p28-live-gear-mobile-control.png") });
+  const yG = await M.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
+  await shot(M.page, "p29-live-gear-mobile-results.png", { x: 0, y: Math.max(0, yG - 20), width: 390, height: 700 }, true);
   await M.ctx.close();
 } catch (e) {
   check("script completed without an unexpected error", false, String(e).slice(0, 300));
