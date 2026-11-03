@@ -130,6 +130,7 @@ export function SetTiers({ kind, detail, t }: { kind: "equipment" | "jewelry"; d
           id: b.id,
           requiredPieces: b.requiredPieces ?? null,
           requiredItemNames: "requiredItemNames" in b ? b.requiredItemNames : undefined,
+          groupName: "groupName" in b ? b.groupName : null,
           description: b.description ?? (("groupName" in b && b.groupName) ? t("catalog.requiresGroup", { group: b.groupName }) : null),
           effects: b.effects,
         }))}

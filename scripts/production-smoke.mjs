@@ -219,6 +219,7 @@ try {
   await go(A.page, BASE + "/sets/jewelry/sand-burial-r1");
   const r1 = await A.page.locator("main").innerText();
   check("gear: Sand Burial R1 detail shows title, client-stated label, sibling versions and tiers", /Sand Burial R1/.test(r1) && /indicada por el cliente/.test(r1) && /Otras versiones/.test(r1) && /8 piezas|2 piezas/.test(r1));
+  check("gear: set tiers are never labelled always active, and jewelry tiers name their category", !/Siempre activo/.test(r1) && /2 piezas de «Force»/.test(r1), "");
   await go(A.page, BASE + "/sets/equipment/warlord");
   const wl = await A.page.locator("main").innerText();
   check("gear: Warlord detail shows upgrade costs as costs, not bonuses", /Costes de mejora/.test(wl) && /Warlord myth - 170/.test(wl) && /No son bonificaciones de combate/.test(wl));

@@ -91,7 +91,7 @@ function What({ effect, t }: { effect: EffectView; t: Translate }) {
  * "Siempre activo" appears only when the effect is positively known to be unconditional;
  * anything conditional, triggered, text-only or unreviewed is labelled as such.
  */
-export function EffectLine({ effect, t, showSource = true }: { effect: EffectView; t: Translate; showSource?: boolean }) {
+export function EffectLine({ effect, t, showSource = true, inTier = false }: { effect: EffectView; t: Translate; showSource?: boolean; inTier?: boolean }) {
   const state = effectConditionState(effect);
   const restricted = state !== "UNCONDITIONAL";
   const groups = groupConditions(effect.conditions);
@@ -118,7 +118,8 @@ export function EffectLine({ effect, t, showSource = true }: { effect: EffectVie
         <What effect={effect} t={t} />
         <span className="ml-auto text-xs text-muted">
           {restricted && <span aria-hidden>🔒 </span>}
-          {t(STATE_LABEL[state])}
+          {/* A set tier needs its pieces: it is never «always active», whatever its own wording says. */}
+          {!(inTier && state === "UNCONDITIONAL") && t(STATE_LABEL[state])}
         </span>
       </div>
 
@@ -300,7 +301,7 @@ function ChoiceBox({ group, rows, t }: { group: number; rows: EffectView[]; t: T
  * supplied Spanish text when there is one, always next to the English original. Alternatives
  * are boxed together so they never read as a sum.
  */
-export function EffectList({ effects, t }: { effects: EffectView[]; t: Translate }) {
+export function EffectList({ effects, t, inTier = false }: { effects: EffectView[]; t: Translate; inTier?: boolean }) {
   if (effects.length === 0) return <p className="text-sm text-muted">{t("effects.noEffects")}</p>;
   return (
     <ul className="flex flex-col gap-3">
@@ -313,7 +314,7 @@ export function EffectList({ effects, t }: { effects: EffectView[]; t: Translate
           );
         }
         const first = item.rows[0]!;
-        if (first.sourceLine === null) return <EffectLine key={first.id} effect={first} t={t} />;
+        if (first.sourceLine === null) return <EffectLine key={first.id} effect={first} t={t} inTier={inTier} />;
         return (
           <li key={item.key} data-source-line={first.sourceLine} className="flex flex-col gap-2 border-l-2 border-border pl-3">
             <LineText first={first} t={t} />

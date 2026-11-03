@@ -8,6 +8,8 @@ export interface SetBonusView {
   requiredPieces: number | null;
   /** Names of specific required items (jewelry SPECIFIC_ITEMS bonuses). */
   requiredItemNames?: string[];
+  /** Jewelry category the 2-piece effect belongs to. */
+  groupName?: string | null;
   description: string | null;
   effects: EffectView[];
 }
@@ -21,7 +23,7 @@ export function SetBonusList({ bonuses, t }: { bonuses: SetBonusView[]; t: Trans
         <li key={b.id} className="rounded-xl border border-border p-3">
           <p className="mb-2 text-sm font-semibold">
             {b.requiredPieces !== null ? (
-              <span className="rounded-md bg-surface-2 px-2 py-0.5">{t("sets.pieces", { count: b.requiredPieces })}</span>
+              <span className="rounded-md bg-surface-2 px-2 py-0.5">{b.groupName ? t("sets.groupPieces", { count: b.requiredPieces, group: b.groupName }) : t("sets.pieces", { count: b.requiredPieces })}</span>
             ) : (
               <span className="rounded-md bg-surface-2 px-2 py-0.5">
                 {t("sets.specificItems")}: {b.requiredItemNames?.join(", ")}
@@ -29,7 +31,7 @@ export function SetBonusList({ bonuses, t }: { bonuses: SetBonusView[]; t: Trans
             )}
           </p>
           {b.description && <p className="mb-2 text-sm text-muted">{b.description}</p>}
-          <EffectList effects={b.effects} t={t} />
+          <EffectList effects={b.effects} t={t} inTier />
         </li>
       ))}
     </ul>
