@@ -18,9 +18,10 @@ import { gunzipSync, gzipSync } from "node:zlib";
  */
 const [command, file] = process.argv.slice(2);
 if (!["backup", "restore", "verify"].includes(command) || !file) throw new Error("usage: pg-backup-restore.mjs <backup|restore|verify> <file.json.gz>");
-if (!existsSync(".local-pg/client/index.js")) throw new Error("PostgreSQL client missing: run node prisma/make-postgres-schema.mjs --local && npx prisma generate --schema .local-pg/schema.prisma");
+const CLIENT_DIR = process.env.PG_CLIENT_DIR ?? ".local-pg/client";
+if (!existsSync(path.join(CLIENT_DIR, "index.js"))) throw new Error("PostgreSQL client missing: run node prisma/make-postgres-schema.mjs --local && npx prisma generate --schema .local-pg/schema.prisma");
 const require = createRequire(import.meta.url);
-const { PrismaClient, Prisma } = require(path.resolve(".local-pg/client"));
+const { PrismaClient, Prisma } = require(path.resolve(CLIENT_DIR));
 const url = process.env.TARGET_DATABASE_URL ?? process.env.DIRECT_URL ?? process.env.DATABASE_URL;
 if (!url || !/^postgres(ql)?:\/\//.test(url)) throw new Error("a PostgreSQL URL is required (DIRECT_URL, DATABASE_URL or TARGET_DATABASE_URL)");
 const db = new PrismaClient({ datasourceUrl: url });
