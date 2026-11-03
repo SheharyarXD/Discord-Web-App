@@ -14,18 +14,18 @@ Date: 4 November 2026. VERIFIED = checked in this round with the evidence shown.
 | 8 | Legendary, Fate, Totsuka: no invented data | VERIFIED | no card, listed as open items |
 | 9 | Every record linked to its source image | VERIFIED | 143 source assets, 144 source records; detail page lists the sheets |
 | 10 | Source images private (not in Git, not served) | VERIFIED | `.gitignore`; live `/gear-source/...` answers 404 |
-| 11 | Catalogue: search, version, category, tier, printed statistic ranges, effects | VERIFIED | live smoke 74 of 74 |
+| 11 | Catalogue: search, version, category, tier, printed statistic ranges, effects | VERIFIED | live smoke 75 of 75 |
 | 12 | Match Any / Match All on ninjas, equipment and jewelry | VERIFIED | live: ALL = A + B - (A or B) on all three lists, not empty for equipment |
 | 13 | Mode and effects kept in the address, through paging, sorting, reload, chips and Clear | VERIFIED | tests and live checks |
 | 14 | Duplicate selections count once; unknown effect handled | VERIFIED | tests and live check |
 | 15 | Inflicting vs immunity, effect vs statistic, negation, ally vs enemy | VERIFIED | tests |
 | 16 | Results say the effect is at a stated tier, not that it is equipped | VERIFIED | live result cards |
-| 17 | Responsive at 390 px, keyboard use | VERIFIED | no horizontal scroll; Match All chosen with the keyboard (browser suite 216 of 216) |
+| 17 | Responsive at 390 px, keyboard use | VERIFIED | no horizontal scroll; Match All chosen with the keyboard (browser suite 217 of 217) |
 | 18 | Idempotent import; zero duplicates on the second run | VERIFIED | Preview and Production, each imported twice |
 | 19 | Production backed up, unchanged tables unchanged | VERIFIED | backup verified; every backup row present and unchanged; 28 tables identical, 13 only gained rows |
 | 20 | Tests, typecheck, lint, build | VERIFIED | SQLite 327 passed, 1 skipped; PostgreSQL 316 passed, 12 skipped |
 | 21 | Preview verified | PARTIAL | Preview deployments built; the same commit tested on the real Preview database through a local server. The deployed Preview URL was not browsed (see technical report, section 5) |
-| 22 | Production live and verified | VERIFIED | https://furia-ninja.vercel.app, commit `a064c32`, live smoke 74 of 74, no errors in logs |
+| 22 | Production live and verified | VERIFIED | https://furia-ninja.vercel.app, commit `60c441e`, live smoke 75 of 75, no errors in logs |
 | 23 | First administrator and setup token | VERIFIED | one administrator exists; `/setup` answers 404; no `SETUP_TOKEN` variable |
 | 24 | Production branch setting | OPEN (owner) | still `main` in the dashboard; builds of `main` are blocked by the Ignored Build Step |
 | 25 | Human check of every transcribed value against its image | OPEN | 15 of 143 images read twice; 128 read once; nothing marked verified |

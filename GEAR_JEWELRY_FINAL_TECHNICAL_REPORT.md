@@ -1,6 +1,6 @@
 # Equipment and jewelry add-on: technical report
 
-Written for: the project owner (technical reader). Date: 4 November 2026. Live at https://furia-ninja.vercel.app, commit `a064c32ba5315a902cfa11732790abf573e49851` on branch `milestone-4`. This add-on is separate from Milestone 4 and is not accepted or closed until the client says so.
+Written for: the project owner (technical reader). Date: 4 November 2026. Live at https://furia-ninja.vercel.app, commit `60c441ecb02d3bf07ca0e6536d8dc4b0c2d7361f` on branch `milestone-4`. This add-on is separate from Milestone 4 and is not accepted or closed until the client says so.
 
 ## 1. What was built
 
@@ -41,9 +41,9 @@ Written for: the project owner (technical reader). Date: 4 November 2026. Live a
 | PostgreSQL suite (`npm run test:pg`, embedded server, real migrations) | **316 passed, 12 skipped** (SQLite-only and real-catalogue tests) |
 | `tsc`, `eslint`, production build | clean |
 | Existing tests | none weakened. Changes: the read-only API name list (`m2-platform`), and the PostgreSQL schema test now reads the baseline plus the additive migration and also checks that every migration is plain SQL |
-| Local browser suite on a production build | **216 of 216** (183 earlier checks plus 33 for gear and Match All / Any) |
+| Local browser suite on a production build | **217 of 217** (183 earlier checks plus 34 for gear and Match All / Any) |
 | Preview database (real PostgreSQL, full data), read-only smoke through a local server | 72 of 73. The one miss is the HTTPS and HSTS check, which cannot apply to `http://127.0.0.1` |
-| Live production smoke over HTTPS (`scripts/production-smoke.mjs`) | **74 of 74** |
+| Live production smoke over HTTPS (`scripts/production-smoke.mjs`) | **75 of 75** |
 
 Noted honestly: the full vitest run can time out at 5 seconds per test when this machine is heavily loaded or when two runs overlap on the same temp database. Run alone, or with `--maxWorkers=3`, it is stable.
 
@@ -58,7 +58,7 @@ Noted honestly: the full vitest run can time out at 5 seconds per test when this
 | Preview deployments | Built and Ready from each push. **They were not browsed over HTTPS**: creating a temporary protection-bypass secret on the client's Vercel project was denied by the tool's permission check, and it was not worked around. The same commit was instead built with the PostgreSQL client and tested through a local server on the real Preview database (above) |
 | Production import | Imported twice in full; second run changed nothing |
 | Unchanged data | Ninjas 177, abilities 316, ninja effects 4,395, users 4, ninja source assets 394 before and after. `scripts/gear-preexisting-check.mjs`: every row of the backup is present and unchanged in all 41 tables; 13 tables only gained rows |
-| Production deployment | `dpl_3UZkidvYvdsLSTsk3bkh4oi9X8Sw`, target Production, commit `a064c32` (metadata read, clean tree, one deploy command). Earlier in the round: `dpl_AccAwe3vP9g7qSbWBXCfPSnekBa6` at `b071872` before the tier-label fix |
+| Production deployment | `dpl_GjWgLSWo1p4wpbVu7DWNnJf62QjQ`, target Production, commit `60c441e` (metadata read, clean tree, one deploy command). Earlier in the round: `dpl_AccAwe3vP9g7qSbWBXCfPSnekBa6` at `b071872` and `dpl_3UZkidvYvdsLSTsk3bkh4oi9X8Sw` at `a064c32`, before two small wording fixes (tier label and «0 piezas») |
 | Logs | No error entries in the production runtime log |
 
 ## 6. Import behaviour and reliability

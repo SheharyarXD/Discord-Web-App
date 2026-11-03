@@ -5,8 +5,8 @@ Date: 4 November 2026. Status: **LIVE AND VERIFIED** at https://furia-ninja.verc
 | Item | Value |
 | --- | --- |
 | Project | Vercel team `furia-ninja`, project `furia-ninja` |
-| Deployed commit | `a064c32ba5315a902cfa11732790abf573e49851`, branch `milestone-4` (read from the deployment metadata, clean tree) |
-| Production deployment | `dpl_3UZkidvYvdsLSTsk3bkh4oi9X8Sw` (`furia-ninja-h301bzyqb-furia-ninja.vercel.app`), aliased to https://furia-ninja.vercel.app. Earlier in the round `dpl_AccAwe3vP9g7qSbWBXCfPSnekBa6` ran commit `b071872` |
+| Deployed commit | `60c441ecb02d3bf07ca0e6536d8dc4b0c2d7361f`, branch `milestone-4` (read from the deployment metadata, clean tree) |
+| Production deployment | `dpl_GjWgLSWo1p4wpbVu7DWNnJf62QjQ` , aliased to https://furia-ninja.vercel.app. Earlier in the round `dpl_AccAwe3vP9g7qSbWBXCfPSnekBa6` ran `b071872` and `dpl_3UZkidvYvdsLSTsk3bkh4oi9X8Sw` ran `a064c32` |
 | Production branch setting | still `main` (dashboard only). Ignored Build Step `if [ "$VERCEL_GIT_COMMIT_REF" = "main" ]; then exit 0; else exit 1; fi` confirmed. `main` is at `37d74fb` and was never touched or deployed |
 | Database | Neon `neon-indigo-blanket` (Production) and `furia-preview` (Preview), separate projects |
 | Migration | `20261103180000_gear_families`, additive, applied to Preview then Production |
@@ -19,9 +19,9 @@ Date: 4 November 2026. Status: **LIVE AND VERIFIED** at https://furia-ninja.verc
 4. Local suites: SQLite, PostgreSQL, `tsc`, `eslint`, build, local browser suite.
 5. Preview: migration, import twice (identical), same commit tested on the real Preview database through a local server (72 of 73; the HSTS check cannot apply to http). The deployed Preview URL was not browsed: creating a protection-bypass secret on the client's project was denied by the permission check and was not worked around.
 6. Production: migration, import twice (identical), every row of the backup confirmed present and unchanged, then one `vercel deploy --prod` from a clean pushed tree.
-7. A small fix (tier labels) went through the same gates and a second production deployment.
+7. Two small wording fixes (tier labels, and a version without printed statistics saying «0 piezas») went through the same gates and two more production deployments. Commits after `60c441e` are documentation only.
 
-## Live checks (production, HTTPS, read-only, 74 of 74)
+## Live checks (production, HTTPS, read-only, 75 of 75)
 
 Health and HSTS; session cookie Secure and HttpOnly; anonymous visitors redirected; regular user 404 on `/admin`; administrator access; `/gems` 404; 177 ninjas; client corrections still visible. New: catalogue counts equal the stored rows (78 + 63 = 141); Sand Burial three cards; Warlord four cards; variants named «variante»; name-only sets show no card; tier and statistic filters equal the stored values (55 sets with an 8-piece bonus, 28 with Speed 70000 or more); effect search «aturdir» on equipment 2 of 2 stored; Match Any = union and Match All = intersection (equipment, jewelry, ninjas); duplicates count once; the mode survives paging, reload and Clear; detail pages for Sand Burial R1, Warlord and Mekansm; 143 private source sheets registered; source path answers 404; 390 px without horizontal scrolling.
 
