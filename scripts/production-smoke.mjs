@@ -450,7 +450,7 @@ try {
   await below(R.page, "/equipment?fx=aumento+de+tasa+de+control&tier=2", "p37-live-equipment-2-pieces-none.png", 300);
   await region(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p38-live-jewelry-slot-controls.png", "[data-filter-panel] form");
   await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p39-live-agility-2-pieces-desc.png", 1500);
-  await fromNote(R.page, "/jewelry?slot=chakra&tier=2&fx=aumento+de+tasa+de+da%C3%B1o&sort=fx:desc", "p40-live-8-piece-stronger.png", 1100);
+  await region(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+da%C3%B1o&sort=fx:desc", "p40-live-8-piece-stronger.png", "[data-gear-card]:has([data-full-set-stronger])");
   await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&fx=aumento+de+tasa+de+da%C3%B1o&fxm=all", "p41-live-match-all-slot-tier.png", 600);
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
