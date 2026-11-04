@@ -1,4 +1,5 @@
 import { normalizeTerm } from "../domain/localize";
+import { additiveKey, cumulate, type BonusLine } from "../domain/cumulative";
 import type { Db } from "./db";
 
 /**
@@ -10,6 +11,9 @@ import type { Db } from "./db";
  * fields (kind, status, statistic, sign, target); effects that only exist as source wording (TEXT_ONLY) are
  * classified from that wording, and a phrase no vocabulary entry knows is searched in the wording itself.
  * Applying a status, being immune to it, raising and lowering a statistic are different concepts and are never mixed.
+ *
+ * Set bonuses ACCUMULATE (confirmed by the client): with N pieces equipped, the bonuses of every tier up to N count together. Only
+ * comparable additive values are summed (see `domain/cumulative.ts`); wording-only and conditional effects stay as printed.
  */
 
 type Side = "self" | "ally" | "enemy";
@@ -44,6 +48,8 @@ interface IndexedEffect {
   statusKey: string | null;
   /** False for effects that exist only as source wording: they are searchable but have no value to compare. */
   structured: boolean;
+  /** Identity for adding set bonuses together (statistic, unit, target, direction); null for effects that are never added. */
+  additiveKey: string | null;
 }
 
 interface EffectIndex {
@@ -52,6 +58,8 @@ interface EffectIndex {
   statistics: { key: string; names: string[] }[];
   /** Concepts that exist in the data, for the suggestions, per kind of owner. */
   present: Record<EffectOwner, Set<string>>;
+  /** The highest piece count printed for each set version (key `${owner}:${id}`): the complete set. */
+  completeSet: Map<string, number>;
 }
 
 const n = normalizeTerm;
@@ -252,6 +260,13 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
         descriptionEs: true,
         structuredStatus: true,
         valueType: true,
+        chancePercent: true,
+        durationTurns: true,
+        triggerText: true,
+        conditionText: true,
+        choiceGroup: true,
+        targetSelector: true,
+        targetCount: true,
         target: { select: { key: true } },
         statistic: { select: { key: true } },
         statusEffect: { select: { key: true } },
@@ -288,6 +303,7 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
   }
 
   const effects: IndexedEffect[] = [];
+  const completeSet = new Map<string, number>();
   const present: Record<EffectOwner, Set<string>> = { ninja: new Set(), equipment: new Set(), jewelry: new Set() };
   for (const r of rows) {
     // The printed main statistic of a piece (Physical Attack: 4000) is a statistic, not an effect: stat filters use it, effect search does not.
@@ -316,6 +332,9 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
     );
     const side = (r.target?.key as Side | undefined) && ["self", "ally", "enemy"].includes(r.target!.key) ? (r.target!.key as Side) : sideOfText(text);
     for (const k of concepts) present[owner].add(k);
+    const value = r.value === null || textOnly ? null : Number(r.value.toString());
+    const conditional = Boolean(r.chancePercent !== null || r.durationTurns !== null || r.triggerText || r.conditionText || r.choiceGroup !== null || r.targetSelector || r.targetCount !== null);
+    if (pieces !== null && owner !== "ninja") completeSet.set(`${owner}:${ownerId}`, Math.max(completeSet.get(`${owner}:${ownerId}`) ?? 0, pieces));
     effects.push({
       owner,
       ownerId,
@@ -326,14 +345,15 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
       kind: r.kind,
       text,
       raw: r.sourceText ?? r.descriptionEs ?? r.description ?? "",
-      value: r.value === null || textOnly ? null : Number(r.value.toString()),
+      value,
       unit: r.valueType ?? null,
       statKey: r.statistic?.key ?? null,
       statusKey: r.statusEffect?.key ?? null,
       structured: !textOnly,
+      additiveKey: additiveKey({ kind: r.kind, structured: !textOnly, value, unit: r.valueType ?? null, statKey: r.statistic?.key ?? null, statusKey: r.statusEffect?.key ?? null, side, conditional }),
     });
   }
-  return { effects, statuses: statusDefs, statistics: statDefs, present };
+  return { effects, statuses: statusDefs, statistics: statDefs, present, completeSet };
 }
 
 async function indexOf(db: Db): Promise<EffectIndex> {
@@ -473,11 +493,16 @@ export interface EffectEvidence {
  * ── Sorting by the value of an effect ──
  * Only the effect the user chose to sort by is looked at. Each matching stored effect is put in a MEASURE CLASS made of what it
  * does and its unit, so an increase of Control Rate (+40%) is never compared with a reduction of the enemy's Control Rate (-20%),
- * with a flat value, or with a different state's immunity. Inside one class the value used is the largest printed value of the owner
- * (magnitude, so a bigger reduction ranks as bigger). Tiers are NOT added: the accumulation rule is not confirmed. Ties are broken
- * by the printed value at the highest piece count, then the next lower one, and finally by the caller (name, then identity).
- * Effects that exist only as wording, effects with no number (heal, a state applied) and owners that do not contain the chosen
- * effect (possible with Match Any) come after every number, and are labelled as such. Nothing is ever guessed.
+ * with a flat value, or with a different state's immunity.
+ *
+ * Set bonuses ACCUMULATE (confirmed by the client). With N pieces equipped the value of an owner is the TOTAL of the comparable
+ * additive bonuses of every tier up to N (Deatbone, Damage Rate: +30% at 2 pieces and +40% at 6 pieces make +70% with 6 pieces; the
+ * 4-piece tier does not need to have it). Comparable means the same statistic, unit, target and direction, in the same jewelry slot;
+ * conditional, timed, chance-based and wording-only effects are never added. Without a chosen piece count the complete set counts.
+ * The best total of the owner (largest magnitude) decides the position. Ties are broken by the printed value at the highest piece
+ * count, then the next lower one, and finally by the caller (name, then identity). Effects that exist only as wording, effects
+ * with no number (heal, a state applied) and owners that do not contain the chosen effect (possible with Match Any) come after
+ * every number, and are labelled as such. Nothing is ever guessed.
  */
 export interface EffectValueUse {
   pieces: number | null;
@@ -487,20 +512,33 @@ export interface EffectValueUse {
   unit: string;
   text: string;
 }
+/** The total available with a piece count: the printed bonuses that were added and their sum. */
+export interface EffectTotal {
+  /** Additive identity of the effect (null for a single value that is never added). */
+  key: string | null;
+  value: number;
+  unit: string;
+  /** The piece count the total is for (selected, or the complete set); null for ninjas. */
+  pieces: number | null;
+  /** Jewelry slot whose 2-piece bonus is part of the total. */
+  slot: string | null;
+  /** The printed bonuses added, lowest piece count first. */
+  parts: EffectValueUse[];
+}
 export type EffectRankStatus = "ranked" | "other-measure" | "text-only" | "no-value" | "no-match";
 export interface EffectRank {
   status: EffectRankStatus;
   /** Measure class, e.g. "up|PERCENT" (increase of the statistic, in percent). Null when nothing numeric was found. */
   measure: string | null;
-  /** The value that decided the position (largest magnitude), with the tier it is printed at. */
-  best: EffectValueUse | null;
-  /** Every printed value of the same measure, highest piece count first. Shown as is; never summed. */
+  /** The total that decided the position, with the printed bonuses it is made of. */
+  total: EffectTotal | null;
+  /** Every printed value of the same measure in scope, highest piece count first: the individual bonuses. */
   uses: EffectValueUse[];
   /** Position of the measure among the measures present: 0 is the primary one. Used by the comparison. */
   group: number;
-  /** Magnitude of `best`; null when there is none. */
+  /** Magnitude of the total; null when there is none. */
   magnitude: number | null;
-  /** The largest magnitude per tier, from the highest piece count down. Missing tiers are -Infinity. */
+  /** Largest printed magnitude per tier of the best total, from the highest piece count down. Missing tiers are -Infinity. */
   tierValues: number[];
 }
 
@@ -538,13 +576,39 @@ const unitRank = (m: string) => {
 };
 
 interface OwnerMatches {
-  uses: { measure: string; magnitude: number; use: EffectValueUse }[];
+  uses: { measure: string; magnitude: number; use: EffectValueUse; effect: IndexedEffect }[];
   wording: boolean;
   anyMatch: boolean;
 }
 
-/** Builds the rank of every owner for the chosen effect. */
-function buildRanks(matches: Map<string, OwnerMatches>): Map<string, EffectRank> {
+const useOf = (e: IndexedEffect): EffectValueUse => ({ pieces: e.pieces, group: e.group, value: e.value!, unit: e.unit!, text: e.raw });
+
+/**
+ * The best total of one owner for one measure: the comparable additive set bonuses are added tier by tier up to `atPieces`; every
+ * other line (a ninja effect, a piece effect, a conditional or wording line) counts as a single value, never added to anything.
+ */
+function bestTotal(lines: OwnerMatches["uses"], atPieces: number | null, slot: string | null | undefined): { total: EffectTotal; magnitude: number } {
+  const candidates: EffectTotal[] = [];
+  const additive: BonusLine[] = [];
+  for (const l of lines) {
+    if (atPieces !== null && l.effect.pieces !== null && l.effect.additiveKey) additive.push({ pieces: l.effect.pieces, group: l.effect.group, key: l.effect.additiveKey, value: l.effect.value, unit: l.effect.unit, label: l.effect.statKey ?? l.effect.statusKey ?? "", text: l.effect.raw });
+    else candidates.push({ key: null, value: l.effect.value!, unit: l.effect.unit!, pieces: l.effect.pieces, slot: l.effect.group, parts: [l.use] });
+  }
+  // Additive totals decide the position when the owner has any; a conditional or otherwise non-additive number is only a single printed
+  // value and never outranks (or is added to) a total. It stays visible among the individual bonuses.
+  const totals: EffectTotal[] = [];
+  if (atPieces !== null && additive.length) {
+    for (const t of cumulate(additive, atPieces, slot)) totals.push({ key: t.key, value: t.value, unit: t.unit, pieces: atPieces, slot: t.slot, parts: t.parts.map((p) => ({ pieces: p.pieces, group: p.group, value: p.value, unit: p.unit, text: p.text })) });
+  }
+  if (totals.length) candidates.splice(0, candidates.length, ...totals);
+  const magnitudeOf = (t: EffectTotal) => Math.abs(t.value);
+  const topPiece = (t: EffectTotal) => Math.max(0, ...t.parts.map((p) => p.pieces ?? 0));
+  const best = candidates.reduce((a, b) => (magnitudeOf(b) > magnitudeOf(a) || (magnitudeOf(b) === magnitudeOf(a) && topPiece(b) > topPiece(a)) ? b : a));
+  return { total: best, magnitude: magnitudeOf(best) };
+}
+
+/** Builds the rank of every owner for the chosen effect. `atPieces` gives the piece count an owner's total is for. */
+function buildRanks(matches: Map<string, OwnerMatches>, atPieces: (ownerKey: string) => number | null, slot: string | null | undefined): Map<string, EffectRank> {
   // Which measures exist, and how many owners have each.
   const owners = new Map<string, Set<string>>();
   for (const [key, m] of matches) for (const u of m.uses) (owners.get(u.measure) ?? owners.set(u.measure, new Set()).get(u.measure)!).add(key);
@@ -562,26 +626,27 @@ function buildRanks(matches: Map<string, OwnerMatches>): Map<string, EffectRank>
   const out = new Map<string, EffectRank>();
   for (const [key, m] of matches) {
     if (!m.anyMatch) {
-      out.set(key, { status: "no-match", measure: null, best: null, uses: [], group: order.length + 2, magnitude: null, tierValues: [] });
+      out.set(key, { status: "no-match", measure: null, total: null, uses: [], group: order.length + 2, magnitude: null, tierValues: [] });
       continue;
     }
     if (m.uses.length === 0) {
-      out.set(key, { status: m.wording ? "text-only" : "no-value", measure: null, best: null, uses: [], group: order.length + 1, magnitude: null, tierValues: [] });
+      out.set(key, { status: m.wording ? "text-only" : "no-value", measure: null, total: null, uses: [], group: order.length + 1, magnitude: null, tierValues: [] });
       continue;
     }
     // The owner's own best measure: the one that comes first in the order.
     const own = [...new Set(m.uses.map((u) => u.measure))].sort((a, b) => groupOf.get(a)! - groupOf.get(b)!)[0]!;
-    const uses = m.uses.filter((u) => u.measure === own).sort((x, y) => (y.use.pieces ?? 0) - (x.use.pieces ?? 0) || y.magnitude - x.magnitude);
-    const best = uses.reduce((a, b) => (b.magnitude > a.magnitude ? b : a));
-    const tierValues = tiers.map((t) => Math.max(-Infinity, ...uses.filter((u) => (u.use.pieces ?? 0) === t).map((u) => u.magnitude)));
+    const ownLines = m.uses.filter((u) => u.measure === own);
+    const uses = ownLines.map((u) => u.use).sort((x, y) => (y.pieces ?? 0) - (x.pieces ?? 0) || Math.abs(y.value) - Math.abs(x.value));
+    const { total, magnitude } = bestTotal(ownLines, atPieces(key), slot);
+    const tierValues = tiers.map((t) => Math.max(-Infinity, ...total.parts.filter((u) => (u.pieces ?? 0) === t).map((u) => Math.abs(u.value))));
     const group = groupOf.get(own)!;
-    out.set(key, { status: group === 0 ? "ranked" : "other-measure", measure: own, best: best.use, uses: uses.map((u) => u.use), group, magnitude: best.magnitude, tierValues });
+    out.set(key, { status: group === 0 ? "ranked" : "other-measure", measure: own, total, uses, group, magnitude, tierValues });
   }
   return out;
 }
 
 /**
- * Orders two ranks. desc: the larger value first; asc: the smaller first. Within one measure: the best printed value, then the value at
+ * Orders two ranks. desc: the larger total first; asc: the smaller first. Within one measure: the best total, then the printed value at
  * the highest piece count, then the next. Measures keep their fixed order and wording-only owners stay last in both directions.
  */
 export function compareRanks(a: EffectRank, b: EffectRank, direction: "asc" | "desc"): number {
@@ -599,32 +664,36 @@ export function compareRanks(a: EffectRank, b: EffectRank, direction: "asc" | "d
 }
 
 /**
- * Restricts which stored effects are looked at, BEFORE any matching. `tiers`: only the bonus printed at exactly these piece counts
- * (an effect found only at another tier never qualifies a result, and nothing is inferred between tiers). `slot`: for jewelry, the
- * 2-piece bonus of that category only; the set-wide bonus (8 pieces) has no category and is not narrowed by it. Ninjas are not scoped.
+ * Restricts which stored effects are looked at, BEFORE any matching. `pieces`: the piece count the user equips. Bonuses of that
+ * threshold and of every lower one count (they accumulate); a bonus printed only at a HIGHER threshold never qualifies a result, so a
+ * 2-piece search never shows an effect that exists only at 4 or 6 pieces. `slot`: for jewelry, the 2-piece bonus of that category only;
+ * the set-wide bonus (8 pieces) has no category and is not narrowed by it. Ninjas are not scoped.
  */
 export interface EffectScope {
-  tiers?: number[];
+  pieces?: number;
   slot?: string | null;
 }
 
 function inScope(e: IndexedEffect, scope: EffectScope | undefined): boolean {
   if (!scope || e.owner === "ninja") return true;
-  if (scope.tiers?.length && (e.pieces === null || !scope.tiers.includes(e.pieces))) return false;
+  if (scope.pieces !== undefined && (e.pieces === null || e.pieces > scope.pieces)) return false;
   if (scope.slot && e.owner === "jewelry" && e.group !== null && e.group !== scope.slot) return false;
   return true;
 }
 
-/** The set-wide bonus of one jewelry version, shown under a result that matched at 2 pieces. */
+/**
+ * The set-wide bonus of one jewelry version, shown under a result whose total is for fewer pieces than the complete set. The total
+ * with the complete set (the slot's 2-piece bonus plus the 8-piece bonus) is given when the SAME additive effect is printed there.
+ */
 export interface FullSetInfo {
   /** Every effect printed at the full-set tier of that version, as printed. */
   effects: string[];
   /**
-   * Only when the SAME measure of the selected effect is printed at the full-set tier: stronger, equal or lower than the matching
-   * value. "unrelated": the full-set bonus has no comparable value of the selected effect. Nothing here says the bonuses add up,
-   * replace each other or are active.
+   * stronger: the same additive effect is printed at the full-set tier, so the total with the complete set is larger.
+   * unrelated: the full-set bonus has no comparable value of the selected effect (it is shown as printed, nothing is added).
+   * included: the result's own total already counts the complete set.
    */
-  comparison: { status: "stronger" | "equal" | "lower" | "unrelated"; matching: EffectValueUse | null; fullSet: EffectValueUse | null };
+  comparison: { status: "stronger" | "unrelated" | "included"; matching: EffectTotal | null; fullSet: EffectTotal | null };
 }
 
 export interface EffectAnalysis {
@@ -670,13 +739,13 @@ export async function analyseEffects(
       if (!effectMatches(e, rs)) return;
       const bucket = perTerm.get(e.owner)![i]!;
       const list = bucket.get(e.ownerId) ?? [];
-      if (list.length < 3) list.push({ pieces: e.pieces, group: e.group, text: e.raw });
+      if (list.length < 6) list.push({ pieces: e.pieces, group: e.group, text: e.raw });
       bucket.set(e.ownerId, list);
       if (i !== sortIndex) return;
       const key = `${e.owner}:${e.ownerId}`;
       const m = sortMatches.get(key) ?? { uses: [], wording: false, anyMatch: true };
       const meas = measureOf(e, sorting);
-      if (meas && e.value !== null && e.unit) m.uses.push({ measure: meas.measure, magnitude: meas.magnitude, use: { pieces: e.pieces, group: e.group, value: e.value, unit: e.unit, text: e.raw } });
+      if (meas && e.value !== null && e.unit) m.uses.push({ measure: meas.measure, magnitude: meas.magnitude, use: useOf(e), effect: e });
       else if (!e.structured) m.wording = true;
       sortMatches.set(key, m);
     });
@@ -695,26 +764,35 @@ export async function analyseEffects(
       all.set(`${owner}:${id}`, sortMatches.get(`${owner}:${id}`) ?? { uses: [], wording: false, anyMatch: false });
     }
   }
-  const ranks = buildRanks(all);
+  // The total is for the selected piece count; without one, for the complete set of that version (6 or 8 pieces as printed).
+  const selected = options.scope?.pieces;
+  const atPieces = (ownerKey: string): number | null => (ownerKey.startsWith("ninja:") ? null : (selected ?? index.completeSet.get(ownerKey) ?? null));
+  const ranks = buildRanks(all, atPieces, options.scope?.slot);
   const fullSet = new Map<string, FullSetInfo>();
   const tier = options.fullSetTier;
   if (tier !== undefined && owners.includes("jewelry")) {
-    const printed = new Map<string, IndexedEffect[]>();
-    for (const e of index.effects) if (e.owner === "jewelry" && e.pieces === tier && e.group === null) (printed.get(e.ownerId) ?? printed.set(e.ownerId, []).get(e.ownerId)!).push(e);
+    const setWide = new Map<string, IndexedEffect[]>();
+    const lines = new Map<string, IndexedEffect[]>();
+    for (const e of index.effects) {
+      if (e.owner !== "jewelry") continue;
+      if (e.pieces === tier && e.group === null) (setWide.get(e.ownerId) ?? setWide.set(e.ownerId, []).get(e.ownerId)!).push(e);
+      if (e.additiveKey) (lines.get(e.ownerId) ?? lines.set(e.ownerId, []).get(e.ownerId)!).push(e);
+    }
     for (const id of perOwner.jewelry.ids) {
-      const list = printed.get(id);
+      const list = setWide.get(id);
       // Only under a result that matched through a bonus of fewer pieces (the 2-piece bonus of a category).
       if (!list?.length || !(perOwner.jewelry.evidence.get(id) ?? []).some((x) => x.pieces !== null && x.pieces !== tier)) continue;
       const rank = ranks.get(`jewelry:${id}`);
       let comparison: FullSetInfo["comparison"] = { status: "unrelated", matching: null, fullSet: null };
-      if (rank?.best && rank.measure) {
-        const same = list.flatMap((e) => {
-          const m = measureOf(e, sorting);
-          return m && m.measure === rank.measure && e.value !== null && e.unit ? [{ magnitude: m.magnitude, use: { pieces: e.pieces, group: e.group, value: e.value, unit: e.unit, text: e.raw } }] : [];
-        });
-        if (same.length) {
-          const top = same.reduce((a, b) => (b.magnitude > a.magnitude ? b : a));
-          comparison = { status: top.magnitude > rank.magnitude! ? "stronger" : top.magnitude === rank.magnitude ? "equal" : "lower", matching: rank.best, fullSet: top.use };
+      if (rank?.total?.key) {
+        const key = rank.total.key;
+        const bonus: BonusLine[] = (lines.get(id) ?? []).filter((e) => e.additiveKey === key && e.pieces !== null).map((e) => ({ pieces: e.pieces, group: e.group, key, value: e.value, unit: e.unit, label: e.statKey ?? "", text: e.raw }));
+        const full = cumulate(bonus, tier, options.scope?.slot ?? rank.total.slot).filter((t) => t.slot === rank.total!.slot || rank.total!.slot === null);
+        const top = full.length ? full.reduce((a, b) => (Math.abs(b.value) > Math.abs(a.value) ? b : a)) : null;
+        if (top && top.parts.some((p) => p.pieces === tier)) {
+          const fullTotal: EffectTotal = { key, value: top.value, unit: top.unit, pieces: tier, slot: top.slot, parts: top.parts.map((p) => ({ pieces: p.pieces, group: p.group, value: p.value, unit: p.unit, text: p.text })) };
+          const already = (rank.total.pieces ?? 0) >= tier;
+          comparison = { status: already ? "included" : Math.abs(fullTotal.value) > Math.abs(rank.total.value) ? "stronger" : "unrelated", matching: rank.total, fullSet: fullTotal };
         }
       }
       fullSet.set(`jewelry:${id}`, { effects: list.map((e) => e.raw), comparison });

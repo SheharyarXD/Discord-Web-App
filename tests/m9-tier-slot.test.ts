@@ -9,7 +9,8 @@ import { parseGearParams } from "../src/server/query-params";
 import { IS_PG, seedTestVocabulary, testDb } from "./helpers";
 
 /**
- * Exact piece-count search, jewelry slots, the 8-piece bonus under a 2-piece result, and sorting inside that scope.
+ * Piece-count search (N pieces equipped: a bonus at N or lower qualifies, one only at a HIGHER tier never does), jewelry slots, the
+ * 8-piece bonus under a 2-piece result, and sorting inside that scope by the CUMULATIVE total (the client confirmed that bonuses add up).
  * Fixtures cover every edge case; the client's own scenario is also checked on the real imported catalogue.
  */
 
@@ -93,39 +94,48 @@ afterAll(async () => {
 const run = (kind: "equipment" | "jewelry", extra: Parameters<typeof listGearSets>[1] = {}) => listGearSets(db, { kinds: [kind], query: "T15", pageSize: 100, ...extra });
 const names = (r: Awaited<ReturnType<typeof run>>) => r.items.map((i) => i.title.replace("T15 ", ""));
 
-describe("equipment: the selected piece count is exact", () => {
-  it("2 pieces returns only sets whose 2-piece bonus has the effect, not 4 or 6 piece ones", async () => {
+describe("equipment: the selected piece count (bonuses of that tier and the lower ones count)", () => {
+  it("2 pieces returns only sets whose 2-piece bonus has the effect, never one that has it only at 4 or 6 pieces", async () => {
     // EqWords prints its control rate as wording only, at 2 pieces: it is found, labelled, and has no value.
     expect(names(await run("equipment", { effectTerms: [CC], tiers: [2] })).sort()).toEqual(["EqAll", "EqAll R1", "EqTwo", "EqWords"]);
-    // Nothing is inferred: EqFour (4 pieces) and EqSix (6 pieces) never qualify for a 2-piece search.
     const two = names(await run("equipment", { effectTerms: [CC], tiers: [2] }));
     expect(two).not.toContain("EqFour");
     expect(two).not.toContain("EqSix");
   });
 
-  it("the same rule holds for 4 pieces and 6 pieces", async () => {
-    expect(names(await run("equipment", { effectTerms: [CC], tiers: [4] })).sort()).toEqual(["EqAll", "EqAll R1", "EqFour"]);
-    expect(names(await run("equipment", { effectTerms: [CC], tiers: [6] })).sort()).toEqual(["EqAll", "EqAll R1", "EqSix"]);
+  it("4 and 6 pieces also count the lower tiers (they accumulate), but never a higher one", async () => {
+    expect(names(await run("equipment", { effectTerms: [CC], tiers: [4] })).sort()).toEqual(["EqAll", "EqAll R1", "EqFour", "EqTwo", "EqWords"]);
+    expect(names(await run("equipment", { effectTerms: [CC], tiers: [6] })).sort()).toEqual(["EqAll", "EqAll R1", "EqFour", "EqSix", "EqTwo", "EqWords"]);
   });
 
-  it("ranks only the value printed at the selected tier, not the best of the other tiers", async () => {
+  it("ranks the total available with the selected piece count: the tiers up to it are added", async () => {
     const two = await run("equipment", { effectTerms: [CC], tiers: [2], sort: { by: "effect", direction: "desc" } });
-    expect(names(two)).toEqual(["EqTwo", "EqAll R1", "EqAll", "EqWords"]); // 20, 15, 10 (EqAll's 60 at 6 pieces is not used), wording last
+    expect(names(two)).toEqual(["EqTwo", "EqAll R1", "EqAll", "EqWords"]); // 20, 15, 10 (EqAll's 30 and 60 need more pieces), wording last
     const ranked = two.items.filter((i) => i.rank!.status === "ranked");
-    expect(ranked.map((i) => i.rank!.best!.value)).toEqual([20, 15, 10]);
-    expect(ranked.every((i) => i.rank!.best!.pieces === 2 && i.rank!.uses.length === 1)).toBe(true);
+    expect(ranked.map((i) => i.rank!.total!.value)).toEqual([20, 15, 10]);
+    expect(ranked.every((i) => i.rank!.total!.pieces === 2 && i.rank!.total!.parts.length === 1)).toBe(true);
     expect(names(await run("equipment", { effectTerms: [CC], tiers: [2], sort: { by: "effect", direction: "asc" } }))).toEqual(["EqAll", "EqAll R1", "EqTwo", "EqWords"]);
-    expect(names(await run("equipment", { effectTerms: [CC], tiers: [6], sort: { by: "effect", direction: "desc" } }))).toEqual(["EqAll R1", "EqAll", "EqSix"]);
+    // 4 pieces: R1 15+35, EqFour 40, EqAll 10+30 (a tie with EqFour: the value at the highest piece count, 40 against 30, decides), EqTwo 20.
+    expect(names(await run("equipment", { effectTerms: [CC], tiers: [4], sort: { by: "effect", direction: "desc" } }))).toEqual(["EqAll R1", "EqFour", "EqAll", "EqTwo", "EqWords"]);
+    // 6 pieces: R1 15+35+70 = 120, EqAll 10+30+60 = 100, EqSix 50, EqFour 40, EqTwo 20.
+    expect(names(await run("equipment", { effectTerms: [CC], tiers: [6], sort: { by: "effect", direction: "desc" } }))).toEqual(["EqAll R1", "EqAll", "EqSix", "EqFour", "EqTwo", "EqWords"]);
   });
 
-  it("an upgraded version keeps its own bonuses and values", async () => {
+  it("an upgraded version keeps its own bonuses: its total is made of its own values only", async () => {
     const six = await run("equipment", { effectTerms: [CC], tiers: [6], sort: { by: "effect", direction: "desc" } });
-    expect(six.items.map((i) => [i.title.replace("T15 ", ""), i.rank!.best!.value])).toEqual([["EqAll R1", 70], ["EqAll", 60], ["EqSix", 50]]);
+    expect(six.items.slice(0, 3).map((i) => [i.title.replace("T15 ", ""), i.rank!.total!.value, i.rank!.total!.parts.map((p) => `${p.pieces}:${p.value}`).join(" ")])).toEqual([
+      ["EqAll R1", 120, "2:15 4:35 6:70"],
+      ["EqAll", 100, "2:10 4:30 6:60"],
+      ["EqSix", 50, "6:50"],
+    ]);
   });
 
-  it("several tiers at once mean any of them; without a tier every tier counts as before", async () => {
-    expect(names(await run("equipment", { effectTerms: [CC], tiers: [2, 6] })).sort()).toEqual(["EqAll", "EqAll R1", "EqSix", "EqTwo", "EqWords"]);
-    expect(names(await run("equipment", { effectTerms: [CC] })).sort()).toEqual(["EqAll", "EqAll R1", "EqFour", "EqSix", "EqTwo", "EqWords"].sort());
+  it("several tiers mean the highest one; without a tier the complete set counts", async () => {
+    expect(names(await run("equipment", { effectTerms: [CC], tiers: [2, 6] })).sort()).toEqual(["EqAll", "EqAll R1", "EqFour", "EqSix", "EqTwo", "EqWords"]);
+    const all = await run("equipment", { effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
+    expect(names(all)).toEqual(["EqAll R1", "EqAll", "EqSix", "EqFour", "EqTwo", "EqWords"]);
+    expect(all.items.find((i) => i.title === "T15 EqAll")!.rank!.total).toMatchObject({ value: 100, pieces: 6 });
+    expect(all.items.find((i) => i.title === "T15 EqTwo")!.rank!.total).toMatchObject({ value: 20, pieces: 4 }); // its complete set stops at 4 pieces
     // Without an effect the tier still means «has a bonus at that piece count».
     expect(names(await run("equipment", { tiers: [6] })).sort()).toEqual(["EqAll", "EqAll R1", "EqSix"]);
   });
@@ -135,7 +145,7 @@ describe("equipment: the selected piece count is exact", () => {
     expect(names(two)).not.toContain("EqNegated");
     const all = await run("equipment", { effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
     const words = all.items.find((i) => i.title === "T15 EqWords")!;
-    expect(words.rank).toMatchObject({ status: "text-only", best: null });
+    expect(words.rank).toMatchObject({ status: "text-only", total: null });
     expect(names(all).at(-1)).toBe("EqWords");
   });
 });
@@ -154,7 +164,7 @@ describe("jewelry: slot and exact 2-piece bonus", () => {
     const r = await run("jewelry", { slot: "agility", tiers: [2], effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
     expect(names(r)).toEqual(["JewAlpha", "JewBeta", "JewDelta", "JewEqual", "JewGamma", "JewFlat", "JewText"]);
     const alpha = r.items[0]!;
-    expect(alpha.rank!.best).toMatchObject({ pieces: 2, group: "agility", value: 25 }); // not Force's 30
+    expect(alpha.rank!.total).toMatchObject({ pieces: 2, slot: "agility", value: 25, parts: [{ pieces: 2, group: "agility", value: 25 }] }); // not Force's 30
     expect(r.items.map((i) => i.rank!.status)).toEqual(["ranked", "ranked", "ranked", "ranked", "ranked", "other-measure", "text-only"]);
     const force = await run("jewelry", { slot: "force", tiers: [2], effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
     expect(names(force)).toEqual(["JewForce", "JewAlpha"]); // 50, 30
@@ -167,26 +177,42 @@ describe("jewelry: slot and exact 2-piece bonus", () => {
     expect(flat.rank).toMatchObject({ status: "other-measure", measure: "up|FLAT" });
   });
 
-  it("a 2-piece search does not match an effect that exists only at 8 pieces; an 8-piece search does, separately", async () => {
+  it("a 2-piece search does not match an effect that exists only at 8 pieces; an 8-piece search does, with the slot's 2-piece bonus added", async () => {
     expect(names(await run("jewelry", { tiers: [2], effectTerms: [CC] }))).not.toContain("JewEight");
     expect(names(await run("jewelry", { slot: "chakra", tiers: [2], effectTerms: [CC] }))).toEqual([]);
+    // Complete set, no slot chosen: each slot is its own total, the best slot ranks (slots are never added to each other).
     const eight = await run("jewelry", { tiers: [8], effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
-    expect(names(eight)).toEqual(["JewEight", "JewAlpha", "JewEqual", "JewDelta"]); // 40, 35, 15, 7
-    expect(eight.items.every((i) => i.rank!.best!.pieces === 8 && i.rank!.best!.group === null)).toBe(true);
-    expect(eight.items.every((i) => i.fullSet === null)).toBe(true); // it matched AT 8 pieces: nothing to add underneath
+    expect(eight.items.filter((i) => i.rank!.status === "ranked").map((i) => [i.title.replace("T15 ", ""), i.rank!.total!.value, i.rank!.total!.slot])).toEqual([
+      ["JewAlpha", 65, "force"], // Force 30 + the 8-piece 35 (Agility would be 25 + 35 = 60)
+      ["JewForce", 50, "force"],
+      ["JewPower", 45, "power"],
+      ["JewEight", 40, null], // the 8-piece bonus alone
+      ["JewDelta", 32, "agility"],
+      ["JewEqual", 30, "agility"],
+      ["JewBeta", 25, "agility"],
+      ["JewGamma", 10, "agility"],
+    ]);
+    expect(eight.items.every((i) => i.rank!.total === null || i.rank!.total.pieces === 8)).toBe(true);
+    expect(eight.items.every((i) => i.fullSet === null || ["included", "unrelated"].includes(i.fullSet.comparison.status))).toBe(true); // the total already counts the complete set, or the 8-piece bonus has nothing to add
   });
 
-  it("the slot never narrows the set-wide 8-piece bonus", async () => {
-    expect(names(await run("jewelry", { slot: "agility", tiers: [8], effectTerms: [CC] })).sort()).toEqual(["JewAlpha", "JewDelta", "JewEight", "JewEqual"]);
+  it("the slot never narrows the set-wide 8-piece bonus, and never mixes in another slot", async () => {
+    const r = await run("jewelry", { slot: "agility", tiers: [8], effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
+    expect(names(r).filter((n) => !["JewFlat", "JewText"].includes(n))).toEqual(["JewAlpha", "JewEight", "JewDelta", "JewEqual", "JewBeta", "JewGamma"]);
+    const alpha = r.items[0]!.rank!.total!;
+    expect(alpha).toMatchObject({ value: 60, slot: "agility" }); // 25 + 35, never Force's 30
+    expect(alpha.parts.map((p) => `${p.pieces}:${p.group ?? "-"}:${p.value}`)).toEqual(["2:agility:25", "8:-:35"]);
   });
 
   it("the 8-piece bonus of the same version is shown under a 2-piece result, with a note only when it is genuinely stronger", async () => {
     const r = await run("jewelry", { slot: "agility", tiers: [2], effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
     const by = (n: string) => r.items.find((i) => i.title === `T15 ${n}`)!;
-    expect(by("JewAlpha").fullSet!.comparison).toMatchObject({ status: "stronger", matching: { value: 25, pieces: 2, group: "agility" }, fullSet: { value: 35, pieces: 8 } });
+    // The complete set adds the 8-piece bonus to the slot's 2-piece bonus: 25 + 35.
+    expect(by("JewAlpha").fullSet!.comparison).toMatchObject({ status: "stronger", matching: { value: 25, pieces: 2, slot: "agility" }, fullSet: { value: 60, pieces: 8, slot: "agility" } });
+    expect(by("JewAlpha").fullSet!.comparison.fullSet!.parts.map((p) => p.value)).toEqual([25, 35]);
     expect([...by("JewAlpha").fullSet!.effects].sort()).toEqual(["Increase CC Rate +35%", "Weaken enemy's ATK +30%"].sort());
-    expect(by("JewDelta").fullSet!.comparison.status).toBe("lower"); // 7 against 25: no «stronger» note
-    expect(by("JewEqual").fullSet!.comparison.status).toBe("equal");
+    expect(by("JewDelta").fullSet!.comparison).toMatchObject({ status: "stronger", fullSet: { value: 32 } }); // 25 + 7: any added amount is a bigger bonus
+    expect(by("JewEqual").fullSet!.comparison).toMatchObject({ status: "stronger", fullSet: { value: 30 } }); // 15 + 15
     expect(by("JewGamma").fullSet).toBeNull(); // no 8-piece bonus printed
     // An unrelated 8-piece effect is listed accurately and not compared.
     const beta = await run("jewelry", { slot: "force", tiers: [2], effectTerms: ["congelar"] });
@@ -196,7 +222,7 @@ describe("jewelry: slot and exact 2-piece bonus", () => {
   it("without a slot the matching category is named, and the best value across categories ranks", async () => {
     const r = await run("jewelry", { tiers: [2], effectTerms: [CC], sort: { by: "effect", direction: "desc" } });
     expect(r.items[0]!.title).toBe("T15 JewForce");
-    expect(r.items[0]!.rank!.best).toMatchObject({ group: "force", value: 50 });
+    expect(r.items[0]!.rank!.total).toMatchObject({ slot: "force", value: 50 });
   });
 });
 
@@ -252,13 +278,13 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
   afterAll(() => real.$disconnect());
   const have = async () => (await real.gearFamily.count()) > 0;
 
-  /** The stored 2-piece Control Rate increase (percent) of each jewelry version in one category, straight from the tables. */
+  /** The stored Control Rate increase (percent) of each jewelry version in one category at one threshold, summed per set, straight from the tables. */
   const stored = async (slot: string, pieces: number) => {
     const rows = await real.jewelrySetBonus.findMany({
       where: { requiredPieces: pieces, set: { familyId: { not: null } }, ...(pieces === 2 ? { group: { key: slot } } : { groupId: null }), effects: { some: { statistic: { key: "control-rate" }, value: { gt: 0 }, valueType: "PERCENT", structuredStatus: "STRUCTURED" } } },
       select: { setId: true, effects: { where: { statistic: { key: "control-rate" }, value: { gt: 0 }, valueType: "PERCENT" }, select: { value: true } } },
     });
-    return new Map(rows.map((r) => [r.setId, Math.max(...r.effects.map((e) => Number(e.value!.toString())))]));
+    return new Map(rows.map((r) => [r.setId, r.effects.reduce((sum, e) => sum + Number(e.value!.toString()), 0)]));
   };
 
   it("the client's scenario: Joyería, Agilidad, 2 piezas, Control Rate, mayor a menor equals the stored Agility 2-piece values", { timeout: 180_000 }, async () => {
@@ -268,17 +294,17 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
     const ranked = r.items.filter((i) => i.rank!.status === "ranked");
     expect(ranked.map((i) => i.id).sort()).toEqual([...oracle.keys()].sort());
     for (const i of ranked) {
-      expect(i.rank!.best!.value).toBe(oracle.get(i.id));
-      expect(i.rank!.best).toMatchObject({ pieces: 2, group: "agility" });
+      expect(i.rank!.total!.value).toBe(oracle.get(i.id));
+      expect(i.rank!.total).toMatchObject({ pieces: 2, slot: "agility" });
     }
-    const values = ranked.map((i) => i.rank!.best!.value);
+    const values = ranked.map((i) => i.rank!.total!.value);
     expect(values).toEqual([...values].sort((a, b) => b - a));
     expect(values.length).toBeGreaterThan(5);
     // No Force, Chakra or Power result: every set listed has its Agility bonus as the match.
     expect(r.items.every((i) => i.rank!.uses.every((u) => u.group === "agility"))).toBe(true);
   });
 
-  it("the 8-piece bonus under those results agrees with the stored 8-piece effects, and «stronger» only where the stored value is higher", { timeout: 180_000 }, async () => {
+  it("the 8-piece bonus under those results agrees with the stored 8-piece effects; the complete-set total is the 2-piece value plus the stored 8-piece one", { timeout: 180_000 }, async () => {
     if (!(await have())) return;
     const r = await listGearSets(real, { kinds: ["jewelry"], slot: "agility", tiers: [2], effectTerms: [CC], sort: { by: "effect", direction: "desc" }, pageSize: 100 });
     const eight = await stored("agility", 8);
@@ -287,23 +313,30 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
     for (const i of r.items.filter((x) => x.rank!.status === "ranked")) {
       expect(i.fullSet ? [...i.fullSet.effects].sort() : null).toEqual(printedBy.get(i.id) ? [...printedBy.get(i.id)!].sort() : null);
       const eightValue = eight.get(i.id);
-      const own = i.rank!.best!.value;
-      const expected = eightValue === undefined ? "unrelated" : eightValue > own ? "stronger" : eightValue === own ? "equal" : "lower";
-      if (i.fullSet) expect(i.fullSet.comparison.status, i.title).toBe(expected);
+      const own = i.rank!.total!.value;
+      if (i.fullSet) {
+        expect(i.fullSet.comparison.status, i.title).toBe(eightValue === undefined ? "unrelated" : "stronger");
+        if (eightValue !== undefined) expect(i.fullSet.comparison.fullSet!.value, i.title).toBe(own + eightValue);
+      }
     }
-    expect(r.items.some((i) => i.fullSet?.comparison.status === "lower")).toBe(true); // real data: Crystalys prints 7 and 10 at 8 pieces
+    // Real data: Crystalys prints Control Rate +7% and +10% at 8 pieces, so the complete set totals 32% and 35% with the Agility +25%.
+    expect(r.items.filter((i) => /Crystalys/.test(i.title)).map((i) => i.fullSet!.comparison.fullSet!.value).sort((a, b) => a - b)).toEqual([32, 35]);
   });
 
-  it("equipment Control Rate at exactly 2, 4 and 6 pieces equals the stored bonuses of each tier", { timeout: 180_000 }, async () => {
+  it("equipment Control Rate with 2, 4 and 6 pieces equals the stored bonuses of that tier and the lower ones, added", { timeout: 180_000 }, async () => {
     if (!(await have())) return;
     for (const tier of [2, 4, 6]) {
       const rows = await real.equipmentSetBonus.findMany({
-        where: { requiredPieces: tier, set: { familyId: { not: null } }, effects: { some: { statistic: { key: "control-rate" }, value: { gt: 0 }, valueType: "PERCENT", structuredStatus: "STRUCTURED" } } },
-        select: { setId: true },
+        where: { requiredPieces: { lte: tier }, set: { familyId: { not: null } }, effects: { some: { statistic: { key: "control-rate" }, value: { gt: 0 }, valueType: "PERCENT", structuredStatus: "STRUCTURED" } } },
+        select: { setId: true, effects: { where: { statistic: { key: "control-rate" }, value: { gt: 0 }, valueType: "PERCENT" }, select: { value: true } } },
       });
+      const sums = new Map<string, number>();
+      for (const b of rows) sums.set(b.setId, (sums.get(b.setId) ?? 0) + b.effects.reduce((s, e) => s + Number(e.value!.toString()), 0));
       const r = await listGearSets(real, { kinds: ["equipment"], tiers: [tier], effectTerms: [CC], sort: { by: "effect", direction: "desc" }, pageSize: 100 });
-      expect(r.items.filter((i) => i.rank!.status === "ranked").map((i) => i.id).sort(), `tier ${tier}`).toEqual(rows.map((x) => x.setId).sort());
-      expect(r.items.every((i) => i.rank!.uses.every((u) => u.pieces === tier))).toBe(true);
+      const ranked = r.items.filter((i) => i.rank!.status === "ranked");
+      expect(ranked.map((i) => i.id).sort(), `tier ${tier}`).toEqual([...sums.keys()].sort());
+      for (const i of ranked) expect(i.rank!.total!.value, `${i.title} at ${tier}`).toBe(sums.get(i.id));
+      expect(r.items.every((i) => i.rank!.uses.every((u) => (u.pieces ?? 0) <= tier))).toBe(true);
     }
   });
 
@@ -311,7 +344,7 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
     if (!(await have())) return;
     const eight = await listGearSets(real, { kinds: ["jewelry"], tiers: [8], effectTerms: ["reducción de tasa de control"], pageSize: 100 });
     expect(eight.items.length).toBeGreaterThan(3);
-    expect(eight.items.every((i) => i.rank === null || i.rank.uses.every((u) => u.pieces === 8))).toBe(true);
+    expect(eight.items.every((i) => i.rank === null || i.rank.total === null || i.rank.total.pieces === 8)).toBe(true);
     for (const slot of ["force", "chakra", "agility", "power"] as const) {
       const oracle = await stored(slot, 2);
       const r = await listGearSets(real, { kinds: ["jewelry"], slot, tiers: [2], effectTerms: [CC], pageSize: 100 });
@@ -323,8 +356,8 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
   it("upgraded versions keep separate bonuses and values (Sand Burial, Warlord, Crystalys)", { timeout: 180_000 }, async () => {
     if (!(await have())) return;
     const r = await listGearSets(real, { kinds: ["jewelry"], slot: "agility", tiers: [2], effectTerms: [CC], query: "warlord", sort: { by: "effect", direction: "desc" } });
-    expect(r.items.map((i) => [i.title, i.rank!.best!.value])).toEqual([["Warlord R2", 25], ["Warlord R1", 10]]);
+    expect(r.items.map((i) => [i.title, i.rank!.total!.value])).toEqual([["Warlord R2", 25], ["Warlord R1", 10]]);
     const crystalys = await listGearSets(real, { kinds: ["jewelry"], slot: "agility", tiers: [2], effectTerms: [CC], query: "crystalys" });
-    expect(crystalys.items.map((i) => i.fullSet!.comparison.fullSet!.value).sort((a, b) => a - b)).toEqual([7, 10]); // A prints 7 at 8 pieces, B prints 10
+    expect(crystalys.items.map((i) => i.fullSet!.comparison.fullSet!.value).sort((a, b) => a - b)).toEqual([32, 35]); // A: 25 + 7 at 8 pieces, B: 25 + 10
   });
 });

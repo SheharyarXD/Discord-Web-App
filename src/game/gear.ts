@@ -27,7 +27,9 @@ export const gearListParams = z.object({
   versions: z.array(z.enum(VERSION_FILTERS)).optional(),
   /**
    * Bonus tier (2, 4, 6 for equipment; 2, 8 for jewelry). Without an effect: sets that have a bonus at one of these piece counts.
-   * With an effect: the effect must be printed at EXACTLY one of these piece counts; it never qualifies through another tier.
+   * With an effect: the piece count the user equips. Bonuses accumulate (confirmed), so the effect qualifies when it is printed at that
+   * tier or at a LOWER one, and the total of all those tiers is what is shown and ranked; an effect printed only at a HIGHER tier never
+   * qualifies (a 2-piece search never shows 4 or 6 piece effects). With several tiers selected the highest one counts.
    */
   tiers: z.array(z.number().int().min(1).max(20)).optional(),
   /**
@@ -64,9 +66,9 @@ export interface GearSetSummary {
   stats: { key: string; name: string; value: string }[];
   /** Matching effect wording per tier when an effect filter is active. */
   evidence: EffectEvidence[];
-  /** The printed values of the effect that controls sorting, when an effect filter is active. Never summed. */
+  /** The total of the effect that controls sorting with the selected piece count (or the complete set), and the printed bonuses it adds. */
   rank: EffectRank | null;
-  /** Jewelry matched through a 2-piece bonus: the set-wide (8 piece) bonus of the same version, with a comparison when it is genuine. */
+  /** Jewelry: the set-wide (8 piece) bonus of the same version, with the total of the complete set when the same additive effect is printed there. */
   fullSet: FullSetInfo | null;
 }
 
@@ -76,11 +78,14 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
   const p = parseInput(gearListParams, params, "gear list parameters");
   // A slot is a property of jewelry: choosing one means jewelry only.
   const kinds: GearKind[] = p.slot ? ["jewelry"] : p.kinds?.length ? p.kinds : [...GEAR_KINDS];
-  // The same restrictions are put in the database queries, so a set that cannot qualify is never read.
-  const tierWhere = p.tiers?.length ? { bonuses: { some: { requiredPieces: { in: p.tiers } } } } : {};
+  // The same restrictions are put in the database queries, so a set that cannot qualify is never read. Without an effect a tier means
+  // "has a bonus at that piece count"; with an effect it means "N pieces equipped": a bonus at N or lower can qualify (they accumulate).
+  const equipped = p.tiers?.length ? Math.max(...p.tiers) : undefined;
+  const piecesWhere = p.effectTerms?.length ? { lte: equipped } : { in: p.tiers };
+  const tierWhere = p.tiers?.length ? { bonuses: { some: { requiredPieces: piecesWhere } } } : {};
   const jewelryWhere = {
     ...(p.slot ? { groups: { some: { key: p.slot } } } : {}),
-    ...(p.tiers?.length ? { bonuses: { some: { requiredPieces: { in: p.tiers }, ...(p.slot ? { OR: [{ groupId: null }, { group: { key: p.slot } }] } : {}) } } } : {}),
+    ...(p.tiers?.length ? { bonuses: { some: { requiredPieces: piecesWhere, ...(p.slot ? { OR: [{ groupId: null }, { group: { key: p.slot } }] } : {}) } } } : {}),
   };
 
   const mainStats = { items: { select: { effects: { where: { note: "PRINTED_MAIN_STAT" }, select: { value: true, statistic: { select: { key: true, name: true } } } } } } };
@@ -101,12 +106,14 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
   }
 
   let found = rows;
+  let effectActive = false;
   const evidence = new Map<string, EffectEvidence[]>();
   let ranks = new Map<string, EffectRank>();
   let fullSets = new Map<string, FullSetInfo>();
   if (p.effectTerms?.length) {
-    const hit = await analyseEffects(db, kinds, p.effectTerms, p.effectMode, p.sort?.by === "effect" ? p.sort.effectTerm : null, { scope: { tiers: p.tiers, slot: p.slot }, fullSetTier: 8 });
+    const hit = await analyseEffects(db, kinds, p.effectTerms, p.effectMode, p.sort?.by === "effect" ? p.sort.effectTerm : null, { scope: { pieces: equipped, slot: p.slot }, fullSetTier: 8 });
     if (hit) {
+      effectActive = true;
       fullSets = hit.fullSet;
       ranks = hit.ranks;
       for (const kind of kinds) {
@@ -127,7 +134,8 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
       const kind = r.versionBasis === "SEQUENCE" ? "variant" : r.versionLabel ? "labelled" : "base";
       if (!p.versions.includes(kind)) return false;
     }
-    if (p.tiers?.length && !p.tiers.some((t) => r.thresholds.includes(t))) return false;
+    // With an effect the analysis already applied the piece count (N or lower); without one the set must have a bonus at that count.
+    if (p.tiers?.length && !effectActive && !p.tiers.some((t) => r.thresholds.includes(t))) return false;
     for (const f of p.statFilters ?? []) {
       const s = r.stats.find((x) => x.key === f.statisticKey);
       if (!s) return false;

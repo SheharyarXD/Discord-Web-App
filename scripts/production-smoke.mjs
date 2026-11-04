@@ -235,18 +235,29 @@ try {
   // ── sorting by the value of the selected effect ──
   const CCQ = "aumento+de+tasa+de+control";
   const AGQ = "aumento+de+agilidad";
-  const ccRows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, OR: [{ equipmentSetBonusId: { not: null } }, { jewelrySetBonusId: { not: null } }] }, select: { value: true, equipmentSetBonus: { select: { setId: true } }, jewelrySetBonus: { select: { setId: true } } } });
-  const ccBest = new Map();
+  const ccRows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, OR: [{ equipmentSetBonus: { set: { familyId: { not: null } } } }, { jewelrySetBonus: { set: { familyId: { not: null } } } }] }, select: { value: true, equipmentSetBonus: { select: { setId: true } }, jewelrySetBonus: { select: { setId: true, requiredPieces: true, group: { select: { key: true } } } } } });
+  // The bonuses accumulate: equipment adds every tier; jewelry adds the slot's 2-piece bonus and the set-wide 8-piece bonus (the best slot counts).
+  const eqSum = new Map();
+  const jw = new Map();
   for (const r of ccRows) {
-    const id = r.equipmentSetBonus?.setId ?? r.jewelrySetBonus?.setId;
-    ccBest.set(id, Math.max(ccBest.get(id) ?? 0, Number(r.value.toString())));
+    const v = Number(r.value.toString());
+    if (r.equipmentSetBonus) eqSum.set(r.equipmentSetBonus.setId, (eqSum.get(r.equipmentSetBonus.setId) ?? 0) + v);
+    else {
+      const b = r.jewelrySetBonus;
+      const o = jw.get(b.setId) ?? { slots: new Map(), eight: 0 };
+      if (b.requiredPieces === 8) o.eight += v;
+      else o.slots.set(b.group.key, (o.slots.get(b.group.key) ?? 0) + v);
+      jw.set(b.setId, o);
+    }
   }
+  const ccBest = new Map(eqSum);
+  for (const [id, o] of jw) ccBest.set(id, Math.max(o.eight, ...[...o.slots.values()].map((x) => x + o.eight)));
   const ccMax = Math.max(...ccBest.values());
   const rankValues = async (pg) => (await pg.locator("[data-effect-rank][data-rank-status='ranked']").evaluateAll((els) => els.map((e) => Number(e.getAttribute("data-rank-magnitude")))));
   await go(SP, BASE + `/sets?fx=${CCQ}&sort=fx:desc`);
   const descVals = await rankValues(SP);
-  check("sort by value, highest first: the top result carries the largest stored Control Rate bonus and values never rise", descVals.length > 5 && descVals[0] === ccMax && descVals.every((v, i) => i === 0 || descVals[i - 1] >= v), `top=${descVals[0]} max=${ccMax} shown=${descVals.length}`);
-  check("the result says how it is ordered and that tiers are not added", /Ordenado de mayor a menor por el valor de/.test(await SP.locator("[data-effect-rank-note]").innerText()) && /No se suman niveles/.test(await SP.locator("[data-effect-rank-note]").innerText()));
+  check("sort by value, highest first: the top result carries the largest cumulative Control Rate total (tiers added) and values never rise", descVals.length > 5 && descVals[0] === ccMax && descVals.every((v, i) => i === 0 || descVals[i - 1] >= v), `top=${descVals[0]} max=${ccMax} shown=${descVals.length}`);
+  check("the result says how it is ordered and that the tiers are added", /Ordenado de mayor a menor por el valor de/.test(await SP.locator("[data-effect-rank-note]").innerText()) && /total acumulado/i.test(await SP.locator("[data-effect-rank-note]").innerText()) && !/No se suman niveles/.test(await SP.locator("[data-effect-rank-note]").innerText()));
   await go(SP, BASE + `/sets?fx=${CCQ}&sort=fx:asc`);
   const ascVals = await rankValues(SP);
   check("sort by value, lowest first", ascVals.length > 5 && ascVals.every((v, i) => i === 0 || ascVals[i - 1] <= v), ascVals.slice(0, 6).join(" < "));
@@ -301,21 +312,21 @@ try {
   // ── exact piece counts, jewelry slots and the 8-piece bonus under a 2-piece result ──
   const CCQ2 = "aumento+de+tasa+de+control";
   const DMQ = "aumento+de+tasa+de+da%C3%B1o";
-  const pctRows = (statKey) => db.effect.findMany({ where: { statistic: { key: statKey }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, jewelrySetBonusId: { not: null } }, select: { value: true, jewelrySetBonus: { select: { setId: true, requiredPieces: true, group: { select: { key: true } } } } } });
+  const pctRows = (statKey) => db.effect.findMany({ where: { statistic: { key: statKey }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, jewelrySetBonusId: { not: null }, jewelrySetBonus: { set: { familyId: { not: null } } } }, select: { value: true, jewelrySetBonus: { select: { setId: true, requiredPieces: true, group: { select: { key: true } } } } } });
   const jewelOracle = async (statKey, slot) => {
     const two = new Map();
     const eight = new Map();
     for (const r of await pctRows(statKey)) {
       const b = r.jewelrySetBonus;
       const v = Number(r.value.toString());
-      if (b.requiredPieces === 2 && b.group?.key === slot) two.set(b.setId, Math.max(two.get(b.setId) ?? 0, v));
-      if (b.requiredPieces === 8) eight.set(b.setId, Math.max(eight.get(b.setId) ?? 0, v));
+      if (b.requiredPieces === 2 && b.group?.key === slot) two.set(b.setId, (two.get(b.setId) ?? 0) + v);
+      if (b.requiredPieces === 8) eight.set(b.setId, (eight.get(b.setId) ?? 0) + v);
     }
-    return { two, eight, stronger: [...two].filter(([id, v]) => (eight.get(id) ?? 0) > v).length };
+    return { two, eight, stronger: [...two].filter(([id]) => (eight.get(id) ?? 0) > 0).length };
   };
   const eqDebug = [];
   const equipOracle = async (tier) => {
-    const rows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, equipmentSetBonus: { requiredPieces: tier } }, select: { equipmentSetBonus: { select: { setId: true } } } });
+    const rows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, equipmentSetBonus: { requiredPieces: { lte: tier }, set: { familyId: { not: null } } } }, select: { equipmentSetBonus: { select: { setId: true } } } });
     eqDebug.push(`${tier}:${rows.map((r) => String(r.value)).join("/")}`);
     return new Set(rows.map((r) => r.equipmentSetBonus.setId)).size;
   };
@@ -329,12 +340,12 @@ try {
   // equipment: the selected piece count is exact
   const eqCounts = [];
   for (const tier of [2, 4, 6]) eqCounts.push([await total(SP, `/equipment?fx=${CCQ2}&tier=${tier}`), await equipOracle(tier)]);
-  check("equipment: Control Rate at exactly 2, 4 and 6 pieces returns the sets whose stored bonus of THAT tier has it", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts) + " " + eqDebug.map((d) => d.slice(0, 40)).join(";"));
+  check("equipment: Control Rate with 2, 4 and 6 pieces returns the catalogue sets that have it at that tier or a lower one, and none that has it only at a higher tier", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts) + " " + eqDebug.map((d) => d.slice(0, 40)).join(";"));
   await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=2`);
   check("equipment: a 2-piece search with nothing printed at 2 pieces says so instead of listing 4 and 6 piece sets", eqCounts[0][1] > 0 || /Ningún conjunto tiene/.test(await SP.locator("main").innerText()));
   await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=6&sort=fx:desc`);
   const e6 = await SP.locator("[data-effect-rank][data-rank-status='ranked'] [data-match-value]").allInnerTexts();
-  check("equipment: results name the matching tier and show the value printed at it", e6.length > 3 && e6.every((t) => /6 piezas/.test(t)), e6.slice(0, 2).join(" / ").replace(/\s+/g, " "));
+  check("equipment: results name the piece count and show the accumulated total for it", e6.length > 3 && e6.every((t) => /6 piezas/.test(t)), e6.slice(0, 2).join(" / ").replace(/\s+/g, " "));
   // the client's scenario
   const ccAg = await jewelOracle("control-rate", "agility");
   const SCN = `/jewelry?slot=agility&tier=2&fx=${CCQ2}&sort=fx:desc`;
@@ -357,9 +368,9 @@ try {
   // the 8-piece bonus
   const fullBlocks = await SP.locator("[data-full-set]").count();
   const fullText = await SP.locator("[data-full-set]").first().innerText();
-  check("under every 2-piece result that has one, the set's 8-piece bonus is shown separately and says it needs the full set", fullBlocks > 3 && /Bono de 8 piezas/.test(fullText) && /Requiere el conjunto completo/.test(fullText) && /No se indica que los bonos se sumen/.test(fullText), `blocks=${fullBlocks}`);
+  check("under every 2-piece result that has one, the set's 8-piece bonus is shown separately and says it needs the full set", fullBlocks > 3 && /Bono de 8 piezas/.test(fullText) && /Requiere el conjunto completo/.test(fullText) && !/No se indica que los bonos se sumen/.test(fullText), `blocks=${fullBlocks}`);
   const strongCc = await SP.locator("[data-full-set-stronger]").count();
-  check("the «stronger» note appears only where the stored 8-piece value is higher (Control Rate, Agility)", strongCc === ccAg.stronger, `shown=${strongCc} stored=${ccAg.stronger}`);
+  check("the «stronger» note appears exactly where the set prints an 8-piece Control Rate to add (Control Rate, Agility)", strongCc === ccAg.stronger, `shown=${strongCc} stored=${ccAg.stronger}`);
   const dm = await jewelOracle("damage-rate", "agility");
   await go(SP, BASE + `/jewelry?slot=agility&tier=2&fx=${DMQ}&sort=fx:desc`);
   const strongDm = await SP.locator("[data-full-set-stronger]").count();
@@ -369,7 +380,7 @@ try {
   const e8 = await total(SP, `/jewelry?tier=8&fx=reducci%C3%B3n+de+tasa+de+control&sort=fx:desc`);
   const e2 = await total(SP, `/jewelry?tier=2&fx=reducci%C3%B3n+de+tasa+de+control`);
   await go(SP, BASE + `/jewelry?tier=8&fx=reducci%C3%B3n+de+tasa+de+control&sort=fx:desc`);
-  check("an 8-piece search matches the 8-piece bonus on its own (no 8-piece block under it)", e8 > 0 && (await SP.locator("[data-match-value]").allInnerTexts()).every((t) => /8 piezas/.test(t)) && (await SP.locator("[data-full-set]").count()) === 0, `8pc=${e8} 2pc=${e2}`);
+  check("an 8-piece search counts the complete set: every result shows the total with 8 piezas and no «stronger» note (the 8-piece bonus is already in it)", e8 >= e2 && e8 > 0 && (await SP.locator("[data-match-value]").allInnerTexts()).every((t) => /con 8 piezas/.test(t)) && (await SP.locator("[data-full-set-stronger]").count()) === 0, `8pc=${e8} 2pc=${e2}`);
   // Match All / Any inside the scope, and choosing the sorting effect
   const anyN = await total(SP, `/jewelry?slot=agility&tier=2&fx=${CCQ2}&fx=aumento+de+tasa+de+da%C3%B1o&fxm=any`);
   const allN = await total(SP, `/jewelry?slot=agility&tier=2&fx=${CCQ2}&fx=aumento+de+tasa+de+da%C3%B1o&fxm=all`);
@@ -379,6 +390,50 @@ try {
   await go(SP, BASE + `/jewelry?slot=agility&tier=2&fx=${CCQ2}&fx=${DMQ}&fxm=any&sort=fx:desc&fxs=${DMQ.replace(/%C3%B1/g, "%C3%B1")}`);
   const sortSel = await SP.locator("select#fxs").inputValue();
   check("with several effects the one that decides the order can be chosen", /da.o/.test(sortSel) && (await SP.locator("select#fxs option").count()) === 2, sortSel);
+
+  // ── cumulative bonuses (confirmed by the client): Deatbone, Damage Rate +30% at 2 pieces and +40% at 6 pieces make +70% with 6 pieces ──
+  const DMG6 = `/equipment?fx=${DMQ}&tier=6&q=deatbone&sort=fx:desc`;
+  const drRows = await db.effect.findMany({ where: { statistic: { key: "damage-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, equipmentSetBonus: { set: { familyId: { not: null } } } }, select: { value: true, equipmentSetBonus: { select: { setId: true, requiredPieces: true, set: { select: { slug: true } } } } } });
+  const drTotals = (tier) => {
+    const m = new Map();
+    for (const r of drRows) if (r.equipmentSetBonus.requiredPieces <= tier) m.set(r.equipmentSetBonus.setId, (m.get(r.equipmentSetBonus.setId) ?? 0) + Number(r.value.toString()));
+    return m;
+  };
+  const deat = drRows.filter((r) => r.equipmentSetBonus.set.slug === "deatbone").map((r) => [r.equipmentSetBonus.requiredPieces, Number(r.value.toString())]);
+  await go(SP, BASE + DMG6);
+  const deatText = (await SP.locator("[data-gear-card]", { hasText: "Deatbone" }).first().innerText()).replace(/\s+/g, " ");
+  check("Deatbone is stored with Damage Rate +30% at 2 pieces and +40% at 6 pieces", JSON.stringify(deat.sort((a, b) => a[0] - b[0])) === JSON.stringify([[2, 30], [6, 40]]), JSON.stringify(deat));
+  check("Deatbone with 6 pieces: «Total acumulado con 6 piezas: +70%» with the breakdown 2 piezas +30% and 6 piezas +40%", /Total acumulado con 6 piezas: \+70%/.test(deatText) && /Desglose por piezas/.test(deatText) && /2 piezas: \+30%/.test(deatText) && /6 piezas: \+40%/.test(deatText) && /Bonos individuales/.test(deatText), deatText.slice(0, 40));
+  check("the card says nothing about stacking being unconfirmed", !/no est(a|á) confirmado|no se suman/i.test(deatText));
+  const sixTotals = drTotals(6);
+  await go(SP, BASE + `/equipment?fx=${DMQ}&tier=6&sort=fx:desc`);
+  const sixPage = await rankValues(SP);
+  const sortedOracle = [...sixTotals.values()].sort((a, b) => b - a);
+  check("equipment, 6 pieces, Damage Rate, highest first: every total is the sum of the stored tiers up to 6 and the order never rises", sixPage.length > 10 && sixPage.every((v, i) => v === sortedOracle[i]) && sixPage[0] === Math.max(...sixTotals.values()), `${sixPage.slice(0, 6).join(",")} oracle=${sortedOracle.slice(0, 6).join(",")}`);
+    const drShown = [await total(SP, `/equipment?fx=${DMQ}&tier=2`), await total(SP, `/equipment?fx=${DMQ}&tier=4`), await total(SP, `/equipment?fx=${DMQ}&tier=6`)];
+  const drOracle = [drTotals(2).size, drTotals(4).size, sixTotals.size];
+  check("the number of sets found with 2, 4 and 6 pieces is the sets that have Damage Rate at that tier or a lower one (plus the few that only word it, labelled)", drShown.every((n, i) => n >= drOracle[i] && n <= drOracle[i] + 3) && drShown[0] < drShown[2], `shown ${drShown} stored ${drOracle}`);
+  await go(SP, BASE + `/equipment?fx=${DMQ}&tier=2&q=deatbone`);
+  check("with 2 pieces Deatbone shows +30% and not the 6-piece bonus", /Total acumulado con 2 piezas: \+30%/.test((await SP.locator("[data-gear-card]", { hasText: "Deatbone" }).first().innerText()).replace(/\s+/g, " ")));
+  await go(SP, BASE + `/equipment?fx=${DMQ}&tier=6&q=deatbone&sort=fx:asc&page=1`);
+  check("ascending order keeps the same totals", /\+70%/.test(await SP.locator("main").innerText()));
+  await go(SP, BASE + "/sets/equipment/deatbone");
+  const detailText = (await SP.locator("main").innerText()).replace(/\s+/g, " ");
+  const detailTotal = SP.locator('[data-set-total][data-total-key="stat:damage-rate|PERCENT|self|+"][data-total-pieces="6"]');
+  check("the Deatbone page shows Bonos individuales, Total acumulado and Desglose por piezas, and agrees with the card: Damage Rate +70% with 6 piezas", (await detailTotal.count()) === 1 && (await detailTotal.getAttribute("data-total-value")) === "70" && /Bonos individuales/.test(detailText) && /Total acumulado/.test(detailText) && /Desglose por piezas/.test(detailText) && /Total acumulado con 6 piezas/.test(detailText), detailText.slice(0, 60));
+  check("the Deatbone page breakdown lists 2 piezas +30% and 6 piezas +40%", /2 piezas: \+30%/.test((await detailTotal.innerText()).replace(/\s+/g, " ")) && /6 piezas: \+40%/.test((await detailTotal.innerText()).replace(/\s+/g, " ")));
+  check("no page says that stacking is unconfirmed", !/no est(a|á) confirmado si los niveles/i.test(detailText) && (await SP.locator("[data-stacking-unknown]").count()) === 0);
+  await go(SP, BASE + "/sets/jewelry/sand-burial-r1");
+  check("a jewelry set page shows Bonos individuales and Total acumulado too", (await SP.locator("[data-set-totals]").count()) === 1 && /Bonos individuales/.test(await SP.locator("main").innerText()));
+  const TD = await login(adminMail, adminPw, 390);
+  for (const u of [DMG6, "/sets/equipment/deatbone"]) {
+    await go(TD.page, BASE + u);
+    const o = await TD.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+    const box = await TD.page.locator("[data-match-value], [data-set-total]").first().boundingBox();
+    check(`390 px: ${u.split("?")[0]} fits without sideways scrolling`, o <= 0 && box && box.x + box.width <= 390, `${o}px`);
+  }
+  await TD.ctx.close();
+
   // mobile
   const TM = await login(adminMail, adminPw, 390);
   await go(TM.page, BASE + SCN);
@@ -454,6 +509,11 @@ try {
   await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p39-live-agility-2-pieces-desc.png", 1500);
   await region(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+da%C3%B1o&sort=fx:desc", "p40-live-8-piece-stronger.png", "[data-gear-card]:has([data-full-set-stronger])");
   await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&fx=aumento+de+evasi%C3%B3n+de+da%C3%B1o&fxm=all&sort=fx:desc", "p41-live-match-all-slot-tier.png", 900);
+  // cumulative bonuses: Deatbone, Damage Rate +30% (2 pieces) + +40% (6 pieces) = +70% with 6 pieces
+  await region(R.page, "/equipment?fx=aumento+de+tasa+de+da%C3%B1o&tier=6&q=deatbone&sort=fx:desc", "p44-live-deatbone-cumulative.png", "[data-gear-card]");
+  await region(R.page, "/sets/equipment/deatbone", "p45-live-deatbone-detail-totals.png", "[data-set-totals]");
+  await region(R.page, "/sets/equipment/deatbone", "p46-live-deatbone-detail-individual.png", "[data-individual-bonuses]");
+  await fromNote(R.page, "/equipment?fx=aumento+de+tasa+de+da%C3%B1o&tier=6&sort=fx:desc", "p47-live-cumulative-sort-damage-rate.png", 900);
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
   await R.ctx.close();
@@ -483,6 +543,8 @@ try {
   await fromNote(M.page, "/sets?fx=aumento+de+tasa+de+control&sort=fx:desc", "p35-live-sort-cc-mobile.png", 1300, 390);
   await fromNote(M.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p42-live-agility-mobile.png", 1500, 390);
   await region(M.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p43-live-slot-mobile-control.png", "[data-filter-panel] form");
+  await region(M.page, "/equipment?fx=aumento+de+tasa+de+da%C3%B1o&tier=6&q=deatbone&sort=fx:desc", "p48-live-deatbone-mobile.png", "[data-gear-card]");
+  await region(M.page, "/sets/equipment/deatbone", "p49-live-deatbone-detail-mobile.png", "[data-set-totals]");
   await M.ctx.close();
 } catch (e) {
   check("script completed without an unexpected error", false, String(e).slice(0, 300));

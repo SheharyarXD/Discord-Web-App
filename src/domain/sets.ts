@@ -16,8 +16,9 @@ export type ActiveTiers<T> =
   | { status: "STACKING_UNKNOWN"; unlocked: T[] };
 
 /**
- * Which tiers are in effect at a piece count. It never adds numbers together: whether a
- * 6-piece bonus stacks with the 4-piece one is a game rule that must be confirmed per set.
+ * Which tiers are in effect at a piece count according to a STORED stacking value. The client has since confirmed that the bonuses of
+ * every unlocked threshold accumulate, for all equipment and jewelry sets: the website applies that rule (see `cumulative.ts`) and no
+ * longer consults the stored value, which only remains as data. This function adds no numbers.
  */
 export function activeTiers<T extends TierRef>(tiers: T[], equippedPieces: number, stacking: TierStacking | string): ActiveTiers<T> {
   const unlocked = unlockedTiers(tiers, equippedPieces);

@@ -769,8 +769,8 @@ model EquipmentSet {
   descriptionEs     String?
   translationStatus String              @default("MISSING")
   imageUrl          String?
-  /// Whether a higher tier ADDS to or REPLACES the lower ones. UNKNOWN until the client confirms;
-  /// while UNKNOWN no code may compute a total across tiers.
+  /// Whether a higher tier ADDS to or REPLACES the lower ones. The client has CONFIRMED that the bonuses of every unlocked
+  /// threshold accumulate; the website applies that rule to all sets (src/domain/cumulative.ts) and no longer reads this column.
   tierStacking      String              @default("UNKNOWN") // UNKNOWN | CUMULATIVE | REPLACES
   reviewStatus      String              @default("NEEDS_REVIEW")
   metadata          Json?

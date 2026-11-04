@@ -104,7 +104,7 @@ export default async function PreviewPage() {
               { id: "b3", requiredPieces: 6, description: null, effects: [unconditional] },
             ]}
           />
-          <p className="mt-3 text-xs text-muted">{t("sets.stackingUnknown")}</p>
+          <p className="mt-3 text-xs text-muted">{t("sets.totalNote")}</p>
         </Card>
         <Card>
           <h2 className="mb-3 font-semibold">{t("preview.tableSample")}</h2>

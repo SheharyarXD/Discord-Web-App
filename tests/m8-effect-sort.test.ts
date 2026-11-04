@@ -10,12 +10,12 @@ import { upsertStatusEffect } from "../src/game/status-effects";
 import { parseGearParams, parseNinjaParams, sortEffectOf } from "../src/server/query-params";
 import { IS_PG, seedTestVocabulary, testDb } from "./helpers";
 
-/** Sorting by the value of a selected effect: highest to lowest and back, by one chosen effect, never mixing unlike measures. */
+/** Sorting by the value of a selected effect: highest to lowest and back, by one chosen effect, never mixing unlike measures. The value is the CUMULATIVE total (bonuses of the unlocked tiers add up). */
 
-const rank = (over: Partial<EffectRank>): EffectRank => ({ status: "ranked", measure: "up|PERCENT", best: null, uses: [], group: 0, magnitude: 40, tierValues: [], ...over });
+const rank = (over: Partial<EffectRank>): EffectRank => ({ status: "ranked", measure: "up|PERCENT", total: null, uses: [], group: 0, magnitude: 40, tierValues: [], ...over });
 
 describe("comparison rule (no database)", () => {
-  it("orders by the largest printed value, then by the value at the highest piece count, descending and ascending", () => {
+  it("orders by the total, then by the printed value at the highest piece count, descending and ascending", () => {
     const susanoA = rank({ magnitude: 40, tierValues: [15, 40] }); // 6 pieces +15%, 4 pieces +40%
     const susanoB = rank({ magnitude: 40, tierValues: [18, 40] });
     expect(compareRanks(susanoB, susanoA, "desc")).toBeLessThan(0); // +18% at 6 pieces comes first
@@ -81,7 +81,7 @@ beforeAll(async () => {
   for (const key of ["self", "ally", "enemy"]) await db.effectTarget.upsert({ where: { key }, update: {}, create: { key, name: key } });
   await db.statistic.upsert({ where: { key: "control-rate" }, update: {}, create: { key: "control-rate", name: "control rate", category: "combat", defaultValueType: "PERCENT" } });
   await upsertStatusEffect(db, { key: "freeze", name: "Freeze", cleansability: "CLEANSABLE" });
-  // Susanoo-like: the same +40% at 4 pieces, then +15% or +18% at 6 pieces. Tiers are never added.
+  // Susanoo-like: the same +40% at 4 pieces, then +15% or +18% at 6 pieces. Tiers accumulate: 55% and 58% with the complete set.
   await eq("Alpha", [[2, [cc("30")]], [4, [cc("40")]], [6, [cc("15")]]]);
   await eq("Beta", [[4, [cc("40")]], [6, [cc("18")]]]);
   await eq("Gamma", [[4, [cc("40")]], [6, [cc("18")]]]); // identical to Beta: alphabetical
@@ -115,21 +115,22 @@ const gear = async (terms: string[], direction: "asc" | "desc", extra: Parameter
 const titles = (items: { title: string }[]) => items.map((i) => i.title.replace("T14 ", ""));
 
 describe("equipment: value of the selected effect", () => {
-  it("highest to lowest: largest printed value, then the higher tier, then the name; other measures and wording after", async () => {
+  it("highest to lowest: the cumulative total, then the higher tier, then the name; other measures and wording after", async () => {
     const items = await gear([CC], "desc");
-    // Theta (+40% at 6 pieces) first; Beta and Gamma tie on everything (+40% at 4, +18% at 6): alphabetical; Alpha (+15% at 6) after them.
-    expect(titles(items)).toEqual(["Theta", "Beta", "Gamma", "Alpha", "Freezer", "Zeta", "Epsilon"]);
+    // Alpha 30+40+15 = 85 first; Beta and Gamma tie on everything (40+18 = 58): alphabetical; Theta (+40% at 6 pieces only) and Freezer (+12% at 4) after.
+    expect(titles(items)).toEqual(["Alpha", "Beta", "Gamma", "Theta", "Freezer", "Zeta", "Epsilon"]);
     expect(items.map((i) => i.rank!.status)).toEqual(["ranked", "ranked", "ranked", "ranked", "ranked", "other-measure", "text-only"]);
   });
 
   it("lowest to highest reverses the numbers, keeps the same last places and the same tie rule", async () => {
-    expect(titles(await gear([CC], "asc"))).toEqual(["Freezer", "Alpha", "Beta", "Gamma", "Theta", "Zeta", "Epsilon"]);
+    expect(titles(await gear([CC], "asc"))).toEqual(["Freezer", "Theta", "Beta", "Gamma", "Alpha", "Zeta", "Epsilon"]);
   });
 
-  it("shows every printed value at its own tier and never adds them", async () => {
+  it("shows every printed value at its own tier and adds them: 30 + 40 + 15", async () => {
     const alpha = (await gear([CC], "desc")).find((i) => i.title === "T14 Alpha")!;
     expect(alpha.rank!.uses.map((u) => [u.pieces, u.value])).toEqual([[6, 15], [4, 40], [2, 30]]);
-    expect(alpha.rank!.best).toMatchObject({ pieces: 4, value: 40 }); // not 85
+    expect(alpha.rank!.total).toMatchObject({ pieces: 6, value: 85 });
+    expect(alpha.rank!.total!.parts.map((p) => [p.pieces, p.value])).toEqual([[2, 30], [4, 40], [6, 15]]);
     expect(alpha.rank!.uses.every((u) => u.unit === "PERCENT")).toBe(true);
   });
 
@@ -140,7 +141,7 @@ describe("equipment: value of the selected effect", () => {
     const down = await gear(["reducción de tasa de control"], "desc");
     expect(titles(down)).toEqual(["Delta"]);
     expect(down[0]!.rank!.measure).toBe("down|PERCENT");
-    expect(down[0]!.rank!.best!.value).toBe(-50); // shown with its sign, ranked by its size
+    expect(down[0]!.rank!.total!.value).toBe(-50); // shown with its sign, ranked by its size
     const zeta = (await gear([CC], "desc")).find((i) => i.title === "T14 Zeta")!;
     expect(zeta.rank!.measure).toBe("up|FLAT");
     expect(zeta.rank!.status).toBe("other-measure");
@@ -148,14 +149,14 @@ describe("equipment: value of the selected effect", () => {
 
   it("a wording-only effect stays searchable but is labelled and has no value", async () => {
     const epsilon = (await gear([CC], "desc")).find((i) => i.title === "T14 Epsilon")!;
-    expect(epsilon.rank).toMatchObject({ status: "text-only", best: null, magnitude: null });
+    expect(epsilon.rank).toMatchObject({ status: "text-only", total: null, magnitude: null });
     expect(titles(await gear([CC], "desc", { query: "epsilon" }))).toEqual(["Epsilon"]);
   });
 
   it("a bare «tasa de control» ranks the increases first and puts the reductions after, apart", async () => {
     const items = await gear(["tasa de control"], "desc");
     const order = titles(items);
-    expect(order.slice(0, 5)).toEqual(["Theta", "Beta", "Gamma", "Alpha", "Freezer"]);
+    expect(order.slice(0, 5)).toEqual(["Alpha", "Beta", "Gamma", "Theta", "Freezer"]);
     expect(order.indexOf("Delta")).toBeGreaterThan(order.indexOf("Freezer"));
     expect(items.find((i) => i.title === "T14 Delta")!.rank!.status).toBe("other-measure");
   });
@@ -169,7 +170,7 @@ describe("equipment: value of the selected effect", () => {
     expect(titles(byFirst).slice(2)).toEqual([...titles(byFirst).slice(2)].sort());
     expect(byFirst.slice(2).every((i) => i.rank!.status === "no-match")).toBe(true);
     const byCc = await gear(["congelar", CC], "desc", { sort: { by: "effect", direction: "desc", effectTerm: CC } });
-    expect(titles(byCc).slice(0, 5)).toEqual(["Theta", "Beta", "Gamma", "Alpha", "Freezer"]);
+    expect(titles(byCc).slice(0, 5)).toEqual(["Alpha", "Beta", "Gamma", "Theta", "Freezer"]);
     expect(byCc.find((i) => i.title === "T14 Iceonly")!.rank!.status).toBe("no-match"); // Any: found by the other effect, last
     // The same effect typed another way controls the same.
     const typedOther = await gear(["congelar", CC], "desc", { sort: { by: "effect", direction: "desc", effectTerm: "AUMENTO DE TASA DE CONTROL" } });
@@ -186,7 +187,8 @@ describe("equipment: value of the selected effect", () => {
       expect(seen).toEqual(whole);
       expect(new Set(seen).size).toBe(seen.length);
     }
-    expect(titles(await gear([CC], "desc", { tiers: [6] }))).toEqual(["Theta", "Beta", "Gamma", "Alpha"]);
+    expect(titles(await gear([CC], "desc", { tiers: [6] }))).toEqual(["Alpha", "Beta", "Gamma", "Theta", "Freezer", "Zeta", "Epsilon"]); // 6 pieces: every tier up to 6 counts
+    expect(titles(await gear([CC], "desc", { tiers: [2] }))).toEqual(["Alpha", "Zeta", "Epsilon"]); // only the 2-piece bonuses: 30, flat, wording
     expect(titles(await gear([CC], "desc", { versions: ["labelled"] }))).toEqual([]);
   });
 
@@ -209,7 +211,7 @@ describe("ninjas: value of the selected effect", () => {
   it("ranks by the largest value a ninja has for the effect; wording-only after the numbers", async () => {
     const items = await ninjas([CC], "desc");
     expect(n(items)).toEqual(["Thirty", "Thirty B", "Ten", "Words"]); // 30, 30 (with a 20 as well: not 50), 10, wording
-    expect(items.find((i) => i.name === "T14 Thirty B")!.sortEffect!.best!.value).toBe(30);
+    expect(items.find((i) => i.name === "T14 Thirty B")!.sortEffect!.total!.value).toBe(30); // ninjas have no piece counts: nothing is added
     expect(n(await ninjas([CC], "asc"))).toEqual(["Ten", "Thirty", "Thirty B", "Words"]);
     expect(items.find((i) => i.name === "T14 Words")!.sortEffect!.status).toBe("text-only");
   });
@@ -239,10 +241,12 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
     expect(mags[0]).toBe(Math.max(...mags));
     const asc = (await list([CC], "asc")).items.filter((i) => i.rank!.status === "ranked").map((i) => i.rank!.magnitude!);
     expect(asc).toEqual([...mags].reverse().sort((a, b) => a - b));
-    // Every value shown is a printed value of that set, and the one used is the largest of them: nothing is summed.
+    // The total is the sum of printed values of that set (each listed as a part), all of one unit.
     for (const i of ranked) {
-      expect(i.rank!.best!.value).toBe(Math.max(...i.rank!.uses.map((u) => u.value)));
-      expect(i.rank!.uses.every((u) => u.unit === ranked[0]!.rank!.best!.unit)).toBe(true);
+      const t = i.rank!.total!;
+      expect(Math.round(t.parts.reduce((sum, p) => sum + p.value, 0) * 1e6) / 1e6).toBe(t.value);
+      expect(t.parts.every((p) => p.unit === t.unit && i.rank!.uses.some((u) => u.pieces === p.pieces && u.value === p.value))).toBe(true);
+      expect(i.rank!.uses.every((u) => u.unit === t.unit)).toBe(true);
     }
   });
 
@@ -253,7 +257,8 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
     const [b, a] = items;
     expect(b!.rank!.uses.map((u) => [u.pieces, u.value])).toEqual([[6, 18], [4, 40]]);
     expect(a!.rank!.uses.map((u) => [u.pieces, u.value])).toEqual([[6, 15], [4, 40]]);
-    expect(b!.rank!.best!.value).toBe(40); // not 58: the tiers are not added
+    expect(b!.rank!.total!.value).toBe(58); // 40 at 4 pieces + 18 at 6 pieces: the tiers add up
+    expect(a!.rank!.total!.value).toBe(55);
     expect((await list([CC], "asc", { query: "susanoo", kinds: ["equipment"] })).items.map((i) => i.title)).toEqual(["Susanoo (variant A)", "Susanoo (variant B)"]);
     // Whole catalogue: B is ahead of A.
     const all = (await list([CC], "desc")).items.map((i) => `${i.kind}:${i.title}`);
@@ -268,7 +273,7 @@ describe.skipIf(IS_PG || !existsSync(path.resolve(__dirname, "../prisma/dev.db")
     if (firstOther >= 0) expect(measures.slice(firstOther).every((m) => m !== measures[0])).toBe(true);
     expect(measures[0]).toBe("up|PERCENT");
     const reductions = (await list(["reducción de tasa de control"], "desc")).items.filter((i) => i.rank!.status === "ranked");
-    expect(reductions.every((i) => i.rank!.best!.value < 0)).toBe(true);
+    expect(reductions.every((i) => i.rank!.total!.value < 0)).toBe(true);
   });
 
   it("pages the whole real result without repeats, and several effects can be chosen to control the order", { timeout: 180_000 }, async () => {

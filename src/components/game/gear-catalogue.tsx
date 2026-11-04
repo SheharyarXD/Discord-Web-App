@@ -164,14 +164,17 @@ function GearCard({ s, t, statName, rankEffect }: { s: GearSetSummary; t: Transl
           </p>
         )}
         {s.evidence.length > 0 && (
-          <ul className="mt-3 flex flex-col gap-1 border-t border-border pt-2 text-xs" data-effect-evidence>
-            {s.evidence.slice(0, 3).map((e, i) => (
-              <li key={i}>
-                <span className="font-semibold">{e.pieces ? t("gear.evidencePieces", { count: e.pieces }) : t("gear.evidenceNoTier")}</span>
-                {e.group ? ` · ${statName(e.group)}` : ""}: <span className="text-muted">{e.text.length > 140 ? `${e.text.slice(0, 140)}…` : e.text}</span>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-3 border-t border-border pt-2 text-xs" data-effect-evidence>
+            <p className="mb-1 font-semibold">{t("sets.individual")}</p>
+            <ul className="flex flex-col gap-1">
+              {s.evidence.slice(0, 6).map((e, i) => (
+                <li key={i}>
+                  <span className="font-semibold">{e.pieces ? t("gear.evidencePieces", { count: e.pieces }) : t("gear.evidenceNoTier")}</span>
+                  {e.group ? ` · ${statName(e.group)}` : ""}: <span className="text-muted">{e.text.length > 140 ? `${e.text.slice(0, 140)}…` : e.text}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
         )}
         {rankEffect && s.rank && <EffectRankBlock rank={s.rank} effect={rankEffect} t={t} statName={statName} />}
         {rankEffect && s.fullSet && <FullSetBlock info={s.fullSet} effect={rankEffect} t={t} statName={statName} />}

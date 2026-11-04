@@ -8,6 +8,7 @@ import { EffectList } from "./effect-line";
 import { Localized } from "./localized";
 import { ReviewBadge } from "./review-badge";
 import { SetBonusList } from "./set-bonus-list";
+import { SetTotals } from "./set-totals";
 
 /** Everything stored about one equipment piece, jewelry piece or gem. The set's tiers are shown apart from the piece's own statistics. */
 export function ItemDetailView({ item, t, listHref }: { item: ItemDetail; t: Translate; listHref: string }) {
@@ -107,34 +108,44 @@ export function ItemDetailView({ item, t, listHref }: { item: ItemDetail; t: Tra
   );
 }
 
-/** The tiers of a set exactly as stored. Nothing is summed: while stacking is unknown, a notice says so. */
+/**
+ * The bonuses of a set. «Bonos individuales» lists each threshold exactly as printed; «Total acumulado» adds the bonuses of every
+ * unlocked threshold (the client confirmed that they accumulate), with the «Desglose por piezas» of each total.
+ */
 export function SetTiers({ kind, detail, t }: { kind: "equipment" | "jewelry"; detail: EquipmentSetDetail | JewelrySetDetail; t: Translate }) {
   const tiers = kind === "equipment" ? (detail as EquipmentSetDetail).tiers : (detail as JewelrySetDetail).bonuses;
+  const groupNames = kind === "jewelry" ? Object.fromEntries((detail as JewelrySetDetail).groups.map((g) => [g.key, g.name])) : undefined;
   return (
-    <div className="flex flex-col gap-3">
-      {detail.tierStacking === "UNKNOWN" && tiers.length > 1 && (
-        <p className="text-xs text-warn" data-stacking-unknown>
-          <span aria-hidden>⚠ </span>
-          {t("sets.stackingUnknown")}
-        </p>
-      )}
+    <div className="flex flex-col gap-5">
       {kind === "jewelry" && (detail as JewelrySetDetail).structureStatus === "UNCONFIRMED" && (
         <p className="text-xs text-warn">
           <span aria-hidden>⚠ </span>
           {t("catalog.structureUnconfirmed")}
         </p>
       )}
-      <SetBonusList
-        t={t}
-        bonuses={tiers.map((b) => ({
-          id: b.id,
-          requiredPieces: b.requiredPieces ?? null,
-          requiredItemNames: "requiredItemNames" in b ? b.requiredItemNames : undefined,
-          groupName: "groupName" in b ? b.groupName : null,
-          description: b.description ?? (("groupName" in b && b.groupName) ? t("catalog.requiresGroup", { group: b.groupName }) : null),
-          effects: b.effects,
-        }))}
-      />
+      <div className="flex flex-col gap-3" data-individual-bonuses>
+        <div>
+          <h3 className="text-base font-semibold">{t("sets.individual")}</h3>
+          <p className="text-xs text-muted">{t("sets.individualNote")}</p>
+        </div>
+        <SetBonusList
+          t={t}
+          bonuses={tiers.map((b) => ({
+            id: b.id,
+            requiredPieces: b.requiredPieces ?? null,
+            requiredItemNames: "requiredItemNames" in b ? b.requiredItemNames : undefined,
+            groupName: "groupName" in b ? b.groupName : null,
+            description: b.description ?? (("groupName" in b && b.groupName) ? t("catalog.requiresGroup", { group: b.groupName }) : null),
+            effects: b.effects,
+          }))}
+        />
+      </div>
+      {tiers.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h3 className="text-base font-semibold">{t("sets.total")}</h3>
+          <SetTotals t={t} groupNames={groupNames} bonuses={tiers.map((b) => ({ requiredPieces: b.requiredPieces ?? null, groupKey: "groupKey" in b ? b.groupKey : null, effects: b.effects }))} />
+        </div>
+      )}
     </div>
   );
 }
