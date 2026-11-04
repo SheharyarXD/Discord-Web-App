@@ -231,6 +231,73 @@ try {
   const leak = await fetch(BASE + "/gear-source/sources/01_akatsuki/01_gear.png", { redirect: "manual" });
   check("gear: source sheets are not served publicly", leak.status !== 200, String(leak.status));
 
+  const SP = A.page;
+  // ── sorting by the value of the selected effect ──
+  const CCQ = "aumento+de+tasa+de+control";
+  const AGQ = "aumento+de+agilidad";
+  const ccRows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, OR: [{ equipmentSetBonusId: { not: null } }, { jewelrySetBonusId: { not: null } }] }, select: { value: true, equipmentSetBonus: { select: { setId: true } }, jewelrySetBonus: { select: { setId: true } } } });
+  const ccBest = new Map();
+  for (const r of ccRows) {
+    const id = r.equipmentSetBonus?.setId ?? r.jewelrySetBonus?.setId;
+    ccBest.set(id, Math.max(ccBest.get(id) ?? 0, Number(r.value.toString())));
+  }
+  const ccMax = Math.max(...ccBest.values());
+  const rankValues = async (pg) => (await pg.locator("[data-effect-rank][data-rank-status='ranked']").evaluateAll((els) => els.map((e) => Number(e.getAttribute("data-rank-magnitude")))));
+  await go(SP, BASE + `/sets?fx=${CCQ}&sort=fx:desc`);
+  const descVals = await rankValues(SP);
+  check("sort by value, highest first: the top result carries the largest stored Control Rate bonus and values never rise", descVals.length > 5 && descVals[0] === ccMax && descVals.every((v, i) => i === 0 || descVals[i - 1] >= v), `top=${descVals[0]} max=${ccMax} shown=${descVals.length}`);
+  check("the result says how it is ordered and that tiers are not added", /Ordenado de mayor a menor por el valor de/.test(await SP.locator("[data-effect-rank-note]").innerText()) && /No se suman niveles/.test(await SP.locator("[data-effect-rank-note]").innerText()));
+  await go(SP, BASE + `/sets?fx=${CCQ}&sort=fx:asc`);
+  const ascVals = await rankValues(SP);
+  check("sort by value, lowest first", ascVals.length > 5 && ascVals.every((v, i) => i === 0 || ascVals[i - 1] <= v), ascVals.slice(0, 6).join(" < "));
+  await go(SP, BASE + `/equipment?fx=${CCQ}&sort=fx:desc&q=susanoo`);
+  const susanoo = await SP.locator("[data-gear-card] h2").allInnerTexts();
+  check("Susanoo: the variant with +18% at 6 pieces ranks ahead of +15%, both with +40% at 4 pieces, and the tiers are shown apart", /variante B/.test(susanoo[0] ?? "") && /variante A/.test(susanoo[1] ?? "") && /6 piezas: \+18%/.test(await SP.locator("[data-effect-rank]").first().innerText()) && /4 piezas: \+40%/.test(await SP.locator("[data-effect-rank]").first().innerText()), susanoo.join(" | "));
+  const wholeDesc = await (async () => { const seen = []; for (let n = 1; n <= 12; n++) { await go(SP, BASE + `/sets?fx=${AGQ}&sort=fx:desc&page=${n}`); seen.push(...(await SP.locator("[data-gear-card] h2 a").evaluateAll((els) => els.map((e) => e.getAttribute("href"))))); } return seen; })();
+  const ccTotal = await total(SP, "/sets?fx=" + AGQ);
+  check("paging a value sort shows each set once and none missing", wholeDesc.length === ccTotal && new Set(wholeDesc).size === wholeDesc.length, `${wholeDesc.length}/${ccTotal}`);
+  await go(SP, BASE + `/sets?fx=${AGQ}&sort=fx:desc&page=2`);
+  check("paging links keep the value sort", /sort=fx(%3A|:)desc/.test((await SP.locator("nav[aria-label='Paginación'] a[href*='page=3']").first().getAttribute("href", { timeout: 5000 }).catch(() => "")) ?? ""));
+  const page2first = await SP.locator("[data-gear-card] h2 a").first().getAttribute("href");
+  await SP.goBack({ waitUntil: "networkidle" }).catch(() => {});
+  await SP.goForward({ waitUntil: "networkidle" }).catch(() => {});
+  check("back and forward keep the same ordered page", (await SP.locator("[data-gear-card] h2 a").first().getAttribute("href")) === page2first && /sort=fx:desc/.test(decodeURIComponent(SP.url())));
+  await SP.reload({ waitUntil: "networkidle" });
+  check("reloading keeps the value sort", (await SP.locator("[data-gear-card] h2 a").first().getAttribute("href")) === page2first);
+  // two selected effects: the sorting effect is chosen explicitly
+  await go(SP, BASE + `/equipment?fx=congelar&fx=${CCQ}&fxm=any&sort=fx:desc&fxs=${CCQ.replace(/\+/g, "%20")}`);
+  const chosen = await SP.locator("select#fxs").inputValue();
+  const viaChosen = await rankValues(SP);
+  await go(SP, BASE + `/equipment?fx=congelar&fx=${CCQ}&fxm=any&sort=fx:desc`);
+  const viaFirst = await rankValues(SP);
+  check("with two effects the chosen one orders the list; by default the first selected effect does", chosen === CCQ.replace(/\+/g, " ") && viaChosen.length > 3 && viaFirst.length === 0 && (await SP.locator("select#fxs").inputValue()) === "congelar", `chosen=${viaChosen.length} first=${viaFirst.length}`);
+  check("with a single effect there is no choice of ordering effect", (await (async () => { await go(SP, BASE + `/equipment?fx=${CCQ}`); return SP.locator("select#fxs").count(); })()) === 0);
+  await go(SP, BASE + `/equipment?fx=${CCQ}&sort=fx:desc`);
+  const opts = await SP.locator("select[name=sort] option").allInnerTexts();
+  check("the sort control offers the value order next to the existing orders", opts.some((o) => /Valor del efecto elegido: de mayor a menor/.test(o)) && opts.some((o) => /Nombre: de la A a la Z/.test(o)));
+  const un = await total(SP, `/equipment?fx=${CCQ}`);
+  check("sorting by value does not change which sets are found", (await total(SP, `/equipment?fx=${CCQ}&sort=fx:desc`)) === un && (await total(SP, `/equipment?fx=${CCQ}&sort=name:asc`)) === un);
+  check("Match All and a printed-statistic range still filter a value sort", (await total(SP, `/equipment?fx=${CCQ}&fx=aumento+de+agilidad&fxm=all&sort=fx:desc`)) <= un && (await total(SP, `/equipment?fx=${CCQ}&stat1=speed&min1=70000&sort=fx:desc`)) <= un);
+  await go(SP, BASE + "/equipment?fx=zzzxxyy&sort=fx:desc");
+  check("an effect nobody has gives the empty message when sorting by value", /Ningún conjunto tiene/.test(await SP.locator("main").innerText()));
+  // the reduction of the enemy's control rate is its own effect
+  await go(SP, BASE + "/sets?fx=reducci%C3%B3n+de+tasa+de+control&sort=fx:desc");
+  const redVals = await rankValues(SP);
+  check("a reduction of the enemy's control rate is ordered by its own size and never mixed with the increases", redVals.length > 3 && redVals.every((v, i) => i === 0 || redVals[i - 1] >= v) && !(await SP.locator("main").innerText()).includes("Increase CC Rate"), redVals.slice(0, 4).join(","));
+  // ninjas
+  const nx = await total(SP, `/ninjas?fx=aumento+de+velocidad`);
+  await go(SP, BASE + "/ninjas?fx=aumento+de+velocidad&sort=fx:desc");
+  const nVals = await rankValues(SP);
+  check("ninjas: the value sort lists the largest Speed increase first and never rises", nVals.length > 10 && nVals.every((v, i) => i === 0 || nVals[i - 1] >= v), `${nVals.slice(0, 5).join(",")} of ${nx}`);
+  check("ninjas: sorting by value keeps the count", (await total(SP, "/ninjas?fx=aumento+de+velocidad&sort=fx:desc")) === nx);
+  const SM = await login(adminMail, adminPw, 390);
+  await go(SM.page, BASE + `/sets?fx=${CCQ}&fx=congelar&sort=fx:desc`);
+  const smo = await SM.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  const smSel = await SM.page.locator("select#fxs").boundingBox();
+  const smRank = await SM.page.locator("[data-effect-rank]").first().boundingBox();
+  check("390 px: the value sort, the choice of ordering effect and the values fit the screen without sideways scrolling", smo <= 0 && smSel && smSel.x >= 0 && smSel.x + smSel.width <= 390 && smRank && smRank.x + smRank.width <= 390, `${smo}px`);
+  await SM.ctx.close();
+
   // screenshots (real, from the live site)
   await go(A.page, BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force");
   await shot(A.page, "p01-live-results.png", { x: 0, y: 0, width: 1600, height: 1500 });

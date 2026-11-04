@@ -19,7 +19,7 @@ import { resolveFormation, ruleFormation, type FormationOrigin, type ReleasePeri
 import { slugify } from "../domain/slug";
 import { inTransaction, parseInput, UnknownReferenceError, type Db } from "./db";
 import { effectsArgs, replaceEffects, toEffectView } from "./effects";
-import { ninjaIdsWithEffects } from "./effect-search";
+import { analyseEffects, compareRanks, ninjaIdsWithEffects, type EffectRank } from "./effect-search";
 import { ninjaInput, ninjaListParams, type NinjaInput, type NinjaListParams } from "./schemas";
 import { CI } from "../server/search-mode";
 
@@ -432,7 +432,7 @@ function summarize(n: ListRow) {
   };
 }
 type NinjaSummaryBase = ReturnType<typeof summarize>;
-export type NinjaSummary = NinjaSummaryBase & { sortStat: { key: string; value: string | null; growth: string | null } | null };
+export type NinjaSummary = NinjaSummaryBase & { sortStat: { key: string; value: string | null; growth: string | null } | null; sortEffect: EffectRank | null };
 
 export interface Page<T> {
   items: T[];
@@ -541,6 +541,26 @@ export async function listNinjas(db: Db, params: NinjaListParams = {}): Promise<
   const pageCount = Math.max(1, Math.ceil(total / pageSize));
   const sort = p.sort;
 
+  if (sort?.by === "effect" && p.effectTerms?.length) {
+    // The value of ONE selected effect: the largest value a ninja has for it, in the primary measure (see effect-search.ts).
+    const hit = await analyseEffects(db, ["ninja"], p.effectTerms, p.effectMode, sort.effectTerm);
+    const all = await db.ninja.findMany({ where, select: { id: true, name: true } });
+    const rankOf = (id: string) => hit?.ranks.get(`ninja:${id}`) ?? null;
+    const ordered = [...all].sort((a, b) => {
+      const x = rankOf(a.id);
+      const y = rankOf(b.id);
+      if (x && y) {
+        const c = compareRanks(x, y, sort.direction);
+        if (c !== 0) return c;
+      } else if (x || y) return x ? -1 : 1;
+      return a.name.localeCompare(b.name) || a.id.localeCompare(b.id);
+    });
+    const ids = ordered.slice(skip, skip + pageSize).map((n) => n.id);
+    const rows = await db.ninja.findMany({ where: { id: { in: ids } }, include: listInclude });
+    const byId = new Map(rows.map((r) => [r.id, r]));
+    return { items: ids.map((id) => ({ ...summarize(byId.get(id)!), sortStat: null, sortEffect: rankOf(id) })), total, page: p.page, pageSize, pageCount };
+  }
+
   if (sort && (sort.by === "stat" || sort.by === "growth")) {
     const field = sort.by === "stat" ? "baseValue" : "growthRate";
     const all = await db.ninja.findMany({
@@ -568,6 +588,7 @@ export async function listNinjas(db: Db, params: NinjaListParams = {}): Promise<
     const items = ids.map((id) => ({
       ...summarize(byId.get(id)!),
       sortStat: { key: sort.statisticKey!, value: stats.get(id)?.baseValue?.toString() ?? null, growth: stats.get(id)?.growthRate?.toString() ?? null },
+      sortEffect: null,
     }));
     return { items, total, page: p.page, pageSize, pageCount };
   }
@@ -579,7 +600,7 @@ export async function listNinjas(db: Db, params: NinjaListParams = {}): Promise<
         ? [{ releaseYear: { sort: "asc", nulls: "last" } }, { releaseMonth: { sort: "asc", nulls: "last" } }, { releaseOrder: { sort: "asc", nulls: "last" } }, { name: "asc" }, { id: "asc" }]
         : NEWEST_FIRST_ORDER_BY;
   const rows = await db.ninja.findMany({ where, include: listInclude, orderBy, skip, take: pageSize });
-  return { items: rows.map((r) => ({ ...summarize(r), sortStat: null })), total, page: p.page, pageSize, pageCount };
+  return { items: rows.map((r) => ({ ...summarize(r), sortStat: null, sortEffect: null })), total, page: p.page, pageSize, pageCount };
 }
 
 // ───────────────────────── Read: detail ─────────────────────────

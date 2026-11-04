@@ -2,9 +2,10 @@ import { formatReleasePeriod } from "@/domain/ninja";
 import { getT } from "@/i18n/server";
 import { getGameApi } from "@/server/game-api";
 import { requireUser } from "@/server/auth/guards";
-import { effectModeOf, effectTerms, hrefWith, parseNinjaParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
+import { effectModeOf, effectTerms, hrefWith, sortEffectOf, parseNinjaParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
 import { EmptyState, PageHeader, Pagination, Tag } from "@/components/ui/primitives";
 import { ItemCard } from "@/components/game/item-card";
+import { EffectRankBlock, EffectRankNote } from "@/components/game/effect-rank";
 import { CheckGroup, countActive, EffectSearch, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "@/components/game/list-controls";
 
 export const dynamic = "force-dynamic";
@@ -27,11 +28,13 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
   const statName = (key: string | null | undefined) => facets.statistics.find((s) => s.key === key)?.name ?? key ?? "";
   const sortValue = rawOne(raw.sort) ?? "";
   const active = countActive(raw);
+  const sortTerm = sortEffectOf(raw) ?? fxTerms[0];
   const sortOptions = [
     { value: "release:desc", label: t("filters.sort.releaseDesc") },
     { value: "release:asc", label: t("filters.sort.releaseAsc") },
     { value: "name:asc", label: t("filters.sort.nameAsc") },
     { value: "name:desc", label: t("filters.sort.nameDesc") },
+    ...(fxTerms.length > 0 ? [{ value: "fx:desc", label: t("gear.sortFxDesc") }, { value: "fx:asc", label: t("gear.sortFxAsc") }] : []),
     ...facets.statistics.flatMap((s) => [
       { value: `stat:desc:${s.key}`, label: t("filters.sort.statDesc", { stat: s.name }) },
       { value: `stat:asc:${s.key}`, label: t("filters.sort.statAsc", { stat: s.name }) },
@@ -39,6 +42,7 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
       { value: `growth:asc:${s.key}`, label: t("filters.sort.growthAsc", { stat: s.name }) },
     ]),
   ];
+  const byEffect = params.sort?.by === "effect";
   const sortedByStat = params.sort && (params.sort.by === "stat" || params.sort.by === "growth");
 
   return (
@@ -49,6 +53,7 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
         <EffectSearch
           terms={fxTerms}
           mode={effectModeOf(raw)}
+          sortTerm={sortTerm}
           suggestions={effectSuggestions.map((s) => s.value)}
           removeHref={(term) => hrefWith("/ninjas", raw, { fx: fxTerms.filter((x) => x !== term), page: undefined })}
           t={t}
@@ -83,6 +88,7 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
         />
       ) : (
         <>
+          {byEffect && sortTerm && <EffectRankNote effect={sortTerm} direction={params.sort?.direction === "asc" ? "asc" : "desc"} t={t} />}
           <ResultSummary total={t("filters.results", { count: result.total })}>
             {!params.sort && <span>{t("ninja.listHint")}</span>}
             {sortedByStat && <span>{t("filters.sortNote")}</span>}
@@ -106,6 +112,7 @@ export default async function NinjasPage({ searchParams }: { searchParams: Promi
                         )}
                         {n.clientCombatClass && <Tag>{t(`ninja.combatClassValue.${n.clientCombatClass}`)}</Tag>}
                       </span>
+                      {byEffect && sortTerm && n.sortEffect && <EffectRankBlock rank={n.sortEffect} effect={sortTerm} t={t} statName={statName} />}
                       {n.sortStat && (
                         <span className="text-xs text-muted" data-sort-stat>
                           {n.sortStat.value === null

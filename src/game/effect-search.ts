@@ -36,6 +36,14 @@ interface IndexedEffect {
   text: string;
   /** The wording as stored, for showing which effect matched. */
   raw: string;
+  /** Stored signed value of a structured effect (Weaken enemy's ATK +30% is stored as -30), or null. */
+  value: number | null;
+  /** FLAT, PERCENT or MULTIPLIER as stored. */
+  unit: string | null;
+  statKey: string | null;
+  statusKey: string | null;
+  /** False for effects that exist only as source wording: they are searchable but have no value to compare. */
+  structured: boolean;
 }
 
 interface EffectIndex {
@@ -220,8 +228,9 @@ function classify(
       else if (re.test(t) && /\b(immun\w*|inmun\w*)\b/.test(t)) c.add(`immune:${key}`);
     }
     for (const [key, re] of statNames) {
-      const m = new RegExp(`\\b(increas\\w*|boost\\w*|raise\\w*|restor\\w*)\\b[^.]*${re.source}|${re.source}[^.]*\\b(increas\\w*)`).test(t);
-      const d = new RegExp(`\\b(decreas\\w*|reduc\\w*|lower\\w*)\\b[^.]*${re.source}|${re.source}[^.]*\\b(decreas\\w*|reduc\\w*)`).test(t);
+      // The verb must not be negated («Cannot increase control rate»): the same rule as for states.
+      const m = occursAffirmatively(t, new RegExp(`\\b(increas\\w*|boost\\w*|raise\\w*|restor\\w*)\\b(?=[^.]*${re.source})`)) || new RegExp(`${re.source}[^.]*(?<!cannot )(?<!not )\\b(increas\\w*)`).test(t);
+      const d = occursAffirmatively(t, new RegExp(`\\b(decreas\\w*|reduc\\w*|lower\\w*)\\b(?=[^.]*${re.source})`)) || new RegExp(`${re.source}[^.]*(?<!cannot )(?<!not )\\b(decreas\\w*|reduc\\w*)`).test(t);
       if (m) c.add(`up:${key}`);
       if (d) c.add(`down:${key}`);
     }
@@ -242,6 +251,7 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
         sourceText: true,
         descriptionEs: true,
         structuredStatus: true,
+        valueType: true,
         target: { select: { key: true } },
         statistic: { select: { key: true } },
         statusEffect: { select: { key: true } },
@@ -306,7 +316,22 @@ async function buildIndex(db: Db): Promise<EffectIndex> {
     );
     const side = (r.target?.key as Side | undefined) && ["self", "ally", "enemy"].includes(r.target!.key) ? (r.target!.key as Side) : sideOfText(text);
     for (const k of concepts) present[owner].add(k);
-    effects.push({ owner, ownerId, pieces, group, concepts, side, kind: r.kind, text, raw: r.sourceText ?? r.descriptionEs ?? r.description ?? "" });
+    effects.push({
+      owner,
+      ownerId,
+      pieces,
+      group,
+      concepts,
+      side,
+      kind: r.kind,
+      text,
+      raw: r.sourceText ?? r.descriptionEs ?? r.description ?? "",
+      value: r.value === null || textOnly ? null : Number(r.value.toString()),
+      unit: r.valueType ?? null,
+      statKey: r.statistic?.key ?? null,
+      statusKey: r.statusEffect?.key ?? null,
+      structured: !textOnly,
+    });
   }
   return { effects, statuses: statusDefs, statistics: statDefs, present };
 }
@@ -327,6 +352,8 @@ interface Resolved {
   /** Raw wording to look for when no vocabulary entry matched. */
   text: string | null;
   immunity: boolean;
+  /** The wording the user typed for this effect, for naming the effect that controls sorting. */
+  source?: string;
 }
 
 function resolve(index: EffectIndex, term: string): Resolved {
@@ -430,7 +457,7 @@ function distinctTerms(index: EffectIndex, terms: string[]): Resolved[] {
     const key = termKey(rs);
     if (seen.has(key)) continue;
     seen.add(key);
-    out.push(rs);
+    out.push({ ...rs, source: t });
   }
   return out;
 }
@@ -440,6 +467,197 @@ export interface EffectEvidence {
   group: string | null;
   /** The source wording of one matching effect. */
   text: string;
+}
+
+/**
+ * ── Sorting by the value of an effect ──
+ * Only the effect the user chose to sort by is looked at. Each matching stored effect is put in a MEASURE CLASS made of what it
+ * does and its unit, so an increase of Control Rate (+40%) is never compared with a reduction of the enemy's Control Rate (-20%),
+ * with a flat value, or with a different state's immunity. Inside one class the value used is the largest printed value of the owner
+ * (magnitude, so a bigger reduction ranks as bigger). Tiers are NOT added: the accumulation rule is not confirmed. Ties are broken
+ * by the printed value at the highest piece count, then the next lower one, and finally by the caller (name, then identity).
+ * Effects that exist only as wording, effects with no number (heal, a state applied) and owners that do not contain the chosen
+ * effect (possible with Match Any) come after every number, and are labelled as such. Nothing is ever guessed.
+ */
+export interface EffectValueUse {
+  pieces: number | null;
+  group: string | null;
+  /** The stored value with its sign as printed in the application (reductions are negative). */
+  value: number;
+  unit: string;
+  text: string;
+}
+export type EffectRankStatus = "ranked" | "other-measure" | "text-only" | "no-value" | "no-match";
+export interface EffectRank {
+  status: EffectRankStatus;
+  /** Measure class, e.g. "up|PERCENT" (increase of the statistic, in percent). Null when nothing numeric was found. */
+  measure: string | null;
+  /** The value that decided the position (largest magnitude), with the tier it is printed at. */
+  best: EffectValueUse | null;
+  /** Every printed value of the same measure, highest piece count first. Shown as is; never summed. */
+  uses: EffectValueUse[];
+  /** Position of the measure among the measures present: 0 is the primary one. Used by the comparison. */
+  group: number;
+  /** Magnitude of `best`; null when there is none. */
+  magnitude: number | null;
+  /** The largest magnitude per tier, from the highest piece count down. Missing tiers are -Infinity. */
+  tierValues: number[];
+}
+
+const DIRECTION_ORDER = ["up", "reduction", "fury-up", "immune", "down", "fury-down"];
+const UNIT_ORDER = ["PERCENT", "FLAT", "MULTIPLIER"];
+
+/** Describes a measure class for the interface: its direction word and its unit. */
+export function describeMeasure(measure: string): { direction: string; unit: string } {
+  const [direction = "", unit = ""] = measure.split("|");
+  return { direction: direction.startsWith("immune:") ? "immune" : direction, unit };
+}
+
+function measureOf(e: IndexedEffect, rs: Resolved): { measure: string; magnitude: number } | null {
+  if (!e.structured || e.value === null || !e.unit) return null;
+  const concept = rs.concepts.find((c) => e.concepts.has(c));
+  if (!concept) return null;
+  const magnitude = Math.abs(e.value);
+  if (concept.startsWith("up:") || concept.startsWith("down:")) {
+    const direction = DAMAGE_REDUCTION_CONCEPTS.includes(concept) ? "reduction" : concept.startsWith("up:") ? "up" : "down";
+    return { measure: `${direction}|${e.unit}`, magnitude };
+  }
+  if (concept === "fury-up" || concept === "fury-down") return { measure: `${concept}|${e.unit}`, magnitude };
+  if (concept.startsWith("immune:") && e.statusKey) return { measure: `immune:${e.statusKey}|${e.unit}`, magnitude: e.value };
+  return null;
+}
+
+const directionRank = (m: string) => {
+  const d = describeMeasure(m).direction;
+  const i = DIRECTION_ORDER.indexOf(d);
+  return i < 0 ? DIRECTION_ORDER.length : i;
+};
+const unitRank = (m: string) => {
+  const i = UNIT_ORDER.indexOf(describeMeasure(m).unit);
+  return i < 0 ? UNIT_ORDER.length : i;
+};
+
+interface OwnerMatches {
+  uses: { measure: string; magnitude: number; use: EffectValueUse }[];
+  wording: boolean;
+  anyMatch: boolean;
+}
+
+/** Builds the rank of every owner for the chosen effect. */
+function buildRanks(matches: Map<string, OwnerMatches>): Map<string, EffectRank> {
+  // Which measures exist, and how many owners have each.
+  const owners = new Map<string, Set<string>>();
+  for (const [key, m] of matches) for (const u of m.uses) (owners.get(u.measure) ?? owners.set(u.measure, new Set()).get(u.measure)!).add(key);
+  const measures = [...owners.keys()];
+  // Primary: the highest-priority direction; inside it the unit most owners use (percent first on a tie). The others follow in a fixed order.
+  const byDirection = [...measures].sort((a, b) => directionRank(a) - directionRank(b));
+  const topDirection = byDirection.length ? describeMeasure(byDirection[0]!).direction : null;
+  const topPool = measures.filter((m) => describeMeasure(m).direction === topDirection);
+  topPool.sort((a, b) => owners.get(b)!.size - owners.get(a)!.size || unitRank(a) - unitRank(b) || a.localeCompare(b));
+  const rest = measures.filter((m) => !topPool.includes(m)).sort((a, b) => directionRank(a) - directionRank(b) || a.localeCompare(b) || unitRank(a) - unitRank(b));
+  const order = [...(topPool.length ? [topPool[0]!] : []), ...topPool.slice(1), ...rest];
+  const groupOf = new Map(order.map((m, i) => [m, i]));
+
+  const tiers = [...new Set([...matches.values()].flatMap((m) => m.uses.map((u) => u.use.pieces ?? 0)))].sort((a, b) => b - a);
+  const out = new Map<string, EffectRank>();
+  for (const [key, m] of matches) {
+    if (!m.anyMatch) {
+      out.set(key, { status: "no-match", measure: null, best: null, uses: [], group: order.length + 2, magnitude: null, tierValues: [] });
+      continue;
+    }
+    if (m.uses.length === 0) {
+      out.set(key, { status: m.wording ? "text-only" : "no-value", measure: null, best: null, uses: [], group: order.length + 1, magnitude: null, tierValues: [] });
+      continue;
+    }
+    // The owner's own best measure: the one that comes first in the order.
+    const own = [...new Set(m.uses.map((u) => u.measure))].sort((a, b) => groupOf.get(a)! - groupOf.get(b)!)[0]!;
+    const uses = m.uses.filter((u) => u.measure === own).sort((x, y) => (y.use.pieces ?? 0) - (x.use.pieces ?? 0) || y.magnitude - x.magnitude);
+    const best = uses.reduce((a, b) => (b.magnitude > a.magnitude ? b : a));
+    const tierValues = tiers.map((t) => Math.max(-Infinity, ...uses.filter((u) => (u.use.pieces ?? 0) === t).map((u) => u.magnitude)));
+    const group = groupOf.get(own)!;
+    out.set(key, { status: group === 0 ? "ranked" : "other-measure", measure: own, best: best.use, uses: uses.map((u) => u.use), group, magnitude: best.magnitude, tierValues });
+  }
+  return out;
+}
+
+/**
+ * Orders two ranks. desc: the larger value first; asc: the smaller first. Within one measure: the best printed value, then the value at
+ * the highest piece count, then the next. Measures keep their fixed order and wording-only owners stay last in both directions.
+ */
+export function compareRanks(a: EffectRank, b: EffectRank, direction: "asc" | "desc"): number {
+  if (a.group !== b.group) return a.group - b.group;
+  if (a.magnitude === null || b.magnitude === null) return 0;
+  const sign = direction === "desc" ? -1 : 1;
+  if (a.magnitude !== b.magnitude) return (a.magnitude - b.magnitude) * sign;
+  for (let i = 0; i < Math.min(a.tierValues.length, b.tierValues.length); i++) {
+    const x = a.tierValues[i]!;
+    const y = b.tierValues[i]!;
+    if (x === y) continue;
+    return (x === -Infinity ? -1 : y === -Infinity ? 1 : x - y) * sign;
+  }
+  return 0;
+}
+
+export interface EffectAnalysis {
+  perOwner: Record<EffectOwner, { ids: string[]; evidence: Map<string, EffectEvidence[]> }>;
+  distinct: number;
+  /** The effect that controls sorting, as typed. */
+  sortTerm: string | null;
+  /** Rank of every matching owner for the sorting effect, by `${owner}:${id}`. */
+  ranks: Map<string, EffectRank>;
+}
+
+/**
+ * Matches the typed terms (ANY or ALL) for one or several kinds of owner and ranks the matches by the value of ONE chosen effect:
+ * `sortTerm` (as typed), defaulting to the first selected effect. Null when no term is usable.
+ */
+export async function analyseEffects(db: Db, owners: EffectOwner[], terms: string[], mode: EffectMode = "any", sortTerm?: string | null): Promise<EffectAnalysis | null> {
+  const index = await indexOf(db);
+  const resolved = distinctTerms(index, terms);
+  if (resolved.length === 0) return null;
+  // The sorting effect: the one typed as `sortTerm` (the same effect typed another way counts), else the first.
+  let sortIndex = 0;
+  if (sortTerm && n(sortTerm).length >= 2) {
+    const wanted = termKey(resolve(index, sortTerm));
+    const hit = resolved.findIndex((r) => termKey(r) === wanted);
+    if (hit >= 0) sortIndex = hit;
+  }
+  const sorting = resolved[sortIndex]!;
+  const perTerm = new Map<string, Map<string, EffectEvidence[]>[]>();
+  const sortMatches = new Map<string, OwnerMatches>();
+  for (const owner of owners) perTerm.set(owner, resolved.map(() => new Map()));
+  for (const e of index.effects) {
+    if (!owners.includes(e.owner)) continue;
+    resolved.forEach((rs, i) => {
+      if (!effectMatches(e, rs)) return;
+      const bucket = perTerm.get(e.owner)![i]!;
+      const list = bucket.get(e.ownerId) ?? [];
+      if (list.length < 3) list.push({ pieces: e.pieces, group: e.group, text: e.raw });
+      bucket.set(e.ownerId, list);
+      if (i !== sortIndex) return;
+      const key = `${e.owner}:${e.ownerId}`;
+      const m = sortMatches.get(key) ?? { uses: [], wording: false, anyMatch: true };
+      const meas = measureOf(e, sorting);
+      if (meas && e.value !== null && e.unit) m.uses.push({ measure: meas.measure, magnitude: meas.magnitude, use: { pieces: e.pieces, group: e.group, value: e.value, unit: e.unit, text: e.raw } });
+      else if (!e.structured) m.wording = true;
+      sortMatches.set(key, m);
+    });
+  }
+  const perOwner = {} as EffectAnalysis["perOwner"];
+  for (const kind of ["ninja", "equipment", "jewelry"] as EffectOwner[]) perOwner[kind] = { ids: [], evidence: new Map() };
+  const all = new Map<string, OwnerMatches>();
+  for (const owner of owners) {
+    const buckets = perTerm.get(owner)!;
+    const candidates = new Set(buckets.flatMap((m) => [...m.keys()]));
+    for (const id of candidates) {
+      const hits = buckets.map((m) => m.get(id));
+      if (!(mode === "all" ? hits.every(Boolean) : hits.some(Boolean))) continue;
+      perOwner[owner].ids.push(id);
+      perOwner[owner].evidence.set(id, hits.flatMap((h) => h ?? []));
+      all.set(`${owner}:${id}`, sortMatches.get(`${owner}:${id}`) ?? { uses: [], wording: false, anyMatch: false });
+    }
+  }
+  return { perOwner, distinct: resolved.length, sortTerm: sorting.source ?? null, ranks: buildRanks(all) };
 }
 
 /**
@@ -453,30 +671,8 @@ export async function idsWithEffects(
   terms: string[],
   mode: EffectMode = "any",
 ): Promise<{ ids: string[]; evidence: Map<string, EffectEvidence[]>; distinct: number } | null> {
-  const index = await indexOf(db);
-  const resolved = distinctTerms(index, terms);
-  if (resolved.length === 0) return null;
-  const perTerm: Map<string, EffectEvidence[]>[] = resolved.map(() => new Map());
-  for (const e of index.effects) {
-    if (e.owner !== owner) continue;
-    resolved.forEach((rs, i) => {
-      if (!effectMatches(e, rs)) return;
-      const list = perTerm[i]!.get(e.ownerId) ?? [];
-      if (list.length < 3) list.push({ pieces: e.pieces, group: e.group, text: e.raw });
-      perTerm[i]!.set(e.ownerId, list);
-    });
-  }
-  const evidence = new Map<string, EffectEvidence[]>();
-  const ids: string[] = [];
-  const candidates = new Set(perTerm.flatMap((m) => [...m.keys()]));
-  for (const id of candidates) {
-    const hits = perTerm.map((m) => m.get(id));
-    if (mode === "all" ? hits.every(Boolean) : hits.some(Boolean)) {
-      ids.push(id);
-      evidence.set(id, hits.flatMap((h) => h ?? []));
-    }
-  }
-  return { ids, evidence, distinct: resolved.length };
+  const a = await analyseEffects(db, [owner], terms, mode);
+  return a ? { ids: a.perOwner[owner].ids, evidence: a.perOwner[owner].evidence, distinct: a.distinct } : null;
 }
 
 /** Ids of the ninjas with a stored effect matching ANY of the terms (ALL with mode "all"); null when no term is usable. */

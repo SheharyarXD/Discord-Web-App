@@ -435,7 +435,13 @@ export const ninjaListParams = z.object({
   effectMode: z.enum(["any", "all"]).default("any"),
   /** Default: newest release first. «stat» and «growth» sort by one base statistic, ninjas without it last. */
   sort: z
-    .object({ by: z.enum(["release", "name", "stat", "growth"]).default("release"), statisticKey: key.nullish(), direction: z.enum(SORT_DIRECTIONS).default("desc") })
+    .object({
+      by: z.enum(["release", "name", "stat", "growth", "effect"]).default("release"),
+      statisticKey: key.nullish(),
+      /** «effect»: sorts by the value of ONE selected effect (as typed in effectTerms; the first one when omitted). */
+      effectTerm: z.string().trim().max(80).nullish(),
+      direction: z.enum(SORT_DIRECTIONS).default("desc"),
+    })
     .refine((o) => (o.by !== "stat" && o.by !== "growth") || !!o.statisticKey, { message: "sorting by a statistic needs the statistic", path: ["statisticKey"] })
     .optional(),
   releasedFrom: releaseInput.optional(),

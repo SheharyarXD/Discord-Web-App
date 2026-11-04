@@ -3,7 +3,7 @@ import { normalizeTerm } from "../domain/localize";
 import type { ReviewStatus } from "../domain/constants";
 import type { Db } from "./db";
 import { parseInput } from "./db";
-import { idsWithEffects, type EffectEvidence } from "./effect-search";
+import { analyseEffects, compareRanks, type EffectEvidence, type EffectRank } from "./effect-search";
 import { statFilter } from "./schemas";
 import type { Page } from "./ninjas";
 
@@ -32,7 +32,8 @@ export const gearListParams = z.object({
   effectTerms: z.array(z.string().trim().min(1).max(80)).max(6).optional(),
   /** any = at least one selected effect (default), all = every selected effect. */
   effectMode: z.enum(["any", "all"]).default("any"),
-  sort: z.object({ by: z.enum(["name", "stat"]).default("name"), statisticKey: z.string().nullish(), direction: z.enum(["asc", "desc"]).default("asc") }).optional(),
+  /** by "effect": the value of one selected effect, `effectTerm` (as typed; the first selected effect when omitted). */
+  sort: z.object({ by: z.enum(["name", "stat", "effect"]).default("name"), statisticKey: z.string().nullish(), effectTerm: z.string().trim().max(80).nullish(), direction: z.enum(["asc", "desc"]).default("asc") }).optional(),
 });
 export type GearListParams = z.input<typeof gearListParams>;
 
@@ -55,6 +56,8 @@ export interface GearSetSummary {
   stats: { key: string; name: string; value: string }[];
   /** Matching effect wording per tier when an effect filter is active. */
   evidence: EffectEvidence[];
+  /** The printed values of the effect that controls sorting, when an effect filter is active. Never summed. */
+  rank: EffectRank | null;
 }
 
 const title = (name: string, label: string | null, basis: string | null) => (!label ? name : basis === "SEQUENCE" ? `${name} (variant ${label})` : `${name} ${label}`);
@@ -82,13 +85,16 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
 
   let found = rows;
   const evidence = new Map<string, EffectEvidence[]>();
+  let ranks = new Map<string, EffectRank>();
   if (p.effectTerms?.length) {
-    for (const kind of kinds) {
-      const hit = await idsWithEffects(db, kind, p.effectTerms, p.effectMode);
-      if (!hit) continue;
-      const ids = new Set(hit.ids);
-      for (const [id, ev] of hit.evidence) evidence.set(id, ev);
-      found = found.filter((r) => r.kind !== kind || ids.has(r.id));
+    const hit = await analyseEffects(db, kinds, p.effectTerms, p.effectMode, p.sort?.by === "effect" ? p.sort.effectTerm : null);
+    if (hit) {
+      ranks = hit.ranks;
+      for (const kind of kinds) {
+        const ids = new Set(hit.perOwner[kind].ids);
+        for (const [id, ev] of hit.perOwner[kind].evidence) evidence.set(id, ev);
+        found = found.filter((r) => r.kind !== kind || ids.has(r.id));
+      }
     }
   }
   const needle = p.query ? normalizeTerm(p.query) : "";
@@ -112,7 +118,10 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
     }
     return true;
   });
-  for (const r of found) r.evidence = evidence.get(r.id) ?? [];
+  for (const r of found) {
+    r.evidence = evidence.get(r.id) ?? [];
+    r.rank = ranks.get(`${r.kind}:${r.id}`) ?? null;
+  }
 
   const sort = p.sort ?? { by: "name" as const, direction: "asc" as const, statisticKey: null };
   const dir = sort.direction === "asc" ? 1 : -1;
@@ -121,6 +130,12 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
     return v === undefined ? null : Number(v);
   };
   found.sort((a, b) => {
+    if (sort.by === "effect" && a.rank && b.rank) {
+      const c = compareRanks(a.rank, b.rank, sort.direction);
+      if (c !== 0) return c;
+      // Equal on every printed value: alphabetical, then a fixed identity order.
+      return a.name.localeCompare(b.name) || a.kind.localeCompare(b.kind) || (a.versionKey ?? "").localeCompare(b.versionKey ?? "") || a.slug.localeCompare(b.slug);
+    }
     if (sort.by === "stat" && sort.statisticKey) {
       const x = statOf(a);
       const y = statOf(b);
@@ -164,6 +179,7 @@ function summary(
     thresholds: [...new Set(thresholds.filter((t): t is number => t !== null))].sort((a, b) => a - b),
     stats,
     evidence: [],
+    rank: null,
   };
 }
 

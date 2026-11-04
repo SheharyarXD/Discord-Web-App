@@ -33,9 +33,24 @@ export function effectTerms(p: RawParams): string[] {
 }
 
 /** «fxm=all»: the selected effects must ALL be present. Anything else means ANY (the default). */
+/** «sort=fx:desc» with at least one selected effect: sorting by the value of that effect. */
+function effectSortOf(p: RawParams) {
+  const [by, direction] = (one(p.sort) ?? "").split(":");
+  if (by !== "fx" || (direction !== "asc" && direction !== "desc") || effectTerms(p).length === 0) return undefined;
+  const effectTerm = sortEffectOf(p);
+  return { by: "effect" as const, direction: direction as "asc" | "desc", ...(effectTerm ? { effectTerm } : {}) };
+}
+
 export const effectModeOf = (p: RawParams): "any" | "all" => (one(p.fxm) === "all" ? "all" : "any");
 
-/** «stat:desc:force», «growth:asc:hp», «name:asc», «release:desc». Anything else means the default order. */
+/** The effect that controls value sorting («fxs=aturdir»): one of the selected effects; anything else means the first selected one. */
+export const sortEffectOf = (p: RawParams): string | undefined => {
+  const wanted = one(p.fxs);
+  const terms = effectTerms(p);
+  return wanted && terms.some((t) => t.toLowerCase() === wanted.toLowerCase()) ? wanted : undefined;
+};
+
+/** «stat:desc:force», «growth:asc:hp», «name:asc», «release:desc», «fx:desc» (value of the selected effect). Anything else means the default order. */
 function sortOf(raw: string | undefined, kind: "ninja" | "item") {
   if (!raw) return undefined;
   const [by, direction, statisticKey] = raw.split(":");
@@ -53,6 +68,7 @@ const intOr1 = (v: string | undefined) => {
 export function parseNinjaParams(p: RawParams, options: { includeUnpublished?: boolean } = {}): NinjaListParams {
   const classes = all(p.class).filter((c) => c === "TANK" || c === "DPS" || c === "UNASSIGNED") as ("TANK" | "DPS" | "UNASSIGNED")[];
   const sort = sortOf(one(p.sort), "ninja");
+  const effectSort = effectSortOf(p);
   return {
     page: intOr1(one(p.page)),
     ...(one(p.q) ? { query: one(p.q) } : {}),
@@ -66,6 +82,7 @@ export function parseNinjaParams(p: RawParams, options: { includeUnpublished?: b
     ...(effectTerms(p).length ? { effectTerms: effectTerms(p) } : {}),
     ...(effectModeOf(p) === "all" ? { effectMode: "all" as const } : {}),
     ...(sort ? { sort: sort as NonNullable<NinjaListParams["sort"]> } : {}),
+    ...(effectSort ? { sort: effectSort } : {}),
     ...(options.includeUnpublished ? { includeUnpublished: true } : {}),
   };
 }
@@ -78,7 +95,7 @@ export function parseGearParams(p: RawParams): GearListParams {
   const sortRaw = one(p.sort);
   const [by, direction, statisticKey] = (sortRaw ?? "").split(":");
   const dir = direction === "asc" || direction === "desc" ? direction : undefined;
-  const gearSort: GearListParams["sort"] = by === "name" && dir ? { by: "name" as const, direction: dir } : by === "stat" && statisticKey && dir ? { by: "stat" as const, direction: dir, statisticKey } : undefined;
+  const gearSort: GearListParams["sort"] = effectSortOf(p) ?? (by === "name" && dir ? { by: "name" as const, direction: dir } : by === "stat" && statisticKey && dir ? { by: "stat" as const, direction: dir, statisticKey } : undefined);
   return {
     page: intOr1(one(p.page)),
     ...(one(p.q) ? { query: one(p.q) } : {}),

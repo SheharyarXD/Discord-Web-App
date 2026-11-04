@@ -59,7 +59,7 @@ export function SearchBox({ name = "q", value, placeholder, label }: { name?: st
  * «Buscar por efecto»: a text field with suggestions. Terms already chosen are chips with a link that removes
  * them and hidden fields that keep them when the form is sent again; a newly typed term is added to them.
  */
-export function EffectSearch({ terms, suggestions, removeHref, mode = "any", t }: { terms: string[]; suggestions: string[]; removeHref: (term: string) => string; mode?: "any" | "all"; t: Translate }) {
+export function EffectSearch({ terms, suggestions, removeHref, mode = "any", sortTerm, t }: { terms: string[]; suggestions: string[]; removeHref: (term: string) => string; mode?: "any" | "all"; sortTerm?: string; t: Translate }) {
   return (
     <div className="flex flex-col gap-1.5" data-effect-search>
       <label htmlFor="fx" className="text-sm font-medium">
@@ -84,6 +84,23 @@ export function EffectSearch({ terms, suggestions, removeHref, mode = "any", t }
           <option key={s} value={s} />
         ))}
       </datalist>
+      {terms.length > 1 && (
+        <div className="mt-1 flex flex-col gap-1" data-effect-sort-by>
+          <label htmlFor="fxs" className="text-sm font-medium">
+            {t("filters.effectSortBy")}
+          </label>
+          <select id="fxs" name="fxs" defaultValue={sortTerm ?? terms[0]} className={inputClass} aria-describedby="fxs-hint">
+            {terms.map((term) => (
+              <option key={term} value={term}>
+                {term}
+              </option>
+            ))}
+          </select>
+          <p id="fxs-hint" className="text-xs text-muted">
+            {t("filters.effectSortByHint")}
+          </p>
+        </div>
+      )}
       <fieldset className="mt-1 flex flex-wrap items-center gap-2" data-effect-mode>
         <legend className="sr-only">{t("filters.effectMode")}</legend>
         {(["any", "all"] as const).map((m) => (
@@ -179,6 +196,6 @@ export function ResultSummary({ total, children }: { total: string; children?: R
 }
 
 /** The number of filters that are switched on, for the panel's badge. */
-export function countActive(p: Record<string, string | string[] | undefined>, ignore: string[] = ["page", "sort", "fxm"]): number {
+export function countActive(p: Record<string, string | string[] | undefined>, ignore: string[] = ["page", "sort", "fxm", "fxs"]): number {
   return Object.entries(p).filter(([k, v]) => !ignore.includes(k) && (Array.isArray(v) ? v.some(Boolean) : Boolean(v))).length;
 }

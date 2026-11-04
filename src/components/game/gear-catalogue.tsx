@@ -3,9 +3,10 @@ import type { Translate } from "@/i18n";
 import { getT } from "@/i18n/server";
 import { getGameApi } from "@/server/game-api";
 import { requireUser } from "@/server/auth/guards";
-import { effectModeOf, effectTerms, hrefWith, parseGearParams, rawAll, rawOne, type RawParams } from "@/server/query-params";
+import { effectModeOf, effectTerms, hrefWith, parseGearParams, rawAll, rawOne, sortEffectOf, type RawParams } from "@/server/query-params";
 import type { GearSetSummary } from "@/game/gear";
 import { Card, EmptyState, PageHeader, Pagination, Tag } from "@/components/ui/primitives";
+import { EffectRankBlock, EffectRankNote } from "./effect-rank";
 import { CheckGroup, countActive, EffectSearch, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "./list-controls";
 
 const number = new Intl.NumberFormat("es", { maximumFractionDigits: 2 });
@@ -46,13 +47,16 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
   const suggestions = [...new Set([...suggestionsEq, ...suggestionsJw].map((s) => s.value))];
   const fxTerms = effectTerms(raw);
   const mode = effectModeOf(raw);
-  const ignore = ["page", "sort", "fxm", ...(fixedKind ? ["kind"] : [])];
+  const ignore = ["page", "sort", "fxm", "fxs", ...(fixedKind ? ["kind"] : [])];
+  const sortTerm = sortEffectOf(raw) ?? fxTerms[0];
+  const byEffect = params.sort?.by === "effect";
   const active = countActive(raw, ignore);
   const sortValue = rawOne(raw.sort) ?? "";
   const statName = (key: string) => facets.statistics.find((s) => s.key === key)?.name ?? key;
   const sortOptions = [
     { value: "name:asc", label: t("gear.sortNameAsc") },
     { value: "name:desc", label: t("gear.sortNameDesc") },
+    ...(fxTerms.length > 0 ? [{ value: "fx:desc", label: t("gear.sortFxDesc") }, { value: "fx:asc", label: t("gear.sortFxAsc") }] : []),
     ...facets.statistics.flatMap((s) => [
       { value: `stat:desc:${s.key}`, label: t("gear.sortStatDesc", { stat: s.name }) },
       { value: `stat:asc:${s.key}`, label: t("gear.sortStatAsc", { stat: s.name }) },
@@ -66,7 +70,7 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
       <FilterPanel action={base} count={active} t={t} clearHref={clearHref}>
         <SearchBox value={rawOne(raw.q)} placeholder={t("filters.searchPlaceholder")} label={t("filters.search")} />
         {!fixedKind && <CheckGroup name="kind" legend={t("gear.category")} options={[{ value: "equipment", label: t("gear.kindEquipment") }, { value: "jewelry", label: t("gear.kindJewelry") }]} selected={rawAll(raw.kind)} />}
-        <EffectSearch terms={fxTerms} suggestions={suggestions} mode={mode} removeHref={(term) => hrefWith(base, raw, { fx: fxTerms.filter((x) => x !== term), page: undefined })} t={t} />
+        <EffectSearch terms={fxTerms} suggestions={suggestions} mode={mode} sortTerm={sortTerm} removeHref={(term) => hrefWith(base, raw, { fx: fxTerms.filter((x) => x !== term), page: undefined })} t={t} />
         <CheckGroup
           name="version"
           legend={t("gear.version")}
@@ -91,13 +95,14 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
         />
       ) : (
         <>
+          {byEffect && sortTerm && <EffectRankNote effect={sortTerm} direction={params.sort?.direction === "asc" ? "asc" : "desc"} t={t} />}
           <ResultSummary total={t("filters.results", { count: result.total })}>
             {fxTerms.length > 0 && <span>{t("gear.evidenceNote")}</span>}
           </ResultSummary>
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-gear-results>
             {result.items.map((s) => (
               <li key={`${s.kind}-${s.slug}`}>
-                <GearCard s={s} t={t} statName={statName} />
+                <GearCard s={s} t={t} statName={statName} rankEffect={byEffect ? sortTerm : undefined} />
               </li>
             ))}
           </ul>
@@ -119,7 +124,7 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
   );
 }
 
-function GearCard({ s, t, statName }: { s: GearSetSummary; t: Translate; statName: (key: string) => string }) {
+function GearCard({ s, t, statName, rankEffect }: { s: GearSetSummary; t: Translate; statName: (key: string) => string; rankEffect?: string }) {
   const stats = s.stats.slice(0, 6);
   return (
     <Card className="h-full" >
@@ -160,6 +165,7 @@ function GearCard({ s, t, statName }: { s: GearSetSummary; t: Translate; statNam
             ))}
           </ul>
         )}
+        {rankEffect && s.rank && <EffectRankBlock rank={s.rank} effect={rankEffect} t={t} statName={statName} />}
         {s.reviewStatus !== "CONFIRMED" && <p className="mt-2 text-xs text-warn"><span aria-hidden>⚠ </span>{t("gear.needsReview")}</p>}
       </div>
     </Card>
