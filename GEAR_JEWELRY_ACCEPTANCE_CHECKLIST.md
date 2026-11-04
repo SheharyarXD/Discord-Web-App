@@ -38,3 +38,11 @@ Date: 4 November 2026. VERIFIED = checked in this round with the evidence shown.
 | 32 | Tiers never added; transparent tie rule; Susanoo example (+18% before +15% at 6 pieces) | VERIFIED | real catalogue test and live check |
 | 33 | Wording-only effects stay searchable, labelled, after the numbers | VERIFIED | tests |
 | 34 | Sort works with filters, chips, paging, back and forward, reload and 390 px | VERIFIED | browser suite 235 of 235; live 93 of 93 |
+| 35 | Exact piece counts: a 2-piece search no longer returns sets that only have the effect at 4 or 6 pieces (same for 4, 6 and jewelry 8) | VERIFIED (live) | commit `2c8e9cc`; live smoke 111 of 111; equipment Control Rate 0 / 9 / 6 sets at 2 / 4 / 6 pieces, equal to the stored bonuses |
+| 36 | Results show which piece count matched and the exact value printed there | VERIFIED | live result cards |
+| 37 | Jewelry slot choice (Fuerza, Chakra, Agilidad, Poder, one at a time) enforced in the query, using the existing categories | VERIFIED | tests; live: no other slot in an Agility search |
+| 38 | Agility + 2 pieces + Control Rate + highest to lowest: only Agility 2-piece bonuses, ranked by percentage | VERIFIED (live) | the 8 stored sets: +25% x6, +20%, +10% |
+| 39 | Separate «Bono de 8 piezas» under a 2-piece result; «stronger» note only for a genuinely higher value of the same effect; no claim of stacking | VERIFIED | tests; live: 2 stronger notes for Agility Damage Rate, none for Control Rate (the 8-piece values are lower) |
+| 40 | Match All / Any, name search, stat ranges, versions, paging, back and forward, reset and 390 px still work | VERIFIED | browser suite 253 of 253; live 111 of 111 |
+| 41 | Client confirms the slot choice uses the four jewelry categories («gem sockets» in the request) | OPEN | no Gems feature was activated |
+| 42 | Client acceptance of this add-on | OPEN | not accepted and not closed |

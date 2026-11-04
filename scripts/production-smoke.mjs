@@ -313,8 +313,10 @@ try {
     }
     return { two, eight, stronger: [...two].filter(([id, v]) => (eight.get(id) ?? 0) > v).length };
   };
+  const eqDebug = [];
   const equipOracle = async (tier) => {
     const rows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, equipmentSetBonus: { requiredPieces: tier } }, select: { equipmentSetBonus: { select: { setId: true } } } });
+    eqDebug.push(`${tier}:${rows.map((r) => String(r.value)).join("/")}`);
     return new Set(rows.map((r) => r.equipmentSetBonus.setId)).size;
   };
   // the controls
@@ -327,7 +329,7 @@ try {
   // equipment: the selected piece count is exact
   const eqCounts = [];
   for (const tier of [2, 4, 6]) eqCounts.push([await total(SP, `/equipment?fx=${CCQ2}&tier=${tier}`), await equipOracle(tier)]);
-  check("equipment: Control Rate at exactly 2, 4 and 6 pieces returns the sets whose stored bonus of THAT tier has it", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts));
+  check("equipment: Control Rate at exactly 2, 4 and 6 pieces returns the sets whose stored bonus of THAT tier has it", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts) + " " + eqDebug.map((d) => d.slice(0, 40)).join(";"));
   await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=2`);
   check("equipment: a 2-piece search with nothing printed at 2 pieces says so instead of listing 4 and 6 piece sets", eqCounts[0][1] > 0 || /Ningún conjunto tiene/.test(await SP.locator("main").innerText()));
   await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=6&sort=fx:desc`);
@@ -447,11 +449,11 @@ try {
   await region(R.page, "/equipment?fx=congelar&fx=aumento+de+tasa+de+control&sort=fx:desc&fxs=aumento+de+tasa+de+control", "p34-live-sort-choose-effect.png", "[data-effect-search]");
   // final filtering corrections: exact piece counts, jewelry slot, 8-piece bonus
   await fromNote(R.page, "/equipment?fx=aumento+de+tasa+de+da%C3%B1o&tier=2&sort=fx:desc", "p36-live-equipment-2-pieces.png", 900);
-  await below(R.page, "/equipment?fx=aumento+de+tasa+de+control&tier=2", "p37-live-equipment-2-pieces-none.png", 300);
+  await around(R.page, "/equipment?fx=aumento+de+tasa+de+control&tier=2", /Ningún conjunto tiene/, "p37-live-equipment-2-pieces-none.png", 200, 30);
   await region(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p38-live-jewelry-slot-controls.png", "[data-filter-panel] form");
   await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p39-live-agility-2-pieces-desc.png", 1500);
   await region(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+da%C3%B1o&sort=fx:desc", "p40-live-8-piece-stronger.png", "[data-gear-card]:has([data-full-set-stronger])");
-  await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&fx=aumento+de+tasa+de+da%C3%B1o&fxm=all", "p41-live-match-all-slot-tier.png", 600);
+  await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&fx=aumento+de+evasi%C3%B3n+de+da%C3%B1o&fxm=all&sort=fx:desc", "p41-live-match-all-slot-tier.png", 900);
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
   await R.ctx.close();

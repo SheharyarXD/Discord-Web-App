@@ -1,7 +1,9 @@
-Hi, the sorting you asked for is now live at https://furia-ninja.vercel.app.
+Hi, the filtering corrections are now live at https://furia-ninja.vercel.app.
 
-When you search for an effect such as "tasa de control", the "Ordenar por" list now has "Valor del efecto elegido: de mayor a menor" (and de menor a mayor). The set with the highest printed value goes first, then the next, and so on. It works on Equipamiento, Joyería, Conjuntos and Ninjas.
+When you choose a number of pieces and an effect, only the bonus printed at exactly that number counts. A 2 piece search no longer shows sets that only have the effect at 4 or 6 pieces (equipment 2, 4, 6; jewelry 2 and 8).
 
-If you choose several effects, a new box, "Efecto que ordena", lets you pick which one decides the order. Each result shows the printed values it was ranked by, at their own piece counts, and they are never added together. Increases and reductions of the enemy's control rate are kept apart. For Susanoo, the version with +18% at 6 pieces comes before the one with +15%, as you described.
+On Joyería there is now a "Ranura de la joya" choice: Fuerza, Chakra, Agilidad or Poder, one at a time. I used the four jewelry categories from your sheets for this. With Agilidad, 2 piezas, "aumento de tasa de control" and the highest first, you get only the 8 sets with that bonus in the Agility slot, +25% first, each card showing the percentage, the piece count and the slot.
+
+Under each result there is a separate "Bono de 8 piezas" with the exact 8 piece bonus of that set. If the same effect is higher there, a note says the full set offers a bigger bonus (for example Kumogakure with Damage Rate: +25% at 2 pieces, +30% with the full set). It does not say the bonuses add up, because that is not confirmed.
 
 Still to confirm: the add-on is not accepted yet, the values are marked "pendiente de revisión" until checked against your images, and the earlier questions are in the report. Could you please try it and tell me if it is what you wanted?

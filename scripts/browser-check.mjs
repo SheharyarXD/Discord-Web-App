@@ -757,8 +757,10 @@ try {
     }
     return { two, eight, stronger: [...two].filter(([id, v]) => (eight.get(id) ?? 0) > v).length };
   };
+  const eqDebug = [];
   const equipOracle = async (tier) => {
     const rows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, equipmentSetBonus: { requiredPieces: tier } }, select: { equipmentSetBonus: { select: { setId: true } } } });
+    eqDebug.push(`${tier}:${rows.map((r) => String(r.value)).join("/")}`);
     return new Set(rows.map((r) => r.equipmentSetBonus.setId)).size;
   };
   // the controls
@@ -771,7 +773,7 @@ try {
   // equipment: the selected piece count is exact
   const eqCounts = [];
   for (const tier of [2, 4, 6]) eqCounts.push([await total(`/equipment?fx=${CCQ2}&tier=${tier}`), await equipOracle(tier)]);
-  check("equipment: Control Rate at exactly 2, 4 and 6 pieces returns the sets whose stored bonus of THAT tier has it", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts));
+  check("equipment: Control Rate at exactly 2, 4 and 6 pieces returns the sets whose stored bonus of THAT tier has it", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts) + " " + eqDebug.map((d) => d.slice(0, 40)).join(";"));
   await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=2`);
   check("equipment: a 2-piece search with nothing printed at 2 pieces says so instead of listing 4 and 6 piece sets", eqCounts[0][1] > 0 || /Ningún conjunto tiene/.test(await SP.locator("main").innerText()));
   await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=6&sort=fx:desc`);

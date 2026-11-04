@@ -118,3 +118,50 @@ Live at commit `d43c7ade548dad59f3c0bf5b02c9c73890551d33` (`dpl_6aKGgtVztRX1nLKY
 - Only structured values are ranked. About 15 percent of gear effect rows are wording only; they come after the numbers with an honest label.
 - A state (stun, freeze) or a heal has no printed amount, so sorting by them leaves the order alphabetical.
 - Printed values are still «pendiente de revisión»; a wrong transcription would rank wrongly.
+
+## 10. Addendum: exact piece counts, jewelry slot and the separate 8-piece bonus
+
+Client request: when searching a 2-piece bonus, 4 and 6 piece sets kept appearing; jewelry has fixed slots, so an Agility search must return only Agility pieces with the highest percentage of the chosen effect, and the full 8-piece bonus should be pointed out when it is stronger.
+
+Live at commit `2c8e9ccf7c5d1b6498d58fadbd3496540879614d` (`dpl_9mXMySeF4deGfhTcEhxWEZLTiTQY`), branch `milestone-4`. No schema change, no migration, no data change. Terminology: the client wrote «gem sockets»; this means the four existing jewelry categories (Fuerza, Chakra, Agilidad, Poder). The hidden Gems feature was not activated.
+
+**Data model facts checked first (no new fields needed)**
+- Equipment bonuses carry `requiredPieces` 2, 4 or 6.
+- Jewelry bonuses are of two shapes: `2:group` (one per category, `groupId` set) and `8:set` (set-wide, `groupId` null). Every one of the 252 jewelry pieces has a type key equal to its category key, so slot enforcement uses real data.
+
+**What was built**
+- `tier` is now an exact piece count when an effect is selected (`EffectScope` and `inScope` in `src/game/effect-search.ts`). An effect printed only at another piece count does not qualify; nothing is inferred. Text-only wording at the chosen tier stays searchable and labelled. The detail page still shows every bonus.
+- New address parameter `slot` (`force|chakra|agility|power`, jewelry only; choosing it implies jewelry). It is enforced in the database query in `src/game/gear.ts` (`groups: { some: { key } }` and, for a tier, a bonus condition `OR [groupId null, group.key = slot]`) and again in the in-memory effect scope, so list, count and paging agree. The set-wide 8-piece bonus is not narrowed by the slot.
+- Interface: «Ranura de la joya» radio group (Todas, Fuerza, Chakra, Agilidad, Poder) on `/jewelry` only; tier choices are 2, 4, 6 for equipment, 2 and 8 for jewelry, all four on `/sets`. Each ranked result shows the exact value large with its piece count and slot.
+- Ranking uses only the value printed at the selected tier and slot, with the same measure classes and tie rules as section 9.
+- «Bono de 8 piezas» block (`FullSetBlock`): under a jewelry result that matched through a bonus at another tier, the set's 8-piece effects of the same version, as printed, with «Requiere el conjunto completo». A comparison is shown only when the same measure of the selected effect is printed in the 8-piece bonus: «stronger» (adds «Nota: el conjunto completo ofrece un bono mayor para este efecto.»), «equal» or «lower» are shown with both values; otherwise the block says no comparable value exists. It never says the bonuses add up, replace each other or are active.
+- Match All / Any, effect chips, autocomplete, name search, printed-statistic ranges, version filter, existing sorts, pagination and counts keep working inside the selected slot and tier. With several effects the sorting effect is still chosen with «Efecto que ordena».
+
+**Real-data results**
+| Scenario | Result |
+| --- | --- |
+| Joyería, Agilidad, 2 piezas, aumento de tasa de control, mayor a menor | exactly the 8 sets whose Agility 2-piece bonus has it: six at +25%, then +20%, +10%; no other slot; the 8-piece Control Rate of those sets is lower (Crystalys +7% and +10%), so no «stronger» note |
+| Same, Damage Rate | 2 sets show the «stronger» note (for example Kumogakure variant A: +25% at 2 pieces, +30% with the full set) |
+| Equipment Control Rate at exactly 2 / 4 / 6 pieces | 0 / 9 / 6 sets, equal to the stored bonuses; the 2-piece search says nothing matches |
+| Jewelry 8-piece Control Rate reduction | 8 sets matched on their 8-piece bonus alone |
+| Match All / Any, slot Agility, tier 2 | All = A + B - Any |
+
+**Tests**
+| Check | Result |
+| --- | --- |
+| SQLite suite | **371 passed, 1 skipped** (372 tests, 23 files); 24 new in `tests/m9-tier-slot.test.ts` (exact tiers, upgraded versions, wording-only and negated text, slot filtering, asc/desc, flat vs percent, 2 vs 8 pieces, the 8-piece block and its stronger/lower/equal/unrelated cases, Match All/Any in scope, chosen sorting effect, paging both directions, address parsing, plus real-catalogue tests against an independent database oracle) |
+| PostgreSQL suite | **350 passed, 22 skipped** on the final run (two consecutive runs). One earlier run showed a single failure in a ninja value-sort test from the previous release that did not repeat; recorded here as an unexplained one-off, not hidden |
+| `tsc`, `eslint`, production build | clean |
+| Local browser suite on a production build | **253 of 253** (18 new checks, desktop and 390 px) |
+| Full catalogue on a local PostgreSQL | 110 of 111; the one miss is the HTTPS check, which cannot apply to `http://127.0.0.1` |
+| Live production smoke over HTTPS | **111 of 111** (see the deployment verification) |
+
+**Release record:** commits `457c8c4` (feature) and `2c8e9cc` (smoke screenshots). One `vercel deploy --prod` from a clean tree; the deployment metadata reports `2c8e9cc` on `milestone-4`. `main` stayed at `37d74fb`; the production branch setting and the Ignored Build Step were not touched. The Preview deployment built and was Ready; as before, its address could not be browsed and the Preview database is too slow to read from this machine, so the commit was tested on a local PostgreSQL holding the full catalogue instead. Production error log: no entries. Production counts unchanged.
+
+**Limits**
+- Only the printed value at the chosen piece count is ranked; whether bonuses of different piece counts accumulate is still not confirmed, so nothing is summed.
+- Wording-only effects are searchable but have no value to rank.
+- A «stronger» note needs the same measure of the same effect printed in the 8-piece bonus; different effects (an own increase against an enemy reduction) are not compared.
+- Printed values are still «pendiente de revisión».
+
+**Note on live data after the release.** While the live smoke checks were being repeated for screenshots, an administrator created a new equipment set, `BLAZZTRY` (no family or version, one piece, one 2-piece bonus: Force +110% and Agility +110%, created 2026-11-04 between 18:55 and 18:58 UTC) through the admin form. This is the owner's own entry, not an effect of this release, and it was left untouched. Consequences: production now holds 79 equipment sets, 463 pieces, 235 equipment bonuses and 6,680 effects; the counts quoted for the release (71 families, 78 equipment versions, 462 pieces, 6,676 effects) were read before this and were identical before and after the deployment. It also explains two non-code results in the repeat runs: one run saw 1 stored set where the site showed 0 for a Control Rate 2-piece check (an intermediate state of that edit read by the database oracle before the 30 second search cache refreshed; I could not reproduce it afterwards, the final BLAZZTRY bonus has no Control Rate), and one run's «no game data changed» check saw the effect count rise by 4. The first full live run (111 of 111) happened before the edit.

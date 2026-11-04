@@ -50,3 +50,17 @@ Vercel Instant Rollback returns the code (the migration is additive, so old code
 | Live checks | 93 of 93 over HTTPS, run twice, including the value sort on equipment, jewelry and ninjas |
 | Preview | Preview deployment built and Ready; its address could not be browsed (protection) and the Preview database is too slow to read from this machine, so the commit was tested against a local PostgreSQL with the full catalogue (92 of 93, HSTS cannot apply to http) |
 | Logs and setup | no error entries; `/setup` answers 404 |
+
+## Addendum: exact piece counts, jewelry slot and 8-piece bonus release
+
+| Item | Value |
+| --- | --- |
+| Deployed commit | `2c8e9ccf7c5d1b6498d58fadbd3496540879614d`, branch `milestone-4` (metadata read, clean tree, one deploy command); the feature commit is `457c8c4` |
+| Production deployment | `dpl_9mXMySeF4deGfhTcEhxWEZLTiTQY`, aliased to https://furia-ninja.vercel.app |
+| Database | no schema change, no migration, no import; production counts identical before and after (ninjas 177, abilities 316, ninja effects 4,395, users 4; gear 71 families, 78 equipment versions, 63 jewelry versions, 462 pieces, 252 categories, 541 tiers, 2,281 effects, 143 assets, 144 records); no backup needed (the verified backup of 3 November stays) |
+| Branch guard | production branch setting still `main`; Ignored Build Step unchanged; `main` at `37d74fb`, never touched |
+| Live checks | 111 of 111 over HTTPS, including the exact Agility + 2 pieces + Control Rate + highest to lowest scenario compared with the stored data, exact piece counts on equipment, the 8-piece block, Match All / Any and 390 px; the temporary accounts were removed and no game data changed |
+| Preview | Preview deployment built and Ready; its address could not be browsed (protection) and the Preview database is too slow to read from this machine, so the commit was tested on a local PostgreSQL with the full catalogue (110 of 111, HSTS cannot apply to http) |
+| Logs and setup | no error entries after the release; `/setup` answers 404; `/api/health` answers ok |
+
+**Note on live data after the release.** While the live smoke checks were being repeated for screenshots, an administrator created a new equipment set, `BLAZZTRY` (no family or version, one piece, one 2-piece bonus: Force +110% and Agility +110%, created 2026-11-04 between 18:55 and 18:58 UTC) through the admin form. This is the owner's own entry, not an effect of this release, and it was left untouched. Consequences: production now holds 79 equipment sets, 463 pieces, 235 equipment bonuses and 6,680 effects; the counts quoted for the release (71 families, 78 equipment versions, 462 pieces, 6,676 effects) were read before this and were identical before and after the deployment. It also explains two non-code results in the repeat runs: one run saw 1 stored set where the site showed 0 for a Control Rate 2-piece check (an intermediate state of that edit read by the database oracle before the 30 second search cache refreshed; I could not reproduce it afterwards, the final BLAZZTRY bonus has no Control Rate), and one run's «no game data changed» check saw the effect count rise by 4. The first full live run (111 of 111) happened before the edit.
