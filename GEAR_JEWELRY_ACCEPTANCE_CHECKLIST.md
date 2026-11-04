@@ -35,14 +35,23 @@ Date: 4 November 2026. VERIFIED = checked in this round with the evidence shown.
 | 29 | Sort by the value of the selected effect (equipment, jewelry, ninjas), highest to lowest and back | VERIFIED (live) | commit `d43c7ad`; live smoke 93 of 93; `tests/m8-effect-sort.test.ts` |
 | 30 | Sorted by the selected effect only; increases, enemy reductions, flat values and other states kept apart | VERIFIED | tests; the bare «tasa de control» lists increases first, reductions after, labelled |
 | 31 | With several effects the sorting effect is chosen; the first is the default; Match Any / All intact | VERIFIED | live check; tests |
-| 32 | Tiers never added; transparent tie rule; Susanoo example (+18% before +15% at 6 pieces) | VERIFIED | real catalogue test and live check |
+| 32 | Transparent tie rule; Susanoo example (variant B before variant A at 6 pieces: 58% against 55% with the tiers added) | VERIFIED | real catalogue test and live check |
 | 33 | Wording-only effects stay searchable, labelled, after the numbers | VERIFIED | tests |
 | 34 | Sort works with filters, chips, paging, back and forward, reload and 390 px | VERIFIED | browser suite 235 of 235; live 93 of 93 |
-| 35 | Exact piece counts: a 2-piece search no longer returns sets that only have the effect at 4 or 6 pieces (same for 4, 6 and jewelry 8) | VERIFIED (live) | commit `2c8e9cc`; live smoke 111 of 111; equipment Control Rate 0 / 9 / 6 sets at 2 / 4 / 6 pieces, equal to the stored bonuses |
-| 36 | Results show which piece count matched and the exact value printed there | VERIFIED | live result cards |
+| 35 | Piece counts: a 2-piece search never returns sets that have the effect only at 4 or 6 pieces; with 4 or 6 pieces the lower tiers count too (they accumulate, see 43) | VERIFIED (live) | commit `e533df9`; equipment Control Rate with 2 / 4 / 6 pieces: 0 / 9 / 10 sets, equal to the stored bonuses of that tier and the lower ones |
+| 36 | Results show the piece count and the total for it, with the printed bonuses it is made of | VERIFIED | live result cards
 | 37 | Jewelry slot choice (Fuerza, Chakra, Agilidad, Poder, one at a time) enforced in the query, using the existing categories | VERIFIED | tests; live: no other slot in an Agility search |
 | 38 | Agility + 2 pieces + Control Rate + highest to lowest: only Agility 2-piece bonuses, ranked by percentage | VERIFIED (live) | the 8 stored sets: +25% x6, +20%, +10% |
-| 39 | Separate «Bono de 8 piezas» under a 2-piece result; «stronger» note only for a genuinely higher value of the same effect; no claim of stacking | VERIFIED | tests; live: 2 stronger notes for Agility Damage Rate, none for Control Rate (the 8-piece values are lower) |
+| 39 | Separate «Bono de 8 piezas» under a 2-piece result; «stronger» note where the 8-piece bonus prints the same additive effect, with the total for the complete set | VERIFIED | tests; live: Agility Control Rate 2 sets (Crystalys 32% and 35%), Damage Rate 3 sets |
 | 40 | Match All / Any, name search, stat ranges, versions, paging, back and forward, reset and 390 px still work | VERIFIED | browser suite 253 of 253; live 111 of 111 |
-| 41 | Client confirms the slot choice uses the four jewelry categories («gem sockets» in the request) | OPEN | no Gems feature was activated |
-| 42 | Client acceptance of this add-on | OPEN | not accepted and not closed |
+| 41 | Slot choice uses the four jewelry categories («gem sockets» in the request) | CONFIRMED by the client ("I've checked everything and it's all correct") | no Gems feature was activated |
+| 42 | Client acceptance of this add-on | ACCEPTED IN PRINCIPLE by the client; administrative closure by the owner is separate | the client wrote "I think we can consider this finished"; this checklist is not the closure |
+| 43 | Bonuses of unlocked tiers accumulate: equipment 2 / 2+4 / 2+4+6; jewelry slot 2-piece bonus, plus the 8-piece bonus for the complete set | VERIFIED (live) | commit `e533df9`; tests `tests/m10-cumulative.test.ts`; live smoke 124 of 124 |
+| 44 | Deatbone: Damage Rate +30% (2 pieces) + +40% (6 pieces) = **+70%** with 6 pieces, with the breakdown; the 4-piece tier does not need it | VERIFIED (live) | card and detail page; screenshots in the PDF |
+| 45 | A 2-piece search never matches an effect printed only at 4 or 6 pieces; Agilidad never returns Fuerza, Chakra or Poder | VERIFIED | tests and live checks |
+| 46 | Only comparable additive values are added (same statistic, unit, target, direction, slot); conditional, chance, timed and wording-only effects are shown as printed | VERIFIED | unit and fixture tests |
+| 47 | Ranking by the cumulative total at the selected piece count, highest to lowest and back; ties, paging, Match All / Any, address and back / forward intact | VERIFIED | tests; browser suite 266 of 266; live |
+| 48 | «Bonos individuales», «Total acumulado», «Desglose por piezas» on result cards and detail pages, in agreement; readable at 390 px | VERIFIED | every equipment detail page checked against its card |
+| 49 | No text says stacking is unconfirmed or that tiers are never added | VERIFIED | automated text test; documents updated |
+| 50 | Cross-slot total for jewelry (all four slots worn together) | OPEN (client, only if wanted) | slots are shown apart; no rule was given for adding slots |
+| 51 | Administrative closure of the add-on | OPEN (owner) | the client has indicated acceptance; closure is recorded by the owner |

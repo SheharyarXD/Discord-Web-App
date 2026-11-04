@@ -1,6 +1,6 @@
 # Equipment and jewelry add-on: open items
 
-Written for: the project owner and the client. Date: 4 November 2026. This add-on is separate from Milestone 4 and stays open until the client accepts it.
+Written for: the project owner and the client. Date: 5 November 2026. This add-on is separate from Milestone 4. The client has confirmed what was delivered and said they consider it finished; the owner records the formal closure.
 
 Nothing below was guessed. Where the source does not decide, the data is stored exactly as printed and the question is listed here.
 
@@ -73,3 +73,14 @@ Warlord equipment also has upgrade stages R1, R2, R3, SSR4 and SSR5 on the cost 
 - Cropped item icons were not published. The pieces on the sheets are small and several have two icons in one cell, and the icon-to-piece assignment is not stated in the source. The catalogue uses no placeholder pictures.
 - No original screenshot is published, committed or listed with a public address. The detail page lists the file names of the sheets only.
 - The pieces of a cell with two icons are stored as one piece (not two invented names).
+
+## Resolved by the client
+
+| Question | Answer |
+| --- | --- |
+| Do the bonuses of different piece counts add up? | Yes. Shown as a combined total («Total acumulado») with the breakdown by piece count. Implemented and live. |
+| Is the slot choice meant to use the four jewelry categories? | Yes ("I've checked everything and it's all correct"). |
+
+## Still open (source questions only)
+
+The questions in sections 1 to 4 above stay open until the client answers them or sends the missing sheets. One new, optional question: if the four jewelry slots should also be added to each other when all eight pieces are worn, a rule is needed; the website shows each slot apart.
