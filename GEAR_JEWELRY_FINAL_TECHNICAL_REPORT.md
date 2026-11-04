@@ -80,3 +80,41 @@ Private and not committed: the four ZIPs, `docs/gear-handoff/` (the 143 images),
 - Names are in English, which is authoritative here. No Spanish translation was invented.
 - No item icons were cropped or published.
 - The Vercel production branch setting still needs the owner to switch it to `milestone-4` in the dashboard if automatic releases are wanted. Releases here were made with `vercel deploy --prod`.
+
+## 9. Addendum: sorting by the value of a selected effect
+
+Client request: «When you search, for example, for control rate, there's no way to sort the results from highest to lowest. I know which item has the most in the entire game, and I'd like it to appear at the very top, followed by the next one, and so on.»
+
+Live at commit `d43c7ade548dad59f3c0bf5b02c9c73890551d33` (`dpl_6aKGgtVztRX1nLKYSZwYnJvy9RVS`). No schema change and no data change.
+
+**What was added**
+- The «Ordenar por» control of Ninjas, Equipamiento, Joyería and Conjuntos has two new options once an effect is selected: «Valor del efecto elegido: de mayor a menor» and «de menor a mayor» (`sort=fx:desc` or `fx:asc`).
+- With two or more selected effects a second control, «Efecto que ordena» (`fxs=<effect>`), says which one controls the order. The default is the first selected effect. Match Any and Match All keep filtering exactly as before.
+- Each result shows the printed values it was ranked by, each at its own tier or category, with the one used highlighted, and says that tiers are not added.
+
+**How the ranking works** (`analyseEffects`, `compareRanks` in `src/game/effect-search.ts`)
+1. Only the chosen effect is looked at. Every stored effect that matches it is put in a measure class made of what it does and its unit: increase of a statistic (percent or flat), damage reduction, fury gained or lost, or immunity to one state. An increase of Control Rate (+40%) is never compared with a reduction of the enemy's Control Rate (-20%), with a flat value, or with a different state's immunity.
+2. Inside one class an owner's value is its largest printed value (by size, so a bigger reduction counts as bigger). Values are never summed across tiers or rows, because the accumulation rule is not confirmed.
+3. Order, highest first: the best printed value; on a tie the value at the highest piece count, then at the next lower one; then alphabetical by name; then a fixed identity order (category, version key, slug). Lowest first reverses the numbers and keeps the same tie rule. A missing tier counts as the lowest.
+4. The measures present are ordered: increases first, then damage reduction, fury gained, immunity, reductions, fury lost. The most-used unit of the first group is the primary measure; the others follow, grouped and labelled («Otra medida»). With a bare «tasa de control» the increases therefore come first and the enemy reductions after, apart.
+5. After every number come, in this order: effects that exist only as source wording («Sin valor comparable»), effects with no number (a state, a heal), and, with Match Any, owners found only through another selected effect. They stay searchable and are labelled; nothing is invented. Wording-only effects are never turned into numbers, because their meaning is not unambiguous.
+6. Negated wording («Cannot increase control rate») no longer matches a text-only statistic phrase either.
+
+**Client's Susanoo example, on the real data:** both versions print Increase CC Rate +40% at 4 pieces; at 6 pieces variant A prints +15% and variant B +18%. Descending, variant B comes first; ascending, variant A. The value used is 40% (not 58%). In the whole Control Rate list Indora (+40% at 6 pieces) is first because the tie on 40% is decided at the highest tier, then Susanoo B (+18%), then Black Feather and Susanoo A (+15%, alphabetical).
+
+**Tests (this round)**
+| Check | Result |
+| --- | --- |
+| SQLite suite | **347 passed, 1 skipped** (348 tests, 22 files); 20 new in `tests/m8-effect-sort.test.ts`: the comparison rule, address parameters, descending and ascending, ties, the Susanoo example on the real catalogue, several selected effects, a flat value, an enemy reduction, a negated phrase, wording-only effects, paging in both directions, empty results, ninjas |
+| PostgreSQL suite | **331 passed, 17 skipped** (SQLite-only and real-catalogue tests) |
+| `tsc`, `eslint`, production build | clean |
+| Local browser suite on a production build | **235 of 235** (13 new checks) |
+| Full catalogue on a local PostgreSQL (the Preview database could not be used from this machine, see below) | 92 of 93; the one miss is the HTTPS check, which cannot apply to `http://127.0.0.1` |
+| Live production smoke over HTTPS | **93 of 93**, run twice. The top Control Rate result carries the largest stored value; values never rise; ascending never falls; Susanoo B before A with the tiers shown apart; paging shows each set once; back, forward and reload keep the order; the choice of ordering effect works; 390 px without sideways scrolling; ninjas sort by Speed increase |
+
+**Release record:** no migration and no backup were needed (no database change). The existing verified backup `production-20261103-pre-gear` remains; production tables were re-counted before and after (ninjas 177, abilities 316, ninja effects 4,395, users 4, gear unchanged). Preview deployment of the commit built and was Ready. Reading the full effect index from this machine to the Preview database took minutes (about 4 minutes for one query over this link; Vercel runs next to Neon), so the Preview smoke timed out. The same commit was instead tested against a local PostgreSQL holding the full catalogue. `main` and the production-branch guard were not touched. Production error log: no entries.
+
+**Limits**
+- Only structured values are ranked. About 15 percent of gear effect rows are wording only; they come after the numbers with an honest label.
+- A state (stun, freeze) or a heal has no printed amount, so sorting by them leaves the order alphabetical.
+- Printed values are still «pendiente de revisión»; a wrong transcription would rank wrongly.

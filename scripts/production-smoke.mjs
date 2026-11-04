@@ -344,6 +344,18 @@ try {
   await go(R.page, BASE + "/sets/equipment/warlord");
   await shot(R.page, "p26-live-gear-detail-warlord.png", { x: 0, y: 0, width: 960, height: 1300 });
   await below(R.page, "/sets?q=sange", "p27-live-gear-variants.png", 640);
+  // value sort screenshots: Control Rate, highest to lowest
+  const fromNote = async (page, url, name, height, width = 960) => {
+    await go(page, BASE + url);
+    await page.addStyleTag({ content: HIDE }).catch(() => {});
+    const y = await page.evaluate(() => { const el = document.querySelector("[data-effect-rank-note]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
+    await shot(page, name, { x: 0, y: Math.max(0, y - 8), width, height }, true);
+  };
+  await fromNote(R.page, "/sets?fx=aumento+de+tasa+de+control&sort=fx:desc", "p30-live-sort-cc-desc.png", 1280);
+  await fromNote(R.page, "/jewelry?fx=aumento+de+tasa+de+control&sort=fx:desc", "p31-live-sort-cc-jewelry.png", 900);
+  await fromNote(R.page, "/sets?fx=aumento+de+tasa+de+control&sort=fx:asc", "p32-live-sort-cc-asc.png", 760);
+  await fromNote(R.page, "/equipment?fx=aumento+de+tasa+de+control&q=susanoo&sort=fx:desc", "p33-live-sort-susanoo.png", 760);
+  await region(R.page, "/equipment?fx=congelar&fx=aumento+de+tasa+de+control&sort=fx:desc&fxs=aumento+de+tasa+de+control", "p34-live-sort-choose-effect.png", "[data-effect-search]");
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
   await R.ctx.close();
@@ -370,6 +382,7 @@ try {
   await M.page.locator("[data-effect-search]").first().screenshot({ path: path.join(OUT, "p28-live-gear-mobile-control.png") });
   const yG = await M.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
   await shot(M.page, "p29-live-gear-mobile-results.png", { x: 0, y: Math.max(0, yG - 20), width: 390, height: 700 }, true);
+  await fromNote(M.page, "/sets?fx=aumento+de+tasa+de+control&sort=fx:desc", "p35-live-sort-cc-mobile.png", 1300, 390);
   await M.ctx.close();
 } catch (e) {
   check("script completed without an unexpected error", false, String(e).slice(0, 300));

@@ -1,9 +1,7 @@
-Hi, the equipment and jewelry section is now live at https://furia-ninja.vercel.app, under Equipamiento, Joyería and Conjuntos.
+Hi, the sorting you asked for is now live at https://furia-ninja.vercel.app.
 
-It holds 68 sets with 141 versions from your 143 images. Equipment and jewelry are separate but linked by set name, each version shows its own numbers, and R1 and R2 appear only where your images or you said so. Legendary, Fate and Totsuka have names only, so nothing was made up for them.
+When you search for an effect such as "tasa de control", the "Ordenar por" list now has "Valor del efecto elegido: de mayor a menor" (and de menor a mayor). The set with the highest printed value goes first, then the next, and so on. It works on Equipamiento, Joyería, Conjuntos and Ninjas.
 
-The effect filter now has a switch, "Coincidir con cualquiera" or "Coincidir con todos", on ninjas, equipment and jewelry. Results show which piece bonus holds the effect, and they do not claim the effect is active.
+If you choose several effects, a new box, "Efecto que ordena", lets you pick which one decides the order. Each result shows the printed values it was ranked by, at their own piece counts, and they are never added together. Increases and reductions of the enemy's control rate are kept apart. For Susanoo, the version with +18% at 6 pieces comes before the one with +15%, as you described.
 
-I did not confirm the values against your images one by one yet, so each card says "pendiente de revisión". The attached report lists a few questions: what the unlabeled second versions are called (Sange, Iron Will, Crystalys, Susanoo, Izanami, Truth-Seeking, Yin-Yang, Summoning, Sarutobi, Kumogakure), the Mekansm or MEKA name, and some unusual printed values.
-
-Could you please review it and tell me if it is accepted, or what you would like changed?
+Still to confirm: the add-on is not accepted yet, the values are marked "pendiente de revisión" until checked against your images, and the earlier questions are in the report. Could you please try it and tell me if it is what you wanted?

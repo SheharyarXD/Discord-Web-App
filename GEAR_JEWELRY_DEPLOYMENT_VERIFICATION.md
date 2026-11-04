@@ -38,3 +38,15 @@ Logs: no error entries after the release. Setup page: 404. Secrets: none in Git,
 ## Rollback
 
 Vercel Instant Rollback returns the code (the migration is additive, so old code ignores the new columns and table). Data: delete the gear rows by slug, or restore `production-20261103-pre-gear` into an empty database with `scripts/pg-backup-restore.mjs`. The production database was never reset.
+
+## Addendum: value sort release
+
+| Item | Value |
+| --- | --- |
+| Deployed commit | `d43c7ade548dad59f3c0bf5b02c9c73890551d33`, branch `milestone-4` (metadata read, clean tree, one deploy command) |
+| Production deployment | `dpl_6aKGgtVztRX1nLKYSZwYnJvy9RVS`, aliased to https://furia-ninja.vercel.app |
+| Database | no schema change, no migration, no import; production counts identical before and after; no backup needed (the verified backup of 3 November stays) |
+| Branch guard | production branch setting still `main`; Ignored Build Step unchanged; `main` at `37d74fb`, never touched |
+| Live checks | 93 of 93 over HTTPS, run twice, including the value sort on equipment, jewelry and ninjas |
+| Preview | Preview deployment built and Ready; its address could not be browsed (protection) and the Preview database is too slow to read from this machine, so the commit was tested against a local PostgreSQL with the full catalogue (92 of 93, HSTS cannot apply to http) |
+| Logs and setup | no error entries; `/setup` answers 404 |

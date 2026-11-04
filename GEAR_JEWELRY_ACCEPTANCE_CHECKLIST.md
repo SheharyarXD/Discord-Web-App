@@ -32,3 +32,9 @@ Date: 4 November 2026. VERIFIED = checked in this round with the evidence shown.
 | 26 | Client decisions on version labels, Mekansm name and the unusual printed values | OPEN | `GEAR_JEWELRY_OPEN_ITEMS.md` |
 | 27 | Source material for Legendary, Fate and Totsuka | OPEN | `GEAR_JEWELRY_OPEN_ITEMS.md` |
 | 28 | Client acceptance of this add-on | OPEN | not accepted and not closed |
+| 29 | Sort by the value of the selected effect (equipment, jewelry, ninjas), highest to lowest and back | VERIFIED (live) | commit `d43c7ad`; live smoke 93 of 93; `tests/m8-effect-sort.test.ts` |
+| 30 | Sorted by the selected effect only; increases, enemy reductions, flat values and other states kept apart | VERIFIED | tests; the bare «tasa de control» lists increases first, reductions after, labelled |
+| 31 | With several effects the sorting effect is chosen; the first is the default; Match Any / All intact | VERIFIED | live check; tests |
+| 32 | Tiers never added; transparent tie rule; Susanoo example (+18% before +15% at 6 pieces) | VERIFIED | real catalogue test and live check |
+| 33 | Wording-only effects stay searchable, labelled, after the numbers | VERIFIED | tests |
+| 34 | Sort works with filters, chips, paging, back and forward, reload and 390 px | VERIFIED | browser suite 235 of 235; live 93 of 93 |
