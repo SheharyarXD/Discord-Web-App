@@ -3,7 +3,7 @@ import { normalizeTerm } from "../domain/localize";
 import type { ReviewStatus } from "../domain/constants";
 import type { Db } from "./db";
 import { parseInput } from "./db";
-import { analyseEffects, compareRanks, type EffectEvidence, type EffectRank } from "./effect-search";
+import { analyseEffects, compareRanks, type EffectEvidence, type EffectRank, type FullSetInfo } from "./effect-search";
 import { statFilter } from "./schemas";
 import type { Page } from "./ninjas";
 
@@ -25,8 +25,16 @@ export const gearListParams = z.object({
   query: z.string().trim().max(120).optional(),
   /** base = the only or base version; labelled = R1, R2, SSR5 (printed or client stated); variant = unlabeled variants A, B, C. */
   versions: z.array(z.enum(VERSION_FILTERS)).optional(),
-  /** Sets that have a bonus at one of these piece counts (2, 4, 6 for equipment; 2, 8 for jewelry). */
+  /**
+   * Bonus tier (2, 4, 6 for equipment; 2, 8 for jewelry). Without an effect: sets that have a bonus at one of these piece counts.
+   * With an effect: the effect must be printed at EXACTLY one of these piece counts; it never qualifies through another tier.
+   */
   tiers: z.array(z.number().int().min(1).max(20)).optional(),
+  /**
+   * Jewelry slot (one at a time): the category of the piece. «agility» searches only the Agility category: its 2-piece bonus and the
+   * set-wide bonus. Implies jewelry. The slots are the existing categories of every jewelry version, not a new field.
+   */
+  slot: z.enum(["force", "chakra", "agility", "power"]).optional(),
   /** Printed main statistic ranges, for example Speed at least 70000. Every filter must hold. */
   statFilters: z.array(statFilter).max(4).optional(),
   effectTerms: z.array(z.string().trim().min(1).max(80)).max(6).optional(),
@@ -58,26 +66,35 @@ export interface GearSetSummary {
   evidence: EffectEvidence[];
   /** The printed values of the effect that controls sorting, when an effect filter is active. Never summed. */
   rank: EffectRank | null;
+  /** Jewelry matched through a 2-piece bonus: the set-wide (8 piece) bonus of the same version, with a comparison when it is genuine. */
+  fullSet: FullSetInfo | null;
 }
 
 const title = (name: string, label: string | null, basis: string | null) => (!label ? name : basis === "SEQUENCE" ? `${name} (variant ${label})` : `${name} ${label}`);
 
 export async function listGearSets(db: Db, params: GearListParams = {}): Promise<Page<GearSetSummary>> {
   const p = parseInput(gearListParams, params, "gear list parameters");
-  const kinds = p.kinds?.length ? p.kinds : [...GEAR_KINDS];
+  // A slot is a property of jewelry: choosing one means jewelry only.
+  const kinds: GearKind[] = p.slot ? ["jewelry"] : p.kinds?.length ? p.kinds : [...GEAR_KINDS];
+  // The same restrictions are put in the database queries, so a set that cannot qualify is never read.
+  const tierWhere = p.tiers?.length ? { bonuses: { some: { requiredPieces: { in: p.tiers } } } } : {};
+  const jewelryWhere = {
+    ...(p.slot ? { groups: { some: { key: p.slot } } } : {}),
+    ...(p.tiers?.length ? { bonuses: { some: { requiredPieces: { in: p.tiers }, ...(p.slot ? { OR: [{ groupId: null }, { group: { key: p.slot } }] } : {}) } } } : {}),
+  };
 
   const mainStats = { items: { select: { effects: { where: { note: "PRINTED_MAIN_STAT" }, select: { value: true, statistic: { select: { key: true, name: true } } } } } } };
   const rows: GearSetSummary[] = [];
   if (kinds.includes("equipment")) {
     const sets = await db.equipmentSet.findMany({
-      where: { familyId: { not: null } },
+      where: { familyId: { not: null }, ...tierWhere },
       include: { family: { select: { slug: true, name: true, sourceTitle: true } }, bonuses: { select: { requiredPieces: true } }, ...mainStats },
     });
     for (const s of sets) rows.push(summary("equipment", s, s.items, s.bonuses.map((b) => b.requiredPieces)));
   }
   if (kinds.includes("jewelry")) {
     const sets = await db.jewelrySet.findMany({
-      where: { familyId: { not: null } },
+      where: { familyId: { not: null }, ...jewelryWhere },
       include: { family: { select: { slug: true, name: true, sourceTitle: true } }, bonuses: { select: { requiredPieces: true } }, ...mainStats },
     });
     for (const s of sets) rows.push(summary("jewelry", s, s.items, s.bonuses.map((b) => b.requiredPieces)));
@@ -86,9 +103,11 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
   let found = rows;
   const evidence = new Map<string, EffectEvidence[]>();
   let ranks = new Map<string, EffectRank>();
+  let fullSets = new Map<string, FullSetInfo>();
   if (p.effectTerms?.length) {
-    const hit = await analyseEffects(db, kinds, p.effectTerms, p.effectMode, p.sort?.by === "effect" ? p.sort.effectTerm : null);
+    const hit = await analyseEffects(db, kinds, p.effectTerms, p.effectMode, p.sort?.by === "effect" ? p.sort.effectTerm : null, { scope: { tiers: p.tiers, slot: p.slot }, fullSetTier: 8 });
     if (hit) {
+      fullSets = hit.fullSet;
       ranks = hit.ranks;
       for (const kind of kinds) {
         const ids = new Set(hit.perOwner[kind].ids);
@@ -121,6 +140,7 @@ export async function listGearSets(db: Db, params: GearListParams = {}): Promise
   for (const r of found) {
     r.evidence = evidence.get(r.id) ?? [];
     r.rank = ranks.get(`${r.kind}:${r.id}`) ?? null;
+    r.fullSet = fullSets.get(`${r.kind}:${r.id}`) ?? null;
   }
 
   const sort = p.sort ?? { by: "name" as const, direction: "asc" as const, statisticKey: null };
@@ -180,10 +200,13 @@ function summary(
     stats,
     evidence: [],
     rank: null,
+    fullSet: null,
   };
 }
 
 /** Statistics the printed-stat filters offer, per kind. */
+export const JEWELRY_SLOTS = ["force", "chakra", "agility", "power"] as const;
+
 export async function gearFacets(db: Db) {
   const [slots, types] = await Promise.all([db.equipmentSlot.findMany({ orderBy: { sortOrder: "asc" }, select: { key: true, name: true } }), db.jewelryType.findMany({ orderBy: { sortOrder: "asc" }, select: { key: true, name: true } })]);
   const stats = new Map<string, string>();

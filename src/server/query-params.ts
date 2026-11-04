@@ -91,6 +91,8 @@ export function parseNinjaParams(p: RawParams, options: { includeUnpublished?: b
 export function parseGearParams(p: RawParams): GearListParams {
   const kinds = all(p.kind).filter((k): k is "equipment" | "jewelry" => k === "equipment" || k === "jewelry");
   const versions = all(p.version).filter((v): v is "base" | "labelled" | "variant" => v === "base" || v === "labelled" || v === "variant");
+  const slotRaw = one(p.slot);
+  const slot = slotRaw === "force" || slotRaw === "chakra" || slotRaw === "agility" || slotRaw === "power" ? slotRaw : undefined;
   const tiers = all(p.tier).map((t) => Number.parseInt(t, 10)).filter((t) => Number.isInteger(t) && t > 0 && t < 21);
   const sortRaw = one(p.sort);
   const [by, direction, statisticKey] = (sortRaw ?? "").split(":");
@@ -102,6 +104,7 @@ export function parseGearParams(p: RawParams): GearListParams {
     ...(kinds.length ? { kinds } : {}),
     ...(versions.length ? { versions } : {}),
     ...(tiers.length ? { tiers } : {}),
+    ...(slot ? { slot } : {}),
     ...(statRanges(p).length ? { statFilters: statRanges(p) } : {}),
     ...(effectTerms(p).length ? { effectTerms: effectTerms(p) } : {}),
     ...(effectModeOf(p) === "all" ? { effectMode: "all" as const } : {}),

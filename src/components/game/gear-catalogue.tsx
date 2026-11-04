@@ -6,8 +6,8 @@ import { requireUser } from "@/server/auth/guards";
 import { effectModeOf, effectTerms, hrefWith, parseGearParams, rawAll, rawOne, sortEffectOf, type RawParams } from "@/server/query-params";
 import type { GearSetSummary } from "@/game/gear";
 import { Card, EmptyState, PageHeader, Pagination, Tag } from "@/components/ui/primitives";
-import { EffectRankBlock, EffectRankNote } from "./effect-rank";
-import { CheckGroup, countActive, EffectSearch, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "./list-controls";
+import { EffectRankBlock, EffectRankNote, FullSetBlock } from "./effect-rank";
+import { CheckGroup, countActive, EffectSearch, RadioGroup, FilterPanel, RangeRows, ResultSummary, SearchBox, SelectBox } from "./list-controls";
 
 const number = new Intl.NumberFormat("es", { maximumFractionDigits: 2 });
 
@@ -52,7 +52,11 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
   const byEffect = params.sort?.by === "effect";
   const active = countActive(raw, ignore);
   const sortValue = rawOne(raw.sort) ?? "";
-  const statName = (key: string) => facets.statistics.find((s) => s.key === key)?.name ?? key;
+  const SLOT_KEYS = ["force", "chakra", "agility", "power"] as const;
+  // A jewelry category is shown by its Spanish slot name; any other key keeps its stored name.
+  const statName = (key: string) => ((SLOT_KEYS as readonly string[]).includes(key) ? t(`gear.slot.${key as (typeof SLOT_KEYS)[number]}`) : (facets.statistics.find((s) => s.key === key)?.name ?? key));
+  const slot = params.slot;
+  const tierOptions = fixedKind === "equipment" ? [2, 4, 6] : fixedKind === "jewelry" ? [2, 8] : facets.tiers;
   const sortOptions = [
     { value: "name:asc", label: t("gear.sortNameAsc") },
     { value: "name:desc", label: t("gear.sortNameDesc") },
@@ -81,7 +85,11 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
           ]}
           selected={rawAll(raw.version)}
         />
-        <CheckGroup name="tier" legend={t("gear.tierFilter")} options={facets.tiers.map((n) => ({ value: String(n), label: t("gear.tierPieces", { count: n }) }))} selected={rawAll(raw.tier)} />
+        {fixedKind === "jewelry" && (
+          <RadioGroup name="slot" legend={t("gear.slotTitle")} hint={t("gear.slotHint")} allLabel={t("gear.slotAll")} options={SLOT_KEYS.map((k) => ({ value: k, label: t(`gear.slot.${k}`) }))} selected={slot} />
+        )}
+        <CheckGroup name="tier" legend={t("gear.tierFilter")} options={tierOptions.map((n) => ({ value: String(n), label: t("gear.tierPieces", { count: n }) }))} selected={rawAll(raw.tier)} />
+        {(fxTerms.length > 0 || rawAll(raw.tier).length > 0) && <p className="-mt-3 text-xs text-muted">{t("gear.tierHint")}</p>}
         <RangeRows statistics={facets.statistics.map((s) => ({ value: s.key, label: s.name }))} selected={params.statFilters ?? []} t={t} />
         <p className="-mt-3 text-xs text-muted">{t("gear.statHint")}</p>
         <SelectBox name="sort" label={t("filters.sortBy")} empty={t("filters.sortDefault")} options={sortOptions} value={sortValue} />
@@ -102,7 +110,7 @@ export async function GearCatalogue({ searchParams, base, fixedKind }: { searchP
           <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3" data-gear-results>
             {result.items.map((s) => (
               <li key={`${s.kind}-${s.slug}`}>
-                <GearCard s={s} t={t} statName={statName} rankEffect={byEffect ? sortTerm : undefined} />
+                <GearCard s={s} t={t} statName={statName} rankEffect={fxTerms.length > 0 ? sortTerm : undefined} />
               </li>
             ))}
           </ul>
@@ -166,6 +174,7 @@ function GearCard({ s, t, statName, rankEffect }: { s: GearSetSummary; t: Transl
           </ul>
         )}
         {rankEffect && s.rank && <EffectRankBlock rank={s.rank} effect={rankEffect} t={t} statName={statName} />}
+        {rankEffect && s.fullSet && <FullSetBlock info={s.fullSet} effect={rankEffect} t={t} statName={statName} />}
         {s.reviewStatus !== "CONFIRMED" && <p className="mt-2 text-xs text-warn"><span aria-hidden>⚠ </span>{t("gear.needsReview")}</p>}
       </div>
     </Card>

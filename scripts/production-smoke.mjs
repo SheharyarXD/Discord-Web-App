@@ -298,6 +298,95 @@ try {
   check("390 px: the value sort, the choice of ordering effect and the values fit the screen without sideways scrolling", smo <= 0 && smSel && smSel.x >= 0 && smSel.x + smSel.width <= 390 && smRank && smRank.x + smRank.width <= 390, `${smo}px`);
   await SM.ctx.close();
 
+  // ── exact piece counts, jewelry slots and the 8-piece bonus under a 2-piece result ──
+  const CCQ2 = "aumento+de+tasa+de+control";
+  const DMQ = "aumento+de+tasa+de+da%C3%B1o";
+  const pctRows = (statKey) => db.effect.findMany({ where: { statistic: { key: statKey }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, jewelrySetBonusId: { not: null } }, select: { value: true, jewelrySetBonus: { select: { setId: true, requiredPieces: true, group: { select: { key: true } } } } } });
+  const jewelOracle = async (statKey, slot) => {
+    const two = new Map();
+    const eight = new Map();
+    for (const r of await pctRows(statKey)) {
+      const b = r.jewelrySetBonus;
+      const v = Number(r.value.toString());
+      if (b.requiredPieces === 2 && b.group?.key === slot) two.set(b.setId, Math.max(two.get(b.setId) ?? 0, v));
+      if (b.requiredPieces === 8) eight.set(b.setId, Math.max(eight.get(b.setId) ?? 0, v));
+    }
+    return { two, eight, stronger: [...two].filter(([id, v]) => (eight.get(id) ?? 0) > v).length };
+  };
+  const equipOracle = async (tier) => {
+    const rows = await db.effect.findMany({ where: { statistic: { key: "control-rate" }, kind: "STAT", structuredStatus: "STRUCTURED", valueType: "PERCENT", value: { gt: 0 }, equipmentSetBonus: { requiredPieces: tier } }, select: { equipmentSetBonus: { select: { setId: true } } } });
+    return new Set(rows.map((r) => r.equipmentSetBonus.setId)).size;
+  };
+  // the controls
+  await go(SP, BASE + "/jewelry");
+  const slotLabels = await SP.locator("[data-radio-group=slot] label").evaluateAll((els) => els.map((e) => e.textContent ?? ""));
+  const jTiers = await SP.locator("input[name=tier]").evaluateAll((els) => els.map((e) => e.value));
+  check("jewelry has an obvious slot choice (Todas, Fuerza, Chakra, Agilidad, Poder), one at a time, and the 2 and 8 piece bonus tiers", ["Todas", "Fuerza", "Chakra", "Agilidad", "Poder"].every((l) => slotLabels.some((x) => x.trim() === l)) && (await SP.locator("input[name=slot]").first().getAttribute("type")) === "radio" && jTiers.join() === "2,8", `${slotLabels.join("|")} tiers=${jTiers}`);
+  await go(SP, BASE + "/equipment");
+  check("equipment offers the 2, 4 and 6 piece tiers and no slot choice", (await SP.locator("input[name=tier]").evaluateAll((els) => els.map((e) => e.value))).join() === "2,4,6" && (await SP.locator("[data-radio-group=slot]").count()) === 0);
+  // equipment: the selected piece count is exact
+  const eqCounts = [];
+  for (const tier of [2, 4, 6]) eqCounts.push([await total(SP, `/equipment?fx=${CCQ2}&tier=${tier}`), await equipOracle(tier)]);
+  check("equipment: Control Rate at exactly 2, 4 and 6 pieces returns the sets whose stored bonus of THAT tier has it", eqCounts.every(([shown, stored]) => shown === stored) && eqCounts.some(([, stored]) => stored > 0), JSON.stringify(eqCounts));
+  await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=2`);
+  check("equipment: a 2-piece search with nothing printed at 2 pieces says so instead of listing 4 and 6 piece sets", eqCounts[0][1] > 0 || /Ningún conjunto tiene/.test(await SP.locator("main").innerText()));
+  await go(SP, BASE + `/equipment?fx=${CCQ2}&tier=6&sort=fx:desc`);
+  const e6 = await SP.locator("[data-effect-rank][data-rank-status='ranked'] [data-match-value]").allInnerTexts();
+  check("equipment: results name the matching tier and show the value printed at it", e6.length > 3 && e6.every((t) => /6 piezas/.test(t)), e6.slice(0, 2).join(" / ").replace(/\s+/g, " "));
+  // the client's scenario
+  const ccAg = await jewelOracle("control-rate", "agility");
+  const SCN = `/jewelry?slot=agility&tier=2&fx=${CCQ2}&sort=fx:desc`;
+  await go(SP, BASE + SCN);
+  const agVals = (await SP.locator("[data-effect-rank][data-rank-status='ranked']").evaluateAll((els) => els.map((e) => Number(e.getAttribute("data-rank-magnitude")))));
+  const matchText = await SP.locator("[data-match-value]").allInnerTexts();
+  check("Joyería + Agilidad + 2 piezas + Control Rate + mayor a menor: exactly the sets whose stored Agility 2-piece bonus has it, highest first", agVals.length === ccAg.two.size && agVals.length > 5 && agVals[0] === Math.max(...ccAg.two.values()) && agVals.every((v, i) => i === 0 || agVals[i - 1] >= v), `${agVals.join(",")} stored=${ccAg.two.size}`);
+  check("every result shows the exact percentage prominently with its tier and slot, and none comes from Fuerza, Chakra or Poder", matchText.length === agVals.length && matchText.every((t) => /2 piezas/.test(t) && /Agilidad/.test(t) && !/Fuerza|Chakra|Poder/.test(t)), matchText.slice(0, 2).join(" / ").replace(/\s+/g, " "));
+  const noSlotTotal = await total(SP, `/jewelry?tier=2&fx=${CCQ2}`);
+  const forceTotal = await total(SP, `/jewelry?slot=force&tier=2&fx=${CCQ2}`);
+  check("choosing a slot narrows the result and the slot is enforced by the query (URL, reload and back keep it)", (await total(SP, SCN)) <= noSlotTotal && forceTotal <= noSlotTotal && (await total(SP, SCN)) === (await total(SP, `/jewelry?slot=agility&tier=2&fx=${CCQ2}`)), `agility<=${noSlotTotal} force=${forceTotal}`);
+  await go(SP, BASE + SCN);
+  const firstScn = await SP.locator("[data-gear-card] h2 a").first().getAttribute("href");
+  await go(SP, BASE + "/jewelry");
+  await SP.goBack({ waitUntil: "networkidle" });
+  check("back keeps the slot, tier, effect and order", /slot=agility/.test(SP.url()) && (await SP.locator("[data-gear-card] h2 a").first().getAttribute("href")) === firstScn && (await SP.locator("input[name=slot][value=agility]").isChecked()));
+  await SP.reload({ waitUntil: "networkidle" });
+  check("reloading keeps them", (await SP.locator("input[name=slot][value=agility]").isChecked()) && (await SP.locator("input[name=tier][value='2']").isChecked()));
+  check("clearing the filters removes the slot and the effects", /^\/jewelry(\?|$)/.test((await SP.getByRole("link", { name: /Quitar filtros/ }).first().getAttribute("href")) ?? "") && !/slot=|fx=/.test((await SP.getByRole("link", { name: /Quitar filtros/ }).first().getAttribute("href")) ?? ""));
+  // the 8-piece bonus
+  const fullBlocks = await SP.locator("[data-full-set]").count();
+  const fullText = await SP.locator("[data-full-set]").first().innerText();
+  check("under every 2-piece result that has one, the set's 8-piece bonus is shown separately and says it needs the full set", fullBlocks > 3 && /Bono de 8 piezas/.test(fullText) && /Requiere el conjunto completo/.test(fullText) && /No se indica que los bonos se sumen/.test(fullText), `blocks=${fullBlocks}`);
+  const strongCc = await SP.locator("[data-full-set-stronger]").count();
+  check("the «stronger» note appears only where the stored 8-piece value is higher (Control Rate, Agility)", strongCc === ccAg.stronger, `shown=${strongCc} stored=${ccAg.stronger}`);
+  const dm = await jewelOracle("damage-rate", "agility");
+  await go(SP, BASE + `/jewelry?slot=agility&tier=2&fx=${DMQ}&sort=fx:desc`);
+  const strongDm = await SP.locator("[data-full-set-stronger]").count();
+  const cmp = await SP.locator("[data-full-set-compare]").first().innerText().catch(() => "");
+  check("a genuinely stronger 8-piece value is pointed out with both values (Damage Rate, Agility)", strongDm === dm.stronger && dm.stronger > 0 && /2 piezas/.test(cmp) && /8 piezas/.test(cmp) && /ofrece un bono mayor/.test(await SP.locator("[data-full-set-stronger]").first().innerText()), `shown=${strongDm} stored=${dm.stronger}`);
+  // 8-piece search
+  const e8 = await total(SP, `/jewelry?tier=8&fx=reducci%C3%B3n+de+tasa+de+control&sort=fx:desc`);
+  const e2 = await total(SP, `/jewelry?tier=2&fx=reducci%C3%B3n+de+tasa+de+control`);
+  await go(SP, BASE + `/jewelry?tier=8&fx=reducci%C3%B3n+de+tasa+de+control&sort=fx:desc`);
+  check("an 8-piece search matches the 8-piece bonus on its own (no 8-piece block under it)", e8 > 0 && (await SP.locator("[data-match-value]").allInnerTexts()).every((t) => /8 piezas/.test(t)) && (await SP.locator("[data-full-set]").count()) === 0, `8pc=${e8} 2pc=${e2}`);
+  // Match All / Any inside the scope, and choosing the sorting effect
+  const anyN = await total(SP, `/jewelry?slot=agility&tier=2&fx=${CCQ2}&fx=aumento+de+tasa+de+da%C3%B1o&fxm=any`);
+  const allN = await total(SP, `/jewelry?slot=agility&tier=2&fx=${CCQ2}&fx=aumento+de+tasa+de+da%C3%B1o&fxm=all`);
+  const a1 = await total(SP, `/jewelry?slot=agility&tier=2&fx=${CCQ2}`);
+  const a2 = await total(SP, `/jewelry?slot=agility&tier=2&fx=${DMQ}`);
+  check("Match Any / Match All apply inside the selected slot and tier (All = A + B - Any)", allN === a1 + a2 - anyN && allN <= anyN && a1 > 0, `A=${a1} B=${a2} any=${anyN} all=${allN}`);
+  await go(SP, BASE + `/jewelry?slot=agility&tier=2&fx=${CCQ2}&fx=${DMQ}&fxm=any&sort=fx:desc&fxs=${DMQ.replace(/%C3%B1/g, "%C3%B1")}`);
+  const sortSel = await SP.locator("select#fxs").inputValue();
+  check("with several effects the one that decides the order can be chosen", /da.o/.test(sortSel) && (await SP.locator("select#fxs option").count()) === 2, sortSel);
+  // mobile
+  const TM = await login(adminMail, adminPw, 390);
+  await go(TM.page, BASE + SCN);
+  const tmo = await TM.page.evaluate(() => document.documentElement.scrollWidth - document.documentElement.clientWidth);
+  const tmSlot = await TM.page.locator("[data-radio-group=slot]").boundingBox();
+  const tmVal = await TM.page.locator("[data-match-value]").first().boundingBox();
+  const tmFull = await TM.page.locator("[data-full-set]").first().boundingBox();
+  check("390 px: the slot choice, the prominent value and the 8-piece bonus fit without sideways scrolling", tmo <= 0 && tmSlot && tmSlot.x + tmSlot.width <= 390 && tmVal && tmVal.x + tmVal.width <= 390 && tmFull && tmFull.x + tmFull.width <= 390, `${tmo}px`);
+  await TM.ctx.close();
+
   // screenshots (real, from the live site)
   await go(A.page, BASE + "/ninjas?rating=SSR&formation=center&sort=stat:desc:force");
   await shot(A.page, "p01-live-results.png", { x: 0, y: 0, width: 1600, height: 1500 });
@@ -356,6 +445,13 @@ try {
   await fromNote(R.page, "/sets?fx=aumento+de+tasa+de+control&sort=fx:asc", "p32-live-sort-cc-asc.png", 760);
   await fromNote(R.page, "/equipment?fx=aumento+de+tasa+de+control&q=susanoo&sort=fx:desc", "p33-live-sort-susanoo.png", 760);
   await region(R.page, "/equipment?fx=congelar&fx=aumento+de+tasa+de+control&sort=fx:desc&fxs=aumento+de+tasa+de+control", "p34-live-sort-choose-effect.png", "[data-effect-search]");
+  // final filtering corrections: exact piece counts, jewelry slot, 8-piece bonus
+  await fromNote(R.page, "/equipment?fx=aumento+de+tasa+de+da%C3%B1o&tier=2&sort=fx:desc", "p36-live-equipment-2-pieces.png", 900);
+  await below(R.page, "/equipment?fx=aumento+de+tasa+de+control&tier=2", "p37-live-equipment-2-pieces-none.png", 300);
+  await region(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p38-live-jewelry-slot-controls.png", "[data-filter-panel] form");
+  await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p39-live-agility-2-pieces-desc.png", 1500);
+  await fromNote(R.page, "/jewelry?slot=chakra&tier=2&fx=aumento+de+tasa+de+da%C3%B1o&sort=fx:desc", "p40-live-8-piece-stronger.png", 1100);
+  await fromNote(R.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&fx=aumento+de+tasa+de+da%C3%B1o&fxm=all", "p41-live-match-all-slot-tier.png", 600);
   await go(R.page, BASE + "/admin/ninjas/natsu-dragneel");
   await shot(R.page, "p10-live-admin.png", { x: 0, y: 0, width: 960, height: 1100 });
   await R.ctx.close();
@@ -383,6 +479,8 @@ try {
   const yG = await M.page.evaluate(() => { const el = document.querySelector("[data-result-count]"); return el ? el.getBoundingClientRect().top + window.scrollY : 0; });
   await shot(M.page, "p29-live-gear-mobile-results.png", { x: 0, y: Math.max(0, yG - 20), width: 390, height: 700 }, true);
   await fromNote(M.page, "/sets?fx=aumento+de+tasa+de+control&sort=fx:desc", "p35-live-sort-cc-mobile.png", 1300, 390);
+  await fromNote(M.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p42-live-agility-mobile.png", 1500, 390);
+  await region(M.page, "/jewelry?slot=agility&tier=2&fx=aumento+de+tasa+de+control&sort=fx:desc", "p43-live-slot-mobile-control.png", "[data-filter-panel] form");
   await M.ctx.close();
 } catch (e) {
   check("script completed without an unexpected error", false, String(e).slice(0, 300));

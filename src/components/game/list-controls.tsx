@@ -120,6 +120,24 @@ export function EffectSearch({ terms, suggestions, removeHref, mode = "any", sor
   );
 }
 
+/** One choice at a time (radio buttons), with an «all» option that sends nothing. */
+export function RadioGroup({ name, legend, hint, options, selected, allLabel }: { name: string; legend: string; hint?: string; options: Option[]; selected?: string; allLabel: string }) {
+  return (
+    <fieldset className="min-w-0" data-radio-group={name}>
+      <legend className="mb-1.5 text-sm font-medium">{legend}</legend>
+      {hint && <p className="mb-2 text-xs text-muted">{hint}</p>}
+      <div className="flex flex-wrap gap-2">
+        {[{ value: "", label: allLabel }, ...options].map((o) => (
+          <label key={o.value || "all"} className="inline-flex min-h-9 cursor-pointer items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-sm has-[:checked]:border-accent has-[:checked]:bg-accent/10">
+            <input type="radio" name={name} value={o.value} defaultChecked={(selected ?? "") === o.value} className="size-4 accent-[var(--color-accent)]" />
+            <span>{o.label}</span>
+          </label>
+        ))}
+      </div>
+    </fieldset>
+  );
+}
+
 export function CheckGroup({ name, legend, options, selected }: { name: string; legend: string; options: Option[]; selected: string[] }) {
   if (options.length === 0) return null;
   return (

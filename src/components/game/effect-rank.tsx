@@ -1,5 +1,5 @@
 import type { Translate } from "@/i18n";
-import { describeMeasure, type EffectRank, type EffectValueUse } from "@/game/effect-search";
+import { describeMeasure, type EffectRank, type EffectValueUse, type FullSetInfo } from "@/game/effect-search";
 import { Tag } from "@/components/ui/primitives";
 
 const number = new Intl.NumberFormat("es", { maximumFractionDigits: 2 });
@@ -30,6 +30,12 @@ export function EffectRankBlock({ rank, effect, t, statName }: { rank: EffectRan
     return (
       <div className="mt-3 border-t border-border pt-2 text-xs" data-effect-rank data-rank-status={rank.status} data-rank-value={rank.best?.value} data-rank-magnitude={rank.magnitude ?? undefined}>
         <p className="font-semibold">{t("gear.rankTitle", { effect })}</p>
+        {rank.best && (
+          <p className="mt-1 flex flex-wrap items-baseline gap-x-2" data-match-value>
+            <span className="text-2xl font-bold leading-none text-accent">{formatUse(rank.best)}</span>
+            <span className="text-muted">{where(rank.best, t, statName) || t("gear.evidenceNoTier")}</span>
+          </p>
+        )}
         <ul className="mt-1.5 flex flex-wrap gap-1.5">
           {rank.uses.map((u, i) => (
             <li key={i}>
@@ -57,6 +63,40 @@ export function EffectRankNote({ effect, direction, t }: { effect: string; direc
     <div className="mb-4 rounded-lg border border-border p-3 text-xs text-muted" data-effect-rank-note>
       <p className="font-semibold text-fg">{t(direction === "desc" ? "gear.rankNoteDesc" : "gear.rankNoteAsc", { effect })}</p>
       <p className="mt-1">{t("gear.rankRule")}</p>
+    </div>
+  );
+}
+
+/**
+ * Under a jewelry result that matched through a 2-piece bonus: the set-wide bonus of the SAME version, as printed. A comparison is
+ * shown only when the same measure of the selected effect is printed there; nothing says the bonuses add up, replace each other or
+ * are active. The 8-piece bonus needs all eight pieces, not only the two used for this search.
+ */
+export function FullSetBlock({ info, effect, t, statName }: { info: FullSetInfo; effect: string; t: Translate; statName: (key: string) => string }) {
+  const c = info.comparison;
+  return (
+    <div className="mt-3 border-t border-border pt-2 text-xs" data-full-set data-full-set-status={c.status}>
+      <p className="font-semibold">{t("gear.fullTitle")}</p>
+      <p className="mt-0.5 text-muted">{t("gear.fullNeeds")}</p>
+      <ul className="mt-1.5 flex flex-col gap-1">
+        {info.effects.map((text, i) => (
+          <li key={i}>{text}</li>
+        ))}
+      </ul>
+      {c.status !== "unrelated" && c.matching && c.fullSet && (
+        <div className="mt-2 rounded-lg border border-border p-2" data-full-set-compare>
+          <p>
+            <span className="font-semibold">{where(c.matching, t, statName)}:</span> {effect} {formatUse(c.matching)}
+          </p>
+          <p>
+            <span className="font-semibold">{t("gear.fullPieces")}:</span> {effect} {formatUse(c.fullSet)}
+          </p>
+          {c.status === "stronger" && <p className="mt-1 font-semibold text-accent" data-full-set-stronger>{t("gear.fullStronger")}</p>}
+          {c.status === "equal" && <p className="mt-1 text-muted">{t("gear.fullEqual")}</p>}
+        </div>
+      )}
+      {c.status === "unrelated" && <p className="mt-1.5 text-muted">{t("gear.fullUnrelated")}</p>}
+      <p className="mt-1.5 text-muted">{t("gear.fullNoStack")}</p>
     </div>
   );
 }

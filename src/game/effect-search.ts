@@ -598,6 +598,35 @@ export function compareRanks(a: EffectRank, b: EffectRank, direction: "asc" | "d
   return 0;
 }
 
+/**
+ * Restricts which stored effects are looked at, BEFORE any matching. `tiers`: only the bonus printed at exactly these piece counts
+ * (an effect found only at another tier never qualifies a result, and nothing is inferred between tiers). `slot`: for jewelry, the
+ * 2-piece bonus of that category only; the set-wide bonus (8 pieces) has no category and is not narrowed by it. Ninjas are not scoped.
+ */
+export interface EffectScope {
+  tiers?: number[];
+  slot?: string | null;
+}
+
+function inScope(e: IndexedEffect, scope: EffectScope | undefined): boolean {
+  if (!scope || e.owner === "ninja") return true;
+  if (scope.tiers?.length && (e.pieces === null || !scope.tiers.includes(e.pieces))) return false;
+  if (scope.slot && e.owner === "jewelry" && e.group !== null && e.group !== scope.slot) return false;
+  return true;
+}
+
+/** The set-wide bonus of one jewelry version, shown under a result that matched at 2 pieces. */
+export interface FullSetInfo {
+  /** Every effect printed at the full-set tier of that version, as printed. */
+  effects: string[];
+  /**
+   * Only when the SAME measure of the selected effect is printed at the full-set tier: stronger, equal or lower than the matching
+   * value. "unrelated": the full-set bonus has no comparable value of the selected effect. Nothing here says the bonuses add up,
+   * replace each other or are active.
+   */
+  comparison: { status: "stronger" | "equal" | "lower" | "unrelated"; matching: EffectValueUse | null; fullSet: EffectValueUse | null };
+}
+
 export interface EffectAnalysis {
   perOwner: Record<EffectOwner, { ids: string[]; evidence: Map<string, EffectEvidence[]> }>;
   distinct: number;
@@ -605,13 +634,22 @@ export interface EffectAnalysis {
   sortTerm: string | null;
   /** Rank of every matching owner for the sorting effect, by `${owner}:${id}`. */
   ranks: Map<string, EffectRank>;
+  /** The set-wide bonus of matching jewelry versions (key `jewelry:${id}`), when asked for. */
+  fullSet: Map<string, FullSetInfo>;
 }
 
 /**
  * Matches the typed terms (ANY or ALL) for one or several kinds of owner and ranks the matches by the value of ONE chosen effect:
  * `sortTerm` (as typed), defaulting to the first selected effect. Null when no term is usable.
  */
-export async function analyseEffects(db: Db, owners: EffectOwner[], terms: string[], mode: EffectMode = "any", sortTerm?: string | null): Promise<EffectAnalysis | null> {
+export async function analyseEffects(
+  db: Db,
+  owners: EffectOwner[],
+  terms: string[],
+  mode: EffectMode = "any",
+  sortTerm?: string | null,
+  options: { scope?: EffectScope; fullSetTier?: number } = {},
+): Promise<EffectAnalysis | null> {
   const index = await indexOf(db);
   const resolved = distinctTerms(index, terms);
   if (resolved.length === 0) return null;
@@ -627,7 +665,7 @@ export async function analyseEffects(db: Db, owners: EffectOwner[], terms: strin
   const sortMatches = new Map<string, OwnerMatches>();
   for (const owner of owners) perTerm.set(owner, resolved.map(() => new Map()));
   for (const e of index.effects) {
-    if (!owners.includes(e.owner)) continue;
+    if (!owners.includes(e.owner) || !inScope(e, options.scope)) continue;
     resolved.forEach((rs, i) => {
       if (!effectMatches(e, rs)) return;
       const bucket = perTerm.get(e.owner)![i]!;
@@ -657,7 +695,32 @@ export async function analyseEffects(db: Db, owners: EffectOwner[], terms: strin
       all.set(`${owner}:${id}`, sortMatches.get(`${owner}:${id}`) ?? { uses: [], wording: false, anyMatch: false });
     }
   }
-  return { perOwner, distinct: resolved.length, sortTerm: sorting.source ?? null, ranks: buildRanks(all) };
+  const ranks = buildRanks(all);
+  const fullSet = new Map<string, FullSetInfo>();
+  const tier = options.fullSetTier;
+  if (tier !== undefined && owners.includes("jewelry")) {
+    const printed = new Map<string, IndexedEffect[]>();
+    for (const e of index.effects) if (e.owner === "jewelry" && e.pieces === tier && e.group === null) (printed.get(e.ownerId) ?? printed.set(e.ownerId, []).get(e.ownerId)!).push(e);
+    for (const id of perOwner.jewelry.ids) {
+      const list = printed.get(id);
+      // Only under a result that matched through a bonus of fewer pieces (the 2-piece bonus of a category).
+      if (!list?.length || !(perOwner.jewelry.evidence.get(id) ?? []).some((x) => x.pieces !== null && x.pieces !== tier)) continue;
+      const rank = ranks.get(`jewelry:${id}`);
+      let comparison: FullSetInfo["comparison"] = { status: "unrelated", matching: null, fullSet: null };
+      if (rank?.best && rank.measure) {
+        const same = list.flatMap((e) => {
+          const m = measureOf(e, sorting);
+          return m && m.measure === rank.measure && e.value !== null && e.unit ? [{ magnitude: m.magnitude, use: { pieces: e.pieces, group: e.group, value: e.value, unit: e.unit, text: e.raw } }] : [];
+        });
+        if (same.length) {
+          const top = same.reduce((a, b) => (b.magnitude > a.magnitude ? b : a));
+          comparison = { status: top.magnitude > rank.magnitude! ? "stronger" : top.magnitude === rank.magnitude ? "equal" : "lower", matching: rank.best, fullSet: top.use };
+        }
+      }
+      fullSet.set(`jewelry:${id}`, { effects: list.map((e) => e.raw), comparison });
+    }
+  }
+  return { perOwner, distinct: resolved.length, sortTerm: sorting.source ?? null, ranks, fullSet };
 }
 
 /**
