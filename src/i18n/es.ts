@@ -499,7 +499,7 @@ export const es = {
       newEquipment: "Nuevo conjunto de equipamiento",
       newJewelry: "Nuevo conjunto de joyería",
       tiers: "Niveles de bonificación",
-      tiersHint: "Cada nivel se guarda tal como lo dice la fuente. Nunca se calcula un total entre niveles.",
+      tiersHint: "Escribe el bono de cada nivel tal como lo dice la fuente. La web suma los niveles desbloqueados y muestra el «Total acumulado»: no hace falta calcularlo.",
       tierPieces: "Piezas necesarias",
       addTier: "Añadir o cambiar nivel",
       removeTier: "Quitar nivel",

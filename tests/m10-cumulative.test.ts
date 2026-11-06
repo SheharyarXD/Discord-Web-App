@@ -329,6 +329,7 @@ describe("no statement that stacking is unconfirmed remains", () => {
     expect(es).not.toMatch(/no está confirmado si los niveles/i);
     expect(es).not.toMatch(/no se suman niveles/i);
     expect(es).not.toMatch(/porque no está confirmado si se acumulan/i);
+    expect(es).not.toMatch(/nunca se calcula un total/i); // the administrator form used to say this
     expect(es).toContain('total: "Total acumulado"');
     expect(es).toContain('individual: "Bonos individuales"');
     expect(es).toContain('breakdown: "Desglose por piezas"');
